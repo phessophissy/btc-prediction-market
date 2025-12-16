@@ -4,9 +4,9 @@ import { useStacksAuth } from "@/contexts/StacksAuthContext";
 import { AlertCircle, TrendingUp, TrendingDown, Clock } from "lucide-react";
 
 export default function PortfolioPage() {
-  const { isAuthenticated, address } = useStacksAuth();
+  const { isConnected, stxAddress } = useStacksAuth();
 
-  if (!isAuthenticated) {
+  if (!isConnected) {
     return (
       <div className="max-w-4xl mx-auto">
         <div className="bg-gray-800 rounded-xl p-8 text-center">

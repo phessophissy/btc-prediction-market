@@ -19,7 +19,7 @@ import {
 import { AlertCircle, Bitcoin, Calendar, DollarSign } from "lucide-react";
 
 export default function CreateMarketPage() {
-  const { isAuthenticated, address } = useStacksAuth();
+  const { isConnected, stxAddress } = useStacksAuth();
   const [marketType, setMarketType] = useState<"binary" | "multi">("binary");
   const [question, setQuestion] = useState("");
   const [description, setDescription] = useState("");
@@ -27,7 +27,7 @@ export default function CreateMarketPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleCreateMarket = async () => {
-    if (!isAuthenticated || !address) {
+    if (!isConnected || !stxAddress) {
       alert("Please connect your wallet first");
       return;
     }
@@ -53,7 +53,7 @@ export default function CreateMarketPage() {
       // Add post condition for the 5 STX fee
       const postConditions = [
         makeStandardSTXPostCondition(
-          address,
+          stxAddress,
           FungibleConditionCode.Equal,
           MARKET_CREATION_FEE
         ),
@@ -86,7 +86,7 @@ export default function CreateMarketPage() {
     }
   };
 
-  if (!isAuthenticated) {
+  if (!isConnected) {
     return (
       <div className="max-w-2xl mx-auto">
         <div className="bg-gray-800 rounded-xl p-8 text-center">
