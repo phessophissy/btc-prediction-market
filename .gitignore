@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+.cache/
+.next/
+frontend/.next/
+
+# Environment files - NEVER commit these
+.env
+.env.local
+.env.*.local
+
+# Clarinet
+settings/Mainnet.toml
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test coverage
+coverage/

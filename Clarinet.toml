@@ -1,0 +1,33 @@
+[project]
+name = "btc-prediction-market"
+description = "Bitcoin-Anchored Prediction Market using Clarity 4"
+authors = []
+telemetry = false
+cache_dir = "./.cache"
+requirements = []
+
+[contracts.sip-010-trait]
+path = "contracts/sip-010-trait.clar"
+clarity_version = 3
+epoch = 3.0
+
+[contracts.btc-prediction-market]
+path = "contracts/btc-prediction-market.clar"
+clarity_version = 3
+epoch = 3.0
+depends_on = ["sip-010-trait"]
+
+[contracts.prediction-token]
+path = "contracts/prediction-token.clar"
+clarity_version = 3
+epoch = 3.0
+depends_on = ["sip-010-trait"]
+
+[repl.analysis]
+passes = ["check_checker"]
+
+[repl.analysis.check_checker]
+strict = false
+trusted_sender = false
+trusted_caller = false
+callee_filter = false

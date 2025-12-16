@@ -1,0 +1,32 @@
+---
+id: 0
+name: Mainnet deployment
+network: mainnet
+stacks-node: "https://api.hiro.so"
+bitcoin-node: "http://blockstack:blockstacksystem@bitcoin.blockstack.com:8332"
+plan:
+  batches:
+    - id: 0
+      transactions:
+        - contract-publish:
+            contract-name: sip-010-trait
+            expected-sender: SP31G2FZ5JN87BATZMP4ZRYE5F7WZQDNEXJ7G7X97
+            cost: 7290
+            path: contracts/sip-010-trait.clar
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: btc-prediction-market
+            expected-sender: SP31G2FZ5JN87BATZMP4ZRYE5F7WZQDNEXJ7G7X97
+            cost: 234480
+            path: contracts/btc-prediction-market.clar
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: prediction-token
+            expected-sender: SP31G2FZ5JN87BATZMP4ZRYE5F7WZQDNEXJ7G7X97
+            cost: 49220
+            path: contracts/prediction-token.clar
+            anchor-block-only: true
+            clarity-version: 3
+      epoch: "3.0"
