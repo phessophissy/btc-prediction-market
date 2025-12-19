@@ -459,21 +459,21 @@
       ;; Transfer winnings (minus fee)
       (if (> net-payout u0)
         (begin
-          (try! (as-contract (stx-transfer? net-payout tx-sender (unwrap! (element-at? (list tx-sender) u0) ERR-TRANSFER-FAILED))))
+          (try! (as-contract (stx-transfer? net-payout tx-sender tx-sender)))
           (var-set total-fees-collected (+ (var-get total-fees-collected) platform-fee))
           ;; Update user stats
           (update-user-winnings tx-sender net-payout)
-          (ok { 
-            market-id: market-id, 
+          (ok {
+            market-id: market-id,
             gross-payout: gross-payout,
             platform-fee: platform-fee,
-            net-payout: net-payout 
+            net-payout: net-payout
           }))
-        (ok { 
-          market-id: market-id, 
+        (ok {
+          market-id: market-id,
           gross-payout: u0,
           platform-fee: u0,
-          net-payout: u0 
+          net-payout: u0
         })))
   )
 )
