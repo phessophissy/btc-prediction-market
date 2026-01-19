@@ -1,14 +1,47 @@
 {
   "name": "btc-prediction-market",
   "version": "1.0.0",
-  "description": "Bitcoin-Anchored Prediction Market on Stacks",
+  "description": "A decentralized prediction market built on Stacks (Bitcoin L2) that uses Bitcoin block hashes for provably fair settlement",
+  "private": true,
+  "workspaces": [
+    "frontend"
+  ],
   "scripts": {
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
-    "clarinet:check": "clarinet check",
-    "clarinet:test": "clarinet test",
-    "clarinet:console": "clarinet console"
+    "install:all": "npm install && cd frontend && npm install",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build:frontend": "cd frontend && npm run build",
+    "start:frontend": "cd frontend && npm start",
+    "lint:frontend": "cd frontend && npm run lint",
+    "test": "npm run test",
+    "test:watch": "npm run test:watch",
+    "test:coverage": "npm run test:coverage",
+    "clarinet:check": "npm run clarinet:check",
+    "clarinet:test": "npm run clarinet:test",
+    "clarinet:console": "npm run clarinet:console"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Trust-Machines/btc-prediction-market.git"
+  },
+  "keywords": [
+    "bitcoin",
+    "prediction-market",
+    "stacks",
+    "clarity",
+    "blockchain",
+    "defi",
+    "smart-contracts",
+    "decentralized",
+    "provably-fair"
+  ],
+  "author": "Adekunle Bamz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Trust-Machines/btc-prediction-market/issues"
+  },
+  "homepage": "https://github.com/Trust-Machines/btc-prediction-market#readme",
+  "engines": {
+    "node": ">=18.0.0"
   },
   "devDependencies": {
     "@hirosystems/clarinet-sdk": "^2.3.2",
