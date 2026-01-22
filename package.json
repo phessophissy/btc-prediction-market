@@ -1,24 +1,24 @@
 {
-  "name": "btc-prediction-market",
-  "version": "1.0.0",
-  "description": "Bitcoin-Anchored Prediction Market on Stacks",
-  "scripts": {
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
-    "clarinet:check": "clarinet check",
-    "clarinet:test": "clarinet test",
-    "clarinet:console": "clarinet console"
-  },
-  "devDependencies": {
-    "@hirosystems/clarinet-sdk": "^2.3.2",
-    "@stacks/transactions": "^6.13.0",
-    "chokidar-cli": "^3.0.0",
-    "typescript": "^5.3.3",
-    "vitest": "^1.2.0",
-    "vitest-environment-clarinet": "^2.0.0"
-  },
-  "dependencies": {
-    "@stacks/network": "^6.13.0"
-  }
+    "name": "btc-prediction-market",
+    "version": "1.0.0",
+    "description": "Bitcoin-Anchored Prediction Market on Stacks",
+    "scripts": {
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "test:coverage": "vitest run --coverage",
+        "clarinet:check": "clarinet check",
+        "clarinet:test": "clarinet test",
+        "clarinet:console": "clarinet console"
+    },
+    "devDependencies": {
+        "@hirosystems/clarinet-sdk": "^2.3.2",
+        "@stacks/transactions": "^6.13.0",
+        "chokidar-cli": "^3.0.0",
+        "typescript": "^5.3.3",
+        "vitest": "^1.2.0",
+        "vitest-environment-clarinet": "^2.0.0"
+    },
+    "dependencies": {
+        "@stacks/network": "^6.13.0"
+    }
 }
