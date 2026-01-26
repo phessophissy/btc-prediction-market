@@ -2,37 +2,713 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================
+   BTC Prediction Market - Wooden Theme
+   Rustic & Textual Design System
+   ============================================ */
+
+/* Custom Fonts - Serif for textual feel */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 15, 23, 42;
-  --background-end-rgb: 30, 41, 59;
+  /* Wood Color Palette */
+  --wood-light: #d4a574;
+  --wood-medium: #b8860b;
+  --wood-dark: #8b4513;
+  --wood-darker: #5d3a1a;
+  --wood-darkest: #3d2914;
+  
+  /* Mahogany Tones */
+  --mahogany-light: #c19a6b;
+  --mahogany: #a0522d;
+  --mahogany-dark: #6b3a2e;
+  
+  /* Oak Tones */
+  --oak-light: #deb887;
+  --oak: #cd853f;
+  --oak-dark: #a0522d;
+  
+  /* Walnut Tones */
+  --walnut-light: #9c7653;
+  --walnut: #5d432c;
+  --walnut-dark: #3d2b1f;
+  
+  /* Background Colors */
+  --bg-primary: #2c1810;
+  --bg-secondary: #3d2419;
+  --bg-tertiary: #4a2c1c;
+  --bg-surface: #523420;
+  
+  /* Text Colors */
+  --text-cream: #f5f0e6;
+  --text-parchment: #e8dcc8;
+  --text-aged: #c4b69c;
+  --text-faded: #9a8b73;
+  --text-accent: #daa520;
+  
+  /* Accent Colors */
+  --gold-accent: #daa520;
+  --gold-light: #ffd700;
+  --copper-accent: #b87333;
+  --brass-accent: #b5a642;
+  
+  /* Semantic Colors */
+  --success: #6b8e23;
+  --warning: #cd853f;
+  --danger: #8b0000;
+  --info: #4682b4;
+  
+  /* Gradients */
+  --wood-grain: linear-gradient(
+    135deg,
+    var(--bg-primary) 0%,
+    var(--bg-secondary) 25%,
+    var(--bg-tertiary) 50%,
+    var(--bg-secondary) 75%,
+    var(--bg-primary) 100%
+  );
+  
+  --wood-vertical: linear-gradient(
+    180deg,
+    var(--walnut-dark) 0%,
+    var(--bg-primary) 10%,
+    var(--bg-secondary) 90%,
+    var(--walnut-dark) 100%
+  );
+  
+  /* Shadows */
+  --shadow-carved: inset 2px 2px 4px rgba(0, 0, 0, 0.4), inset -1px -1px 2px rgba(255, 255, 255, 0.05);
+  --shadow-raised: 4px 4px 8px rgba(0, 0, 0, 0.5), -2px -2px 4px rgba(255, 255, 255, 0.02);
+  --shadow-embossed: 0 2px 4px rgba(0, 0, 0, 0.3), 0 -1px 2px rgba(255, 255, 255, 0.05);
+  
+  /* Border */
+  --border-wood: 1px solid rgba(139, 69, 19, 0.4);
+  --border-inlay: 2px solid var(--gold-accent);
+  
+  /* Transitions */
+  --transition-smooth: 300ms ease-in-out;
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: 'Crimson Pro', 'Georgia', 'Times New Roman', serif;
+  color: var(--text-parchment);
+  background: var(--wood-vertical);
+  background-attachment: fixed;
   min-height: 100vh;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  position: relative;
 }
 
+/* Wood Grain Texture Overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 2px,
+      rgba(139, 69, 19, 0.03) 2px,
+      rgba(139, 69, 19, 0.03) 4px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 40px,
+      rgba(0, 0, 0, 0.02) 40px,
+      rgba(0, 0, 0, 0.02) 42px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================
+   Typography - Textual & Elegant
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Libre Baskerville', 'Georgia', serif;
+  color: var(--text-cream);
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.03em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold-accent), transparent);
+}
+
+h2 {
+  font-size: 1.875rem;
+  margin-bottom: 1.25rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  color: var(--text-parchment);
+  line-height: 1.9;
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--gold-accent);
+  text-decoration: none;
+  transition: all var(--transition-smooth);
+  border-bottom: 1px solid transparent;
+}
+
+a:hover {
+  color: var(--gold-light);
+  border-bottom-color: var(--gold-light);
+}
+
+/* Decorative Text Styles */
+.text-ornate {
+  font-style: italic;
+  color: var(--text-aged);
+}
+
+.text-chapter {
+  font-variant: small-caps;
+  letter-spacing: 0.1em;
+  color: var(--gold-accent);
+}
+
+/* ============================================
+   Component Styles
+   ============================================ */
 @layer components {
+  /* Primary Button - Carved Wood Effect */
   .btn-primary {
-    @apply bg-stacks hover:bg-stacks/90 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200;
+    @apply font-semibold py-3 px-6 rounded-lg transition-all duration-300;
+    font-family: 'Libre Baskerville', serif;
+    background: linear-gradient(145deg, var(--wood-medium), var(--wood-dark));
+    color: var(--text-cream);
+    border: 2px solid var(--mahogany);
+    box-shadow: var(--shadow-raised);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.05em;
   }
 
+  .btn-primary:hover {
+    background: linear-gradient(145deg, var(--wood-light), var(--wood-medium));
+    border-color: var(--gold-accent);
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.6), -3px -3px 6px rgba(255, 255, 255, 0.03);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-carved);
+  }
+
+  /* Secondary Button - Brass Inlay Effect */
   .btn-secondary {
-    @apply bg-bitcoin hover:bg-bitcoin/90 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200;
+    @apply font-semibold py-3 px-6 rounded-lg transition-all duration-300;
+    font-family: 'Libre Baskerville', serif;
+    background: transparent;
+    color: var(--gold-accent);
+    border: 2px solid var(--brass-accent);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.05em;
   }
 
+  .btn-secondary:hover {
+    background: rgba(218, 165, 32, 0.1);
+    border-color: var(--gold-light);
+    color: var(--gold-light);
+    box-shadow: 0 0 15px rgba(218, 165, 32, 0.2);
+  }
+
+  /* Card - Wooden Panel Effect */
   .card {
-    @apply bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6;
+    @apply rounded-xl p-6;
+    background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-secondary) 100%);
+    border: 2px solid var(--mahogany-dark);
+    box-shadow: 
+      var(--shadow-raised),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
   }
 
+  /* Wood grain texture on cards */
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 3px,
+        rgba(139, 69, 19, 0.05) 3px,
+        rgba(139, 69, 19, 0.05) 5px
+      );
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .card:hover {
+    border-color: var(--gold-accent);
+    box-shadow: 
+      var(--shadow-raised),
+      0 0 20px rgba(218, 165, 32, 0.1);
+  }
+
+  /* Input - Carved Inlay Effect */
   .input {
-    @apply bg-slate-700/50 border border-slate-600 rounded-lg px-4 py-2 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-stacks focus:border-transparent;
+    @apply rounded-lg px-4 py-3 w-full;
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.1rem;
+    background: var(--bg-primary);
+    border: 2px solid var(--mahogany-dark);
+    color: var(--text-cream);
+    box-shadow: var(--shadow-carved);
+    transition: all var(--transition-smooth);
+  }
+
+  .input::placeholder {
+    color: var(--text-faded);
+    font-style: italic;
+  }
+
+  .input:focus {
+    outline: none;
+    border-color: var(--gold-accent);
+    box-shadow: var(--shadow-carved), 0 0 10px rgba(218, 165, 32, 0.2);
+  }
+
+  /* Label styling */
+  .label {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.9rem;
+    color: var(--text-aged);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+}
+
+/* ============================================
+   Header Styles
+   ============================================ */
+header {
+  background: linear-gradient(180deg, var(--walnut-dark) 0%, var(--bg-primary) 100%);
+  border-bottom: 3px solid var(--mahogany);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-accent), transparent);
+}
+
+/* Navigation Links */
+nav a {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 1rem;
+  color: var(--text-aged);
+  text-decoration: none;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: color var(--transition-smooth);
+  border-bottom: none;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gold-accent);
+  transition: width var(--transition-smooth);
+}
+
+nav a:hover {
+  color: var(--text-cream);
+  border-bottom: none;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* ============================================
+   Market Card Specific Styles
+   ============================================ */
+.market-tag {
+  font-family: 'Crimson Pro', serif;
+  font-size: 0.8rem;
+  font-variant: small-caps;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+}
+
+.market-tag.binary {
+  background: rgba(107, 142, 35, 0.2);
+  color: var(--success);
+  border: 1px solid var(--success);
+}
+
+.market-tag.multi {
+  background: rgba(218, 165, 32, 0.2);
+  color: var(--gold-accent);
+  border: 1px solid var(--gold-accent);
+}
+
+/* Outcome Bars - Wood Carved Style */
+.outcome-bar {
+  height: 2.5rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--mahogany-dark);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-carved);
+}
+
+.outcome-fill {
+  height: 100%;
+  transition: width 0.5s ease-out;
+  position: relative;
+}
+
+.outcome-fill.yes {
+  background: linear-gradient(90deg, var(--success), rgba(107, 142, 35, 0.7));
+}
+
+.outcome-fill.no {
+  background: linear-gradient(90deg, var(--copper-accent), rgba(184, 115, 51, 0.7));
+}
+
+.outcome-percentage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-cream);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* ============================================
+   Stats Overview Styles
+   ============================================ */
+.stat-card {
+  position: relative;
+}
+
+.stat-card .stat-icon {
+  color: var(--mahogany);
+  opacity: 0.6;
+}
+
+.stat-value {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-cream);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.stat-label {
+  font-family: 'Crimson Pro', serif;
+  font-size: 0.9rem;
+  color: var(--text-aged);
+  font-variant: small-caps;
+  letter-spacing: 0.1em;
+}
+
+.stat-change {
+  font-family: 'Crimson Pro', serif;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--success);
+}
+
+/* ============================================
+   Modal Styles
+   ============================================ */
+.modal-overlay {
+  background: rgba(20, 10, 5, 0.85);
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  border: 3px solid var(--mahogany);
+  border-radius: 12px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.modal-header {
+  border-bottom: 2px solid var(--mahogany-dark);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.modal-header::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--gold-accent);
+  margin-top: 0.5rem;
+}
+
+/* ============================================
+   Footer Styles
+   ============================================ */
+footer {
+  background: var(--walnut-dark);
+  border-top: 3px solid var(--mahogany);
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-accent), transparent);
+}
+
+footer p {
+  font-family: 'Crimson Pro', serif;
+  font-style: italic;
+  color: var(--text-faded);
+  font-size: 0.9rem;
+}
+
+/* ============================================
+   Scrollbar Styling
+   ============================================ */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+  border-left: 1px solid var(--mahogany-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--wood-medium), var(--wood-dark));
+  border-radius: 6px;
+  border: 2px solid var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--wood-light), var(--wood-medium));
+}
+
+/* ============================================
+   Selection Styling
+   ============================================ */
+::selection {
+  background: rgba(218, 165, 32, 0.3);
+  color: var(--text-cream);
+}
+
+/* ============================================
+   Decorative Elements
+   ============================================ */
+.divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--mahogany), var(--gold-accent), var(--mahogany), transparent);
+  margin: 2rem 0;
+}
+
+.ornament {
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--gold-accent);
+  margin: 1rem 0;
+}
+
+.ornament::before,
+.ornament::after {
+  content: '─────';
+  color: var(--mahogany);
+  margin: 0 1rem;
+}
+
+/* Chapter/Section Headers */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.section-header::before,
+.section-header::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--mahogany));
+}
+
+.section-header::after {
+  background: linear-gradient(90deg, var(--mahogany), transparent);
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+.text-gold {
+  color: var(--gold-accent) !important;
+}
+
+.text-cream {
+  color: var(--text-cream) !important;
+}
+
+.text-aged {
+  color: var(--text-aged) !important;
+}
+
+.bg-wood {
+  background: var(--bg-surface) !important;
+}
+
+.border-gold {
+  border-color: var(--gold-accent) !important;
+}
+
+.shadow-carved {
+  box-shadow: var(--shadow-carved) !important;
+}
+
+.shadow-raised {
+  box-shadow: var(--shadow-raised) !important;
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes goldShimmer {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.animate-shimmer {
+  animation: goldShimmer 2s ease-in-out infinite;
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  .card {
+    padding: 1.25rem;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .card {
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+  
+  header, footer {
+    display: none;
   }
 }
