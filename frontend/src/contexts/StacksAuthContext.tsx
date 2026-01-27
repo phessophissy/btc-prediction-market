@@ -1,12 +1,14 @@
-"use client";
+﻿"use client";
 
 import { createContext, useContext, useState, useCallback, ReactNode, useEffect } from "react";
 import { AppConfig, UserSession, showConnect, UserData } from "@stacks/connect";
+import { NETWORK } from "@/lib/constants";
 
 interface StacksAuthContextType {
   isConnected: boolean;
   userData: UserData | null;
   stxAddress: string | null;
+  network: typeof NETWORK;
   connect: () => void;
   disconnect: () => void;
 }
@@ -55,8 +57,8 @@ export function StacksAuthProvider({ children }: { children: ReactNode }) {
     setIsConnected(false);
   }, []);
 
-  const stxAddress = userData?.profile?.stxAddress?.mainnet || 
-                     userData?.profile?.stxAddress?.testnet || 
+  const stxAddress = userData?.profile?.stxAddress?.mainnet ||
+                     userData?.profile?.stxAddress?.testnet ||
                      null;
 
   return (
@@ -65,6 +67,7 @@ export function StacksAuthProvider({ children }: { children: ReactNode }) {
         isConnected,
         userData,
         stxAddress,
+        network: NETWORK,
         connect,
         disconnect,
       }}

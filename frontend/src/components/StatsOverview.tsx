@@ -1,40 +1,90 @@
-"use client";
+﻿"use client";
 
+import { useEffect, useState } from "react";
 import { TrendingUp, Users, DollarSign, Clock } from "lucide-react";
+import { getPlatformStats, formatSTX } from "@/lib/contractService";
+
+interface StatItem {
+  label: string;
+  value: string;
+  icon: typeof TrendingUp;
+  change: string;
+}
 
 export function StatsOverview() {
-  // These would be fetched from the contract in a real implementation
-  const stats = [
+  const [stats, setStats] = useState<StatItem[]>([
     {
       label: "Total Markets",
-      value: "24",
+      value: "...",
       icon: TrendingUp,
-      change: "+3 this week",
+      change: "Loading...",
     },
     {
       label: "Total Volume",
-      value: "125,430 STX",
+      value: "...",
       icon: DollarSign,
-      change: "+12.5%",
+      change: "Loading...",
     },
     {
-      label: "Active Users",
-      value: "1,234",
+      label: "Platform Fees",
+      value: "...",
       icon: Users,
-      change: "+45 today",
+      change: "5% on winnings",
     },
     {
-      label: "Avg Settlement",
+      label: "Settlement",
       value: "~10 min",
       icon: Clock,
       change: "Bitcoin finality",
     },
-  ];
+  ]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadStats() {
+      try {
+        const platformStats = await getPlatformStats();
+        
+        setStats([
+          {
+            label: "Total Markets",
+            value: platformStats.totalMarkets.toString(),
+            icon: TrendingUp,
+            change: "All-time created",
+          },
+          {
+            label: "Total Volume",
+            value: `${formatSTX(platformStats.totalVolume)} STX`,
+            icon: DollarSign,
+            change: "Across all markets",
+          },
+          {
+            label: "Fees Collected",
+            value: `${formatSTX(platformStats.totalFeesCollected)} STX`,
+            icon: Users,
+            change: "5% on winnings",
+          },
+          {
+            label: "Settlement",
+            value: "~10 min",
+            icon: Clock,
+            change: "Bitcoin finality",
+          },
+        ]);
+      } catch (error) {
+        console.error("Failed to load stats:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadStats();
+  }, []);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {stats.map((stat) => (
-        <div key={stat.label} className="card">
+        <div key={stat.label} className={`card ${loading ? "animate-pulse" : ""}`}>
           <div className="flex items-center justify-between">
             <div>
               <p className="text-slate-400 text-sm">{stat.label}</p>
