@@ -9,24 +9,10 @@ plan:
     - id: 0
       transactions:
         - contract-publish:
-            contract-name: sip-010-trait
+            contract-name: btc-prediction-market-v3
             expected-sender: SP2KYZRNME33Y39GP3RKC90DQJ45EF1N0NZNVRE09
-            cost: 728062
-            path: contracts/sip-010-trait.clar
-            anchor-block-only: true
-            clarity-version: 3
-        - contract-publish:
-            contract-name: btc-prediction-market
-            expected-sender: SP2KYZRNME33Y39GP3RKC90DQJ45EF1N0NZNVRE09
-            cost: 729402
-            path: contracts/btc-prediction-market-v2.clar
-            anchor-block-only: true
-            clarity-version: 3
-        - contract-publish:
-            contract-name: prediction-token
-            expected-sender: SP2KYZRNME33Y39GP3RKC90DQJ45EF1N0NZNVRE09
-            cost: 728657
-            path: contracts/prediction-token.clar
+            cost: 734234
+            path: contracts/btc-prediction-market-v3.clar
             anchor-block-only: true
             clarity-version: 3
       epoch: "3.0"
