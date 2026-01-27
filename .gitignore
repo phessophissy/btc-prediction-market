@@ -38,3 +38,6 @@ scripts/test-wallets.json
 
 # Scripts directory
 scripts/
+
+# Tests directory
+tests/
