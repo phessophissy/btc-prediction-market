@@ -12,7 +12,7 @@ clarity_version = 3
 epoch = 3.0
 
 [contracts.btc-prediction-market]
-path = "contracts/btc-prediction-market.clar"
+path = "contracts/btc-prediction-market-v2.clar"
 clarity_version = 3
 epoch = 3.0
 depends_on = ["sip-010-trait"]

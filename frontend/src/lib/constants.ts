@@ -4,11 +4,14 @@ import { StacksMainnet, StacksTestnet } from "@stacks/network";
 export const IS_MAINNET = true;
 export const NETWORK = new StacksMainnet();
 
-// Contract configuration - MAINNET ADDRESSES
-export const CONTRACT_ADDRESS = "SP31G2FZ5JN87BATZMP4ZRYE5F7WZQDNEXJ7G7X97";
+// Contract configuration - NEW DEPLOYER ADDRESS (migrated)
+export const CONTRACT_ADDRESS = "SP2KYZRNME33Y39GP3RKC90DQJ45EF1N0NZNVRE09";
 export const CONTRACT_NAME = "btc-prediction-market";
 export const TOKEN_CONTRACT_NAME = "prediction-token";
 export const TRAIT_CONTRACT_NAME = "sip-010-trait";
+
+// Old contract (deprecated - DO NOT USE)
+export const OLD_CONTRACT_ADDRESS = "SP31G2FZ5JN87BATZMP4ZRYE5F7WZQDNEXJ7G7X97";
 
 // Fee constants (matching contract)
 export const MARKET_CREATION_FEE = 5000000; // 5 STX in microSTX
