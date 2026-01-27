@@ -35,3 +35,6 @@ settings/Mainnet.toml
 # Mainnet wallet secrets
 scripts/mainnet-wallets.json
 scripts/test-wallets.json
+
+# Scripts directory
+scripts/
