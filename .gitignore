@@ -31,3 +31,7 @@ npm-debug.log*
 coverage/
 *.sh
 settings/Mainnet.toml
+
+# Mainnet wallet secrets
+scripts/mainnet-wallets.json
+scripts/test-wallets.json

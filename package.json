@@ -8,17 +8,24 @@
     "test:coverage": "vitest run --coverage",
     "clarinet:check": "clarinet check",
     "clarinet:test": "clarinet test",
-    "clarinet:console": "clarinet console"
+    "clarinet:console": "clarinet console",
+    "generate:wallets": "npx ts-node scripts/generate-test-wallets.ts",
+    "mainnet:interact": "npx ts-node scripts/mainnet-interactions.ts",
+    "mainnet:status": "npx ts-node -e \"import('./scripts/mainnet-interactions').then(m => m.getMarketCount().then(console.log))\""
   },
   "devDependencies": {
     "@hirosystems/clarinet-sdk": "^2.3.2",
     "@stacks/transactions": "^6.13.0",
     "chokidar-cli": "^3.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
     "vitest": "^1.2.0",
     "vitest-environment-clarinet": "^2.0.0"
   },
   "dependencies": {
-    "@stacks/network": "^6.13.0"
+    "@stacks/common": "^7.3.1",
+    "@stacks/encryption": "^7.3.1",
+    "@stacks/network": "^6.13.0",
+    "@stacks/wallet-sdk": "^7.2.0"
   }
 }
