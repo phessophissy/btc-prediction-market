@@ -1,9 +1,13 @@
-"use client";
+﻿"use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useStacksAuth } from "@/contexts/StacksAuthContext";
-import { Clock, Users, TrendingUp, ChevronDown, ChevronUp } from "lucide-react";
+import { Clock, Users, TrendingUp, ChevronDown, ChevronUp, Gavel, Loader2, CheckCircle } from "lucide-react";
 import { BetModal } from "./BetModal";
+import { isMarketSettleable } from "@/lib/contractService";
+import { CONTRACT_ADDRESS, CONTRACT_NAME } from "@/lib/constants";
+import { openContractCall } from "@stacks/connect";
+import { uintCV, PostConditionMode } from "@stacks/transactions";
 
 interface Market {
   id: number;
@@ -25,13 +29,39 @@ interface MarketCardProps {
 }
 
 export function MarketCard({ market }: MarketCardProps) {
-  const { isConnected } = useStacksAuth();
+  const { isConnected, network } = useStacksAuth();
   const [expanded, setExpanded] = useState(false);
   const [betModalOpen, setBetModalOpen] = useState(false);
   const [selectedOutcome, setSelectedOutcome] = useState<string | null>(null);
+  const [canSettle, setCanSettle] = useState(false);
+  const [settling, setSettling] = useState(false);
+  const [checkingSettle, setCheckingSettle] = useState(true);
 
   const blocksRemaining = market.settlementHeight - market.currentBurnHeight;
   const timeRemaining = blocksRemaining * 10; // ~10 min per BTC block
+
+  // Check if market can be settled
+  useEffect(() => {
+    async function checkSettleable() {
+      if (market.settled) {
+        setCanSettle(false);
+        setCheckingSettle(false);
+        return;
+      }
+
+      try {
+        const settleable = await isMarketSettleable(market.id);
+        setCanSettle(settleable);
+      } catch (error) {
+        console.error("Failed to check settleable:", error);
+        setCanSettle(false);
+      } finally {
+        setCheckingSettle(false);
+      }
+    }
+
+    checkSettleable();
+  }, [market.id, market.settled]);
 
   const formatSTX = (microSTX: number) => {
     return (microSTX / 1000000).toLocaleString();
@@ -44,7 +74,7 @@ export function MarketCard({ market }: MarketCardProps) {
   };
 
   const calculateOdds = (pool: number, total: number) => {
-    if (pool === 0) return "∞";
+    if (pool === 0) return "";
     return (total / pool).toFixed(2) + "x";
   };
 
@@ -59,9 +89,36 @@ export function MarketCard({ market }: MarketCardProps) {
     setBetModalOpen(true);
   };
 
+  const handleSettleMarket = async () => {
+    if (!isConnected) return;
+
+    setSettling(true);
+    try {
+      await openContractCall({
+        network,
+        contractAddress: CONTRACT_ADDRESS,
+        contractName: CONTRACT_NAME,
+        functionName: "settle-market",
+        functionArgs: [uintCV(market.id)],
+        postConditionMode: PostConditionMode.Allow,
+        onFinish: (data) => {
+          console.log("Settlement transaction submitted:", data);
+          // Refresh page after settlement
+          setTimeout(() => window.location.reload(), 2000);
+        },
+        onCancel: () => {
+          setSettling(false);
+        },
+      });
+    } catch (error) {
+      console.error("Failed to settle market:", error);
+      setSettling(false);
+    }
+  };
+
   return (
     <>
-      <div className="card hover:border-slate-600 transition-colors">
+      <div className={`card hover:border-slate-600 transition-colors ${market.settled ? "opacity-75" : ""}`}>
         {/* Header */}
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
@@ -76,6 +133,17 @@ export function MarketCard({ market }: MarketCardProps) {
                 {market.type === "binary" ? "Binary" : "Multi-outcome"}
               </span>
               <span className="text-xs text-slate-500">#{market.id}</span>
+              {market.settled && (
+                <span className="text-xs px-2 py-1 rounded-full bg-green-500/20 text-green-400 flex items-center gap-1">
+                  <CheckCircle className="w-3 h-3" />
+                  Settled
+                </span>
+              )}
+              {canSettle && !market.settled && (
+                <span className="text-xs px-2 py-1 rounded-full bg-yellow-500/20 text-yellow-400 animate-pulse">
+                  Ready to Settle
+                </span>
+              )}
             </div>
             <h3 className="text-lg font-semibold mb-2">{market.title}</h3>
             <p className="text-slate-400 text-sm">{market.description}</p>
@@ -90,7 +158,13 @@ export function MarketCard({ market }: MarketCardProps) {
           </div>
           <div className="flex items-center gap-1">
             <Clock className="w-4 h-4" />
-            <span>{formatTime(timeRemaining)}</span>
+            {market.settled ? (
+              <span className="text-green-400">Completed</span>
+            ) : blocksRemaining > 0 ? (
+              <span>{formatTime(timeRemaining)}</span>
+            ) : (
+              <span className="text-yellow-400">Awaiting settlement</span>
+            )}
           </div>
           <div className="flex items-center gap-1">
             <Users className="w-4 h-4" />
@@ -210,36 +284,74 @@ export function MarketCard({ market }: MarketCardProps) {
         )}
 
         {/* Action Buttons */}
-        <div className="flex gap-3">
-          <button
-            onClick={() => handleBet("A")}
-            className="flex-1 bg-stacks/20 hover:bg-stacks/30 text-stacks border border-stacks/30 py-2 px-4 rounded-lg transition-colors"
-          >
-            Bet {market.type === "binary" ? "Yes" : "A"}
-          </button>
-          <button
-            onClick={() => handleBet("B")}
-            className="flex-1 bg-bitcoin/20 hover:bg-bitcoin/30 text-bitcoin border border-bitcoin/30 py-2 px-4 rounded-lg transition-colors"
-          >
-            Bet {market.type === "binary" ? "No" : "B"}
-          </button>
-          {market.type === "multi" && (
-            <>
+        {!market.settled ? (
+          <div className="flex gap-3">
+            {canSettle ? (
+              /* Settle Market Button */
               <button
-                onClick={() => handleBet("C")}
-                className="flex-1 bg-green-500/20 hover:bg-green-500/30 text-green-400 border border-green-500/30 py-2 px-4 rounded-lg transition-colors"
+                onClick={handleSettleMarket}
+                disabled={settling || !isConnected}
+                className="flex-1 bg-yellow-500/20 hover:bg-yellow-500/30 text-yellow-400 border border-yellow-500/30 py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
               >
-                Bet C
+                {settling ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Settling...
+                  </>
+                ) : (
+                  <>
+                    <Gavel className="w-4 h-4" />
+                    Settle Market (Earn Reward)
+                  </>
+                )}
               </button>
-              <button
-                onClick={() => handleBet("D")}
-                className="flex-1 bg-purple-500/20 hover:bg-purple-500/30 text-purple-400 border border-purple-500/30 py-2 px-4 rounded-lg transition-colors"
-              >
-                Bet D
-              </button>
-            </>
-          )}
-        </div>
+            ) : (
+              /* Betting Buttons */
+              <>
+                <button
+                  onClick={() => handleBet("A")}
+                  disabled={!isConnected || blocksRemaining <= 0}
+                  className="flex-1 bg-stacks/20 hover:bg-stacks/30 text-stacks border border-stacks/30 py-2 px-4 rounded-lg transition-colors disabled:opacity-50"
+                >
+                  Bet {market.type === "binary" ? "Yes" : "A"}
+                </button>
+                <button
+                  onClick={() => handleBet("B")}
+                  disabled={!isConnected || blocksRemaining <= 0}
+                  className="flex-1 bg-bitcoin/20 hover:bg-bitcoin/30 text-bitcoin border border-bitcoin/30 py-2 px-4 rounded-lg transition-colors disabled:opacity-50"
+                >
+                  Bet {market.type === "binary" ? "No" : "B"}
+                </button>
+                {market.type === "multi" && (
+                  <>
+                    <button
+                      onClick={() => handleBet("C")}
+                      disabled={!isConnected || blocksRemaining <= 0}
+                      className="flex-1 bg-green-500/20 hover:bg-green-500/30 text-green-400 border border-green-500/30 py-2 px-4 rounded-lg transition-colors disabled:opacity-50"
+                    >
+                      Bet C
+                    </button>
+                    <button
+                      onClick={() => handleBet("D")}
+                      disabled={!isConnected || blocksRemaining <= 0}
+                      className="flex-1 bg-purple-500/20 hover:bg-purple-500/30 text-purple-400 border border-purple-500/30 py-2 px-4 rounded-lg transition-colors disabled:opacity-50"
+                    >
+                      Bet D
+                    </button>
+                  </>
+                )}
+              </>
+            )}
+          </div>
+        ) : (
+          /* Settled State */
+          <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3 text-center">
+            <p className="text-green-400 text-sm flex items-center justify-center gap-2">
+              <CheckCircle className="w-4 h-4" />
+              This market has been settled. Check your portfolio for winnings.
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Bet Modal */}
