@@ -1,0 +1,21 @@
+{
+  "name": "@btc-prediction-market/sdk",
+  "version": "1.0.0",
+  "description": "TypeScript SDK for Bitcoin Prediction Market",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@stacks/network": "^6.13.0",
+    "@stacks/transactions": "^6.13.0",
+    "@stacks/wallet-sdk": "^7.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "typescript": "^5"
+  }
+}
