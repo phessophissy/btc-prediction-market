@@ -16,7 +16,7 @@ interface Market {
   settlementHeight: number;
   currentBurnHeight: number;
   totalPool: number;
-  outcomeAPoll: number;
+  outcomeAPool: number; 
   outcomeBPool: number;
   outcomeCPool?: number;
   outcomeDPool?: number;
