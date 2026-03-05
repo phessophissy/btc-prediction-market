@@ -1,5 +1,3 @@
-import { initializeMarketSDK, Market } from '../sdk/src/index';
-
 /**
  * Market analytics and monitoring utilities
  */
@@ -101,7 +99,7 @@ export class MarketDataProvider {
    */
   async getUserPositions(userAddress: string): Promise<any[]> {
     // In a real implementation, would query contract for user positions
-    console.log(\Fetching positions for user: \\);
+    console.log(`Fetching positions for user: ${userAddress}`);
     return [];
   }
 

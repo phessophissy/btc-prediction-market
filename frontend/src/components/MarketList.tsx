@@ -98,5 +98,7 @@ export function MarketList({ showSettled = false }: MarketListProps) {
             type: market.type,
           }}
         />
+      ))}
+    </div>
   );
 }

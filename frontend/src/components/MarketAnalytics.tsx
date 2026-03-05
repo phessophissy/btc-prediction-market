@@ -85,7 +85,7 @@ export function MarketAnalytics({
                 <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
                   {metric.label}
                 </span>
-                <div className={\ p-2 rounded-lg text-white}>
+                <div className={`${metric.color} p-2 rounded-lg text-white`}>
                   <IconComponent size={16} />
                 </div>
               </div>
@@ -118,7 +118,7 @@ export function MarketAnalytics({
                   <div
                     className="bg-blue-500 h-2 rounded-full"
                     style={{
-                      width: \\\%,
+                      width: `${totalVolume > 0 ? (point.value / totalVolume) * 100 : 0}%`,
                     }}
                   />
                 </div>
