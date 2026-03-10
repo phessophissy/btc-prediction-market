@@ -35,7 +35,9 @@ settings/Mainnet.toml
 # Mainnet wallet secrets
 scripts/mainnet-wallets.json
 scripts/test-wallets.json
+scripts/fund-wallets.ts
 wallets.json
+wallets-*.json
 
 # Scripts and tests logic
 !scripts/
@@ -46,3 +48,5 @@ wallets.json
 !Clarinet.toml
 !frontend/package.json
 !sdk/package.json
+.vercel
+.env*.local

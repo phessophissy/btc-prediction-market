@@ -1,21 +1,39 @@
 import {
-  StacksTestnet,
   StacksMainnet,
+  StacksTestnet,
 } from '@stacks/network';
 import {
-  ContractCallPayload,
+  AnchorMode,
+  PostConditionMode,
   broadcastTransaction,
+  callReadOnlyFunction,
+  cvToJSON,
+  falseCV,
   makeContractCall,
+  standardPrincipalCV,
+  stringUtf8CV,
+  trueCV,
+  uintCV,
 } from '@stacks/transactions';
 import { Market, UserPosition, Outcome, MarketStats } from './types';
 
+type ContractArg = {
+  type: 'uint' | 'bool' | 'string-utf8' | 'principal';
+  value: string | boolean;
+};
+
 export class MarketContractService {
   private contractAddress: string;
-  private contractName: string = 'btc-prediction-market';
+  private contractName: string;
   private network: StacksTestnet | StacksMainnet;
 
-  constructor(contractAddress: string, isMainnet: boolean = false) {
+  constructor(
+    contractAddress: string,
+    isMainnet: boolean = false,
+    contractName: string = 'btc-prediction-market'
+  ) {
     this.contractAddress = contractAddress;
+    this.contractName = contractName;
     this.network = isMainnet ? new StacksMainnet() : new StacksTestnet();
   }
 
@@ -28,7 +46,7 @@ export class MarketContractService {
     settlementBurnHeight: number,
     senderKey: string
   ): Promise<string> {
-    const functionArgs = [
+    const functionArgs: ContractArg[] = [
       { type: 'string-utf8', value: title },
       { type: 'string-utf8', value: description },
       { type: 'uint', value: settlementBurnHeight.toString() },
@@ -54,7 +72,7 @@ export class MarketContractService {
     enableOutcomeD: boolean,
     senderKey: string
   ): Promise<string> {
-    const functionArgs = [
+    const functionArgs: ContractArg[] = [
       { type: 'string-utf8', value: title },
       { type: 'string-utf8', value: description },
       { type: 'uint', value: settlementBurnHeight.toString() },
@@ -81,7 +99,7 @@ export class MarketContractService {
     senderKey: string
   ): Promise<string> {
     const functionName = `bet-outcome-${outcome}`;
-    const functionArgs = [
+    const functionArgs: ContractArg[] = [
       { type: 'uint', value: marketId.toString() },
       { type: 'uint', value: (amount * 1000000).toString() }, // Convert to microSTX
     ];
@@ -93,7 +111,7 @@ export class MarketContractService {
    * Settle a market after the settlement height
    */
   async settleMarket(marketId: number, senderKey: string): Promise<string> {
-    const functionArgs = [
+    const functionArgs: ContractArg[] = [
       { type: 'uint', value: marketId.toString() },
     ];
 
@@ -104,7 +122,7 @@ export class MarketContractService {
    * Claim winnings from a settled market
    */
   async claimWinnings(marketId: number, senderKey: string): Promise<string> {
-    const functionArgs = [
+    const functionArgs: ContractArg[] = [
       { type: 'uint', value: marketId.toString() },
     ];
 
@@ -117,8 +135,11 @@ export class MarketContractService {
   async getMarket(marketId: number): Promise<Market | null> {
     const response = await this.readContract('get-market', [
       { type: 'uint', value: marketId.toString() },
-    ]);
-    return response || null;
+    ] as ContractArg[]);
+    if (!response || response.type === 'none') {
+      return null;
+    }
+    return response.value || null;
   }
 
   /**
@@ -126,7 +147,7 @@ export class MarketContractService {
    */
   async getMarketCount(): Promise<number> {
     const response = await this.readContract('get-market-count', []);
-    return Number(response || 0);
+    return Number(response?.value || 0);
   }
 
   /**
@@ -139,8 +160,11 @@ export class MarketContractService {
     const response = await this.readContract('get-user-position', [
       { type: 'uint', value: marketId.toString() },
       { type: 'principal', value: userAddress },
-    ]);
-    return response || null;
+    ] as ContractArg[]);
+    if (!response || response.type === 'none') {
+      return null;
+    }
+    return response.value || null;
   }
 
   /**
@@ -149,8 +173,16 @@ export class MarketContractService {
   async getMarketOdds(marketId: number): Promise<any | null> {
     const response = await this.readContract('get-market-odds', [
       { type: 'uint', value: marketId.toString() },
-    ]);
-    return response || null;
+    ] as ContractArg[]);
+    if (!response || response.type === 'none') {
+      return null;
+    }
+    return response.value || null;
+  }
+
+  async getCurrentBurnHeight(): Promise<number> {
+    const response = await this.readContract('get-current-burn-height', []);
+    return Number(response?.value || 0);
   }
 
   /**
@@ -158,16 +190,18 @@ export class MarketContractService {
    */
   private async readContract(
     functionName: string,
-    functionArgs: any[]
+    functionArgs: ContractArg[]
   ): Promise<any> {
-    // In a real environment, this would call a Stacks node's read-only function endpoint
-    // For this example, we'll log it. In a real SDK, you'd use @stacks/transactions 'callReadOnlyFunction'
-    console.log(`Reading ${functionName} with args:`, functionArgs);
+    const result = await callReadOnlyFunction({
+      contractAddress: this.contractAddress,
+      contractName: this.contractName,
+      functionName,
+      functionArgs: functionArgs.map(arg => this.toClarityValue(arg)),
+      network: this.network,
+      senderAddress: this.contractAddress,
+    });
 
-    // Placeholder for actual read logic
-    // const result = await callReadOnlyFunction({...});
-    // return cvToValue(result.value);
-    return null;
+    return cvToJSON(result);
   }
 
   /**
@@ -175,29 +209,18 @@ export class MarketContractService {
    */
   private async callContract(
     functionName: string,
-    functionArgs: any[],
+    functionArgs: ContractArg[],
     senderKey: string
   ): Promise<string> {
     const txOptions = {
       contractAddress: this.contractAddress,
       contractName: this.contractName,
       functionName,
-      functionArgs: functionArgs.map(arg => {
-        if (arg.type === 'uint') {
-          return { type: arg.type, value: BigInt(arg.value) };
-        }
-        if (arg.type === 'bool') {
-          return { type: arg.type, value: arg.value };
-        }
-        if (arg.type === 'string-utf8') {
-          return { type: arg.type, value: arg.value };
-        }
-        return arg;
-      }),
+      functionArgs: functionArgs.map(arg => this.toClarityValue(arg)),
       senderKey,
       network: this.network,
-      postConditionMode: 0x01, // Allow
-      anchorMode: 1, // Any
+      postConditionMode: PostConditionMode.Allow,
+      anchorMode: AnchorMode.Any,
     };
 
     try {
@@ -212,6 +235,19 @@ export class MarketContractService {
     } catch (error) {
       console.error(`Error calling ${functionName}:`, error);
       throw error;
+    }
+  }
+
+  private toClarityValue(arg: ContractArg) {
+    switch (arg.type) {
+      case 'uint':
+        return uintCV(arg.value as string);
+      case 'bool':
+        return arg.value ? trueCV() : falseCV();
+      case 'string-utf8':
+        return stringUtf8CV(arg.value as string);
+      case 'principal':
+        return standardPrincipalCV(arg.value as string);
     }
   }
 }

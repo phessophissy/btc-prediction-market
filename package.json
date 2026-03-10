@@ -10,8 +10,8 @@
     "clarinet:test": "clarinet test",
     "clarinet:console": "clarinet console",
     "generate:wallets": "npx ts-node scripts/generate-test-wallets.ts",
-    "mainnet:interact": "npx ts-node scripts/mainnet-interactions.ts",
-    "mainnet:status": "npx ts-node -e \"import('./scripts/mainnet-interactions').then(m => m.getMarketCount().then(console.log))\""
+    "mainnet:interact": "npx ts-node --compiler-options '{\"module\":\"CommonJS\"}' scripts/mainnet-interactions.ts",
+    "mainnet:status": "npx ts-node --compiler-options '{\"module\":\"CommonJS\"}' -e \"require('./scripts/mainnet-interactions').getMarketCount().then(console.log)\""
   },
   "devDependencies": {
     "@hirosystems/clarinet-sdk": "^2.3.2",
