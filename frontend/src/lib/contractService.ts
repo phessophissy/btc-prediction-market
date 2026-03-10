@@ -4,6 +4,7 @@
  */
 
 import {
+  cvToHex,
   cvToJSON,
   hexToCV,
   uintCV,
@@ -99,7 +100,7 @@ async function callReadOnly(functionName: string, args: any[] = []): Promise<any
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       sender: CONTRACT_ADDRESS,
-      arguments: args.map((arg) => arg.toString()),
+      arguments: args.map((arg) => cvToHex(arg)),
     }),
   });
 
