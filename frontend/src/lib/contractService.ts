@@ -19,6 +19,7 @@ import {
   OUTCOME_C,
   OUTCOME_D,
 } from "./constants";
+import { formatBlocksToEta, formatMicroStx } from "./format";
 
 // ============================================
 // Types
@@ -542,20 +543,14 @@ export async function canClaimWinnings(
  * Format microSTX to STX string
  */
 export function formatSTX(microSTX: number): string {
-  return (microSTX / 1_000_000).toLocaleString(undefined, {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 2,
-  });
+  return formatMicroStx(microSTX);
 }
 
 /**
  * Format blocks remaining to time string
  */
 export function formatBlocksToTime(blocks: number): string {
-  const minutes = blocks * 10; // ~10 min per BTC block
-  if (minutes < 60) return `${minutes} min`;
-  if (minutes < 1440) return `${Math.floor(minutes / 60)}h ${minutes % 60}m`;
-  return `${Math.floor(minutes / 1440)}d ${Math.floor((minutes % 1440) / 60)}h`;
+  return formatBlocksToEta(blocks);
 }
 
 /**
