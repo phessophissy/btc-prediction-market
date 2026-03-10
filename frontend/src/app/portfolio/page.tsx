@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { ConnectionRequired } from "@/components/ConnectionRequired";
 import { PageHero } from "@/components/PageHero";
+import { StatCard } from "@/components/StatCard";
 import {
   Market,
   UserPosition,
@@ -176,26 +177,16 @@ export default function PortfolioPage() {
       />
 
       <section className="grid grid-cols-2 gap-4 md:grid-cols-4">
-        <div className="card">
-          <p className="text-sm text-slate-300">Total Bets Placed</p>
-          <p className="metric-value mt-3">{stats?.totalBetsPlaced || 0}</p>
-        </div>
-        <div className="card">
-          <p className="text-sm text-slate-300">Total Winnings</p>
-          <p className="metric-value mt-3 text-emerald-300">
-            {formatSTX(stats?.totalWinnings || 0)} STX
-          </p>
-        </div>
-        <div className="card">
-          <p className="text-sm text-slate-300">Active Positions</p>
-          <p className="metric-value mt-3">{activePositions}</p>
-        </div>
-        <div className="card">
-          <p className="text-sm text-slate-300">Markets Created</p>
-          <p className="metric-value mt-3 text-amber-300">
-            {stats?.marketsCreated || 0}
-          </p>
-        </div>
+        <StatCard label="Total Bets Placed" value={stats?.totalBetsPlaced || 0} />
+        <StatCard
+          label="Total Winnings"
+          value={<span className="text-emerald-300">{formatSTX(stats?.totalWinnings || 0)} STX</span>}
+        />
+        <StatCard label="Active Positions" value={activePositions} />
+        <StatCard
+          label="Markets Created"
+          value={<span className="text-amber-300">{stats?.marketsCreated || 0}</span>}
+        />
       </section>
 
       <section className="grid gap-4 md:grid-cols-3">
