@@ -15,6 +15,7 @@ import {
 import { BetModal } from "./BetModal";
 import { isMarketSettleable } from "@/lib/contractService";
 import { CONTRACT_ADDRESS, CONTRACT_NAME } from "@/lib/constants";
+import { formatBlocksToEta, formatMicroStx } from "@/lib/format";
 import { openContractCall } from "@stacks/connect";
 import { PostConditionMode, uintCV } from "@stacks/transactions";
 
@@ -46,7 +47,6 @@ export function MarketCard({ market }: MarketCardProps) {
   const [settling, setSettling] = useState(false);
 
   const blocksRemaining = market.settlementHeight - market.currentBurnHeight;
-  const timeRemaining = blocksRemaining * 10;
 
   useEffect(() => {
     async function checkSettleable() {
@@ -65,14 +65,6 @@ export function MarketCard({ market }: MarketCardProps) {
 
     checkSettleable();
   }, [market.id, market.settled]);
-
-  const formatSTX = (microSTX: number) => (microSTX / 1000000).toLocaleString();
-
-  const formatTime = (minutes: number) => {
-    if (minutes < 60) return `${minutes} min`;
-    if (minutes < 1440) return `${Math.floor(minutes / 60)}h ${minutes % 60}m`;
-    return `${Math.floor(minutes / 1440)}d ${Math.floor((minutes % 1440) / 60)}h`;
-  };
 
   const calculateOdds = (pool: number, total: number) => {
     if (pool === 0) return "No liquidity";
@@ -177,7 +169,7 @@ export function MarketCard({ market }: MarketCardProps) {
           <div className="grid gap-3 sm:grid-cols-3 lg:w-[22rem] lg:grid-cols-1">
             <div className="panel-soft">
               <span className="subtle-copy text-xs uppercase tracking-[0.18em]">Total pool</span>
-              <p className="mt-2 text-2xl font-semibold text-white">{formatSTX(market.totalPool)} STX</p>
+              <p className="mt-2 text-2xl font-semibold text-white">{formatMicroStx(market.totalPool)} STX</p>
             </div>
             <div className="panel-soft">
               <span className="subtle-copy text-xs uppercase tracking-[0.18em]">Settlement</span>
@@ -185,7 +177,7 @@ export function MarketCard({ market }: MarketCardProps) {
                 {market.settled
                   ? "Completed"
                   : blocksRemaining > 0
-                    ? formatTime(timeRemaining)
+                    ? formatBlocksToEta(blocksRemaining)
                     : "Awaiting settlement"}
               </p>
             </div>
@@ -217,7 +209,7 @@ export function MarketCard({ market }: MarketCardProps) {
               <div className="flex items-center justify-between gap-3 text-sm">
                 <span className="text-slate-200">{outcome.label}</span>
                 <div className="flex items-center gap-3">
-                  <span className="subtle-copy">{formatSTX(outcome.pool)} STX</span>
+                  <span className="subtle-copy">{formatMicroStx(outcome.pool)} STX</span>
                   <span className={`font-semibold ${outcome.valueClass}`}>
                     {calculateOdds(outcome.pool, market.totalPool)}
                   </span>
