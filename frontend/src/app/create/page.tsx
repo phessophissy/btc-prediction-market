@@ -19,6 +19,7 @@ import {
 import { Bitcoin, DollarSign } from "lucide-react";
 import { ConnectionRequired } from "@/components/ConnectionRequired";
 import { PageHero } from "@/components/PageHero";
+import { formatMicroStx } from "@/lib/format";
 
 export default function CreateMarketPage() {
   const { isConnected, stxAddress } = useStacksAuth();
@@ -27,18 +28,34 @@ export default function CreateMarketPage() {
   const [description, setDescription] = useState("");
   const [settlementBlock, setSettlementBlock] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState<string | null>(null);
+  const [submissionSuccess, setSubmissionSuccess] = useState<string | null>(null);
+
+  const trimmedQuestion = question.trim();
+  const trimmedDescription = description.trim();
+  const parsedSettlementBlock = Number.parseInt(settlementBlock, 10);
+  const validationError =
+    !trimmedQuestion
+      ? "A market question is required."
+      : !settlementBlock
+        ? "A settlement block is required."
+        : Number.isNaN(parsedSettlementBlock) || parsedSettlementBlock <= 0
+          ? "Settlement block must be a positive integer."
+          : null;
 
   const handleCreateMarket = async () => {
     if (!isConnected || !stxAddress) {
-      alert("Please connect your wallet first");
+      setSubmissionError("Please connect your wallet first.");
       return;
     }
 
-    if (!question || !settlementBlock) {
-      alert("Please fill in all required fields");
+    if (validationError) {
+      setSubmissionError(validationError);
       return;
     }
 
+    setSubmissionError(null);
+    setSubmissionSuccess(null);
     setIsSubmitting(true);
 
     try {
@@ -47,12 +64,11 @@ export default function CreateMarketPage() {
         : "create-multi-market";
 
       const functionArgs = [
-        stringAsciiCV(question.slice(0, 100)),
-        stringAsciiCV(description.slice(0, 500) || "No description"),
-        uintCV(parseInt(settlementBlock)),
+        stringAsciiCV(trimmedQuestion.slice(0, 100)),
+        stringAsciiCV(trimmedDescription.slice(0, 500) || "No description"),
+        uintCV(parsedSettlementBlock),
       ];
 
-      // Add post condition for the 5 STX fee
       const postConditions = [
         makeStandardSTXPostCondition(
           stxAddress,
@@ -71,18 +87,19 @@ export default function CreateMarketPage() {
         postConditions,
         onFinish: (data) => {
           console.log("Transaction submitted:", data);
-          alert(`Market creation submitted! TX: ${data.txId}`);
+          setSubmissionSuccess(`Market creation submitted: ${data.txId}`);
           setQuestion("");
           setDescription("");
           setSettlementBlock("");
         },
         onCancel: () => {
           console.log("Transaction cancelled");
+          setSubmissionError("Market creation was cancelled.");
         },
       });
     } catch (error) {
       console.error("Error creating market:", error);
-      alert("Failed to create market. Please try again.");
+      setSubmissionError("Failed to create market. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -112,7 +129,7 @@ export default function CreateMarketPage() {
         <div className="flex items-center gap-2">
           <DollarSign className="h-5 w-5 text-amber-300" />
           <span className="text-amber-100">
-            Market creation fee: <strong>5 STX</strong>
+            Market creation fee: <strong>{formatMicroStx(MARKET_CREATION_FEE)} STX</strong>
           </span>
         </div>
       </div>
@@ -199,11 +216,29 @@ export default function CreateMarketPage() {
 
         <button
           onClick={handleCreateMarket}
-          disabled={isSubmitting || !question || !settlementBlock}
+          disabled={isSubmitting || !!validationError}
           className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {isSubmitting ? "Creating Market..." : "Create Market (5 STX)"}
+          {isSubmitting
+            ? "Creating Market..."
+            : `Create Market (${formatMicroStx(MARKET_CREATION_FEE)} STX)`}
         </button>
+
+        {validationError && !submissionError ? (
+          <p className="text-sm text-amber-200">{validationError}</p>
+        ) : null}
+
+        {submissionError ? (
+          <div className="rounded-[1.25rem] border border-rose-300/20 bg-rose-300/10 p-4 text-sm text-rose-100">
+            {submissionError}
+          </div>
+        ) : null}
+
+        {submissionSuccess ? (
+          <div className="rounded-[1.25rem] border border-emerald-300/20 bg-emerald-300/10 p-4 text-sm text-emerald-100">
+            {submissionSuccess}
+          </div>
+        ) : null}
       </div>
     </div>
   );
