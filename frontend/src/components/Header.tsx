@@ -1,6 +1,7 @@
 "use client";
 
 import { useStacksAuth } from "@/contexts/StacksAuthContext";
+import { formatAddress } from "@/lib/format";
 import { Bitcoin, Menu, Sparkles, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -17,10 +18,6 @@ export function Header() {
     { href: "/portfolio", label: "Portfolio" },
     { href: "/leaderboard", label: "Leaderboard" },
   ];
-
-  const truncateAddress = (address: string) => {
-    return `${address.slice(0, 6)}...${address.slice(-4)}`;
-  };
 
   const navClassName = (href: string) =>
     pathname === href
@@ -62,7 +59,7 @@ export function Header() {
           {isConnected ? (
             <div className="flex items-center gap-3 rounded-full border border-white/10 bg-white/6 p-1.5 pl-4">
               <span className="text-sm text-slate-300">
-                {truncateAddress(stxAddress || "")}
+                {formatAddress(stxAddress || "")}
               </span>
               <button onClick={disconnect} className="btn-secondary px-4 py-2 text-xs">
                 Disconnect
@@ -104,7 +101,7 @@ export function Header() {
               {isConnected ? (
                 <div className="flex flex-col gap-2">
                   <span className="text-sm text-slate-300">
-                    {truncateAddress(stxAddress || "")}
+                    {formatAddress(stxAddress || "")}
                   </span>
                   <button onClick={disconnect} className="btn-secondary w-full">
                     Disconnect
