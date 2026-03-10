@@ -40,7 +40,7 @@ wallets.json
 wallets-*.json
 
 # Scripts and tests logic
-!scripts/
+scripts/
 !tests/
 *.json
 !package.json
