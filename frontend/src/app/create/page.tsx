@@ -16,7 +16,8 @@ import {
   makeStandardSTXPostCondition,
   FungibleConditionCode
 } from "@stacks/transactions";
-import { AlertCircle, Bitcoin, DollarSign } from "lucide-react";
+import { Bitcoin, DollarSign } from "lucide-react";
+import { ConnectionRequired } from "@/components/ConnectionRequired";
 import { PageHero } from "@/components/PageHero";
 
 export default function CreateMarketPage() {
@@ -90,13 +91,10 @@ export default function CreateMarketPage() {
   if (!isConnected) {
     return (
       <div className="max-w-2xl mx-auto">
-        <div className="card p-8 text-center">
-          <AlertCircle className="mx-auto mb-4 h-16 w-16 text-amber-300" />
-          <h2 className="mb-2 text-3xl">Connect Wallet</h2>
-          <p className="text-slate-300">
-            Please connect your Stacks wallet to create a prediction market.
-          </p>
-        </div>
+        <ConnectionRequired
+          title="Connect Wallet"
+          description="Please connect your Stacks wallet to create a prediction market."
+        />
       </div>
     );
   }
