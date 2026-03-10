@@ -4,12 +4,18 @@ import { useState } from "react";
 import { X, AlertCircle, Loader2 } from "lucide-react";
 import { useStacksAuth } from "@/contexts/StacksAuthContext";
 import { openContractCall } from "@stacks/connect";
-import { 
+import {
   uintCV, 
   FungibleConditionCode,
   makeStandardSTXPostCondition,
 } from "@stacks/transactions";
-import { NETWORK, CONTRACT_ADDRESS, CONTRACT_NAME } from "@/lib/constants";
+import {
+  CONTRACT_ADDRESS,
+  CONTRACT_NAME,
+  MIN_BET_AMOUNT,
+  NETWORK,
+} from "@/lib/constants";
+import { formatMicroStx } from "@/lib/format";
 
 interface Market {
   id: number;
@@ -31,6 +37,9 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
   const { stxAddress } = useStacksAuth();
   const [amount, setAmount] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const parsedAmount = Number.parseFloat(amount || "0");
+  const minimumBet = MIN_BET_AMOUNT / 1_000_000;
 
   const getOutcomePool = () => {
     switch (outcome) {
@@ -71,10 +80,15 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!stxAddress || !amount) return;
+    if (parsedAmount < minimumBet) {
+      setError(`Minimum bet is ${minimumBet} STX.`);
+      return;
+    }
 
+    setError(null);
     setIsSubmitting(true);
 
-    const betAmountMicroSTX = Math.floor(parseFloat(amount) * 1000000);
+    const betAmountMicroSTX = Math.floor(parsedAmount * 1_000_000);
 
     try {
       await openContractCall({
@@ -103,6 +117,7 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
       });
     } catch (error) {
       console.error("Error placing bet:", error);
+      setError("Failed to place bet. Please try again.");
       setIsSubmitting(false);
     }
   };
@@ -142,19 +157,41 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
               <input
                 type="number"
                 value={amount}
-                onChange={(e) => setAmount(e.target.value)}
+                onChange={(e) => {
+                  setAmount(e.target.value);
+                  setError(null);
+                }}
                 placeholder="0.00"
-                min="1"
-                step="0.1"
+                min={minimumBet}
+                step="0.01"
                 className="input w-full pr-16"
               />
               <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">
                 STX
               </span>
             </div>
+            <p className="mt-2 text-xs text-slate-400">
+              Minimum bet: {minimumBet} STX. Total pool: {formatMicroStx(market.totalPool)} STX.
+            </p>
           </div>
 
-          {parseFloat(amount) > 0 && (
+          <div className="mb-6 flex flex-wrap gap-2">
+            {[0.05, 0.1, 0.25, 1].map((quickAmount) => (
+              <button
+                key={quickAmount}
+                type="button"
+                onClick={() => {
+                  setAmount(quickAmount.toString());
+                  setError(null);
+                }}
+                className="btn-secondary px-4 py-2 text-xs"
+              >
+                {quickAmount} STX
+              </button>
+            ))}
+          </div>
+
+          {parsedAmount > 0 && (
             <div className="mb-6 rounded-[1.25rem] border border-white/10 bg-white/6 p-4">
               <div className="mb-2 flex justify-between text-sm">
                 <span className="text-slate-300">Potential Win:</span>
@@ -177,9 +214,15 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
             </p>
           </div>
 
+          {error ? (
+            <div className="mb-6 rounded-[1.25rem] border border-rose-300/20 bg-rose-300/10 p-4 text-sm text-rose-100">
+              {error}
+            </div>
+          ) : null}
+
           <button
             type="submit"
-            disabled={!amount || parseFloat(amount) < 1 || isSubmitting}
+            disabled={!amount || parsedAmount < minimumBet || isSubmitting}
             className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? (
