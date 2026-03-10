@@ -9,7 +9,7 @@ import {
   NETWORK 
 } from "@/lib/constants";
 import { openContractCall } from "@stacks/connect";
-import {
+import { 
   uintCV, 
   stringAsciiCV,
   PostConditionMode,
@@ -17,6 +17,7 @@ import {
   FungibleConditionCode
 } from "@stacks/transactions";
 import { AlertCircle, Bitcoin, DollarSign } from "lucide-react";
+import { PageHero } from "@/components/PageHero";
 
 export default function CreateMarketPage() {
   const { isConnected, stxAddress } = useStacksAuth();
@@ -102,14 +103,12 @@ export default function CreateMarketPage() {
 
   return (
     <div className="mx-auto max-w-3xl space-y-6">
-      <section className="hero-panel py-8">
-        <span className="eyebrow mb-4">Launch a new market</span>
-        <h1 className="mb-3 text-5xl">Create prediction market</h1>
-        <p className="max-w-2xl text-slate-300">
-          Define the question, pick a settlement block, and publish a colorful
-          market card directly from your connected wallet.
-        </p>
-      </section>
+      <PageHero
+        eyebrow="Launch a new market"
+        title="Create prediction market"
+        description="Define the question, pick a settlement block, and publish a colorful market card directly from your connected wallet."
+        compact
+      />
 
       <div className="card">
         <div className="flex items-center gap-2">
