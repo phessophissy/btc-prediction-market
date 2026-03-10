@@ -3,13 +3,13 @@
 import { useEffect, useState } from "react";
 import { useStacksAuth } from "@/contexts/StacksAuthContext";
 import {
-  AlertCircle,
   Clock,
   Gift,
   Loader2,
   TrendingDown,
   TrendingUp,
 } from "lucide-react";
+import { ConnectionRequired } from "@/components/ConnectionRequired";
 import { PageHero } from "@/components/PageHero";
 import {
   Market,
@@ -126,13 +126,10 @@ export default function PortfolioPage() {
   if (!isConnected) {
     return (
       <div className="mx-auto max-w-4xl">
-        <div className="card p-8 text-center">
-          <AlertCircle className="mx-auto mb-4 h-16 w-16 text-amber-300" />
-          <h2 className="mb-2 text-3xl">Connect Wallet</h2>
-          <p className="text-slate-300">
-            Please connect your Stacks wallet to view your portfolio.
-          </p>
-        </div>
+        <ConnectionRequired
+          title="Connect Wallet"
+          description="Please connect your Stacks wallet to view your portfolio."
+        />
       </div>
     );
   }
