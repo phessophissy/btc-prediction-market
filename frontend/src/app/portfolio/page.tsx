@@ -10,6 +10,7 @@ import {
   TrendingDown,
   TrendingUp,
 } from "lucide-react";
+import { PageHero } from "@/components/PageHero";
 import {
   Market,
   UserPosition,
@@ -170,14 +171,12 @@ export default function PortfolioPage() {
 
   return (
     <div className="mx-auto max-w-5xl space-y-6">
-      <section className="hero-panel py-8">
-        <span className="eyebrow mb-4">Wallet dashboard</span>
-        <h1 className="mb-3 text-5xl">My portfolio</h1>
-        <p className="max-w-2xl text-slate-300">
-          Track open positions, spot settled winners, and claim payouts without
-          digging through flat tables.
-        </p>
-      </section>
+      <PageHero
+        eyebrow="Wallet dashboard"
+        title="My portfolio"
+        description="Track open positions, spot settled winners, and claim payouts without digging through flat tables."
+        compact
+      />
 
       <section className="grid grid-cols-2 gap-4 md:grid-cols-4">
         <div className="card">
