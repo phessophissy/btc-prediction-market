@@ -1,5 +1,6 @@
 "use client";
 
+import { PageHero } from "@/components/PageHero";
 import { Award, Medal, Trophy } from "lucide-react";
 
 export default function LeaderboardPage() {
@@ -45,14 +46,12 @@ export default function LeaderboardPage() {
 
   return (
     <div className="mx-auto max-w-6xl space-y-6">
-      <section className="hero-panel py-8">
-        <span className="eyebrow mb-4">Top traders</span>
-        <h1 className="mb-3 text-5xl">Leaderboard</h1>
-        <p className="max-w-2xl text-slate-300">
-          Highlight the most accurate wallets, strongest win rates, and the
-          biggest STX earners in a brighter ranking view.
-        </p>
-      </section>
+      <PageHero
+        eyebrow="Top traders"
+        title="Leaderboard"
+        description="Highlight the most accurate wallets, strongest win rates, and the biggest STX earners in a brighter ranking view."
+        compact
+      />
 
       <section className="grid gap-4 md:grid-cols-3 md:items-end">
         {podium.map((entry) => {
