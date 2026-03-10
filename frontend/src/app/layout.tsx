@@ -24,7 +24,7 @@ export default function RootLayout({
         <ExtensionErrorSuppressor />
         <Providers>
           <Header />
-          <main className="container mx-auto px-4 py-8">{children}</main>
+          <main className="app-shell">{children}</main>
         </Providers>
       </body>
     </html>

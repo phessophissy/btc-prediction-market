@@ -6,11 +6,15 @@ import { StatsOverview } from "@/components/StatsOverview";
 export default function MarketsPage() {
   return (
     <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold mb-2">All Markets</h1>
-        <p className="text-gray-400">Browse and bet on Bitcoin-anchored prediction markets</p>
+      <div className="hero-panel py-8">
+        <span className="eyebrow mb-4">Market directory</span>
+        <h1 className="mb-3 text-5xl">All markets</h1>
+        <p className="max-w-2xl text-slate-300">
+          Browse every Bitcoin-anchored prediction market with brighter pool
+          signals, cleaner cards, and a more readable odds board.
+        </p>
       </div>
-      
+
       <StatsOverview />
       <MarketList />
     </div>

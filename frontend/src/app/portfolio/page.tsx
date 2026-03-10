@@ -1,21 +1,35 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import { useStacksAuth } from "@/contexts/StacksAuthContext";
-import { AlertCircle, TrendingUp, TrendingDown, Clock, Gift, Loader2 } from "lucide-react";
 import {
-  getUserPositions,
-  getUserStats,
+  AlertCircle,
+  Clock,
+  Gift,
+  Loader2,
+  TrendingDown,
+  TrendingUp,
+} from "lucide-react";
+import {
+  Market,
+  UserPosition,
+  UserStats,
   canClaimWinnings,
   formatSTX,
   getOutcomeLabel,
-  UserPosition,
-  Market,
-  UserStats,
+  getUserPositions,
+  getUserStats,
 } from "@/lib/contractService";
-import { CONTRACT_ADDRESS, CONTRACT_NAME, OUTCOME_A, OUTCOME_B, OUTCOME_C, OUTCOME_D } from "@/lib/constants";
+import {
+  CONTRACT_ADDRESS,
+  CONTRACT_NAME,
+  OUTCOME_A,
+  OUTCOME_B,
+  OUTCOME_C,
+  OUTCOME_D,
+} from "@/lib/constants";
 import { openContractCall } from "@stacks/connect";
-import { uintCV, PostConditionMode } from "@stacks/transactions";
+import { PostConditionMode, uintCV } from "@stacks/transactions";
 
 interface PositionWithMarket {
   position: UserPosition;
@@ -37,24 +51,23 @@ export default function PortfolioPage() {
 
       try {
         setLoading(true);
-
-        // Fetch positions and stats in parallel
         const [userPositions, userStats] = await Promise.all([
           getUserPositions(stxAddress),
           getUserStats(stxAddress),
         ]);
 
-        // Check claim eligibility for each position
         const positionsWithClaim = await Promise.all(
           userPositions.map(async ({ position, market }) => {
-            const canClaim = await canClaimWinnings(market.id, stxAddress);
-            const isWinner = market.settled && market.winningOutcome !== null && (
-              (market.winningOutcome === OUTCOME_A && position.outcomeAAmount > 0) ||
-              (market.winningOutcome === OUTCOME_B && position.outcomeBAmount > 0) ||
-              (market.winningOutcome === OUTCOME_C && position.outcomeCAmount > 0) ||
-              (market.winningOutcome === OUTCOME_D && position.outcomeDAmount > 0)
-            );
-            return { position, market, canClaim, isWinner };
+            const claimable = await canClaimWinnings(market.id, stxAddress);
+            const isWinner =
+              market.settled &&
+              market.winningOutcome !== null &&
+              ((market.winningOutcome === OUTCOME_A && position.outcomeAAmount > 0) ||
+                (market.winningOutcome === OUTCOME_B && position.outcomeBAmount > 0) ||
+                (market.winningOutcome === OUTCOME_C && position.outcomeCAmount > 0) ||
+                (market.winningOutcome === OUTCOME_D && position.outcomeDAmount > 0));
+
+            return { position, market, canClaim: claimable, isWinner };
           })
         );
 
@@ -84,12 +97,9 @@ export default function PortfolioPage() {
         postConditionMode: PostConditionMode.Allow,
         onFinish: (data) => {
           console.log("Claim transaction submitted:", data);
-          // Refresh positions after claim
           setTimeout(() => window.location.reload(), 2000);
         },
-        onCancel: () => {
-          setClaiming(null);
-        },
+        onCancel: () => setClaiming(null),
       });
     } catch (error) {
       console.error("Failed to claim winnings:", error);
@@ -97,7 +107,7 @@ export default function PortfolioPage() {
     }
   };
 
-  const getPositionOutcome = (position: UserPosition): string => {
+  const getPositionOutcome = (position: UserPosition) => {
     const outcomes = [];
     if (position.outcomeAAmount > 0) outcomes.push(`A: ${formatSTX(position.outcomeAAmount)}`);
     if (position.outcomeBAmount > 0) outcomes.push(`B: ${formatSTX(position.outcomeBAmount)}`);
@@ -114,11 +124,11 @@ export default function PortfolioPage() {
 
   if (!isConnected) {
     return (
-      <div className="max-w-4xl mx-auto">
-        <div className="bg-gray-800 rounded-xl p-8 text-center">
-          <AlertCircle className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold mb-2">Connect Wallet</h2>
-          <p className="text-gray-400">
+      <div className="mx-auto max-w-4xl">
+        <div className="card p-8 text-center">
+          <AlertCircle className="mx-auto mb-4 h-16 w-16 text-amber-300" />
+          <h2 className="mb-2 text-3xl">Connect Wallet</h2>
+          <p className="text-slate-300">
             Please connect your Stacks wallet to view your portfolio.
           </p>
         </div>
@@ -128,21 +138,25 @@ export default function PortfolioPage() {
 
   if (loading) {
     return (
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">My Portfolio</h1>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="bg-gray-800 rounded-xl p-4 animate-pulse">
-              <div className="h-4 bg-gray-700 rounded w-1/2 mb-2" />
-              <div className="h-8 bg-gray-700 rounded w-3/4" />
+      <div className="mx-auto max-w-5xl space-y-6">
+        <div className="hero-panel animate-pulse py-10">
+          <div className="mb-4 h-5 w-28 rounded-full bg-white/10" />
+          <div className="mb-4 h-12 w-72 rounded-full bg-white/10" />
+          <div className="h-5 w-2/3 rounded-full bg-white/10" />
+        </div>
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          {[1, 2, 3, 4].map((item) => (
+            <div key={item} className="card animate-pulse">
+              <div className="mb-3 h-4 w-1/2 rounded-full bg-white/10" />
+              <div className="h-10 w-3/4 rounded-full bg-white/10" />
             </div>
           ))}
         </div>
-        <div className="bg-gray-800 rounded-xl p-8 animate-pulse">
-          <div className="h-6 bg-gray-700 rounded w-1/3 mb-4" />
+        <div className="card animate-pulse">
+          <div className="mb-5 h-6 w-1/3 rounded-full bg-white/10" />
           <div className="space-y-4">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="h-16 bg-gray-700 rounded" />
+            {[1, 2, 3].map((item) => (
+              <div key={item} className="h-20 rounded-[1.25rem] bg-white/8" />
             ))}
           </div>
         </div>
@@ -150,129 +164,142 @@ export default function PortfolioPage() {
     );
   }
 
-  const activePositions = positions.filter((p) => !p.market.settled).length;
-  const wonPositions = positions.filter((p) => getPositionStatus(p) === "won").length;
+  const activePositions = positions.filter((position) => !position.market.settled).length;
+  const wonPositions = positions.filter((position) => getPositionStatus(position) === "won").length;
+  const claimedPositions = positions.filter((position) => position.position.claimed).length;
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-8">My Portfolio</h1>
+    <div className="mx-auto max-w-5xl space-y-6">
+      <section className="hero-panel py-8">
+        <span className="eyebrow mb-4">Wallet dashboard</span>
+        <h1 className="mb-3 text-5xl">My portfolio</h1>
+        <p className="max-w-2xl text-slate-300">
+          Track open positions, spot settled winners, and claim payouts without
+          digging through flat tables.
+        </p>
+      </section>
 
-      {/* Stats Overview */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div className="bg-gray-800 rounded-xl p-4">
-          <p className="text-gray-400 text-sm">Total Bets Placed</p>
-          <p className="text-2xl font-bold">{stats?.totalBetsPlaced || 0}</p>
+      <section className="grid grid-cols-2 gap-4 md:grid-cols-4">
+        <div className="card">
+          <p className="text-sm text-slate-300">Total Bets Placed</p>
+          <p className="metric-value mt-3">{stats?.totalBetsPlaced || 0}</p>
         </div>
-        <div className="bg-gray-800 rounded-xl p-4">
-          <p className="text-gray-400 text-sm">Total Winnings</p>
-          <p className="text-2xl font-bold text-green-500">
+        <div className="card">
+          <p className="text-sm text-slate-300">Total Winnings</p>
+          <p className="metric-value mt-3 text-emerald-300">
             {formatSTX(stats?.totalWinnings || 0)} STX
           </p>
         </div>
-        <div className="bg-gray-800 rounded-xl p-4">
-          <p className="text-gray-400 text-sm">Active Positions</p>
-          <p className="text-2xl font-bold">{activePositions}</p>
+        <div className="card">
+          <p className="text-sm text-slate-300">Active Positions</p>
+          <p className="metric-value mt-3">{activePositions}</p>
         </div>
-        <div className="bg-gray-800 rounded-xl p-4">
-          <p className="text-gray-400 text-sm">Markets Created</p>
-          <p className="text-2xl font-bold text-orange-500">
+        <div className="card">
+          <p className="text-sm text-slate-300">Markets Created</p>
+          <p className="metric-value mt-3 text-amber-300">
             {stats?.marketsCreated || 0}
           </p>
         </div>
-      </div>
+      </section>
 
-      {/* Claimable Winnings Alert */}
-      {positions.some((p) => p.canClaim) && (
-        <div className="bg-green-900/30 border border-green-500 rounded-xl p-4 mb-6 flex items-center gap-3">
-          <Gift className="w-6 h-6 text-green-400" />
+      <section className="grid gap-4 md:grid-cols-3">
+        <div className="panel-soft">
+          <p className="text-sm text-slate-300">Winning positions</p>
+          <p className="mt-3 text-3xl font-semibold text-emerald-300">{wonPositions}</p>
+        </div>
+        <div className="panel-soft">
+          <p className="text-sm text-slate-300">Claimed markets</p>
+          <p className="mt-3 text-3xl font-semibold text-sky-300">{claimedPositions}</p>
+        </div>
+        <div className="panel-soft">
+          <p className="text-sm text-slate-300">Pending rewards</p>
+          <p className="mt-3 text-3xl font-semibold text-amber-300">
+            {positions.filter((position) => position.canClaim).length}
+          </p>
+        </div>
+      </section>
+
+      {positions.some((position) => position.canClaim) && (
+        <div className="card flex items-center gap-3 border-emerald-300/20 bg-emerald-300/10">
+          <Gift className="h-6 w-6 text-emerald-300" />
           <div>
-            <p className="font-medium text-green-400">You have unclaimed winnings!</p>
-            <p className="text-sm text-green-300/70">
-              Claim your winnings from settled markets below.
+            <p className="font-medium text-emerald-200">You have unclaimed winnings.</p>
+            <p className="text-sm text-emerald-100/75">
+              Claim your rewards from settled markets below.
             </p>
           </div>
         </div>
       )}
 
-      {/* Positions List */}
-      <div className="bg-gray-800 rounded-xl overflow-hidden">
-        <div className="p-4 border-b border-gray-700">
-          <h2 className="text-xl font-bold">Your Positions</h2>
+      <section className="table-shell">
+        <div className="border-b border-white/10 px-6 py-5">
+          <h2 className="text-3xl">Your positions</h2>
         </div>
 
         {positions.length === 0 ? (
-          <div className="p-8 text-center text-gray-400">
-            <p>No positions yet. Start betting on prediction markets!</p>
+          <div className="p-10 text-center text-slate-300">
+            No positions yet. Start betting on prediction markets.
           </div>
         ) : (
-          <div className="divide-y divide-gray-700">
+          <div className="divide-y divide-white/10">
             {positions.map((pm) => {
               const status = getPositionStatus(pm);
+              const statusClasses =
+                status === "won"
+                  ? "status-positive"
+                  : status === "lost"
+                    ? "status-negative"
+                    : status === "claimed"
+                      ? "badge-binary"
+                      : "status-warning";
+
               return (
-                <div
-                  key={pm.market.id}
-                  className="p-4 hover:bg-gray-700/50 transition-colors"
-                >
-                  <div className="flex justify-between items-start">
-                    <div className="flex-1">
-                      <h3 className="font-medium mb-1">{pm.market.title}</h3>
-                      <div className="flex items-center gap-4 text-sm flex-wrap">
-                        <span className="px-2 py-1 rounded bg-gray-700 text-gray-300">
+                <div key={pm.market.id} className="px-6 py-5 transition hover:bg-white/6">
+                  <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                    <div className="space-y-2">
+                      <h3 className="text-2xl">{pm.market.title}</h3>
+                      <div className="flex flex-wrap items-center gap-2 text-sm">
+                        <span className="pill border border-white/10 bg-white/8 text-slate-200">
                           {getPositionOutcome(pm.position)} STX
                         </span>
-                        <span className="text-gray-400">
-                          Total: {formatSTX(pm.position.totalInvested)} STX
+                        <span className="pill border border-white/10 bg-white/6 text-slate-300">
+                          Invested: {formatSTX(pm.position.totalInvested)} STX
                         </span>
-                        {pm.market.settled && pm.market.winningOutcome && (
-                          <span className="text-blue-400">
+                        {pm.market.settled && pm.market.winningOutcome !== null && (
+                          <span className="pill border border-sky-300/20 bg-sky-300/10 text-sky-100">
                             Winner: {getOutcomeLabel(pm.market.winningOutcome, pm.market.type)}
                           </span>
                         )}
                       </div>
                     </div>
-                    <div className="text-right flex flex-col items-end gap-2">
-                      <div
-                        className={`flex items-center gap-1 ${
-                          status === "won"
-                            ? "text-green-500"
-                            : status === "lost"
-                            ? "text-red-500"
-                            : status === "claimed"
-                            ? "text-blue-500"
-                            : "text-yellow-500"
-                        }`}
-                      >
-                        {status === "won" && <TrendingUp className="w-4 h-4" />}
-                        {status === "lost" && <TrendingDown className="w-4 h-4" />}
-                        {status === "active" && <Clock className="w-4 h-4" />}
-                        {status === "claimed" && <Gift className="w-4 h-4" />}
-                        <span className="capitalize font-medium">{status}</span>
+
+                    <div className="flex flex-col items-start gap-3 lg:items-end">
+                      <div className={`pill ${statusClasses}`}>
+                        {status === "won" && <TrendingUp className="h-4 w-4" />}
+                        {status === "lost" && <TrendingDown className="h-4 w-4" />}
+                        {status === "active" && <Clock className="h-4 w-4" />}
+                        {status === "claimed" && <Gift className="h-4 w-4" />}
+                        <span className="capitalize">{status}</span>
                       </div>
 
                       {pm.canClaim && (
                         <button
                           onClick={() => handleClaimWinnings(pm.market.id)}
                           disabled={claiming === pm.market.id}
-                          className="px-3 py-1 bg-green-600 hover:bg-green-700 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 flex items-center gap-2"
+                          className="btn-primary disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           {claiming === pm.market.id ? (
                             <>
-                              <Loader2 className="w-3 h-3 animate-spin" />
+                              <Loader2 className="h-4 w-4 animate-spin" />
                               Claiming...
                             </>
                           ) : (
                             <>
-                              <Gift className="w-3 h-3" />
-                              Claim Winnings
+                              <Gift className="h-4 w-4" />
+                              Claim winnings
                             </>
                           )}
                         </button>
-                      )}
-
-                      {!pm.market.settled && (
-                        <p className="text-xs text-gray-400">
-                          Settles at block #{pm.market.settlementHeight.toLocaleString()}
-                        </p>
                       )}
                     </div>
                   </div>
@@ -281,7 +308,7 @@ export default function PortfolioPage() {
             })}
           </div>
         )}
-      </div>
+      </section>
     </div>
   );
 }

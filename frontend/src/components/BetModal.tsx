@@ -108,37 +108,34 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
   };
 
   const outcomeColors: Record<string, string> = {
-    A: "text-stacks border-stacks",
-    B: "text-bitcoin border-bitcoin",
-    C: "text-green-400 border-green-400",
-    D: "text-purple-400 border-purple-400",
+    A: "border-sky-300/30 bg-sky-300/10 text-sky-100",
+    B: "border-amber-300/30 bg-amber-300/10 text-amber-100",
+    C: "border-emerald-300/30 bg-emerald-300/10 text-emerald-100",
+    D: "border-pink-300/30 bg-pink-300/10 text-pink-100",
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="card max-w-md w-full relative">
-        {/* Close Button */}
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 p-4 backdrop-blur-md">
+      <div className="card relative w-full max-w-md">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-white"
+          className="absolute right-4 top-4 rounded-full border border-white/10 bg-white/6 p-2 text-slate-300 transition hover:bg-white/10 hover:text-white"
         >
           <X className="w-5 h-5" />
         </button>
 
-        {/* Header */}
-        <h2 className="text-xl font-bold mb-2">Place Your Bet</h2>
-        <p className="text-slate-400 text-sm mb-6">{market.title}</p>
+        <span className="eyebrow mb-4">Place a position</span>
+        <h2 className="mb-2 text-3xl">Place your bet</h2>
+        <p className="mb-6 text-sm text-slate-300">{market.title}</p>
 
-        {/* Selected Outcome */}
         <div className={`border rounded-lg p-4 mb-6 ${outcomeColors[outcome]}`}>
           <span className="text-sm opacity-75">You're betting on:</span>
           <p className="text-lg font-semibold">Outcome {outcome}</p>
         </div>
 
-        {/* Bet Form */}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-sm text-slate-400 mb-2">
+            <label className="mb-2 block text-sm text-slate-300">
               Bet Amount (STX)
             </label>
             <div className="relative">
@@ -157,24 +154,22 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
             </div>
           </div>
 
-          {/* Potential Win */}
           {parseFloat(amount) > 0 && (
-            <div className="bg-slate-700/50 rounded-lg p-4 mb-6">
-              <div className="flex justify-between text-sm mb-2">
-                <span className="text-slate-400">Potential Win:</span>
-                <span className="text-green-400 font-semibold">
+            <div className="mb-6 rounded-[1.25rem] border border-white/10 bg-white/6 p-4">
+              <div className="mb-2 flex justify-between text-sm">
+                <span className="text-slate-300">Potential Win:</span>
+                <span className="font-semibold text-emerald-300">
                   {calculatePotentialWin()} STX
                 </span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-slate-400">Platform Fee:</span>
-                <span className="text-slate-300">3%</span>
+                <span className="text-slate-300">Platform Fee:</span>
+                <span className="text-slate-200">3%</span>
               </div>
             </div>
           )}
 
-          {/* Warning */}
-          <div className="flex items-start gap-2 text-sm text-slate-400 mb-6">
+          <div className="mb-6 flex items-start gap-2 text-sm text-slate-300">
             <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
             <p>
               This market will settle based on the Bitcoin block hash at the
@@ -182,7 +177,6 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
             </p>
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             disabled={!amount || parseFloat(amount) < 1 || isSubmitting}

@@ -82,16 +82,24 @@ export function StatsOverview() {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
       {stats.map((stat) => (
-        <div key={stat.label} className={`card ${loading ? "animate-pulse" : ""}`}>
-          <div className="flex items-center justify-between">
+        <div
+          key={stat.label}
+          className={`card relative overflow-hidden ${loading ? "animate-pulse" : ""}`}
+        >
+          <div className="absolute right-0 top-0 h-24 w-24 rounded-full bg-white/5 blur-2xl" />
+          <div className="relative flex items-start justify-between gap-4">
             <div>
-              <p className="text-slate-400 text-sm">{stat.label}</p>
-              <p className="text-2xl font-bold mt-1">{stat.value}</p>
-              <p className="text-xs text-stacks mt-2">{stat.change}</p>
+              <p className="text-sm text-slate-300">{stat.label}</p>
+              <p className="metric-value mt-3 text-4xl">{stat.value}</p>
+              <p className="mt-3 text-xs uppercase tracking-[0.18em] text-sky-300">
+                {stat.change}
+              </p>
             </div>
-            <stat.icon className="w-10 h-10 text-slate-600" />
+            <div className="rounded-2xl border border-white/10 bg-white/8 p-3">
+              <stat.icon className="h-8 w-8 text-amber-300" />
+            </div>
           </div>
         </div>
       ))}

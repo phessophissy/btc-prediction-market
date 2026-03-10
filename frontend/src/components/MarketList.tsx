@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { MarketCard } from "./MarketCard";
-import { fetchActiveMarkets, Market, formatSTX } from "@/lib/contractService";
+import { fetchActiveMarkets, Market } from "@/lib/contractService";
 
 interface MarketListProps {
   showSettled?: boolean;
@@ -39,13 +39,10 @@ export function MarketList({ showSettled = false }: MarketListProps) {
     return (
       <div className="grid gap-6">
         {[1, 2, 3].map((i) => (
-          <div
-            key={i}
-            className="bg-gray-800/50 rounded-xl p-6 animate-pulse"
-          >
-            <div className="h-6 bg-gray-700 rounded w-3/4 mb-4" />
-            <div className="h-4 bg-gray-700 rounded w-1/2 mb-6" />
-            <div className="h-20 bg-gray-700 rounded" />
+          <div key={i} className="card animate-pulse">
+            <div className="mb-4 h-6 w-3/4 rounded-full bg-white/10" />
+            <div className="mb-6 h-4 w-1/2 rounded-full bg-white/10" />
+            <div className="h-20 rounded-[1.25rem] bg-white/8" />
           </div>
         ))}
       </div>
@@ -54,11 +51,11 @@ export function MarketList({ showSettled = false }: MarketListProps) {
 
   if (error) {
     return (
-      <div className="bg-red-900/20 border border-red-500 rounded-xl p-6 text-center">
-        <p className="text-red-400 mb-4">{error}</p>
+      <div className="card text-center">
+        <p className="mb-4 text-rose-300">{error}</p>
         <button
           onClick={() => window.location.reload()}
-          className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition-colors"
+          className="btn-secondary"
         >
           Retry
         </button>
@@ -68,8 +65,8 @@ export function MarketList({ showSettled = false }: MarketListProps) {
 
   if (markets.length === 0) {
     return (
-      <div className="bg-gray-800/50 rounded-xl p-8 text-center">
-        <p className="text-gray-400">
+      <div className="card p-8 text-center">
+        <p className="text-slate-300">
           {showSettled
             ? "No settled markets found."
             : "No active markets available. Be the first to create one!"}

@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { TrendingUp, BarChart3, Users, DollarSign } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { BarChart3, DollarSign, TrendingUp, Users } from 'lucide-react';
 
 interface AnalyticsDataPoint {
   label: string;
@@ -18,9 +18,6 @@ interface MarketAnalyticsProps {
   winProbability: number;
 }
 
-/**
- * MarketAnalytics component displays market statistics and analytics
- */
 export function MarketAnalytics({
   marketId,
   totalVolume,
@@ -31,7 +28,6 @@ export function MarketAnalytics({
   const [historicalData, setHistoricalData] = useState<AnalyticsDataPoint[]>([]);
 
   useEffect(() => {
-    // Simulate loading historical data
     setHistoricalData([
       { label: '1h ago', value: totalVolume * 0.8, change: -5, trend: 'down' },
       { label: '30m ago', value: totalVolume * 0.9, change: -2, trend: 'down' },
@@ -45,87 +41,73 @@ export function MarketAnalytics({
       value: totalVolume.toFixed(2),
       unit: 'STX',
       icon: DollarSign,
-      color: 'bg-blue-500',
+      colorClass: 'text-amber-300',
     },
     {
       label: 'Active Participants',
       value: activeParticipants.toString(),
       unit: 'users',
       icon: Users,
-      color: 'bg-green-500',
+      colorClass: 'text-emerald-300',
     },
     {
       label: 'Average Bet',
       value: averageBetSize.toFixed(2),
       unit: 'STX',
       icon: BarChart3,
-      color: 'bg-purple-500',
+      colorClass: 'text-sky-300',
     },
     {
       label: 'Win Probability',
       value: (winProbability * 100).toFixed(1),
       unit: '%',
       icon: TrendingUp,
-      color: 'bg-orange-500',
+      colorClass: 'text-rose-300',
     },
   ];
 
   return (
     <div className="space-y-6">
-      {/* Metrics Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {metrics.map((metric, idx) => {
+      <div className="flex items-center justify-between">
+        <span className="eyebrow">Analytics snapshot</span>
+        <span className="text-sm text-slate-400">Market #{marketId}</span>
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {metrics.map((metric) => {
           const IconComponent = metric.icon;
           return (
-            <div
-              key={idx}
-              className="bg-white dark:bg-slate-800 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                  {metric.label}
-                </span>
-                <div className={`${metric.color} p-2 rounded-lg text-white`}>
-                  <IconComponent size={16} />
+            <div key={metric.label} className="card">
+              <div className="mb-3 flex items-center justify-between">
+                <span className="text-sm text-slate-300">{metric.label}</span>
+                <div className="rounded-2xl border border-white/10 bg-white/6 p-3">
+                  <IconComponent className={`h-4 w-4 ${metric.colorClass}`} />
                 </div>
               </div>
-              <div className="flex items-baseline">
-                <span className="text-2xl font-bold text-gray-900 dark:text-white">
-                  {metric.value}
-                </span>
-                <span className="text-sm text-gray-500 dark:text-gray-400 ml-1">
-                  {metric.unit}
-                </span>
+              <div className="flex items-end gap-2">
+                <span className="text-3xl font-semibold text-white">{metric.value}</span>
+                <span className="pb-1 text-sm text-slate-400">{metric.unit}</span>
               </div>
             </div>
           );
         })}
       </div>
 
-      {/* Historical Data */}
-      <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-          Volume Trend
-        </h3>
-        <div className="space-y-2">
-          {historicalData.map((point, idx) => (
-            <div key={idx} className="flex items-center justify-between">
-              <span className="text-sm text-gray-600 dark:text-gray-400 w-20">
-                {point.label}
-              </span>
-              <div className="flex-1 mx-4">
-                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                  <div
-                    className="bg-blue-500 h-2 rounded-full"
-                    style={{
-                      width: `${totalVolume > 0 ? (point.value / totalVolume) * 100 : 0}%`,
-                    }}
-                  />
-                </div>
+      <div className="card">
+        <h3 className="mb-4 text-3xl">Volume trend</h3>
+        <div className="space-y-4">
+          {historicalData.map((point) => (
+            <div key={point.label} className="flex items-center gap-4">
+              <span className="w-20 text-sm text-slate-300">{point.label}</span>
+              <div className="h-3 flex-1 overflow-hidden rounded-full bg-white/8">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-sky-300 via-cyan-300 to-emerald-300"
+                  style={{
+                    width: `${totalVolume > 0 ? (point.value / totalVolume) * 100 : 0}%`,
+                  }}
+                />
               </div>
-              <span className="text-sm font-medium text-gray-900 dark:text-white w-16 text-right">
-                {point.value.toFixed(2)}
-              </span>
+              <span className="w-20 text-right text-sm text-white">{point.value.toFixed(2)}</span>
             </div>
           ))}
         </div>

@@ -1,9 +1,8 @@
 "use client";
 
-import { Trophy, Medal, Award } from "lucide-react";
+import { Award, Medal, Trophy } from "lucide-react";
 
 export default function LeaderboardPage() {
-  // Mock data - in production, fetch from contract/indexer
   const leaderboard = [
     { rank: 1, address: "SP2J6ZY48GV1EZ5V2V5RB9MP66SW86PYKKNRV9EJ7", winnings: 15420, bets: 89, winRate: 72 },
     { rank: 2, address: "SP1HTBVD3JG9C05J7HBJTHGR0GGW7KXW28M5JS8QE", winnings: 12350, bets: 156, winRate: 65 },
@@ -17,106 +16,108 @@ export default function LeaderboardPage() {
     { rank: 10, address: "SP3DX3H4FEYZJZ586MFBS25ZW3HZDMEW92260R2PR", winnings: 2340, bets: 56, winRate: 52 },
   ];
 
-  const getRankIcon = (rank: number) => {
-    switch (rank) {
-      case 1:
-        return <Trophy className="w-6 h-6 text-yellow-500" />;
-      case 2:
-        return <Medal className="w-6 h-6 text-gray-400" />;
-      case 3:
-        return <Award className="w-6 h-6 text-orange-600" />;
-      default:
-        return <span className="w-6 text-center font-bold text-gray-500">{rank}</span>;
-    }
-  };
+  const formatAddress = (address: string) => `${address.slice(0, 6)}...${address.slice(-4)}`;
 
-  const formatAddress = (addr: string) => {
-    return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
-  };
+  const podium = [
+    {
+      label: "2nd",
+      user: leaderboard[1],
+      icon: Medal,
+      iconClass: "text-slate-300",
+      panelClass: "card mt-6",
+    },
+    {
+      label: "1st",
+      user: leaderboard[0],
+      icon: Trophy,
+      iconClass: "text-amber-300",
+      panelClass:
+        "hero-panel border-amber-300/20 bg-gradient-to-br from-amber-300/14 via-rose-300/10 to-sky-300/10",
+    },
+    {
+      label: "3rd",
+      user: leaderboard[2],
+      icon: Award,
+      iconClass: "text-orange-300",
+      panelClass: "card mt-6",
+    },
+  ];
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-8">Leaderboard</h1>
+    <div className="mx-auto max-w-6xl space-y-6">
+      <section className="hero-panel py-8">
+        <span className="eyebrow mb-4">Top traders</span>
+        <h1 className="mb-3 text-5xl">Leaderboard</h1>
+        <p className="max-w-2xl text-slate-300">
+          Highlight the most accurate wallets, strongest win rates, and the
+          biggest STX earners in a brighter ranking view.
+        </p>
+      </section>
 
-      {/* Top 3 Podium */}
-      <div className="grid grid-cols-3 gap-4 mb-8">
-        {/* 2nd Place */}
-        <div className="bg-gray-800 rounded-xl p-6 text-center mt-8">
-          <Medal className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-          <p className="text-2xl font-bold">2nd</p>
-          <p className="text-sm text-gray-400 mb-2">{formatAddress(leaderboard[1].address)}</p>
-          <p className="text-xl font-bold text-green-500">{leaderboard[1].winnings.toLocaleString()} STX</p>
-          <p className="text-xs text-gray-500">{leaderboard[1].winRate}% win rate</p>
+      <section className="grid gap-4 md:grid-cols-3 md:items-end">
+        {podium.map((entry) => {
+          const Icon = entry.icon;
+          return (
+            <div key={entry.label} className={`${entry.panelClass} p-6 text-center`}>
+              <Icon className={`mx-auto mb-3 h-12 w-12 ${entry.iconClass}`} />
+              <p className="mb-2 text-3xl">{entry.label}</p>
+              <p className="mb-2 text-sm text-slate-300">{formatAddress(entry.user.address)}</p>
+              <p className="text-2xl font-semibold text-emerald-300">
+                {entry.user.winnings.toLocaleString()} STX
+              </p>
+              <p className="mt-2 text-xs uppercase tracking-[0.18em] text-slate-400">
+                {entry.user.winRate}% win rate
+              </p>
+            </div>
+          );
+        })}
+      </section>
+
+      <section className="table-shell">
+        <div className="border-b border-white/10 px-6 py-5">
+          <h2 className="text-3xl">Top predictors</h2>
         </div>
 
-        {/* 1st Place */}
-        <div className="bg-gradient-to-b from-yellow-900/30 to-gray-800 rounded-xl p-6 text-center border border-yellow-600">
-          <Trophy className="w-16 h-16 text-yellow-500 mx-auto mb-2" />
-          <p className="text-3xl font-bold">1st</p>
-          <p className="text-sm text-gray-400 mb-2">{formatAddress(leaderboard[0].address)}</p>
-          <p className="text-2xl font-bold text-green-500">{leaderboard[0].winnings.toLocaleString()} STX</p>
-          <p className="text-xs text-gray-500">{leaderboard[0].winRate}% win rate</p>
-        </div>
-
-        {/* 3rd Place */}
-        <div className="bg-gray-800 rounded-xl p-6 text-center mt-8">
-          <Award className="w-12 h-12 text-orange-600 mx-auto mb-2" />
-          <p className="text-2xl font-bold">3rd</p>
-          <p className="text-sm text-gray-400 mb-2">{formatAddress(leaderboard[2].address)}</p>
-          <p className="text-xl font-bold text-green-500">{leaderboard[2].winnings.toLocaleString()} STX</p>
-          <p className="text-xs text-gray-500">{leaderboard[2].winRate}% win rate</p>
-        </div>
-      </div>
-
-      {/* Full Leaderboard Table */}
-      <div className="bg-gray-800 rounded-xl overflow-hidden">
-        <div className="p-4 border-b border-gray-700">
-          <h2 className="text-xl font-bold">Top Predictors</h2>
-        </div>
-        
         <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-gray-900">
+          <table className="w-full min-w-[720px]">
+            <thead className="bg-white/6 text-left text-sm text-slate-300">
               <tr>
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-400">Rank</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-400">Address</th>
-                <th className="px-4 py-3 text-right text-sm font-medium text-gray-400">Total Won</th>
-                <th className="px-4 py-3 text-right text-sm font-medium text-gray-400">Bets</th>
-                <th className="px-4 py-3 text-right text-sm font-medium text-gray-400">Win Rate</th>
+                <th className="px-6 py-4 font-medium">Rank</th>
+                <th className="px-6 py-4 font-medium">Address</th>
+                <th className="px-6 py-4 text-right font-medium">Total Won</th>
+                <th className="px-6 py-4 text-right font-medium">Bets</th>
+                <th className="px-6 py-4 text-right font-medium">Win Rate</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-700">
-              {leaderboard.map((user) => (
-                <tr key={user.rank} className="hover:bg-gray-700/50 transition-colors">
-                  <td className="px-4 py-4">
-                    <div className="flex items-center gap-2">
-                      {getRankIcon(user.rank)}
-                    </div>
-                  </td>
-                  <td className="px-4 py-4 font-mono text-sm">
-                    {formatAddress(user.address)}
-                  </td>
-                  <td className="px-4 py-4 text-right font-bold text-green-500">
-                    {user.winnings.toLocaleString()} STX
-                  </td>
-                  <td className="px-4 py-4 text-right text-gray-400">
-                    {user.bets}
-                  </td>
-                  <td className="px-4 py-4 text-right">
-                    <span className={`px-2 py-1 rounded text-sm ${
-                      user.winRate >= 70 ? "bg-green-500/20 text-green-400" :
-                      user.winRate >= 50 ? "bg-yellow-500/20 text-yellow-400" :
-                      "bg-red-500/20 text-red-400"
-                    }`}>
-                      {user.winRate}%
-                    </span>
-                  </td>
-                </tr>
-              ))}
+            <tbody className="divide-y divide-white/10">
+              {leaderboard.map((user) => {
+                const winRateClass =
+                  user.winRate >= 70
+                    ? "status-positive"
+                    : user.winRate >= 50
+                      ? "status-warning"
+                      : "status-negative";
+
+                return (
+                  <tr key={user.rank} className="transition hover:bg-white/6">
+                    <td className="px-6 py-5 text-white">{user.rank}</td>
+                    <td className="px-6 py-5 font-mono text-sm text-slate-200">
+                      {formatAddress(user.address)}
+                    </td>
+                    <td className="px-6 py-5 text-right font-semibold text-emerald-300">
+                      {user.winnings.toLocaleString()} STX
+                    </td>
+                    <td className="px-6 py-5 text-right text-slate-300">{user.bets}</td>
+                    <td className="px-6 py-5 text-right">
+                      <span className={`pill ${winRateClass}`}>{user.winRate}%</span>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
