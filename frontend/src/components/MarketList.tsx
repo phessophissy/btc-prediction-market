@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { MarketCard } from "./MarketCard";
+import { EmptyState } from "./EmptyState";
 import { fetchActiveMarkets, Market } from "@/lib/contractService";
 
 interface MarketListProps {
@@ -65,13 +66,14 @@ export function MarketList({ showSettled = false }: MarketListProps) {
 
   if (markets.length === 0) {
     return (
-      <div className="card p-8 text-center">
-        <p className="text-slate-300">
-          {showSettled
-            ? "No settled markets found."
-            : "No active markets available. Be the first to create one!"}
-        </p>
-      </div>
+      <EmptyState
+        title={showSettled ? "No settled markets" : "No active markets"}
+        description={
+          showSettled
+            ? "There are no settled markets to display yet."
+            : "No active markets are available right now. Be the first to create one."
+        }
+      />
     );
   }
 
