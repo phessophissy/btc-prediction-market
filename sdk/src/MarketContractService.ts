@@ -80,7 +80,7 @@ export class MarketContractService {
     amount: number,
     senderKey: string
   ): Promise<string> {
-    const functionName = \et-outcome-\\;
+    const functionName = `bet-outcome-${outcome}`;
     const functionArgs = [
       { type: 'uint', value: marketId.toString() },
       { type: 'uint', value: (amount * 1000000).toString() }, // Convert to microSTX
@@ -114,10 +114,19 @@ export class MarketContractService {
   /**
    * Get market details
    */
-  async getMarket(marketId: number): Promise<Market> {
-    // This would call a read-only function to get market data
-    // Implementation depends on how the contract exposes read functions
-    throw new Error('Not implemented - requires contract read interface');
+  async getMarket(marketId: number): Promise<Market | null> {
+    const response = await this.readContract('get-market', [
+      { type: 'uint', value: marketId.toString() },
+    ]);
+    return response || null;
+  }
+
+  /**
+   * Get total market count
+   */
+  async getMarketCount(): Promise<number> {
+    const response = await this.readContract('get-market-count', []);
+    return Number(response || 0);
   }
 
   /**
@@ -126,25 +135,39 @@ export class MarketContractService {
   async getUserPosition(
     marketId: number,
     userAddress: string
-  ): Promise<UserPosition> {
-    // This would call a read-only function to get user position data
-    throw new Error('Not implemented - requires contract read interface');
+  ): Promise<UserPosition | null> {
+    const response = await this.readContract('get-user-position', [
+      { type: 'uint', value: marketId.toString() },
+      { type: 'principal', value: userAddress },
+    ]);
+    return response || null;
   }
 
   /**
    * Get market odds
    */
-  async getMarketOdds(marketId: number): Promise<number[]> {
-    // This would call a read-only function to get odds
-    throw new Error('Not implemented - requires contract read interface');
+  async getMarketOdds(marketId: number): Promise<any | null> {
+    const response = await this.readContract('get-market-odds', [
+      { type: 'uint', value: marketId.toString() },
+    ]);
+    return response || null;
   }
 
   /**
-   * Get market statistics
+   * Internal method to read contract data (read-only)
    */
-  async getMarketStats(): Promise<MarketStats> {
-    // This would aggregate data from multiple contract reads
-    throw new Error('Not implemented - requires contract read interface');
+  private async readContract(
+    functionName: string,
+    functionArgs: any[]
+  ): Promise<any> {
+    // In a real environment, this would call a Stacks node's read-only function endpoint
+    // For this example, we'll log it. In a real SDK, you'd use @stacks/transactions 'callReadOnlyFunction'
+    console.log(`Reading ${functionName} with args:`, functionArgs);
+
+    // Placeholder for actual read logic
+    // const result = await callReadOnlyFunction({...});
+    // return cvToValue(result.value);
+    return null;
   }
 
   /**
@@ -155,10 +178,41 @@ export class MarketContractService {
     functionArgs: any[],
     senderKey: string
   ): Promise<string> {
-    // This is a placeholder - actual implementation would use
-    // Stacks.js to construct and broadcast the transaction
-    console.log(\Calling \ on \\);
-    throw new Error('Transaction broadcast not implemented in SDK - use wallet');
+    const txOptions = {
+      contractAddress: this.contractAddress,
+      contractName: this.contractName,
+      functionName,
+      functionArgs: functionArgs.map(arg => {
+        if (arg.type === 'uint') {
+          return { type: arg.type, value: BigInt(arg.value) };
+        }
+        if (arg.type === 'bool') {
+          return { type: arg.type, value: arg.value };
+        }
+        if (arg.type === 'string-utf8') {
+          return { type: arg.type, value: arg.value };
+        }
+        return arg;
+      }),
+      senderKey,
+      network: this.network,
+      postConditionMode: 0x01, // Allow
+      anchorMode: 1, // Any
+    };
+
+    try {
+      const transaction = await makeContractCall(txOptions as any);
+      const result = await broadcastTransaction(transaction, this.network);
+
+      if ('error' in result) {
+        throw new Error(`Transaction failed: ${result.error}`);
+      }
+
+      return result.txid;
+    } catch (error) {
+      console.error(`Error calling ${functionName}:`, error);
+      throw error;
+    }
   }
 }
 

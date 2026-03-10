@@ -35,9 +35,14 @@ settings/Mainnet.toml
 # Mainnet wallet secrets
 scripts/mainnet-wallets.json
 scripts/test-wallets.json
+wallets.json
 
-# Scripts directory
-scripts/
-
-# Tests directory
-tests/
+# Scripts and tests logic
+!scripts/
+!tests/
+*.json
+!package.json
+!tsconfig.json
+!Clarinet.toml
+!frontend/package.json
+!sdk/package.json
