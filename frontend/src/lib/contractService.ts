@@ -104,6 +104,10 @@ async function callReadOnly(functionName: string, args: any[] = []): Promise<any
     }),
   });
 
+  if (!response.ok) {
+    throw new Error(`Read-only call failed with HTTP ${response.status}`);
+  }
+
   const data = await response.json();
   
   if (data.okay && data.result) {
