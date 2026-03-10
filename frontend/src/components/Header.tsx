@@ -2,6 +2,7 @@
 
 import { useStacksAuth } from "@/contexts/StacksAuthContext";
 import { formatAddress } from "@/lib/format";
+import { NETWORK_NAME } from "@/lib/constants";
 import { Bitcoin, Menu, Sparkles, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -37,7 +38,7 @@ export function Header() {
                 <span className="text-lg font-bold tracking-tight text-white">BTC Predict</span>
                 <span className="eyebrow hidden sm:inline-flex">
                   <Sparkles className="h-3.5 w-3.5" />
-                  Live on Stacks
+                  {NETWORK_NAME} on Stacks
                 </span>
               </div>
               <p className="hidden text-sm text-slate-400 sm:block">
