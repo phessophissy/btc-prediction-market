@@ -1,6 +1,7 @@
 "use client";
 
 import { PageHero } from "@/components/PageHero";
+import { formatAddress } from "@/lib/format";
 import { Award, Medal, Trophy } from "lucide-react";
 
 export default function LeaderboardPage() {
@@ -16,8 +17,6 @@ export default function LeaderboardPage() {
     { rank: 9, address: "SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9", winnings: 2890, bets: 91, winRate: 49 },
     { rank: 10, address: "SP3DX3H4FEYZJZ586MFBS25ZW3HZDMEW92260R2PR", winnings: 2340, bets: 56, winRate: 52 },
   ];
-
-  const formatAddress = (address: string) => `${address.slice(0, 6)}...${address.slice(-4)}`;
 
   const podium = [
     {
