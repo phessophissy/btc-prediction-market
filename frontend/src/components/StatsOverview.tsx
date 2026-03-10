@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { TrendingUp, Users, DollarSign, Clock } from "lucide-react";
 import { getPlatformStats, formatSTX } from "@/lib/contractService";
+import { StatCard } from "./StatCard";
 
 interface StatItem {
   label: string;
@@ -84,24 +85,15 @@ export function StatsOverview() {
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
       {stats.map((stat) => (
-        <div
+        <StatCard
           key={stat.label}
-          className={`card relative overflow-hidden ${loading ? "animate-pulse" : ""}`}
-        >
-          <div className="absolute right-0 top-0 h-24 w-24 rounded-full bg-white/5 blur-2xl" />
-          <div className="relative flex items-start justify-between gap-4">
-            <div>
-              <p className="text-sm text-slate-300">{stat.label}</p>
-              <p className="metric-value mt-3 text-4xl">{stat.value}</p>
-              <p className="mt-3 text-xs uppercase tracking-[0.18em] text-sky-300">
-                {stat.change}
-              </p>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/8 p-3">
-              <stat.icon className="h-8 w-8 text-amber-300" />
-            </div>
-          </div>
-        </div>
+          label={stat.label}
+          value={stat.value}
+          detail={stat.change}
+          icon={stat.icon}
+          accentClassName="text-sky-300"
+          loading={loading}
+        />
       ))}
     </div>
   );
