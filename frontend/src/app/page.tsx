@@ -16,8 +16,8 @@ export default function Home() {
       icon: Sparkles,
     },
     {
-      title: "STX-native payouts",
-      description: "Create markets, bet across outcomes, and claim winnings directly from your wallet.",
+      title: "V3-compatible workflow",
+      description: "Create markets on-chain today and monitor live contract state while trading functions are brought back in line with V3.",
       icon: CircleDollarSign,
     },
   ];
@@ -33,9 +33,9 @@ export default function Home() {
                 Trade the next BTC narrative with a brighter market board.
               </h1>
               <p className="max-w-2xl text-lg text-slate-300">
-                Predict outcomes, watch pools shift in real time, and settle
-                against Bitcoin block data with a frontend that finally looks
-                alive.
+                Create Bitcoin-anchored markets, inspect live contract state,
+                and follow settlement timelines with a frontend that matches the
+                currently deployed V3 contract.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">

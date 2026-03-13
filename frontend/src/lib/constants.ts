@@ -40,3 +40,12 @@ export const STACKS_API_URL = IS_MAINNET
 export const BTC_EXPLORER_URL = IS_MAINNET
   ? "https://mempool.space"
   : "https://mempool.space/testnet";
+
+// Current V3 deployment does not expose bet/settle/claim entrypoints yet.
+export const CONTRACT_CAPABILITIES = {
+  createMarkets: true,
+  placeBets: false,
+  settleMarkets: false,
+  claimWinnings: false,
+  onChainUserStats: false,
+} as const;

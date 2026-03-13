@@ -24,6 +24,7 @@ import {
 } from "@/lib/contractService";
 import {
   CONTRACT_ADDRESS,
+  CONTRACT_CAPABILITIES,
   CONTRACT_NAME,
   OUTCOME_A,
   OUTCOME_B,
@@ -172,7 +173,11 @@ export default function PortfolioPage() {
       <PageHero
         eyebrow="Wallet dashboard"
         title="My portfolio"
-        description="Track open positions, spot settled winners, and claim payouts without digging through flat tables."
+        description={
+          CONTRACT_CAPABILITIES.claimWinnings
+            ? "Track open positions, spot settled winners, and claim payouts without digging through flat tables."
+            : "Review tracked positions and derived outcomes. Claim actions stay hidden until the V3 contract exposes them."
+        }
         compact
       />
 
@@ -206,7 +211,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {positions.some((position) => position.canClaim) && (
+      {CONTRACT_CAPABILITIES.claimWinnings && positions.some((position) => position.canClaim) && (
         <div className="card flex items-center gap-3 border-emerald-300/20 bg-emerald-300/10">
           <Gift className="h-6 w-6 text-emerald-300" />
           <div>
@@ -225,7 +230,9 @@ export default function PortfolioPage() {
 
         {positions.length === 0 ? (
           <div className="p-10 text-center text-slate-300">
-            No positions yet. Start betting on prediction markets.
+            {CONTRACT_CAPABILITIES.placeBets
+              ? "No positions yet. Start betting on prediction markets."
+              : "No positions tracked yet. The current V3 deployment does not accept bets, so this view stays informational until trading is redeployed."}
           </div>
         ) : (
           <div className="divide-y divide-white/10">
@@ -269,7 +276,7 @@ export default function PortfolioPage() {
                         <span className="capitalize">{status}</span>
                       </div>
 
-                      {pm.canClaim && (
+                      {CONTRACT_CAPABILITIES.claimWinnings && pm.canClaim && (
                         <button
                           onClick={() => handleClaimWinnings(pm.market.id)}
                           disabled={claiming === pm.market.id}

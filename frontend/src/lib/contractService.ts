@@ -12,12 +12,14 @@ import {
 } from "@stacks/transactions";
 import {
   CONTRACT_ADDRESS,
+  CONTRACT_CAPABILITIES,
   CONTRACT_NAME,
-  STACKS_API_URL,
   OUTCOME_A,
   OUTCOME_B,
   OUTCOME_C,
   OUTCOME_D,
+  PLATFORM_FEE_PERCENT,
+  STACKS_API_URL,
 } from "./constants";
 import { formatBlocksToEta, formatMicroStx } from "./format";
 
@@ -84,6 +86,11 @@ export interface PotentialPayout {
   grossPayout: number;
   platformFee: number;
   netPayout: number;
+}
+
+interface UserPositionWithMarket {
+  position: UserPosition;
+  market: Market;
 }
 
 // ============================================
@@ -169,6 +176,199 @@ function getMarketType(possibleOutcomes: number): "binary" | "multi" {
   return count <= 2 ? "binary" : "multi";
 }
 
+function parseIntValue(value: { value?: string } | undefined, fallback = 0): number {
+  const parsed = Number.parseInt(value?.value ?? "", 10);
+  return Number.isFinite(parsed) ? parsed : fallback;
+}
+
+function parseOptionalIntValue(
+  value: { value?: { value?: string } } | undefined
+): number | null {
+  if (!value?.value?.value) return null;
+  const parsed = Number.parseInt(value.value.value, 10);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function parseBoolValue(value: { value?: boolean | string } | undefined): boolean {
+  return value?.value === true || value?.value === "true";
+}
+
+function getOutcomePool(market: Pick<Market, "outcomeAPool" | "outcomeBPool" | "outcomeCPool" | "outcomeDPool">, outcome: number): number {
+  switch (outcome) {
+    case OUTCOME_A:
+      return market.outcomeAPool;
+    case OUTCOME_B:
+      return market.outcomeBPool;
+    case OUTCOME_C:
+      return market.outcomeCPool;
+    case OUTCOME_D:
+      return market.outcomeDPool;
+    default:
+      return 0;
+  }
+}
+
+function getWinningPositionAmount(position: UserPosition, winningOutcome: number): number {
+  switch (winningOutcome) {
+    case OUTCOME_A:
+      return position.outcomeAAmount;
+    case OUTCOME_B:
+      return position.outcomeBAmount;
+    case OUTCOME_C:
+      return position.outcomeCAmount;
+    case OUTCOME_D:
+      return position.outcomeDAmount;
+    default:
+      return 0;
+  }
+}
+
+export function getEnabledOutcomes(possibleOutcomes: number): number[] {
+  return [OUTCOME_A, OUTCOME_B, OUTCOME_C, OUTCOME_D].filter(
+    (outcome) => (possibleOutcomes & outcome) === outcome
+  );
+}
+
+function parseMarketValue(marketId: number, value: Record<string, any>, currentBurnHeight: number): Market {
+  const possibleOutcomes = parseIntValue(
+    value["possible-outcomes"],
+    OUTCOME_A | OUTCOME_B
+  );
+
+  return {
+    id: marketId,
+    creator: value.creator?.value || "",
+    title: hexToString(value.title?.value) || value.title?.value || "",
+    description: hexToString(value.description?.value) || value.description?.value || "",
+    settlementHeight: parseIntValue(value["settlement-burn-height"]),
+    settlementType: value["settlement-type"]?.value || "hash-even-odd",
+    possibleOutcomes,
+    totalPool: parseIntValue(value["total-pool"]),
+    outcomeAPool: parseIntValue(value["outcome-a-pool"]),
+    outcomeBPool: parseIntValue(value["outcome-b-pool"]),
+    outcomeCPool: parseIntValue(value["outcome-c-pool"]),
+    outcomeDPool: parseIntValue(value["outcome-d-pool"]),
+    winningOutcome: parseOptionalIntValue(value["winning-outcome"]),
+    settled: parseBoolValue(value.settled),
+    settledAtBurnHeight: parseOptionalIntValue(value["settled-at-burn-height"]),
+    settlementBlockHash: value["settlement-block-hash"]?.value?.value || null,
+    createdAtBurnHeight: parseIntValue(value["created-at-burn-height"]),
+    createdAtStacksHeight: parseIntValue(value["created-at-stacks-height"]),
+    type: getMarketType(possibleOutcomes),
+    currentBurnHeight,
+  };
+}
+
+export function calculateMarketOddsFromPools(
+  market: Pick<
+    Market,
+    "possibleOutcomes" | "totalPool" | "outcomeAPool" | "outcomeBPool" | "outcomeCPool" | "outcomeDPool"
+  >
+): MarketOdds {
+  const calculateOdds = (outcome: number) => {
+    const outcomePool = getOutcomePool(market, outcome);
+    if (!getEnabledOutcomes(market.possibleOutcomes).includes(outcome) || outcomePool <= 0) {
+      return 0;
+    }
+
+    return Number((market.totalPool / outcomePool).toFixed(2));
+  };
+
+  return {
+    outcomeAOdds: calculateOdds(OUTCOME_A),
+    outcomeBOdds: calculateOdds(OUTCOME_B),
+    outcomeCOdds: calculateOdds(OUTCOME_C),
+    outcomeDOdds: calculateOdds(OUTCOME_D),
+    totalPool: market.totalPool,
+  };
+}
+
+export function calculatePotentialPayoutFromMarket(
+  market: Pick<
+    Market,
+    "possibleOutcomes" | "totalPool" | "outcomeAPool" | "outcomeBPool" | "outcomeCPool" | "outcomeDPool"
+  >,
+  outcome: number,
+  betAmount: number
+): PotentialPayout | null {
+  if (betAmount <= 0) {
+    return {
+      grossPayout: 0,
+      platformFee: 0,
+      netPayout: 0,
+    };
+  }
+
+  if (!getEnabledOutcomes(market.possibleOutcomes).includes(outcome)) {
+    return null;
+  }
+
+  const currentPool = getOutcomePool(market, outcome);
+  const newPool = currentPool + betAmount;
+  const newTotal = market.totalPool + betAmount;
+  const grossPayout = newPool === 0 ? 0 : Math.floor((betAmount * newTotal) / newPool);
+  const platformFee = Math.floor((grossPayout * PLATFORM_FEE_PERCENT) / 10_000);
+
+  return {
+    grossPayout,
+    platformFee,
+    netPayout: grossPayout - platformFee,
+  };
+}
+
+function calculateSettledPositionNetPayout(
+  market: Pick<Market, "winningOutcome" | "totalPool" | "outcomeAPool" | "outcomeBPool" | "outcomeCPool" | "outcomeDPool">,
+  position: UserPosition
+): number {
+  if (market.winningOutcome === null) {
+    return 0;
+  }
+
+  const winningAmount = getWinningPositionAmount(position, market.winningOutcome);
+  const winningPool = getOutcomePool(market, market.winningOutcome);
+
+  if (winningAmount <= 0 || winningPool <= 0) {
+    return 0;
+  }
+
+  const grossPayout = Math.floor((winningAmount * market.totalPool) / winningPool);
+  const platformFee = Math.floor((grossPayout * PLATFORM_FEE_PERCENT) / 10_000);
+  return grossPayout - platformFee;
+}
+
+export function deriveUserStatsFromPositions(
+  userAddress: string,
+  markets: Market[],
+  positions: UserPositionWithMarket[]
+): UserStats {
+  const marketsCreated = markets.filter((market) => market.creator === userAddress).length;
+  const totalBetsPlaced = positions.reduce(
+    (sum, { position }) => sum + position.totalInvested,
+    0
+  );
+  const settledPositions = positions.filter(({ market }) => market.settled);
+  const totalWinnings = settledPositions.reduce((sum, { market, position }) => {
+    return sum + calculateSettledPositionNetPayout(market, position);
+  }, 0);
+  const totalLosses = settledPositions.reduce((sum, { market, position }) => {
+    if (market.winningOutcome === null) {
+      return sum;
+    }
+
+    return getWinningPositionAmount(position, market.winningOutcome) > 0
+      ? sum
+      : sum + position.totalInvested;
+  }, 0);
+
+  return {
+    marketsCreated,
+    totalBetsPlaced,
+    totalWinnings,
+    totalLosses,
+    achievements: 0,
+  };
+}
+
 // ============================================
 // Market Functions
 // ============================================
@@ -189,7 +389,10 @@ export async function getMarketCount(): Promise<number> {
 /**
  * Fetch a single market by ID
  */
-export async function fetchMarket(marketId: number): Promise<Market | null> {
+export async function fetchMarket(
+  marketId: number,
+  currentBurnHeight?: number
+): Promise<Market | null> {
   try {
     const result = await callReadOnly("get-market", [uintCV(marketId)]);
     
@@ -197,36 +400,8 @@ export async function fetchMarket(marketId: number): Promise<Market | null> {
       return null;
     }
 
-    const m = result.value;
-    const currentBurnHeight = await getCurrentBurnHeight();
-    const possibleOutcomes = parseInt(m["possible-outcomes"]?.value) || 3;
-
-    return {
-      id: marketId,
-      creator: m.creator?.value || "",
-      title: hexToString(m.title?.value) || m.title?.value || "",
-      description: hexToString(m.description?.value) || m.description?.value || "",
-      settlementHeight: parseInt(m["settlement-burn-height"]?.value) || 0,
-      settlementType: m["settlement-type"]?.value || "hash-even-odd",
-      possibleOutcomes,
-      totalPool: parseInt(m["total-pool"]?.value) || 0,
-      outcomeAPool: parseInt(m["outcome-a-pool"]?.value) || 0,
-      outcomeBPool: parseInt(m["outcome-b-pool"]?.value) || 0,
-      outcomeCPool: parseInt(m["outcome-c-pool"]?.value) || 0,
-      outcomeDPool: parseInt(m["outcome-d-pool"]?.value) || 0,
-      winningOutcome: m["winning-outcome"]?.value?.value 
-        ? parseInt(m["winning-outcome"].value.value) 
-        : null,
-      settled: m.settled?.value === true || m.settled?.value === "true",
-      settledAtBurnHeight: m["settled-at-burn-height"]?.value?.value
-        ? parseInt(m["settled-at-burn-height"].value.value)
-        : null,
-      settlementBlockHash: m["settlement-block-hash"]?.value?.value || null,
-      createdAtBurnHeight: parseInt(m["created-at-burn-height"]?.value) || 0,
-      createdAtStacksHeight: parseInt(m["created-at-stacks-height"]?.value) || 0,
-      type: getMarketType(possibleOutcomes),
-      currentBurnHeight,
-    };
+    const resolvedBurnHeight = currentBurnHeight ?? (await getCurrentBurnHeight());
+    return parseMarketValue(marketId, result.value, resolvedBurnHeight);
   } catch (error) {
     console.error(`Error fetching market ${marketId}:`, error);
     return null;
@@ -238,7 +413,10 @@ export async function fetchMarket(marketId: number): Promise<Market | null> {
  */
 export async function fetchMarkets(): Promise<Market[]> {
   try {
-    const count = await getMarketCount();
+    const [count, currentBurnHeight] = await Promise.all([
+      getMarketCount(),
+      getCurrentBurnHeight(),
+    ]);
     const markets: Market[] = [];
 
     // Fetch markets in parallel (batches of 10)
@@ -246,7 +424,7 @@ export async function fetchMarkets(): Promise<Market[]> {
     for (let i = 0; i < count; i += batchSize) {
       const batch = [];
       for (let j = i; j < Math.min(i + batchSize, count); j++) {
-        batch.push(fetchMarket(j));
+        batch.push(fetchMarket(j, currentBurnHeight));
       }
       const results = await Promise.all(batch);
       markets.push(...results.filter((m): m is Market => m !== null));
@@ -280,20 +458,8 @@ export async function fetchSettledMarkets(): Promise<Market[]> {
  */
 export async function getMarketOdds(marketId: number): Promise<MarketOdds | null> {
   try {
-    const result = await callReadOnly("get-market-odds", [uintCV(marketId)]);
-    
-    if (!result || !result.value) {
-      return null;
-    }
-
-    const o = result.value;
-    return {
-      outcomeAOdds: parseInt(o["outcome-a-odds"]?.value) || 0,
-      outcomeBOdds: parseInt(o["outcome-b-odds"]?.value) || 0,
-      outcomeCOdds: parseInt(o["outcome-c-odds"]?.value) || 0,
-      outcomeDOdds: parseInt(o["outcome-d-odds"]?.value) || 0,
-      totalPool: parseInt(o["total-pool"]?.value) || 0,
-    };
+    const market = await fetchMarket(marketId);
+    return market ? calculateMarketOddsFromPools(market) : null;
   } catch (error) {
     console.error("Error getting market odds:", error);
     return null;
@@ -305,8 +471,16 @@ export async function getMarketOdds(marketId: number): Promise<MarketOdds | null
  */
 export async function isMarketSettleable(marketId: number): Promise<boolean> {
   try {
-    const result = await callReadOnly("is-market-settleable", [uintCV(marketId)]);
-    return result?.value === true || result?.value === "true";
+    if (!CONTRACT_CAPABILITIES.settleMarkets) {
+      return false;
+    }
+
+    const market = await fetchMarket(marketId);
+    if (!market || market.settled) {
+      return false;
+    }
+
+    return market.currentBurnHeight >= market.settlementHeight;
   } catch (error) {
     console.error("Error checking if market settleable:", error);
     return false;
@@ -318,8 +492,12 @@ export async function isMarketSettleable(marketId: number): Promise<boolean> {
  */
 export async function getBlocksUntilSettlement(marketId: number): Promise<number> {
   try {
-    const result = await callReadOnly("get-blocks-until-settlement", [uintCV(marketId)]);
-    return parseInt(result?.value) || 0;
+    const market = await fetchMarket(marketId);
+    if (!market) {
+      return 0;
+    }
+
+    return Math.max(market.settlementHeight - market.currentBurnHeight, 0);
   } catch (error) {
     console.error("Error getting blocks until settlement:", error);
     return 0;
@@ -335,22 +513,8 @@ export async function calculatePotentialPayout(
   betAmount: number
 ): Promise<PotentialPayout | null> {
   try {
-    const result = await callReadOnly("calculate-potential-payout", [
-      uintCV(marketId),
-      uintCV(outcome),
-      uintCV(betAmount),
-    ]);
-
-    if (!result || !result.value) {
-      return null;
-    }
-
-    const p = result.value;
-    return {
-      grossPayout: parseInt(p["gross-payout"]?.value) || 0,
-      platformFee: parseInt(p["platform-fee"]?.value) || 0,
-      netPayout: parseInt(p["net-payout"]?.value) || 0,
-    };
+    const market = await fetchMarket(marketId);
+    return market ? calculatePotentialPayoutFromMarket(market, outcome, betAmount) : null;
   } catch (error) {
     console.error("Error calculating potential payout:", error);
     return null;
@@ -397,25 +561,30 @@ export async function getUserPosition(
 /**
  * Get all positions for a user across all markets
  */
-export async function getUserPositions(userAddress: string): Promise<{
-  position: UserPosition;
-  market: Market;
-}[]> {
+async function getUserPositionsFromMarkets(
+  markets: Market[],
+  userAddress: string
+): Promise<UserPositionWithMarket[]> {
+  const positions: UserPositionWithMarket[] = [];
+
+  // Check each market for user position
+  const positionPromises = markets.map(async (market) => {
+    const position = await getUserPosition(market.id, userAddress);
+    if (position && position.totalInvested > 0) {
+      return { position, market };
+    }
+    return null;
+  });
+
+  const results = await Promise.all(positionPromises);
+  positions.push(...results.filter((r): r is UserPositionWithMarket => r !== null));
+  return positions;
+}
+
+export async function getUserPositions(userAddress: string): Promise<UserPositionWithMarket[]> {
   try {
     const markets = await fetchMarkets();
-    const positions: { position: UserPosition; market: Market }[] = [];
-
-    // Check each market for user position
-    const positionPromises = markets.map(async (market) => {
-      const position = await getUserPosition(market.id, userAddress);
-      if (position && position.totalInvested > 0) {
-        return { position, market };
-      }
-      return null;
-    });
-
-    const results = await Promise.all(positionPromises);
-    return results.filter((r): r is { position: UserPosition; market: Market } => r !== null);
+    return getUserPositionsFromMarkets(markets, userAddress);
   } catch (error) {
     console.error("Error getting user positions:", error);
     return [];
@@ -427,28 +596,9 @@ export async function getUserPositions(userAddress: string): Promise<{
  */
 export async function getUserStats(userAddress: string): Promise<UserStats | null> {
   try {
-    const result = await callReadOnly("get-user-stats", [
-      standardPrincipalCV(userAddress),
-    ]);
-
-    if (!result || !result.value) {
-      return {
-        marketsCreated: 0,
-        totalBetsPlaced: 0,
-        totalWinnings: 0,
-        totalLosses: 0,
-        achievements: 0,
-      };
-    }
-
-    const s = result.value;
-    return {
-      marketsCreated: parseInt(s["markets-created"]?.value) || 0,
-      totalBetsPlaced: parseInt(s["total-bets-placed"]?.value) || 0,
-      totalWinnings: parseInt(s["total-winnings"]?.value) || 0,
-      totalLosses: parseInt(s["total-losses"]?.value) || 0,
-      achievements: parseInt(s["achievements"]?.value) || 0,
-    };
+    const markets = await fetchMarkets();
+    const positions = await getUserPositionsFromMarkets(markets, userAddress);
+    return deriveUserStatsFromPositions(userAddress, markets, positions);
   } catch (error) {
     console.error("Error getting user stats:", error);
     return null;
@@ -513,6 +663,10 @@ export async function canClaimWinnings(
   userAddress: string
 ): Promise<boolean> {
   try {
+    if (!CONTRACT_CAPABILITIES.claimWinnings) {
+      return false;
+    }
+
     const [market, position] = await Promise.all([
       fetchMarket(marketId),
       getUserPosition(marketId, userAddress),

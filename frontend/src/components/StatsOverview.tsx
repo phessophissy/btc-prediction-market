@@ -1,8 +1,9 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import { TrendingUp, Users, DollarSign, Clock } from "lucide-react";
 import { getPlatformStats, formatSTX } from "@/lib/contractService";
+import { MARKET_CREATION_FEE } from "@/lib/constants";
 import { StatCard } from "./StatCard";
 
 interface StatItem {
@@ -30,7 +31,7 @@ export function StatsOverview() {
       label: "Platform Fees",
       value: "...",
       icon: Users,
-      change: "5% on winnings",
+      change: `${formatSTX(MARKET_CREATION_FEE)} STX / market`,
     },
     {
       label: "Settlement",
@@ -63,7 +64,7 @@ export function StatsOverview() {
             label: "Fees Collected",
             value: `${formatSTX(platformStats.totalFeesCollected)} STX`,
             icon: Users,
-            change: "5% on winnings",
+            change: `${formatSTX(MARKET_CREATION_FEE)} STX / market`,
           },
           {
             label: "Settlement",
