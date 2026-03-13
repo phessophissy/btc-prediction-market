@@ -6,7 +6,8 @@ export { MarketContractService };
 // Export a factory function for easy SDK initialization
 export function initializeMarketSDK(
   contractAddress: string,
-  isMainnet: boolean = false
+  isMainnet: boolean = false,
+  contractName: string = 'btc-prediction-market-v3'
 ): MarketContractService {
-  return new MarketContractService(contractAddress, isMainnet);
+  return new MarketContractService(contractAddress, isMainnet, contractName);
 }

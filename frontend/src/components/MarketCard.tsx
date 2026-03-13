@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { BetModal } from "./BetModal";
 import { isMarketSettleable } from "@/lib/contractService";
-import { CONTRACT_ADDRESS, CONTRACT_NAME } from "@/lib/constants";
+import { CONTRACT_ADDRESS, CONTRACT_CAPABILITIES, CONTRACT_NAME } from "@/lib/constants";
 import { formatBlocksToEta, formatMicroStx } from "@/lib/format";
 import { openContractCall } from "@stacks/connect";
 import { PostConditionMode, uintCV } from "@stacks/transactions";
@@ -50,7 +50,7 @@ export function MarketCard({ market }: MarketCardProps) {
 
   useEffect(() => {
     async function checkSettleable() {
-      if (market.settled) {
+      if (market.settled || !CONTRACT_CAPABILITIES.settleMarkets) {
         setCanSettle(false);
         return;
       }
@@ -249,7 +249,7 @@ export function MarketCard({ market }: MarketCardProps) {
 
         {!market.settled ? (
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            {canSettle ? (
+            {CONTRACT_CAPABILITIES.settleMarkets && canSettle ? (
               <button
                 onClick={handleSettleMarket}
                 disabled={settling || !isConnected}
@@ -267,7 +267,7 @@ export function MarketCard({ market }: MarketCardProps) {
                   </>
                 )}
               </button>
-            ) : (
+            ) : CONTRACT_CAPABILITIES.placeBets ? (
               <>
                 <button
                   onClick={() => handleBet("A")}
@@ -302,13 +302,19 @@ export function MarketCard({ market }: MarketCardProps) {
                   </>
                 )}
               </>
+            ) : (
+              <div className="w-full rounded-[1.35rem] border border-amber-300/20 bg-amber-300/10 p-4 text-sm text-amber-100">
+                The current `btc-prediction-market-v3` deployment supports market creation and
+                read-only tracking. Betting and settlement actions stay disabled until the trading
+                entrypoints are redeployed.
+              </div>
             )}
           </div>
         ) : (
           <div className="mt-6 rounded-[1.35rem] border border-emerald-300/20 bg-emerald-300/10 p-4 text-center">
             <p className="flex items-center justify-center gap-2 text-sm text-emerald-200">
               <CheckCircle className="h-4 w-4" />
-              This market has been settled. Check your portfolio for winnings.
+              This market is settled on-chain. Claim actions remain disabled for the current V3 deployment.
             </p>
           </div>
         )}
