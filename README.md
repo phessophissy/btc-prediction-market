@@ -219,6 +219,44 @@ The winning outcome is determined by the Bitcoin block hash:
 - [ ] Mobile app
 - [ ] Multi-chain expansion
 
+## 🤝 Contributing
+
+We welcome contributions to the Bitcoin Prediction Market! Here's how you can help:
+
+### Ways to Contribute
+- **Bug Fixes**: Report and fix issues in the smart contracts, frontend, or testing
+- **Security Improvements**: Enhance security measures and audit the contracts
+- **Documentation**: Improve README, add tutorials, or create usage guides
+- **Testing**: Add more comprehensive tests for contracts and integration
+- **Features**: Propose and implement new market types or frontend improvements
+- **Performance**: Optimize contract gas usage or frontend performance
+
+### Development Workflow
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature-name`
+3. Make your changes and ensure tests pass
+4. Run the full test suite: `npm test` and `clarinet test`
+5. Submit a pull request with a clear description
+
+### Code Standards
+- Follow existing Clarity and TypeScript patterns
+- Add tests for new functionality
+- Update documentation for significant changes
+- Ensure backward compatibility where possible
+
+### Security Considerations
+When contributing, please consider:
+- Smart contract security best practices
+- Input validation and sanitization
+- Proper error handling
+- Gas optimization
+- Bitcoin block hash verification security
+
+### Testing
+- All contract functions should have unit tests
+- Integration tests should cover full market flows
+- Frontend should have proper error handling tests
+
 ## 📄 License
 
 MIT License
