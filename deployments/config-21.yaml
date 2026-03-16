@@ -1,0 +1,17 @@
+deployment:
+  id: 21
+  network: mainnet
+  contractAddress: SP2KYZRNME33Y39GP3RKC90DQJ45EF1N0NZNVRE09
+  contractName: btc-prediction-market-v3
+  rpcEndpoint: https://api.mainnet.hiro.so
+  explorerUrl: https://explorer.hiro.so
+  settings:
+    defaultGasLimit: 10000
+    confirmationBlocks: 1
+    retryAttempts: 3
+    retryDelayMs: 2000
+    timeoutMs: 30000
+  monitoring:
+    healthCheckInterval: 60000
+    alertThreshold: 5
+    logLevel: info
