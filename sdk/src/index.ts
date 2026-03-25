@@ -1,6 +1,7 @@
 import MarketContractService from './MarketContractService';
 export * from './types';
 export * from './MarketContractService';
+export * from './utils/validation-50';
 export { MarketContractService };
 
 // Export a factory function for easy SDK initialization
