@@ -55,7 +55,12 @@ export function Header() {
 
         <nav className="hidden items-center gap-2 lg:flex">
           {navItems.map((item) => (
-            <Link key={item.href} href={item.href} className={navClassName(item.href)}>
+            <Link
+              key={item.href}
+              href={item.href}
+              className={navClassName(item.href)}
+              aria-current={pathname === item.href ? "page" : undefined}
+            >
               {item.label}
             </Link>
           ))}
@@ -111,6 +116,7 @@ export function Header() {
                 href={item.href}
                 className={navClassName(item.href)}
                 onClick={() => setMobileMenuOpen(false)}
+                aria-current={pathname === item.href ? "page" : undefined}
               >
                 {item.label}
               </Link>
