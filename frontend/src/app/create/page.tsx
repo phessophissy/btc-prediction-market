@@ -302,6 +302,11 @@ export default function CreateMarketPage() {
               {trimmedDescription || "Additional market context helps participants understand how you expect the question to resolve."}
             </p>
           </div>
+          <div className="glass-strip text-sm text-slate-200">
+            {validationError
+              ? validationError
+              : "This preview updates as you write so the final market card feels intentional before submission."}
+          </div>
         </div>
       </div>
     </div>
