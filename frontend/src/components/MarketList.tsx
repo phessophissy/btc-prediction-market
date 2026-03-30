@@ -146,6 +146,15 @@ export function MarketList({ showSettled = false }: MarketListProps) {
                 className="input pl-11"
                 placeholder="Search by market question or description"
               />
+              {query ? (
+                <button
+                  type="button"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full border border-white/10 px-3 py-1 text-xs text-slate-300 transition hover:bg-white/8 hover:text-white"
+                  onClick={() => setQuery("")}
+                >
+                  Clear
+                </button>
+              ) : null}
             </div>
           </div>
 
