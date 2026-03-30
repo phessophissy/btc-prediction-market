@@ -11,6 +11,7 @@ interface StatItem {
   value: string;
   icon: typeof TrendingUp;
   change: string;
+  accentClassName: string;
 }
 
 export function StatsOverview() {
@@ -20,24 +21,28 @@ export function StatsOverview() {
       value: "...",
       icon: TrendingUp,
       change: "Loading...",
+      accentClassName: "text-sky-300",
     },
     {
       label: "Total Volume",
       value: "...",
       icon: DollarSign,
       change: "Loading...",
+      accentClassName: "text-emerald-300",
     },
     {
       label: "Platform Fees",
       value: "...",
       icon: Users,
       change: `${formatSTX(MARKET_CREATION_FEE)} STX / market`,
+      accentClassName: "text-amber-300",
     },
     {
       label: "Settlement",
       value: "~10 min",
       icon: Clock,
       change: "Bitcoin finality",
+      accentClassName: "text-rose-300",
     },
   ]);
   const [loading, setLoading] = useState(true);
@@ -53,24 +58,28 @@ export function StatsOverview() {
             value: platformStats.totalMarkets.toString(),
             icon: TrendingUp,
             change: "All-time created",
+            accentClassName: "text-sky-300",
           },
           {
             label: "Total Volume",
             value: `${formatSTX(platformStats.totalVolume)} STX`,
             icon: DollarSign,
             change: "Across all markets",
+            accentClassName: "text-emerald-300",
           },
           {
             label: "Fees Collected",
             value: `${formatSTX(platformStats.totalFeesCollected)} STX`,
             icon: Users,
             change: `${formatSTX(MARKET_CREATION_FEE)} STX / market`,
+            accentClassName: "text-amber-300",
           },
           {
             label: "Settlement",
             value: "~10 min",
             icon: Clock,
             change: "Bitcoin finality",
+            accentClassName: "text-rose-300",
           },
         ]);
       } catch (error) {
@@ -92,7 +101,7 @@ export function StatsOverview() {
           value={stat.value}
           detail={stat.change}
           icon={stat.icon}
-          accentClassName="text-sky-300"
+          accentClassName={stat.accentClassName}
           loading={loading}
         />
       ))}
