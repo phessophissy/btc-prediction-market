@@ -3,6 +3,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { Header } from "@/components/Header";
 import { ExtensionErrorSuppressor } from "@/components/ExtensionErrorSuppressor";
+import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "BTC Predict Studio",
@@ -24,7 +25,10 @@ export default function RootLayout({
         <ExtensionErrorSuppressor />
         <Providers>
           <Header />
-          <main className="app-shell">{children}</main>
+          <main className="app-shell">
+            {children}
+            <Footer />
+          </main>
         </Providers>
       </body>
     </html>
