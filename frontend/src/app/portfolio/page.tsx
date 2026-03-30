@@ -221,6 +221,13 @@ export default function PortfolioPage() {
         </div>
       </section>
 
+      <div className="glass-strip flex flex-wrap items-center justify-between gap-3 text-sm text-slate-200">
+        <span>
+          {activePositions} active positions, {wonPositions} winning outcomes, {claimedPositions} claimed payouts.
+        </span>
+        <span className="text-slate-400">Switch filters to focus the table below.</span>
+      </div>
+
       <div className="card">
         <div className="flex flex-wrap gap-2">
           {[
