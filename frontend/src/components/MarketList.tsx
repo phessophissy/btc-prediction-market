@@ -16,6 +16,7 @@ export function MarketList({ showSettled = false }: MarketListProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
+  const [typeFilter, setTypeFilter] = useState<"all" | "binary" | "multi">("all");
 
   useEffect(() => {
     async function loadMarkets() {
@@ -76,9 +77,10 @@ export function MarketList({ showSettled = false }: MarketListProps) {
 
   const visibleMarkets = markets.filter((market) => {
     const normalizedQuery = query.trim().toLowerCase();
-    if (!normalizedQuery) return true;
+    const matchesType = typeFilter === "all" || market.type === typeFilter;
+    if (!normalizedQuery) return matchesType;
 
-    return [market.title, market.description]
+    return matchesType && [market.title, market.description]
       .join(" ")
       .toLowerCase()
       .includes(normalizedQuery);
@@ -110,15 +112,40 @@ export function MarketList({ showSettled = false }: MarketListProps) {
   return (
     <div className="space-y-4">
       <div className="card">
-        <label className="mb-2 block text-sm text-slate-300">Search markets</label>
-        <div className="relative">
-          <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
-          <input
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            className="input pl-11"
-            placeholder="Search by market question or description"
-          />
+        <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto]">
+          <div>
+            <label className="mb-2 block text-sm text-slate-300">Search markets</label>
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+              <input
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                className="input pl-11"
+                placeholder="Search by market question or description"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="mb-2 block text-sm text-slate-300">Market type</label>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { value: "all", label: "All" },
+                { value: "binary", label: "Binary" },
+                { value: "multi", label: "Multi" },
+              ].map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  data-active={typeFilter === option.value}
+                  onClick={() => setTypeFilter(option.value as typeof typeFilter)}
+                  className="btn-pill"
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
