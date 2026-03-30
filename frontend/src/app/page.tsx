@@ -1,7 +1,14 @@
 import { MarketList } from "@/components/MarketList";
 import { CreateMarketButton } from "@/components/CreateMarketButton";
 import { StatsOverview } from "@/components/StatsOverview";
-import { ArrowRight, CircleDollarSign, Sparkles, TimerReset } from "lucide-react";
+import {
+  ArrowRight,
+  CircleDollarSign,
+  Sparkles,
+  TimerReset,
+  Waves,
+} from "lucide-react";
+import { LiveNowPill } from "@/components/LiveNowPill";
 
 export default function Home() {
   const highlights = [
@@ -27,10 +34,13 @@ export default function Home() {
       <section className="hero-panel">
         <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
           <div className="space-y-6">
-            <span className="eyebrow">Bitcoin finality. Arcade color.</span>
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="eyebrow">Bitcoin finality. Studio polish.</span>
+              <LiveNowPill />
+            </div>
             <div className="space-y-4">
               <h1 className="text-5xl sm:text-6xl lg:text-7xl">
-                Trade the next BTC narrative with a brighter market board.
+                Track the next BTC narrative with a brighter market studio.
               </h1>
               <p className="max-w-2xl text-lg text-slate-300">
                 Create Bitcoin-anchored markets, inspect live contract state,
@@ -44,6 +54,16 @@ export default function Home() {
                 Explore markets
                 <ArrowRight className="h-4 w-4" />
               </a>
+            </div>
+            <div className="flex flex-wrap gap-3 text-sm text-slate-200">
+              <span className="glass-strip">
+                <Waves className="h-4 w-4 text-sky-300" />
+                Refined list controls
+              </span>
+              <span className="glass-strip">
+                <CircleDollarSign className="h-4 w-4 text-amber-300" />
+                Liquidity-led market cards
+              </span>
             </div>
           </div>
 
