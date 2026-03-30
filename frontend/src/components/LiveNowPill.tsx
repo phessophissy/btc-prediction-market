@@ -24,7 +24,7 @@ export function LiveNowPill() {
   return (
     <span className="glass-strip text-sm text-slate-200">
       <span className="dot-indicator bg-emerald-300" />
-      Live now {timeLabel || "syncing..."}
+      Live now {timeLabel || "syncing clock..."}
     </span>
   );
 }
