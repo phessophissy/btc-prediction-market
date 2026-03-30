@@ -361,6 +361,11 @@ export function MarketCard({ market }: MarketCardProps) {
             </p>
           </div>
         )}
+
+        <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-5 text-sm text-slate-300">
+          <span>Settlement target BTC block #{market.settlementHeight}</span>
+          <span>{market.settled ? "Finalized on-chain" : urgencyLabel}</span>
+        </div>
       </div>
 
       {betModalOpen && selectedOutcome && (
