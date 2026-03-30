@@ -314,6 +314,9 @@ export default function CreateMarketPage() {
             <p className="mt-2 text-2xl font-semibold text-white">
               {settlementBlock ? `BTC block #${settlementBlock}` : "Awaiting input"}
             </p>
+            <p className="mt-2 text-sm text-slate-400">
+              Choose a future burn block you can explain clearly to participants.
+            </p>
           </div>
           <div className="panel-soft">
             <p className="text-sm text-slate-300">Description</p>
