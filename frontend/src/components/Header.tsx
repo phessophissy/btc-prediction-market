@@ -7,6 +7,7 @@ import { Bitcoin, Dot, Menu, Sparkles, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { LiveNowPill } from "./LiveNowPill";
 
 export function Header() {
   const { isConnected, stxAddress, connect, disconnect } = useStacksAuth();
@@ -61,9 +62,12 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
-          <div className="glass-strip hidden text-sm text-slate-200 xl:flex">
-            <Dot className="h-5 w-5 text-emerald-300" />
-            Design refresh live
+          <div className="hidden items-center gap-3 xl:flex">
+            <LiveNowPill />
+            <div className="glass-strip text-sm text-slate-200">
+              <Dot className="h-5 w-5 text-emerald-300" />
+              Design refresh live
+            </div>
           </div>
           {isConnected ? (
             <div className="flex items-center gap-3 rounded-full border border-white/10 bg-white/6 p-1.5 pl-4">
