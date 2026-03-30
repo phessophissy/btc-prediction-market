@@ -173,6 +173,7 @@ export function MarketCard({ market }: MarketCardProps) {
                 {market.type === "binary" ? "Binary" : "Multi-outcome"}
               </span>
               <span className="pill border border-white/10 bg-white/6 text-slate-300">Market #{market.id}</span>
+              <span className="pill border border-white/10 bg-white/6 text-slate-200">{liquidityLabel}</span>
               {market.settled && (
                 <span className="pill status-positive">
                   <CheckCircle className="h-3.5 w-3.5" />
@@ -182,6 +183,11 @@ export function MarketCard({ market }: MarketCardProps) {
               {!market.settled && canSettle && (
                 <span className="pill status-warning">Ready to settle</span>
               )}
+              {!market.settled && !canSettle ? (
+                <span className="pill border border-white/10 bg-white/6 text-slate-300">
+                  {urgencyLabel}
+                </span>
+              ) : null}
             </div>
             <div>
               <h3 className="mb-2 text-3xl">{market.title}</h3>
@@ -195,7 +201,7 @@ export function MarketCard({ market }: MarketCardProps) {
               <p className="mt-2 text-2xl font-semibold text-white">{formatMicroStx(market.totalPool)} STX</p>
             </div>
             <div className="panel-soft">
-              <span className="subtle-copy text-xs uppercase tracking-[0.18em]">Settlement</span>
+              <span className="subtle-copy text-xs uppercase tracking-[0.18em]">Settlement pace</span>
               <p className="mt-2 text-lg text-white">
                 {market.settled
                   ? "Completed"
@@ -205,8 +211,10 @@ export function MarketCard({ market }: MarketCardProps) {
               </p>
             </div>
             <div className="panel-soft">
-              <span className="subtle-copy text-xs uppercase tracking-[0.18em]">BTC block</span>
-              <p className="mt-2 text-lg text-white">#{market.settlementHeight}</p>
+              <span className="subtle-copy text-xs uppercase tracking-[0.18em]">Market lead</span>
+              <p className="mt-2 text-lg text-white">
+                {leadOutcome ? `Outcome ${leadOutcome.id}` : "Pending"}
+              </p>
             </div>
           </div>
         </div>
