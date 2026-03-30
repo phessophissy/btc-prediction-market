@@ -129,7 +129,13 @@ export default function CreateMarketPage() {
         title="Create prediction market"
         description="Define the question, pick a settlement block, and publish a colorful market card directly from your connected wallet."
         compact
-      />
+      >
+        <div className="flex flex-wrap gap-3">
+          <span className="glass-strip text-sm text-slate-200">Prompt templates</span>
+          <span className="glass-strip text-sm text-slate-200">Live card preview</span>
+          <span className="glass-strip text-sm text-slate-200">Wallet-ready flow</span>
+        </div>
+      </PageHero>
 
       <div className="card">
         <p className="mb-3 text-sm text-slate-300">Quick-start prompts</p>
