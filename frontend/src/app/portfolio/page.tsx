@@ -266,6 +266,9 @@ export default function PortfolioPage() {
       <section className="table-shell">
         <div className="border-b border-white/10 px-6 py-5">
           <h2 className="text-3xl">Your positions</h2>
+          <p className="mt-2 text-sm text-slate-400">
+            Each entry summarizes your exposure, current market state, and payout readiness.
+          </p>
         </div>
 
         {positions.length === 0 ? (
