@@ -166,111 +166,143 @@ export default function CreateMarketPage() {
         </div>
       </div>
 
-      <div className="card">
-        <label className="mb-3 block text-sm font-medium text-slate-200">
-          Market Type
-        </label>
-        <div className="grid grid-cols-2 gap-4">
-          <button
-            onClick={() => setMarketType("binary")}
-            className={`rounded-[1.5rem] border p-5 text-left transition-all ${
-              marketType === "binary"
-                ? "border-amber-300/40 bg-amber-300/12"
-                : "border-white/10 bg-white/5 hover:border-white/20"
-            }`}
-          >
-            <h3 className="mb-1 text-2xl">Binary</h3>
-            <p className="text-sm text-slate-300">Yes/No outcomes</p>
-          </button>
-          <button
-            onClick={() => setMarketType("multi")}
-            className={`rounded-[1.5rem] border p-5 text-left transition-all ${
-              marketType === "multi"
-                ? "border-amber-300/40 bg-amber-300/12"
-                : "border-white/10 bg-white/5 hover:border-white/20"
-            }`}
-          >
-            <h3 className="mb-1 text-2xl">Multi-Outcome</h3>
-            <p className="text-sm text-slate-300">Up to 4 outcomes</p>
-          </button>
-        </div>
-      </div>
-
-      <div className="card space-y-6">
-        <div>
-          <label className="mb-2 block text-sm font-medium text-slate-200">
-            Question *
-          </label>
-          <input
-            type="text"
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            placeholder="Will BTC reach $100k by end of year?"
-            maxLength={100}
-            className="input"
-          />
-          <p className="mt-2 text-xs text-slate-400">{question.length}/100 characters</p>
-        </div>
-
-        <div>
-          <label className="mb-2 block text-sm font-medium text-slate-200">
-            Description
-          </label>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder="Additional details about the market..."
-            maxLength={500}
-            rows={3}
-            className="input min-h-[120px]"
-          />
-          <p className="mt-2 text-xs text-slate-400">{description.length}/500 characters</p>
-        </div>
-
-        <div>
-          <label className="mb-2 block text-sm font-medium text-slate-200">
-            <div className="flex items-center gap-2">
-              <Bitcoin className="h-4 w-4 text-amber-300" />
-              Settlement Bitcoin Block *
+      <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="space-y-6">
+          <div className="card">
+            <label className="mb-3 block text-sm font-medium text-slate-200">
+              Market Type
+            </label>
+            <div className="grid grid-cols-2 gap-4">
+              <button
+                onClick={() => setMarketType("binary")}
+                className={`rounded-[1.5rem] border p-5 text-left transition-all ${
+                  marketType === "binary"
+                    ? "border-amber-300/40 bg-amber-300/12"
+                    : "border-white/10 bg-white/5 hover:border-white/20"
+                }`}
+              >
+                <h3 className="mb-1 text-2xl">Binary</h3>
+                <p className="text-sm text-slate-300">Yes/No outcomes</p>
+              </button>
+              <button
+                onClick={() => setMarketType("multi")}
+                className={`rounded-[1.5rem] border p-5 text-left transition-all ${
+                  marketType === "multi"
+                    ? "border-amber-300/40 bg-amber-300/12"
+                    : "border-white/10 bg-white/5 hover:border-white/20"
+                }`}
+              >
+                <h3 className="mb-1 text-2xl">Multi-Outcome</h3>
+                <p className="text-sm text-slate-300">Up to 4 outcomes</p>
+              </button>
             </div>
-          </label>
-          <input
-            type="number"
-            value={settlementBlock}
-            onChange={(e) => setSettlementBlock(e.target.value)}
-            placeholder="e.g., 875000"
-            className="input"
-          />
-          <p className="mt-2 text-xs text-slate-400">
-            The market will settle using the hash of this Bitcoin block
-          </p>
+          </div>
+
+          <div className="card space-y-6">
+            <div>
+              <label className="mb-2 block text-sm font-medium text-slate-200">
+                Question *
+              </label>
+              <input
+                type="text"
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+                placeholder="Will BTC reach $100k by end of year?"
+                maxLength={100}
+                className="input"
+              />
+              <p className="mt-2 text-xs text-slate-400">{question.length}/100 characters</p>
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm font-medium text-slate-200">
+                Description
+              </label>
+              <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Additional details about the market..."
+                maxLength={500}
+                rows={3}
+                className="input min-h-[120px]"
+              />
+              <p className="mt-2 text-xs text-slate-400">{description.length}/500 characters</p>
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm font-medium text-slate-200">
+                <div className="flex items-center gap-2">
+                  <Bitcoin className="h-4 w-4 text-amber-300" />
+                  Settlement Bitcoin Block *
+                </div>
+              </label>
+              <input
+                type="number"
+                value={settlementBlock}
+                onChange={(e) => setSettlementBlock(e.target.value)}
+                placeholder="e.g., 875000"
+                className="input"
+              />
+              <p className="mt-2 text-xs text-slate-400">
+                The market will settle using the hash of this Bitcoin block
+              </p>
+            </div>
+
+            <button
+              onClick={handleCreateMarket}
+              disabled={isSubmitting || !!validationError}
+              className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {isSubmitting
+                ? "Creating Market..."
+                : `Create Market (${formatMicroStx(MARKET_CREATION_FEE)} STX)`}
+            </button>
+
+            {validationError && !submissionError ? (
+              <p className="text-sm text-amber-200">{validationError}</p>
+            ) : null}
+
+            {submissionError ? (
+              <div className="rounded-[1.25rem] border border-rose-300/20 bg-rose-300/10 p-4 text-sm text-rose-100">
+                {submissionError}
+              </div>
+            ) : null}
+
+            {submissionSuccess ? (
+              <div className="rounded-[1.25rem] border border-emerald-300/20 bg-emerald-300/10 p-4 text-sm text-emerald-100">
+                {submissionSuccess}
+              </div>
+            ) : null}
+          </div>
         </div>
 
-        <button
-          onClick={handleCreateMarket}
-          disabled={isSubmitting || !!validationError}
-          className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          {isSubmitting
-            ? "Creating Market..."
-            : `Create Market (${formatMicroStx(MARKET_CREATION_FEE)} STX)`}
-        </button>
-
-        {validationError && !submissionError ? (
-          <p className="text-sm text-amber-200">{validationError}</p>
-        ) : null}
-
-        {submissionError ? (
-          <div className="rounded-[1.25rem] border border-rose-300/20 bg-rose-300/10 p-4 text-sm text-rose-100">
-            {submissionError}
+        <div className="panel-highlight space-y-4">
+          <span className="eyebrow">Live preview</span>
+          <div className="panel-soft">
+            <p className="text-sm text-slate-300">Question</p>
+            <p className="mt-2 text-2xl font-semibold text-white">
+              {trimmedQuestion || "Your market question will appear here"}
+            </p>
           </div>
-        ) : null}
-
-        {submissionSuccess ? (
-          <div className="rounded-[1.25rem] border border-emerald-300/20 bg-emerald-300/10 p-4 text-sm text-emerald-100">
-            {submissionSuccess}
+          <div className="panel-soft">
+            <p className="text-sm text-slate-300">Format</p>
+            <p className="mt-2 text-2xl font-semibold text-white">
+              {marketType === "binary" ? "Binary outcomes" : "Four outcome spread"}
+            </p>
           </div>
-        ) : null}
+          <div className="panel-soft">
+            <p className="text-sm text-slate-300">Settlement target</p>
+            <p className="mt-2 text-2xl font-semibold text-white">
+              {settlementBlock ? `BTC block #${settlementBlock}` : "Awaiting input"}
+            </p>
+          </div>
+          <div className="panel-soft">
+            <p className="text-sm text-slate-300">Description</p>
+            <p className="mt-2 text-sm text-slate-200">
+              {trimmedDescription || "Additional market context helps participants understand how you expect the question to resolve."}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
