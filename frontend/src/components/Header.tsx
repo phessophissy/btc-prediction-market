@@ -88,6 +88,7 @@ export function Header() {
         <button
           className="rounded-2xl border border-white/10 bg-white/6 p-3 text-white md:hidden"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
         >
           {mobileMenuOpen ? (
             <X className="h-5 w-5" />
