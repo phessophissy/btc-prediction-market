@@ -179,6 +179,9 @@ export function MarketCard({ market }: MarketCardProps) {
               <span className={`pill ${market.type === "binary" ? "badge-binary" : "badge-multi"}`}>
                 {market.type === "binary" ? "Binary" : "Multi-outcome"}
               </span>
+              <span className="pill border border-white/10 bg-white/6 text-slate-300">
+                {market.type === "binary" ? "2 outcomes" : "4 outcomes"}
+              </span>
               <span className="pill border border-white/10 bg-white/6 text-slate-300">Market #{market.id}</span>
               <span className="pill border border-white/10 bg-white/6 text-slate-200">{liquidityLabel}</span>
               {market.settled && (
