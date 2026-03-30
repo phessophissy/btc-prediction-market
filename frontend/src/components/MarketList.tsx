@@ -118,6 +118,15 @@ export function MarketList({ showSettled = false }: MarketListProps) {
           title="No markets match this search"
           description="Try a broader keyword to bring more Bitcoin market cards back into view."
         />
+        <div className="flex justify-center">
+          <button
+            type="button"
+            onClick={() => setQuery("")}
+            className="btn-secondary"
+          >
+            Reset search
+          </button>
+        </div>
       </div>
     );
   }
