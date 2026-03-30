@@ -51,6 +51,15 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
     }
   };
 
+  const outcomeLabel =
+    outcome === "A"
+      ? "Outcome A"
+      : outcome === "B"
+        ? "Outcome B"
+        : outcome === "C"
+          ? "Outcome C"
+          : "Outcome D";
+
   const calculatePotentialWin = () => {
     const betAmount = parseFloat(amount) || 0;
     const betMicroSTX = betAmount * 1000000;
@@ -145,7 +154,7 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
 
         <div className={`border rounded-lg p-4 mb-6 ${outcomeColors[outcome]}`}>
           <span className="text-sm opacity-75">You're betting on:</span>
-          <p className="text-lg font-semibold">Outcome {outcome}</p>
+          <p className="text-lg font-semibold">{outcomeLabel}</p>
         </div>
 
         <form onSubmit={handleSubmit}>
