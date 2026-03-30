@@ -144,6 +144,7 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
         <button
           onClick={onClose}
           className="absolute right-4 top-4 rounded-full border border-white/10 bg-white/6 p-2 text-slate-300 transition hover:bg-white/10 hover:text-white"
+          aria-label="Close bet modal"
         >
           <X className="w-5 h-5" />
         </button>
