@@ -93,18 +93,24 @@ export function StatsOverview() {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-      {stats.map((stat) => (
-        <StatCard
-          key={stat.label}
-          label={stat.label}
-          value={stat.value}
-          detail={stat.change}
-          icon={stat.icon}
-          accentClassName={stat.accentClassName}
-          loading={loading}
-        />
-      ))}
+    <div className="space-y-4">
+      <div className="glass-strip flex flex-wrap items-center justify-between gap-3 text-sm text-slate-200">
+        <span>Platform snapshot</span>
+        <span className="text-slate-400">Core market totals update from contract reads.</span>
+      </div>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {stats.map((stat) => (
+          <StatCard
+            key={stat.label}
+            label={stat.label}
+            value={stat.value}
+            detail={stat.change}
+            icon={stat.icon}
+            accentClassName={stat.accentClassName}
+            loading={loading}
+          />
+        ))}
+      </div>
     </div>
   );
 }
