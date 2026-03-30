@@ -210,7 +210,7 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
                 }}
                 className="btn-secondary px-4 py-2 text-xs"
               >
-                {quickAmount} STX
+                +{quickAmount} STX
               </button>
             ))}
           </div>
