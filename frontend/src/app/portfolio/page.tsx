@@ -47,6 +47,7 @@ export default function PortfolioPage() {
   const [stats, setStats] = useState<UserStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [claiming, setClaiming] = useState<number | null>(null);
+  const [statusFilter, setStatusFilter] = useState<"all" | "active" | "won" | "lost" | "claimed">("all");
 
   useEffect(() => {
     async function loadPortfolio() {
@@ -167,6 +168,9 @@ export default function PortfolioPage() {
   const activePositions = positions.filter((position) => !position.market.settled).length;
   const wonPositions = positions.filter((position) => getPositionStatus(position) === "won").length;
   const claimedPositions = positions.filter((position) => position.position.claimed).length;
+  const visiblePositions = positions.filter((position) =>
+    statusFilter === "all" ? true : getPositionStatus(position) === statusFilter
+  );
 
   return (
     <div className="mx-auto max-w-5xl space-y-6">
@@ -217,6 +221,28 @@ export default function PortfolioPage() {
         </div>
       </section>
 
+      <div className="card">
+        <div className="flex flex-wrap gap-2">
+          {[
+            "all",
+            "active",
+            "won",
+            "lost",
+            "claimed",
+          ].map((status) => (
+            <button
+              key={status}
+              type="button"
+              data-active={statusFilter === status}
+              onClick={() => setStatusFilter(status as typeof statusFilter)}
+              className="btn-pill"
+            >
+              {status}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {CONTRACT_CAPABILITIES.claimWinnings && positions.some((position) => position.canClaim) && (
         <div className="card flex items-center gap-3 border-emerald-300/20 bg-emerald-300/10">
           <Gift className="h-6 w-6 text-emerald-300" />
@@ -240,9 +266,13 @@ export default function PortfolioPage() {
               ? "No positions yet. Start betting on prediction markets."
               : "No positions tracked yet. The current V3 deployment does not accept bets, so this view stays informational until trading is redeployed."}
           </div>
+        ) : visiblePositions.length === 0 ? (
+          <div className="p-10 text-center text-slate-300">
+            No positions match the current portfolio filter.
+          </div>
         ) : (
           <div className="divide-y divide-white/10">
-            {positions.map((pm) => {
+            {visiblePositions.map((pm) => {
               const status = getPositionStatus(pm);
               const statusClasses =
                 status === "won"
