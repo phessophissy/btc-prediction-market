@@ -99,6 +99,13 @@ export function MarketCard({ market }: MarketCardProps) {
     return Math.round((pool / total) * 100);
   };
 
+  const getOutcomeCaption = (percentage: number) => {
+    if (percentage >= 55) return "Strong share";
+    if (percentage >= 30) return "Competitive";
+    if (percentage > 0) return "Building";
+    return "No flow yet";
+  };
+
   const handleBet = (outcome: string) => {
     if (!isConnected) return;
     setSelectedOutcome(outcome);
@@ -245,6 +252,7 @@ export function MarketCard({ market }: MarketCardProps) {
                 <span className="text-slate-200">{outcome.label}</span>
                 <div className="flex items-center gap-3">
                   <span className="subtle-copy">{formatMicroStx(outcome.pool)} STX</span>
+                  <span className="subtle-copy">{getOutcomeCaption(calculatePercentage(outcome.pool, market.totalPool))}</span>
                   <span className={`font-semibold ${outcome.valueClass}`}>
                     {calculateOdds(outcome.pool, market.totalPool)}
                   </span>
