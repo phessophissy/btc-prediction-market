@@ -22,7 +22,7 @@ export function LiveNowPill() {
   }, []);
 
   return (
-    <span className="glass-strip text-sm text-slate-200">
+    <span className="glass-strip text-sm text-slate-200" aria-live="polite">
       <span className="dot-indicator bg-emerald-300" />
       Live now {timeLabel || "syncing clock..."}
     </span>
