@@ -295,6 +295,11 @@ export default function PortfolioPage() {
                   <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                     <div className="space-y-2">
                       <h3 className="text-2xl">{pm.market.title}</h3>
+                      <p className="text-sm text-slate-400">
+                        {pm.market.settled
+                          ? "This market has settled and your final result is reflected below."
+                          : `Settlement target BTC block #${pm.market.settlementHeight}`}
+                      </p>
                       <div className="flex flex-wrap items-center gap-2 text-sm">
                         <span className="pill border border-white/10 bg-white/8 text-slate-200">
                           {getPositionOutcome(pm.position)} STX
