@@ -227,6 +227,9 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
                 <span className="text-slate-300">Platform Fee:</span>
                 <span className="text-slate-200">3%</span>
               </div>
+              <p className="mt-3 text-xs text-slate-400">
+                Estimate is derived from the current pool snapshot and will shift if new positions arrive first.
+              </p>
             </div>
           )}
 
