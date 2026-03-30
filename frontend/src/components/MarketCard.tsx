@@ -226,7 +226,7 @@ export function MarketCard({ market }: MarketCardProps) {
         <div className="mb-6 flex flex-wrap items-center gap-5 text-sm text-slate-300">
           <div className="flex items-center gap-2">
             <TrendingUp className="h-4 w-4 text-amber-300" />
-            Liquidity-led odds
+            {liquidityLabel}
           </div>
           <div className="flex items-center gap-2">
             <Clock className="h-4 w-4 text-sky-300" />
@@ -234,7 +234,7 @@ export function MarketCard({ market }: MarketCardProps) {
           </div>
           <div className="flex items-center gap-2">
             <Users className="h-4 w-4 text-emerald-300" />
-            Trustless outcome selection
+            {leadOutcome ? `Outcome ${leadOutcome.id} currently ahead` : "Open price discovery"}
           </div>
         </div>
 
