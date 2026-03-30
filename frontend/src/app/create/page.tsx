@@ -6,7 +6,8 @@ import {
   CONTRACT_ADDRESS, 
   CONTRACT_NAME, 
   MARKET_CREATION_FEE,
-  NETWORK 
+  NETWORK,
+  NETWORK_NAME,
 } from "@/lib/constants";
 import { openContractCall } from "@stacks/connect";
 import { 
@@ -146,12 +147,22 @@ export default function CreateMarketPage() {
         </div>
       </div>
 
-      <div className="card">
-        <div className="flex items-center gap-2">
-          <DollarSign className="h-5 w-5 text-amber-300" />
-          <span className="text-amber-100">
-            Market creation fee: <strong>{formatMicroStx(MARKET_CREATION_FEE)} STX</strong>
-          </span>
+      <div className="grid gap-4 md:grid-cols-3">
+        <div className="card">
+          <div className="flex items-center gap-2">
+            <DollarSign className="h-5 w-5 text-amber-300" />
+            <span className="text-amber-100">
+              Market creation fee: <strong>{formatMicroStx(MARKET_CREATION_FEE)} STX</strong>
+            </span>
+          </div>
+        </div>
+        <div className="panel-soft">
+          <p className="text-sm text-slate-300">Network</p>
+          <p className="mt-2 text-2xl font-semibold text-white">{NETWORK_NAME}</p>
+        </div>
+        <div className="panel-soft">
+          <p className="text-sm text-slate-300">Settlement mode</p>
+          <p className="mt-2 text-2xl font-semibold text-white">BTC burn block</p>
         </div>
       </div>
 
