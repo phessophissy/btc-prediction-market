@@ -179,7 +179,13 @@ export default function PortfolioPage() {
             : "Review tracked positions and derived outcomes. Claim actions stay hidden until the V3 contract exposes them."
         }
         compact
-      />
+      >
+        <div className="flex flex-wrap gap-3">
+          <span className="glass-strip text-sm text-slate-200">Position summary</span>
+          <span className="glass-strip text-sm text-slate-200">Claim readiness</span>
+          <span className="glass-strip text-sm text-slate-200">Color-coded statuses</span>
+        </div>
+      </PageHero>
 
       <section className="grid grid-cols-2 gap-4 md:grid-cols-4">
         <StatCard label="Total Bets Placed" value={stats?.totalBetsPlaced || 0} />
