@@ -90,6 +90,21 @@ body::after {
   color: var(--text-main);
 }
 
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+*::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 191, 60, 0.7), rgba(103, 210, 255, 0.7));
+  background-clip: padding-box;
+}
+
 h1,
 h2,
 h3,
