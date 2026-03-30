@@ -79,6 +79,11 @@ export default function LeaderboardPage() {
               <p className="mt-2 text-xs uppercase tracking-[0.18em] text-slate-400">
                 {entry.user.winRate}% win rate
               </p>
+              <p className="mt-3 text-sm text-slate-300">
+                {entry.label === "1st"
+                  ? "Current benchmark for strong market reads."
+                  : "Consistent performance across tracked bets."}
+              </p>
             </div>
           );
         })}
