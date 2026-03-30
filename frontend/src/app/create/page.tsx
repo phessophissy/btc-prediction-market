@@ -30,6 +30,11 @@ export default function CreateMarketPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionError, setSubmissionError] = useState<string | null>(null);
   const [submissionSuccess, setSubmissionSuccess] = useState<string | null>(null);
+  const promptTemplates = [
+    "Will BTC close above $100k before December 31?",
+    "Will the next monthly candle close green?",
+    "Will BTC mine a new all-time high this quarter?",
+  ];
 
   const trimmedQuestion = question.trim();
   const trimmedDescription = description.trim();
@@ -124,6 +129,22 @@ export default function CreateMarketPage() {
         description="Define the question, pick a settlement block, and publish a colorful market card directly from your connected wallet."
         compact
       />
+
+      <div className="card">
+        <p className="mb-3 text-sm text-slate-300">Quick-start prompts</p>
+        <div className="flex flex-wrap gap-2">
+          {promptTemplates.map((template) => (
+            <button
+              key={template}
+              type="button"
+              className="btn-pill"
+              onClick={() => setQuestion(template)}
+            >
+              {template}
+            </button>
+          ))}
+        </div>
+      </div>
 
       <div className="card">
         <div className="flex items-center gap-2">
