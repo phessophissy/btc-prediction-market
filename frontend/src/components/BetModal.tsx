@@ -157,6 +157,21 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
           <p className="text-lg font-semibold">{outcomeLabel}</p>
         </div>
 
+        <div className="mb-6 grid gap-3 sm:grid-cols-2">
+          <div className="panel-soft">
+            <p className="text-sm text-slate-300">Current outcome pool</p>
+            <p className="mt-2 text-2xl font-semibold text-white">
+              {formatMicroStx(getOutcomePool())} STX
+            </p>
+          </div>
+          <div className="panel-soft">
+            <p className="text-sm text-slate-300">Total market pool</p>
+            <p className="mt-2 text-2xl font-semibold text-white">
+              {formatMicroStx(market.totalPool)} STX
+            </p>
+          </div>
+        </div>
+
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="mb-2 block text-sm text-slate-300">
