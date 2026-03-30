@@ -221,13 +221,17 @@ main {
   }
 
   .card {
-    @apply relative rounded-[1.75rem] border p-6;
+    @apply relative rounded-[1.75rem] border p-6 transition-transform duration-300;
     border-color: var(--border);
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
       var(--surface);
     box-shadow: var(--shadow-glow);
     backdrop-filter: blur(18px);
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
   }
 
   .panel-soft {
