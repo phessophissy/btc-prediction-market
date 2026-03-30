@@ -17,6 +17,7 @@ export function MarketList({ showSettled = false }: MarketListProps) {
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState<"all" | "binary" | "multi">("all");
+  const [sortBy, setSortBy] = useState<"soonest" | "largest-pool" | "newest">("soonest");
 
   useEffect(() => {
     async function loadMarkets() {
@@ -75,16 +76,28 @@ export function MarketList({ showSettled = false }: MarketListProps) {
     );
   }
 
-  const visibleMarkets = markets.filter((market) => {
-    const normalizedQuery = query.trim().toLowerCase();
-    const matchesType = typeFilter === "all" || market.type === typeFilter;
-    if (!normalizedQuery) return matchesType;
+  const visibleMarkets = markets
+    .filter((market) => {
+      const normalizedQuery = query.trim().toLowerCase();
+      const matchesType = typeFilter === "all" || market.type === typeFilter;
+      if (!normalizedQuery) return matchesType;
 
-    return matchesType && [market.title, market.description]
-      .join(" ")
-      .toLowerCase()
-      .includes(normalizedQuery);
-  });
+      return matchesType && [market.title, market.description]
+        .join(" ")
+        .toLowerCase()
+        .includes(normalizedQuery);
+    })
+    .sort((left, right) => {
+      if (sortBy === "largest-pool") {
+        return right.totalPool - left.totalPool;
+      }
+
+      if (sortBy === "newest") {
+        return right.createdAtBurnHeight - left.createdAtBurnHeight;
+      }
+
+      return left.settlementHeight - right.settlementHeight;
+    });
 
   if (visibleMarkets.length === 0) {
     return (
@@ -112,7 +125,7 @@ export function MarketList({ showSettled = false }: MarketListProps) {
   return (
     <div className="space-y-4">
       <div className="card">
-        <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto]">
+        <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_auto]">
           <div>
             <label className="mb-2 block text-sm text-slate-300">Search markets</label>
             <div className="relative">
@@ -145,6 +158,22 @@ export function MarketList({ showSettled = false }: MarketListProps) {
                 </button>
               ))}
             </div>
+          </div>
+
+          <div>
+            <label htmlFor="market-sort" className="mb-2 block text-sm text-slate-300">
+              Sort by
+            </label>
+            <select
+              id="market-sort"
+              value={sortBy}
+              onChange={(event) => setSortBy(event.target.value as typeof sortBy)}
+              className="select min-w-[12rem]"
+            >
+              <option value="soonest">Settlement soonest</option>
+              <option value="largest-pool">Largest pool</option>
+              <option value="newest">Newest markets</option>
+            </select>
           </div>
         </div>
       </div>
