@@ -21,6 +21,10 @@ export default function MarketsPage() {
       </PageHero>
 
       <StatsOverview />
+      <div className="glass-strip flex flex-wrap items-center justify-between gap-3 text-sm text-slate-200">
+        <span>The market directory emphasizes scan speed across active pools and settlement timing.</span>
+        <span className="text-slate-400">Controls live inside the list below.</span>
+      </div>
       <MarketList />
     </div>
   );
