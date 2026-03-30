@@ -150,13 +150,9 @@ export default function Home() {
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
-            <button className="btn-primary text-sm">All markets</button>
-            <button className="btn-secondary text-sm">
-              Binary
-            </button>
-            <button className="btn-secondary text-sm">
-              Multi-outcome
-            </button>
+            <span className="glass-strip text-sm text-slate-200">Built-in search</span>
+            <span className="glass-strip text-sm text-slate-200">Instant filtering</span>
+            <span className="glass-strip text-sm text-slate-200">Pool-based sorting</span>
           </div>
         </div>
         <MarketList />
