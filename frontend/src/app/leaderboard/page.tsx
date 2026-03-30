@@ -50,7 +50,13 @@ export default function LeaderboardPage() {
         title="Leaderboard"
         description="Highlight the most accurate wallets, strongest win rates, and the biggest STX earners in a brighter ranking view."
         compact
-      />
+      >
+        <div className="flex flex-wrap gap-3">
+          <span className="glass-strip text-sm text-slate-200">Podium spotlight</span>
+          <span className="glass-strip text-sm text-slate-200">Readable wallet ranks</span>
+          <span className="glass-strip text-sm text-slate-200">Win-rate badges</span>
+        </div>
+      </PageHero>
 
       <section className="grid gap-4 md:grid-cols-3 md:items-end">
         {podium.map((entry) => {
