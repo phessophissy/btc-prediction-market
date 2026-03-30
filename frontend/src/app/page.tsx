@@ -100,6 +100,45 @@ export default function Home() {
 
       <StatsOverview />
 
+      <section className="dashboard-grid">
+        <div className="card">
+          <span className="eyebrow mb-4">Workflow</span>
+          <h2 className="section-title mb-3">A cleaner route from idea to settlement</h2>
+          <p className="section-intro">
+            Launch a market, monitor pool balance, and keep an eye on settlement timing with surfaces that are easier to scan under pressure.
+          </p>
+          <div className="mt-6 insight-list">
+            {[
+              "Use search and type filters to cut directly to the active market set you care about.",
+              "Spot leading outcomes and liquidity concentration without opening each market in detail.",
+              "Move from discovery into creation, portfolio review, or leaderboard context without losing the visual thread.",
+            ].map((item) => (
+              <div key={item} className="panel-soft text-sm text-slate-200">
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="panel-highlight">
+          <span className="eyebrow mb-4">What changed</span>
+          <div className="space-y-4">
+            <div className="panel-soft">
+              <p className="text-sm text-slate-300">Theme direction</p>
+              <p className="mt-2 text-2xl font-semibold text-white">Brighter, sharper, more editorial</p>
+            </div>
+            <div className="panel-soft">
+              <p className="text-sm text-slate-300">Controls</p>
+              <p className="mt-2 text-2xl font-semibold text-white">Search, filter, sort</p>
+            </div>
+            <div className="panel-soft">
+              <p className="text-sm text-slate-300">Cards</p>
+              <p className="mt-2 text-2xl font-semibold text-white">Momentum, liquidity, urgency</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="active-markets" className="space-y-5">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
