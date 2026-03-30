@@ -172,6 +172,11 @@ export default function CreateMarketPage() {
         </div>
       </div>
 
+      <div className="glass-strip flex flex-wrap items-center justify-between gap-3 text-sm text-slate-200">
+        <span>Clear questions settle better: keep the prompt specific, time-bound, and easy to verify on-chain.</span>
+        <span className="text-slate-400">The preview on the right updates instantly.</span>
+      </div>
+
       <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-6">
           <div className="card">
