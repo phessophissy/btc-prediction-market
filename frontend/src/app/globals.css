@@ -270,6 +270,15 @@ main {
     box-shadow: 0 20px 40px rgba(255, 191, 60, 0.3);
   }
 
+  .btn-primary:disabled,
+  .btn-secondary:disabled,
+  .btn-pill:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+    transform: none;
+    box-shadow: none;
+  }
+
   .btn-secondary,
   .btn-pill {
     color: var(--text-main);
