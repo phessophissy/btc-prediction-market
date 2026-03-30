@@ -289,6 +289,14 @@ export default function CreateMarketPage() {
 
         <div className="panel-highlight space-y-4">
           <span className="eyebrow">Live preview</span>
+          <div className="flex flex-wrap gap-2">
+            <span className="pill border border-white/10 bg-white/6 text-slate-200">
+              {question.length}/100 question chars
+            </span>
+            <span className="pill border border-white/10 bg-white/6 text-slate-200">
+              {description.length}/500 description chars
+            </span>
+          </div>
           <div className="panel-soft">
             <p className="text-sm text-slate-300">Question</p>
             <p className="mt-2 text-2xl font-semibold text-white">
