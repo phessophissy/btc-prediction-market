@@ -3,10 +3,10 @@
 import { useStacksAuth } from "@/contexts/StacksAuthContext";
 import { formatAddress } from "@/lib/format";
 import { NETWORK_NAME } from "@/lib/constants";
-import { Bitcoin, Menu, Sparkles, X } from "lucide-react";
+import { Bitcoin, Dot, Menu, Sparkles, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function Header() {
   const { isConnected, stxAddress, connect, disconnect } = useStacksAuth();
@@ -20,14 +20,18 @@ export function Header() {
     { href: "/leaderboard", label: "Leaderboard" },
   ];
 
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
+
   const navClassName = (href: string) =>
     pathname === href
-      ? "rounded-full bg-white/12 px-4 py-2 text-white"
-      : "rounded-full px-4 py-2 text-slate-300 transition hover:bg-white/8 hover:text-white";
+      ? "rounded-full border border-amber-300/20 bg-gradient-to-r from-amber-300/90 to-cyan-300/90 px-4 py-2 text-slate-950 shadow-lg shadow-amber-500/10"
+      : "rounded-full border border-transparent px-4 py-2 text-slate-300 transition hover:border-white/10 hover:bg-white/8 hover:text-white";
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/45 backdrop-blur-xl">
-      <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/40 backdrop-blur-xl">
+      <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-amber-300/25 bg-gradient-to-br from-amber-300/25 via-rose-400/20 to-sky-400/25 shadow-lg shadow-amber-500/10">
@@ -42,13 +46,13 @@ export function Header() {
                 </span>
               </div>
               <p className="hidden text-sm text-slate-400 sm:block">
-                Color-coded Bitcoin prediction markets
+                Colorful Bitcoin prediction markets
               </p>
             </div>
           </Link>
         </div>
 
-        <nav className="hidden items-center gap-2 md:flex">
+        <nav className="hidden items-center gap-2 lg:flex">
           {navItems.map((item) => (
             <Link key={item.href} href={item.href} className={navClassName(item.href)}>
               {item.label}
@@ -56,7 +60,11 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden items-center gap-3 md:flex">
+          <div className="glass-strip hidden text-sm text-slate-200 xl:flex">
+            <Dot className="h-5 w-5 text-emerald-300" />
+            Design refresh live
+          </div>
           {isConnected ? (
             <div className="flex items-center gap-3 rounded-full border border-white/10 bg-white/6 p-1.5 pl-4">
               <span className="text-sm text-slate-300">
@@ -87,6 +95,10 @@ export function Header() {
 
       {mobileMenuOpen && (
         <div className="mx-4 mb-4 rounded-[1.75rem] border border-white/10 bg-slate-950/85 p-4 shadow-2xl shadow-slate-950/30 md:hidden">
+          <div className="glass-strip mb-3 text-sm text-slate-200">
+            <Dot className="h-5 w-5 text-emerald-300" />
+            Design refresh live on {NETWORK_NAME}
+          </div>
           <nav className="flex flex-col gap-2">
             {navItems.map((item) => (
               <Link
