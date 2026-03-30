@@ -129,6 +129,12 @@ export function MarketList({ showSettled = false }: MarketListProps) {
   return (
     <div className="space-y-4">
       <div className="card">
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+          <p className="text-sm text-slate-300">Browse and refine the current market set</p>
+          <span className="pill border border-white/10 bg-white/6 text-slate-200">
+            {visibleMarkets.length} results
+          </span>
+        </div>
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_auto]">
           <div>
             <label className="mb-2 block text-sm text-slate-300">Search markets</label>
