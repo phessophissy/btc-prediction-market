@@ -292,6 +292,11 @@ export function MarketCard({ market }: MarketCardProps) {
 
         {!market.settled ? (
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            {!isConnected ? (
+              <div className="w-full rounded-[1.35rem] border border-white/10 bg-white/6 p-4 text-sm text-slate-300">
+                Connect a wallet to interact with this market.
+              </div>
+            ) : null}
             {CONTRACT_CAPABILITIES.settleMarkets && canSettle ? (
               <button
                 onClick={handleSettleMarket}
