@@ -16,6 +16,9 @@ export function ConnectionRequired({
       </div>
       <h2 className="mb-2 text-3xl">{title}</h2>
       <p className="mx-auto max-w-xl text-slate-300">{description}</p>
+      <p className="mt-4 text-sm text-slate-400">
+        Wallet actions stay local to your extension confirmation flow.
+      </p>
     </div>
   );
 }
