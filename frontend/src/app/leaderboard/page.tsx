@@ -42,6 +42,13 @@ export default function LeaderboardPage() {
       panelClass: "card mt-6",
     },
   ];
+  const totals = {
+    totalWinnings: leaderboard.reduce((sum, user) => sum + user.winnings, 0),
+    averageWinRate: Math.round(
+      leaderboard.reduce((sum, user) => sum + user.winRate, 0) / leaderboard.length
+    ),
+    totalBets: leaderboard.reduce((sum, user) => sum + user.bets, 0),
+  };
 
   return (
     <div className="mx-auto max-w-6xl space-y-6">
@@ -75,6 +82,23 @@ export default function LeaderboardPage() {
             </div>
           );
         })}
+      </section>
+
+      <section className="grid gap-4 md:grid-cols-3">
+        <div className="panel-soft">
+          <p className="text-sm text-slate-300">Tracked winnings</p>
+          <p className="mt-2 text-3xl font-semibold text-emerald-300">
+            {totals.totalWinnings.toLocaleString()} STX
+          </p>
+        </div>
+        <div className="panel-soft">
+          <p className="text-sm text-slate-300">Average hit rate</p>
+          <p className="mt-2 text-3xl font-semibold text-sky-300">{totals.averageWinRate}%</p>
+        </div>
+        <div className="panel-soft">
+          <p className="text-sm text-slate-300">Bets recorded</p>
+          <p className="mt-2 text-3xl font-semibold text-amber-300">{totals.totalBets}</p>
+        </div>
       </section>
 
       <section className="table-shell">
