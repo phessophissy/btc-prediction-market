@@ -201,6 +201,15 @@ export function MarketList({ showSettled = false }: MarketListProps) {
         </div>
       </div>
 
+      <div className="glass-strip flex flex-wrap items-center justify-between gap-3 text-sm text-slate-200">
+        <span>
+          {showSettled
+            ? "Settled archive mode surfaces completed market snapshots."
+            : "Live mode prioritizes open markets with the fastest settlement windows first."}
+        </span>
+        <span className="text-slate-400">Search, filter, and sort update instantly.</span>
+      </div>
+
       <div className="grid gap-6">
         {visibleMarkets.map((market) => (
         <MarketCard
