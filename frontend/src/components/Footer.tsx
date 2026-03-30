@@ -38,6 +38,10 @@ export function Footer() {
                 <Waves className="mr-2 inline h-4 w-4 text-sky-300" />
                 Liquidity-first market board
               </span>
+              <span className="glass-strip">
+                <ArrowUpRight className="mr-2 inline h-4 w-4 text-amber-300" />
+                BTC block settlement visibility
+              </span>
             </div>
           </div>
 
