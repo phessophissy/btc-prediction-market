@@ -13,6 +13,7 @@ export function LoadingCard({ lines = 3 }: LoadingCardProps) {
           <div key={index} className="h-5 rounded-full bg-white/8" />
         ))}
       </div>
+      <div className="mt-6 h-10 rounded-full bg-white/8" />
     </div>
   );
 }
