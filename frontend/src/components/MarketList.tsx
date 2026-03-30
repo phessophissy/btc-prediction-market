@@ -122,6 +122,10 @@ export function MarketList({ showSettled = false }: MarketListProps) {
     );
   }
 
+  const binaryCount = visibleMarkets.filter((market) => market.type === "binary").length;
+  const multiCount = visibleMarkets.length - binaryCount;
+  const totalVisiblePool = visibleMarkets.reduce((sum, market) => sum + market.totalPool, 0);
+
   return (
     <div className="space-y-4">
       <div className="card">
@@ -175,6 +179,25 @@ export function MarketList({ showSettled = false }: MarketListProps) {
               <option value="newest">Newest markets</option>
             </select>
           </div>
+        </div>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-3">
+        <div className="panel-soft">
+          <p className="text-sm text-slate-300">Visible markets</p>
+          <p className="mt-2 text-3xl font-semibold text-white">{visibleMarkets.length}</p>
+        </div>
+        <div className="panel-soft">
+          <p className="text-sm text-slate-300">Binary vs multi</p>
+          <p className="mt-2 text-3xl font-semibold text-sky-300">
+            {binaryCount} / <span className="text-rose-300">{multiCount}</span>
+          </p>
+        </div>
+        <div className="panel-soft">
+          <p className="text-sm text-slate-300">Visible liquidity</p>
+          <p className="mt-2 text-3xl font-semibold text-emerald-300">
+            {(totalVisiblePool / 1_000_000).toFixed(2)} STX
+          </p>
         </div>
       </div>
 
