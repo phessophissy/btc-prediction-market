@@ -101,6 +101,11 @@ export default function LeaderboardPage() {
         </div>
       </section>
 
+      <div className="glass-strip flex flex-wrap items-center justify-between gap-3 text-sm text-slate-200">
+        <span>Podium cards emphasize the best overall performance while the table below keeps the full field visible.</span>
+        <span className="text-slate-400">Win-rate badges update per row threshold.</span>
+      </div>
+
       <section className="table-shell">
         <div className="border-b border-white/10 px-6 py-5">
           <h2 className="text-3xl">Top predictors</h2>
