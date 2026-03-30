@@ -125,9 +125,17 @@ export default function LeaderboardPage() {
                     : user.winRate >= 50
                       ? "status-warning"
                       : "status-negative";
+                const rowClass =
+                  user.rank === 1
+                    ? "bg-amber-300/8"
+                    : user.rank === 2
+                      ? "bg-sky-300/6"
+                      : user.rank === 3
+                        ? "bg-rose-300/6"
+                        : "";
 
                 return (
-                  <tr key={user.rank} className="transition hover:bg-white/6">
+                  <tr key={user.rank} className={`transition hover:bg-white/6 ${rowClass}`}>
                     <td className="px-6 py-5 text-white">{user.rank}</td>
                     <td className="px-6 py-5 font-mono text-sm text-slate-200">
                       {formatAddress(user.address)}
