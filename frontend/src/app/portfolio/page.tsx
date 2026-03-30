@@ -229,6 +229,7 @@ export default function PortfolioPage() {
       </div>
 
       <div className="card">
+        <p className="mb-3 text-sm text-slate-300">Filter positions by result state</p>
         <div className="flex flex-wrap gap-2">
           {[
             "all",
