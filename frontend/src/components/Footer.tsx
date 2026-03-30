@@ -50,6 +50,11 @@ export function Footer() {
             ))}
           </div>
         </div>
+
+        <div className="relative mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-5 text-sm text-slate-400">
+          <span>BTC Predict Studio</span>
+          <span>Colorful interface refresh for Bitcoin-settled markets.</span>
+        </div>
       </div>
     </footer>
   );
