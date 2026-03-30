@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Search } from "lucide-react";
 import { MarketCard } from "./MarketCard";
 import { EmptyState } from "./EmptyState";
 import { LoadingCard } from "./LoadingCard";
@@ -14,6 +15,7 @@ export function MarketList({ showSettled = false }: MarketListProps) {
   const [markets, setMarkets] = useState<Market[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     async function loadMarkets() {
@@ -72,9 +74,56 @@ export function MarketList({ showSettled = false }: MarketListProps) {
     );
   }
 
+  const visibleMarkets = markets.filter((market) => {
+    const normalizedQuery = query.trim().toLowerCase();
+    if (!normalizedQuery) return true;
+
+    return [market.title, market.description]
+      .join(" ")
+      .toLowerCase()
+      .includes(normalizedQuery);
+  });
+
+  if (visibleMarkets.length === 0) {
+    return (
+      <div className="space-y-4">
+        <div className="card">
+          <label className="mb-2 block text-sm text-slate-300">Search markets</label>
+          <div className="relative">
+            <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+            <input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              className="input pl-11"
+              placeholder="Search by market question or description"
+            />
+          </div>
+        </div>
+        <EmptyState
+          title="No markets match this search"
+          description="Try a broader keyword to bring more Bitcoin market cards back into view."
+        />
+      </div>
+    );
+  }
+
   return (
-    <div className="grid gap-6">
-      {markets.map((market) => (
+    <div className="space-y-4">
+      <div className="card">
+        <label className="mb-2 block text-sm text-slate-300">Search markets</label>
+        <div className="relative">
+          <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+          <input
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            className="input pl-11"
+            placeholder="Search by market question or description"
+          />
+        </div>
+      </div>
+
+      <div className="grid gap-6">
+        {visibleMarkets.map((market) => (
         <MarketCard
           key={market.id}
           market={{
@@ -92,7 +141,8 @@ export function MarketList({ showSettled = false }: MarketListProps) {
             type: market.type,
           }}
         />
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
