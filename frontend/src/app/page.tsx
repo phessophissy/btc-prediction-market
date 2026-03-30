@@ -28,6 +28,11 @@ export default function Home() {
       icon: CircleDollarSign,
     },
   ];
+  const heroStats = [
+    { label: "Studio mode", value: "Color-led" },
+    { label: "Market lens", value: "Search + sort" },
+    { label: "Resolution", value: "BTC block anchored" },
+  ];
 
   return (
     <div className="space-y-8">
@@ -67,14 +72,28 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-            {highlights.map((item) => (
-              <div key={item.title} className="panel-soft">
-                <item.icon className="mb-4 h-8 w-8 text-amber-300" />
-                <h2 className="mb-2 text-2xl">{item.title}</h2>
-                <p className="text-sm text-slate-300">{item.description}</p>
+          <div className="space-y-4">
+            <div className="panel-highlight">
+              <p className="text-sm uppercase tracking-[0.18em] text-slate-300">Why it feels better</p>
+              <div className="mt-4 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                {heroStats.map((stat) => (
+                  <div key={stat.label} className="rounded-[1.25rem] border border-white/10 bg-white/6 p-4">
+                    <p className="text-xs uppercase tracking-[0.18em] text-slate-400">{stat.label}</p>
+                    <p className="mt-2 text-2xl font-semibold text-white">{stat.value}</p>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+              {highlights.map((item) => (
+                <div key={item.title} className="panel-soft">
+                  <item.icon className="mb-4 h-8 w-8 text-amber-300" />
+                  <h2 className="mb-2 text-2xl">{item.title}</h2>
+                  <p className="text-sm text-slate-300">{item.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
