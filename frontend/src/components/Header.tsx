@@ -70,7 +70,7 @@ export function Header() {
             </div>
           </div>
           {isConnected ? (
-            <div className="flex items-center gap-3 rounded-full border border-white/10 bg-white/6 p-1.5 pl-4">
+            <div className="flex items-center gap-3 rounded-full border border-sky-300/15 bg-white/6 p-1.5 pl-4 shadow-lg shadow-slate-950/10">
               <span className="text-sm text-slate-300">
                 {formatAddress(stxAddress || "")}
               </span>
