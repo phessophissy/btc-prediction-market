@@ -5,9 +5,10 @@ The current UI uses a colorful dark theme defined in `frontend/src/app/globals.c
 ## Design choices
 
 - Fraunces for headings
-- Space Grotesk for body copy
-- layered gradients and glow effects
-- shared component classes such as `.card`, `.hero-panel`, and `.btn-primary`
+- Manrope for body copy
+- layered gradients, animated orbs, and glass strips
+- shared component classes such as `.card`, `.hero-panel`, `.panel-highlight`, and `.btn-primary`
+- bright accent tokens for sky, mint, coral, rose, violet, and gold
 
 ## Maintenance note
 
