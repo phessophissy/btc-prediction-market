@@ -16,6 +16,12 @@ import { BetModal } from "./BetModal";
 import { isMarketSettleable } from "@/lib/contractService";
 import { CONTRACT_ADDRESS, CONTRACT_CAPABILITIES, CONTRACT_NAME } from "@/lib/constants";
 import { formatBlocksToEta, formatMicroStx } from "@/lib/format";
+import {
+  getMarketLeadOutcome,
+  getMarketLiquidityLabel,
+  getMarketMomentumLabel,
+  getMarketUrgencyLabel,
+} from "@/lib/marketPresentation";
 import { openContractCall } from "@stacks/connect";
 import { PostConditionMode, uintCV } from "@stacks/transactions";
 
@@ -47,6 +53,23 @@ export function MarketCard({ market }: MarketCardProps) {
   const [settling, setSettling] = useState(false);
 
   const blocksRemaining = market.settlementHeight - market.currentBurnHeight;
+  const liquidityLabel = getMarketLiquidityLabel(market.totalPool);
+  const urgencyLabel = getMarketUrgencyLabel(blocksRemaining);
+  const momentumLabel = getMarketMomentumLabel({
+    totalPool: market.totalPool,
+    outcomeAPool: market.outcomeAPoll,
+    outcomeBPool: market.outcomeBPool,
+    outcomeCPool: market.outcomeCPool || 0,
+    outcomeDPool: market.outcomeDPool || 0,
+    type: market.type,
+  });
+  const leadOutcome = getMarketLeadOutcome({
+    outcomeAPool: market.outcomeAPoll,
+    outcomeBPool: market.outcomeBPool,
+    outcomeCPool: market.outcomeCPool || 0,
+    outcomeDPool: market.outcomeDPool || 0,
+    type: market.type,
+  });
 
   useEffect(() => {
     async function checkSettleable() {
