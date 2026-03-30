@@ -100,6 +100,11 @@ export default function Home() {
 
       <StatsOverview />
 
+      <div className="glass-strip flex flex-wrap items-center justify-between gap-3 text-sm text-slate-200">
+        <span>The redesigned studio keeps the app bold without losing the market data hierarchy.</span>
+        <span className="text-slate-400">Focused on readability, speed, and confidence.</span>
+      </div>
+
       <section className="dashboard-grid">
         <div className="card">
           <span className="eyebrow mb-4">Workflow</span>
