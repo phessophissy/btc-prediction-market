@@ -12,7 +12,13 @@ export default function MarketsPage() {
         title="All markets"
         description="Browse every Bitcoin-anchored prediction market with brighter pool signals, cleaner cards, and a more readable odds board."
         compact
-      />
+      >
+        <div className="flex flex-wrap gap-3">
+          <span className="glass-strip text-sm text-slate-200">Search by question</span>
+          <span className="glass-strip text-sm text-slate-200">Filter by market type</span>
+          <span className="glass-strip text-sm text-slate-200">Sort by settlement or liquidity</span>
+        </div>
+      </PageHero>
 
       <StatsOverview />
       <MarketList />
