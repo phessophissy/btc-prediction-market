@@ -117,6 +117,7 @@ export default function Home() {
               "Use search and type filters to cut directly to the active market set you care about.",
               "Spot leading outcomes and liquidity concentration without opening each market in detail.",
               "Move from discovery into creation, portfolio review, or leaderboard context without losing the visual thread.",
+              "Lean on brighter chips, strips, and badges that separate action states from passive information.",
             ].map((item) => (
               <div key={item} className="panel-soft text-sm text-slate-200">
                 {item}
