@@ -189,6 +189,10 @@ export function MarketCard({ market }: MarketCardProps) {
                 </span>
               ) : null}
             </div>
+            <div className="glass-strip inline-flex text-sm text-slate-200">
+              <TrendingUp className="h-4 w-4 text-amber-300" />
+              {momentumLabel}
+            </div>
             <div>
               <h3 className="mb-2 text-3xl">{market.title}</h3>
               <p className="max-w-3xl text-sm text-slate-300">{market.description}</p>
