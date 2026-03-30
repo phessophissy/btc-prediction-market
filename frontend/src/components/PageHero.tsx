@@ -17,10 +17,16 @@ export function PageHero({
 }: PageHeroProps) {
   return (
     <section className={`hero-panel ${compact ? "py-8" : ""}`}>
-      {eyebrow ? <span className="eyebrow mb-4">{eyebrow}</span> : null}
-      <h1 className="mb-3 text-5xl">{title}</h1>
-      <p className="max-w-2xl text-slate-300">{description}</p>
-      {children ? <div className="mt-6">{children}</div> : null}
+      <div className="spotlight-orb -right-10 top-0 h-32 w-32 bg-amber-300/10" />
+      <div className="spotlight-orb bottom-0 left-0 h-28 w-28 bg-sky-300/10" />
+      <div className="relative space-y-4">
+        {eyebrow ? <span className="eyebrow">{eyebrow}</span> : null}
+        <div className="space-y-3">
+          <h1 className="text-5xl">{title}</h1>
+          <p className="max-w-2xl text-slate-300">{description}</p>
+        </div>
+        {children ? <div className="pt-2">{children}</div> : null}
+      </div>
     </section>
   );
 }
