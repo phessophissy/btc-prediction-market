@@ -11,7 +11,7 @@ describe("sdk V3 surface", () => {
   it("keeps the V3 contract as the default target", () => {
     const service = new MarketContractService("SP123", true);
 
-    expect((service as any).contractName).toBe("btc-prediction-market-v3");
+    expect((service as any).contractName).toBe("btc-prediction-market-v5");
   });
 
   it("does not expose stale betting helpers on the V3 service", () => {

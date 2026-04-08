@@ -10,7 +10,7 @@
 
 - `contracts/btc-prediction-market.clar`: original contract
 - `contracts/btc-prediction-market-v2.clar`: intermediate version
-- `contracts/btc-prediction-market-v3.clar`: current deployed version targeted by the frontend
+- `contracts/btc-prediction-market-v5.clar`: current deployed version targeted by the frontend
 
 ## Frontend
 
