@@ -10,6 +10,7 @@
     "clarinet:test": "clarinet test",
     "clarinet:console": "clarinet console",
     "generate:wallets": "npx ts-node scripts/generate-test-wallets.ts",
+    "fund:wallets": "npx ts-node --compiler-options '{\"module\":\"CommonJS\"}' scripts/fund-wallets.ts",
     "mainnet:interact": "npx ts-node --compiler-options '{\"module\":\"CommonJS\"}' scripts/mainnet-interactions.ts",
     "mainnet:status": "npx ts-node --compiler-options '{\"module\":\"CommonJS\"}' -e \"require('./scripts/mainnet-interactions').getMarketCount().then(console.log)\""
   },
@@ -26,6 +27,7 @@
     "@stacks/common": "^7.3.1",
     "@stacks/encryption": "^7.3.1",
     "@stacks/network": "^6.13.0",
-    "@stacks/wallet-sdk": "^7.2.0"
+    "@stacks/wallet-sdk": "^7.2.0",
+    "dotenv": "^17.4.1"
   }
 }
