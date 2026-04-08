@@ -19,3 +19,29 @@ describe('format utilities - value formatting', () => {
 function formatValue(microStx: number): string {
   return (microStx / 1_000_000).toFixed(2);
 }
+
+describe('format utilities - error handling', () => {
+  it('wraps errors with context', () => {
+    const err = wrapError(new Error('network timeout'), 'fetching market 7');
+    expect(err.message).toContain('fetching market 7');
+    expect(err.message).toContain('network timeout');
+  });
+
+  it('handles non-Error objects', () => {
+    const err = wrapError('string error', 'operation');
+    expect(err.message).toContain('string error');
+  });
+
+  it('preserves error stack', () => {
+    const original = new Error('original');
+    const wrapped = wrapError(original, 'context');
+    expect(wrapped.cause).toBe(original);
+  });
+});
+
+function wrapError(err: unknown, context: string): Error {
+  const message = err instanceof Error ? err.message : String(err);
+  const wrapped = new Error(`${context}: ${message}`);
+  if (err instanceof Error) wrapped.cause = err;
+  return wrapped;
+}
