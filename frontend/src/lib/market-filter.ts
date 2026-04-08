@@ -152,3 +152,21 @@ export class MarketFilteringHandler {
     }
     throw lastError!;
   }
+
+  private metrics: Array<{ operation: string; durationMs: number; timestamp: number }> = [];
+
+  recordMetric(operation: string, durationMs: number): void {
+    this.metrics.push({ operation, durationMs, timestamp: Date.now() });
+    if (this.metrics.length > 1000) {
+      this.metrics = this.metrics.slice(-500);
+    }
+  }
+
+  getAverageDuration(operation?: string): number {
+    const filtered = operation
+      ? this.metrics.filter(m => m.operation === operation)
+      : this.metrics;
+    if (filtered.length === 0) return 0;
+    const total = filtered.reduce((sum, m) => sum + m.durationMs, 0);
+    return total / filtered.length;
+  }
