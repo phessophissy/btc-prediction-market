@@ -78,3 +78,19 @@ export class AnalyticsCollectorHandler {
   private emit(event: string, data: unknown): void {
     for (const l of this.listeners) { try { l(event, data); } catch {} }
   }
+
+  async withRetry<T>(fn: () => Promise<T>, maxAttempts = this.config.maxRetries): Promise<T> {
+    let last: Error | undefined;
+    for (let i = 1; i <= maxAttempts; i++) {
+      try {
+        const r = await fn();
+        this.emit('retry:ok', { attempt: i });
+        return r;
+      } catch (e) {
+        last = e instanceof Error ? e : new Error(String(e));
+        this.emit('retry:fail', { attempt: i, error: last.message });
+        if (i < maxAttempts) await new Promise(r => setTimeout(r, 1000 * Math.pow(2, i - 1)));
+      }
+    }
+    throw last!;
+  }
