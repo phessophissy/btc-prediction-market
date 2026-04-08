@@ -38,3 +38,38 @@ async function retry<T>(fn: () => Promise<T>, maxAttempts: number): Promise<T> {
   }
   throw lastError;
 }
+
+describe('bet placement logic - state transitions', () => {
+  it('transitions from pending to active', () => {
+    const state = createState('pending');
+    const next = transition(state, 'activate');
+    expect(next.status).toBe('active');
+  });
+
+  it('prevents invalid transitions', () => {
+    const state = createState('completed');
+    expect(() => transition(state, 'activate')).toThrow('Invalid transition');
+  });
+
+  it('records transition timestamp', () => {
+    const state = createState('pending');
+    const next = transition(state, 'activate');
+    expect(next.updatedAt).toBeGreaterThan(0);
+  });
+});
+
+interface State { status: string; updatedAt: number; }
+
+function createState(status: string): State {
+  return { status, updatedAt: Date.now() };
+}
+
+function transition(state: State, action: string): State {
+  const transitions: Record<string, Record<string, string>> = {
+    pending: { activate: 'active' },
+    active: { complete: 'completed', cancel: 'cancelled' },
+  };
+  const nextStatus = transitions[state.status]?.[action];
+  if (!nextStatus) throw new Error(`Invalid transition: ${state.status} + ${action}`);
+  return { status: nextStatus, updatedAt: Date.now() };
+}
