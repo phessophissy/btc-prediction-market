@@ -28,3 +28,51 @@ describe('bet placement logic - serialization', () => {
     expect(parsed.winner).toBeNull();
   });
 });
+
+describe('bet placement logic - data pipeline', () => {
+  it('transforms raw contract response to typed market', () => {
+    const raw = {
+      'market-id': { value: '4' },
+      'title': { value: 'Test Market 4' },
+      'total-pool': { value: '50000' },
+      'settled': { value: false },
+    };
+    const market = transformRaw(raw);
+    expect(market.id).toBe(4);
+    expect(market.totalPool).toBe(50000);
+    expect(market.settled).toBe(false);
+  });
+
+  it('handles missing optional fields', () => {
+    const raw = {
+      'market-id': { value: '4' },
+      'title': { value: 'Minimal' },
+      'total-pool': { value: '0' },
+      'settled': { value: false },
+    };
+    const market = transformRaw(raw);
+    expect(market.winningOutcome).toBeNull();
+  });
+});
+
+interface RawMarket {
+  [key: string]: { value: string | boolean | null } | undefined;
+}
+
+interface TransformedMarket {
+  id: number;
+  title: string;
+  totalPool: number;
+  settled: boolean;
+  winningOutcome: number | null;
+}
+
+function transformRaw(raw: RawMarket): TransformedMarket {
+  return {
+    id: Number(raw['market-id']?.value ?? 0),
+    title: String(raw['title']?.value ?? ''),
+    totalPool: Number(raw['total-pool']?.value ?? 0),
+    settled: Boolean(raw['settled']?.value),
+    winningOutcome: raw['winning-outcome']?.value ? Number(raw['winning-outcome'].value) : null,
+  };
+}
