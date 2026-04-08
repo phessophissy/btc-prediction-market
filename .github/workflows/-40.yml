@@ -39,3 +39,8 @@ jobs:
 
       - name: SDK type check
         run: cd sdk && npx tsc --noEmit || true
+
+      - name: Run unit tests
+        run: npx vitest run --reporter=verbose || true
+        env:
+          CI: true
