@@ -107,3 +107,19 @@ export class QueryBuilderHandler {
     if (f.length === 0) return 0;
     return f.reduce((s, m) => s + m.ms, 0) / f.length;
   }
+
+  reset(): void {
+    this.processedCount = 0;
+    this.errorCount = 0;
+    this.cache.clear();
+    this.metrics = [];
+    this.listeners = [];
+  }
+
+  getConfig(): Readonly<QueryBuilderConfig> { return Object.freeze({ ...this.config }); }
+  updateConfig(u: Partial<QueryBuilderConfig>): void { this.config = { ...this.config, ...u }; this.emit('config:updated', u); }
+}
+
+export function createQueryBuilder(config?: Partial<QueryBuilderConfig>): QueryBuilderHandler {
+  return new QueryBuilderHandler({ ...DEFAULT_CONFIG, ...config });
+}
