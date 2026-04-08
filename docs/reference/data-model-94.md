@@ -35,3 +35,10 @@ console.log(status.phase);
 | u1012 | Not ready to settle | Wait for block maturation |
 
 Recovery: exponential backoff (2s, 4s, 8s), max 3 retries.
+
+## Security Considerations
+- Input validation before all contract calls
+- STX amount bounds checking
+- Post-conditions enforce exact transfer amounts
+- On-chain burn block hashes for settlement randomness
+- Emergency mode for stuck funds recovery
