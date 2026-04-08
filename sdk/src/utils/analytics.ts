@@ -13,3 +13,19 @@ export interface AnalyticsCollectorConfig {
 export const DEFAULT_CONFIG: AnalyticsCollectorConfig = { enabled: true, threshold: 116, maxRetries: 3, timeoutMs: 5000 };
 
 export type AnalyticsCollectorResult<T> = { success: boolean; data?: T; error?: string; timestamp: number };
+
+export class AnalyticsCollectorHandler {
+  private config: AnalyticsCollectorConfig;
+  private processedCount = 0;
+  private errorCount = 0;
+
+  constructor(config: AnalyticsCollectorConfig = DEFAULT_CONFIG) {
+    this.config = { ...config };
+  }
+
+  getStats() {
+    const total = this.processedCount + this.errorCount;
+    return { processed: this.processedCount, errors: this.errorCount, ratio: total > 0 ? this.processedCount / total : 0 };
+  }
+
+  isHealthy(): boolean { return this.getStats().ratio >= 0.95; }
