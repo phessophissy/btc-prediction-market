@@ -51,3 +51,26 @@ export class MarketFilteringHandler {
     const stats = this.getStats();
     return stats.ratio >= 0.95;
   }
+
+  async process<T>(input: T): Promise<MarketFilteringResult<T>> {
+    if (!this.config.enabled) {
+      return { success: false, error: 'market-filtering is disabled', timestamp: Date.now() };
+    }
+
+    try {
+      this.processedCount++;
+      return { success: true, data: input, timestamp: Date.now() };
+    } catch (err) {
+      this.errorCount++;
+      const message = err instanceof Error ? err.message : String(err);
+      return { success: false, error: message, timestamp: Date.now() };
+    }
+  }
+
+  async processBatch<T>(inputs: T[]): Promise<MarketFilteringResult<T>[]> {
+    const results: MarketFilteringResult<T>[] = [];
+    for (const input of inputs) {
+      results.push(await this.process(input));
+    }
+    return results;
+  }
