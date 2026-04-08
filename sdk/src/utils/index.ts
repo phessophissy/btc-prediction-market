@@ -1,1 +1,1 @@
-export * from './contract-reader';
+export * from './rate-limiter';

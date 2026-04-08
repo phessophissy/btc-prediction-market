@@ -18,7 +18,7 @@ export async function inspectMarket(options: InspectOptions): Promise<void> {
   console.log(`Inspecting market #${marketId} on ${network}...`);
 
   try {
-    const url = `${apiBase}/v2/contracts/call-read/SP2KYZRNME33Y39GP3RKC90DQJ45EF1N0NZNVRE09/btc-prediction-market-v3/get-market`;
+    const url = `${apiBase}/v2/contracts/call-read/SP2KYZRNME33Y39GP3RKC90DQJ45EF1N0NZNVRE09/btc-prediction-market-v5/get-market`;
 
     if (verbose) {
       console.log(`API endpoint: ${url}`);
