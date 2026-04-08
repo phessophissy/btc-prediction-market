@@ -11,3 +11,11 @@ export function formatRelativeTime(blocksRemaining: number): string {
   const h = Math.floor((minutes % 1440) / 60);
   return h > 0 ? `${d}d ${h}h` : `${d}d`;
 }
+
+export function formatBlockHeight(height: number): string {
+  return `#${height.toLocaleString()}`;
+}
+
+export function formatBlockRange(start: number, end: number): string {
+  return `${formatBlockHeight(start)} → ${formatBlockHeight(end)}`;
+}
