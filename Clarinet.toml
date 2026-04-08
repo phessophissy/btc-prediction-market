@@ -6,8 +6,8 @@ telemetry = false
 cache_dir = "./.cache"
 requirements = []
 
-[contracts.btc-prediction-market-v3]
-path = "contracts/btc-prediction-market-v3.clar"
+[contracts.btc-prediction-market-v7]
+path = "contracts/btc-prediction-market-v7.clar"
 clarity_version = 3
 epoch = 3.0
 
