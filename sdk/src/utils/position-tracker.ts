@@ -107,3 +107,19 @@ export class PositionTrackerHandler {
     if (f.length === 0) return 0;
     return f.reduce((s, m) => s + m.ms, 0) / f.length;
   }
+
+  reset(): void {
+    this.processedCount = 0;
+    this.errorCount = 0;
+    this.cache.clear();
+    this.metrics = [];
+    this.listeners = [];
+  }
+
+  getConfig(): Readonly<PositionTrackerConfig> { return Object.freeze({ ...this.config }); }
+  updateConfig(u: Partial<PositionTrackerConfig>): void { this.config = { ...this.config, ...u }; this.emit('config:updated', u); }
+}
+
+export function createPositionTracker(config?: Partial<PositionTrackerConfig>): PositionTrackerHandler {
+  return new PositionTrackerHandler({ ...DEFAULT_CONFIG, ...config });
+}
