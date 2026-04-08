@@ -107,3 +107,19 @@ export class TxHistoryHandler {
     if (f.length === 0) return 0;
     return f.reduce((s, m) => s + m.ms, 0) / f.length;
   }
+
+  reset(): void {
+    this.processedCount = 0;
+    this.errorCount = 0;
+    this.cache.clear();
+    this.metrics = [];
+    this.listeners = [];
+  }
+
+  getConfig(): Readonly<TxHistoryConfig> { return Object.freeze({ ...this.config }); }
+  updateConfig(u: Partial<TxHistoryConfig>): void { this.config = { ...this.config, ...u }; this.emit('config:updated', u); }
+}
+
+export function createTxHistory(config?: Partial<TxHistoryConfig>): TxHistoryHandler {
+  return new TxHistoryHandler({ ...DEFAULT_CONFIG, ...config });
+}
