@@ -27,3 +27,35 @@ function validateInput(input: any): { valid: boolean; error?: string } {
   }
   return { valid: true };
 }
+
+describe('error handling paths - boundary conditions', () => {
+  it('handles maximum length strings', () => {
+    const longStr = 'x'.repeat(256);
+    const result = validateBounds(longStr);
+    expect(result.valid).toBe(false);
+  });
+
+  it('handles minimum valid input', () => {
+    const result = validateBounds('a');
+    expect(result.valid).toBe(true);
+  });
+
+  it('handles exactly max length', () => {
+    const exact = 'y'.repeat(128);
+    const result = validateBounds(exact);
+    expect(result.valid).toBe(true);
+  });
+
+  it('trims whitespace before validation', () => {
+    const result = validateBounds('  valid  ');
+    expect(result.valid).toBe(true);
+    expect(result.value).toBe('valid');
+  });
+});
+
+function validateBounds(input: string): { valid: boolean; value?: string; error?: string } {
+  const trimmed = input.trim();
+  if (trimmed.length === 0) return { valid: false, error: 'Cannot be empty' };
+  if (trimmed.length > 128) return { valid: false, error: 'Exceeds max length of 128' };
+  return { valid: true, value: trimmed };
+}
