@@ -170,3 +170,22 @@ export class BetHistoryHandler {
     const total = filtered.reduce((sum, m) => sum + m.durationMs, 0);
     return total / filtered.length;
   }
+
+  reset(): void {
+    this.processedCount = 0;
+    this.errorCount = 0;
+    this.cache.clear();
+    this.metrics = [];
+    this.listeners = [];
+    this.emit('reset', { timestamp: Date.now() });
+  }
+
+  getConfig(): Readonly<BetHistoryConfig> {
+    return Object.freeze({ ...this.config });
+  }
+
+  updateConfig(updates: Partial<BetHistoryConfig>): void {
+    this.config = { ...this.config, ...updates };
+    this.emit('config:updated', updates);
+  }
+}
