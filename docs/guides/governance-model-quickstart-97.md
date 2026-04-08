@@ -30,3 +30,9 @@ npm run dev
 2. Trigger settlement
 3. Click Claim on winning positions
 4. Net payout = gross - 3% fee
+
+## Troubleshooting
+- **Pending tx:** Check Stacks Explorer, verify nonce
+- **Rate limiting:** SDK auto-retries with backoff
+- **Failed settlement:** Ensure burn height >= settlement + 6
+- **Failed claim (V4 bug):** Use emergency mode
