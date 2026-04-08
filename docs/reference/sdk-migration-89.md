@@ -25,3 +25,13 @@ Returns the current sdk migration status for a specific market.
 const status = await getsdk migrationStatus(1);
 console.log(status.phase);
 ```
+
+## Error Handling
+| Code | Description | Resolution |
+|------|-------------|------------|
+| u1001 | Market not found | Verify market ID |
+| u1002 | Market closed | Cannot bet on closed markets |
+| u1007 | Bet too small | Min 0.01 STX |
+| u1012 | Not ready to settle | Wait for block maturation |
+
+Recovery: exponential backoff (2s, 4s, 8s), max 3 retries.
