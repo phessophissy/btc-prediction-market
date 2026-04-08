@@ -13,3 +13,15 @@ The token economics module interacts with the smart contract layer (Clarity), SD
 | `threshold` | number | `96` | Trigger threshold |
 | `timeout` | number | `5000` | Timeout in ms |
 | `retries` | number | `3` | Max retry attempts |
+
+## API Reference
+### `gettoken economicsStatus(marketId: number)`
+Returns the current token economics status for a specific market.
+
+**Parameters:** `marketId` (number) - The on-chain market identifier
+**Returns:** `Promise<Status>`
+
+```typescript
+const status = await gettoken economicsStatus(1);
+console.log(status.phase);
+```
