@@ -22,3 +22,13 @@ export function formatStxCompact(microStx: number): string {
   if (stx >= 1_000) return `${(stx / 1_000).toFixed(1)}K STX`;
   return `${stx.toFixed(2)} STX`;
 }
+
+export function formatPercentage(value: number, total: number): string {
+  if (total === 0) return '0%';
+  const pct = (value / total) * 100;
+  return `${pct.toFixed(1)}%`;
+}
+
+export function formatBasisPoints(bps: number): string {
+  return `${(bps / 100).toFixed(1)}%`;
+}
