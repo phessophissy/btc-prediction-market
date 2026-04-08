@@ -67,3 +67,14 @@ export class ReportingEngineHandler {
   }
 
   clearCache(): void { this.cache.clear(); }
+
+  private listeners: Array<(event: string, data: unknown) => void> = [];
+
+  on(cb: (event: string, data: unknown) => void): () => void {
+    this.listeners.push(cb);
+    return () => { this.listeners = this.listeners.filter(l => l !== cb); };
+  }
+
+  private emit(event: string, data: unknown): void {
+    for (const l of this.listeners) { try { l(event, data); } catch {} }
+  }
