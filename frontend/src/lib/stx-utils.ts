@@ -7,3 +7,18 @@ export function microStxToStx(microStx: number): number {
 export function stxToMicroStx(stx: number): number {
   return Math.round(stx * MICROSTX_PER_STX);
 }
+
+export function formatStx(microStx: number, decimals: number = 2): string {
+  const stx = microStxToStx(microStx);
+  return `${stx.toLocaleString(undefined, {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: decimals,
+  })} STX`;
+}
+
+export function formatStxCompact(microStx: number): string {
+  const stx = microStxToStx(microStx);
+  if (stx >= 1_000_000) return `${(stx / 1_000_000).toFixed(1)}M STX`;
+  if (stx >= 1_000) return `${(stx / 1_000).toFixed(1)}K STX`;
+  return `${stx.toFixed(2)} STX`;
+}
