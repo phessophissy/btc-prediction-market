@@ -2,7 +2,7 @@
 
 ## V3 constants
 
-From `contracts/btc-prediction-market-v3.clar`:
+From `contracts/btc-prediction-market-v5.clar`:
 
 - `MARKET-CREATION-FEE`: `u100000` = `0.1 STX`
 - `PLATFORM-FEE-PERCENT`: `u300` = `3%`

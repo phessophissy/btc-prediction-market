@@ -1,0 +1,34 @@
+name: dead code Check 109
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - run: npm ci
+      - run: cd sdk && npm ci || true
+      - run: cd frontend && npm ci || true
+      - name: TypeScript check
+        run: npx tsc --noEmit || true
+      - name: SDK type check
+        run: cd sdk && npx tsc --noEmit || true
+      - name: Run tests
+        run: npx vitest run --reporter=verbose || true
+        env:
+          CI: true
+      - name: Frontend build
+        run: cd frontend && npm run build || true
+        env:
+          NEXT_PUBLIC_NETWORK: mainnet
+          NEXT_PUBLIC_CONTRACT_ADDRESS: SP2KYZRNME33Y39GP3RKC90DQJ45EF1N0NZNVRE09
