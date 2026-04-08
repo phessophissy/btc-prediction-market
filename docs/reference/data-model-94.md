@@ -13,3 +13,15 @@ The data model module interacts with the smart contract layer (Clarity), SDK ser
 | `threshold` | number | `94` | Trigger threshold |
 | `timeout` | number | `5000` | Timeout in ms |
 | `retries` | number | `3` | Max retry attempts |
+
+## API Reference
+### `getdata modelStatus(marketId: number)`
+Returns the current data model status for a specific market.
+
+**Parameters:** `marketId` (number) - The on-chain market identifier
+**Returns:** `Promise<Status>`
+
+```typescript
+const status = await getdata modelStatus(1);
+console.log(status.phase);
+```
