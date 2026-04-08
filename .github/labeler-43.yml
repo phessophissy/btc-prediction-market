@@ -1,0 +1,23 @@
+contracts:
+  - changed-files:
+    - any-glob-to-any-file: 'contracts/**'
+
+frontend:
+  - changed-files:
+    - any-glob-to-any-file: 'frontend/**'
+
+sdk:
+  - changed-files:
+    - any-glob-to-any-file: 'sdk/**'
+
+documentation:
+  - changed-files:
+    - any-glob-to-any-file: 'docs/**'
+
+tests:
+  - changed-files:
+    - any-glob-to-any-file: 'tests/**'
+
+ci:
+  - changed-files:
+    - any-glob-to-any-file: '.github/**'

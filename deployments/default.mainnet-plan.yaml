@@ -9,10 +9,10 @@ plan:
     - id: 0
       transactions:
         - contract-publish:
-            contract-name: btc-prediction-market-v3
+            contract-name: btc-prediction-market-v5
             expected-sender: SP2KYZRNME33Y39GP3RKC90DQJ45EF1N0NZNVRE09
             cost: 734234
-            path: contracts/btc-prediction-market-v3.clar
+            path: contracts/btc-prediction-market-v5.clar
             anchor-block-only: true
             clarity-version: 3
       epoch: "3.0"

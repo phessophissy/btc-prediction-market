@@ -1,1 +1,1 @@
-export * from './batch-processor';
+export * from './rate-limiter';
