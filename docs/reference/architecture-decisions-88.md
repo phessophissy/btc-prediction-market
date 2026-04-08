@@ -13,3 +13,15 @@ The architecture decisions module interacts with the smart contract layer (Clari
 | `threshold` | number | `88` | Trigger threshold |
 | `timeout` | number | `5000` | Timeout in ms |
 | `retries` | number | `3` | Max retry attempts |
+
+## API Reference
+### `getarchitecture decisionsStatus(marketId: number)`
+Returns the current architecture decisions status for a specific market.
+
+**Parameters:** `marketId` (number) - The on-chain market identifier
+**Returns:** `Promise<Status>`
+
+```typescript
+const status = await getarchitecture decisionsStatus(1);
+console.log(status.phase);
+```
