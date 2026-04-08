@@ -7,7 +7,7 @@ describe("sdk defaults", () => {
   it("targets the V3 contract by default", () => {
     const service = new MarketContractService("SP123", true);
 
-    expect((service as any).contractName).toBe("btc-prediction-market-v3");
+    expect((service as any).contractName).toBe("btc-prediction-market-v5");
   });
 
   it("lets the factory override the contract name when needed", () => {

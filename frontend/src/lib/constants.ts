@@ -14,7 +14,7 @@ export const CONTRACT_ADDRESS =
   process.env.NEXT_PUBLIC_CONTRACT_ADDRESS ||
   "SP2KYZRNME33Y39GP3RKC90DQJ45EF1N0NZNVRE09";
 export const CONTRACT_NAME =
-  process.env.NEXT_PUBLIC_CONTRACT_NAME || "btc-prediction-market-v3";
+  process.env.NEXT_PUBLIC_CONTRACT_NAME || "btc-prediction-market-v5";
 export const TOKEN_CONTRACT_NAME = "prediction-token";
 export const TRAIT_CONTRACT_NAME = "sip-010-trait";
 
