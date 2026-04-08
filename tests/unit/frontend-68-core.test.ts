@@ -30,3 +30,18 @@ describe('loading states - boundary conditions', () => {
   it('trims whitespace', () => expect(validateBounds('  ok  ').value).toBe('ok'));
   it('rejects whitespace-only', () => expect(validateBounds('   ').valid).toBe(false));
 });
+
+function processAmount(amount: number): number {
+  if (!Number.isFinite(amount)) throw new Error('Invalid amount');
+  if (amount < 0) throw new Error('Must be positive');
+  return Math.round(amount);
+}
+
+describe('loading states - numeric processing', () => {
+  it('handles integers', () => expect(processAmount(100)).toBe(100));
+  it('rounds decimals', () => expect(processAmount(1.7)).toBe(2));
+  it('handles zero', () => expect(processAmount(0)).toBe(0));
+  it('rejects negative', () => expect(() => processAmount(-1)).toThrow('positive'));
+  it('rejects NaN', () => expect(() => processAmount(NaN)).toThrow('Invalid'));
+  it('rejects Infinity', () => expect(() => processAmount(Infinity)).toThrow('Invalid'));
+});
