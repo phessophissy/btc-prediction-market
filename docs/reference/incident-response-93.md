@@ -1,0 +1,7 @@
+# incident response Reference - Section 93
+
+## Overview
+Covers the incident response subsystem of the BTC Prediction Market platform.
+
+## Architecture
+The incident response module interacts with the smart contract layer (Clarity), SDK service abstraction, frontend components, and CLI tooling.
