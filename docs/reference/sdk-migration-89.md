@@ -13,3 +13,15 @@ The sdk migration module interacts with the smart contract layer (Clarity), SDK 
 | `threshold` | number | `89` | Trigger threshold |
 | `timeout` | number | `5000` | Timeout in ms |
 | `retries` | number | `3` | Max retry attempts |
+
+## API Reference
+### `getsdk migrationStatus(marketId: number)`
+Returns the current sdk migration status for a specific market.
+
+**Parameters:** `marketId` (number) - The on-chain market identifier
+**Returns:** `Promise<Status>`
+
+```typescript
+const status = await getsdk migrationStatus(1);
+console.log(status.phase);
+```
