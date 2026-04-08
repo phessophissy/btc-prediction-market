@@ -193,7 +193,7 @@ export class MarketContractService {
   constructor(
     contractAddress: string,
     isMainnet = false,
-    contractName = 'btc-prediction-market-v3'
+    contractName = 'btc-prediction-market-v5'
   ) {
     this.contractAddress = contractAddress;
     this.contractName = contractName;

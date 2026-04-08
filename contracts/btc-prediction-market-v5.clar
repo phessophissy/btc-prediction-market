@@ -1,5 +1,5 @@
-;; Bitcoin-Anchored Prediction Market V3 - Reduced Fees
-;; With ownership transfer and emergency migration support
+;; Bitcoin-Anchored Prediction Market V5 - Full Features
+;; With ownership transfer, betting, settlement, and claiming
 
 ;; Trait already deployed on mainnet
 ;; (use-trait sip-010-trait .sip-010-trait.sip-010-trait)
