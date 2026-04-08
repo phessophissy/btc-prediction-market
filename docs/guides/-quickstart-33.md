@@ -54,3 +54,20 @@ Click "Connect Wallet" and approve the connection in your Stacks wallet extensio
 2. Any user can trigger settlement
 3. Winners click "Claim" on their positions
 4. Net payout = gross payout - 3% platform fee
+
+## Troubleshooting
+
+### Transaction Pending Too Long
+
+Stacks transactions typically confirm within 10-30 minutes. If your transaction
+is pending for more than an hour:
+- Check the transaction on the Stacks Explorer
+- Verify your nonce is not blocked by a prior pending transaction
+- Consider using Replace-By-Fee if available
+
+### API Rate Limiting
+
+The Hiro API may rate-limit requests during high traffic:
+- The SDK includes automatic retry with exponential backoff
+- Maximum 3 retries with 2s, 4s, 8s delays
+- Consider using a dedicated API key for production use
