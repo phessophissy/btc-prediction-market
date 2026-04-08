@@ -31,3 +31,21 @@ export function getActiveOutcomes(possibleOutcomes: number): OutcomeLetter[] {
   if (possibleOutcomes & 8) outcomes.push('D');
   return outcomes;
 }
+
+const OUTCOME_COLORS: Record<OutcomeLetter, string> = {
+  A: '#22c55e',
+  B: '#ef4444',
+  C: '#3b82f6',
+  D: '#f59e0b',
+};
+
+export function getOutcomeColor(outcome: OutcomeLetter): string {
+  return OUTCOME_COLORS[outcome];
+}
+
+export function getOutcomeLabel(outcome: OutcomeLetter, marketType: string = 'binary'): string {
+  if (marketType === 'binary') {
+    return outcome === 'A' ? 'Yes' : 'No';
+  }
+  return `Outcome ${outcome}`;
+}
