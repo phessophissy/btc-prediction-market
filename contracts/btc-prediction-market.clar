@@ -427,8 +427,9 @@
 ;; Claim winnings from a settled market
 (define-public (claim-winnings (market-id uint))
   (let (
+    (claimant tx-sender)
     (market (unwrap! (map-get? markets market-id) ERR-MARKET-NOT-FOUND))
-    (position (unwrap! (map-get? user-positions { market-id: market-id, user: tx-sender }) ERR-NO-POSITION))
+    (position (unwrap! (map-get? user-positions { market-id: market-id, user: claimant }) ERR-NO-POSITION))
     (winning-outcome (unwrap! (get winning-outcome market) ERR-MARKET-NOT-SETTLED))
   )
     ;; Validate claim
@@ -453,16 +454,16 @@
       (asserts! (> user-winning-amount u0) ERR-NO-POSITION)
       
       ;; Mark as claimed
-      (map-set user-positions { market-id: market-id, user: tx-sender }
+      (map-set user-positions { market-id: market-id, user: claimant }
         (merge position { claimed: true }))
       
       ;; Transfer winnings (minus fee)
       (if (> net-payout u0)
         (begin
-          (try! (as-contract (stx-transfer? net-payout tx-sender tx-sender)))
+          (try! (as-contract (stx-transfer? net-payout tx-sender claimant)))
           (var-set total-fees-collected (+ (var-get total-fees-collected) platform-fee))
           ;; Update user stats
-          (update-user-winnings tx-sender net-payout)
+          (update-user-winnings claimant net-payout)
           (ok {
             market-id: market-id,
             gross-payout: gross-payout,
