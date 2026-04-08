@@ -2,7 +2,7 @@ deployment:
   id: 35
   network: mainnet
   contractAddress: SP2KYZRNME33Y39GP3RKC90DQJ45EF1N0NZNVRE09
-  contractName: btc-prediction-market-v3
+  contractName: btc-prediction-market-v5
   rpcEndpoint: https://api.mainnet.hiro.so
   explorerUrl: https://explorer.hiro.so
   settings:
