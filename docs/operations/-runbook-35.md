@@ -25,3 +25,17 @@ If claim-winnings fails (known V4 bug):
 1. Enable emergency mode: `emergency enable`
 2. Withdraw all funds: `emergency withdraw`
 3. Distribute winnings manually from owner wallet
+
+## Monitoring Checklist
+
+- [ ] Contract market count increasing as expected
+- [ ] Settlement transactions succeeding on-chain
+- [ ] Wallet balances sufficient for operations
+- [ ] API response times within acceptable range (< 2s)
+- [ ] No stuck pending transactions
+
+## Escalation Contacts
+
+- Contract Owner: Deployer wallet
+- Emergency Mode: Owner-only function
+- API Issues: Hiro support (https://hiro.so)
