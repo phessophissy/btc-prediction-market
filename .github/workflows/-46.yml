@@ -33,3 +33,9 @@ jobs:
 
       - name: Install frontend dependencies
         run: cd frontend && npm ci
+
+      - name: TypeScript compilation check
+        run: npx tsc --noEmit --project tsconfig.json || true
+
+      - name: SDK type check
+        run: cd sdk && npx tsc --noEmit || true
