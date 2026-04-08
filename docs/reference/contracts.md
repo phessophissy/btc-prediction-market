@@ -3,7 +3,7 @@
 Frontend defaults:
 
 - address: `SP2KYZRNME33Y39GP3RKC90DQJ45EF1N0NZNVRE09`
-- contract: `btc-prediction-market-v3`
+- contract: `btc-prediction-market-v5`
 
 Historical references:
 

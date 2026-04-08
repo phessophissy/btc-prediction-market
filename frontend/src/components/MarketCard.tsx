@@ -355,7 +355,7 @@ export function MarketCard({ market }: MarketCardProps) {
               </>
             ) : (
               <div className="w-full rounded-[1.35rem] border border-amber-300/20 bg-amber-300/10 p-4 text-sm text-amber-100">
-                The current `btc-prediction-market-v3` deployment supports market creation and
+                The current `btc-prediction-market-v5` deployment supports market creation and
                 read-only tracking. Betting and settlement actions stay disabled until the trading
                 entrypoints are redeployed.
               </div>
