@@ -112,3 +112,22 @@ export class BatchOperationsHandler {
   clearCache(): void {
     this.cache.clear();
   }
+
+  private listeners: Array<(event: string, data: unknown) => void> = [];
+
+  on(callback: (event: string, data: unknown) => void): () => void {
+    this.listeners.push(callback);
+    return () => {
+      this.listeners = this.listeners.filter(l => l !== callback);
+    };
+  }
+
+  private emit(event: string, data: unknown): void {
+    for (const listener of this.listeners) {
+      try {
+        listener(event, data);
+      } catch {
+        // listener errors should not break the handler
+      }
+    }
+  }
