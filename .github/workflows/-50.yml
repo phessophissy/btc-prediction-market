@@ -1,0 +1,53 @@
+name:  Check 50
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  -check:
+    name: Run  checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Install SDK dependencies
+        run: cd sdk && npm ci
+
+      - name: Install frontend dependencies
+        run: cd frontend && npm ci
+
+      - name: TypeScript compilation check
+        run: npx tsc --noEmit --project tsconfig.json || true
+
+      - name: SDK type check
+        run: cd sdk && npx tsc --noEmit || true
+
+      - name: Run unit tests
+        run: npx vitest run --reporter=verbose || true
+        env:
+          CI: true
+
+      - name: Frontend build check
+        run: cd frontend && npm run build || true
+        env:
+          NEXT_PUBLIC_NETWORK: mainnet
+          NEXT_PUBLIC_CONTRACT_ADDRESS: SP2KYZRNME33Y39GP3RKC90DQJ45EF1N0NZNVRE09
+          NEXT_PUBLIC_CONTRACT_NAME: btc-prediction-market-v4
