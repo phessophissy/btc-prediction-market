@@ -47,3 +47,15 @@ export function estimatedTimeToSettlement(market: Market, currentBurnHeight: num
   const hours = Math.floor((minutes % 1440) / 60);
   return `${days}d ${hours}h`;
 }
+
+export function getMarketPhaseLabel(phase: MarketPhase): string {
+  const labels: Record<MarketPhase, string> = {
+    'open': 'Open for Betting',
+    'closing-soon': 'Closing Soon',
+    'closed': 'Betting Closed',
+    'settleable': 'Ready to Settle',
+    'settled': 'Settled',
+    'claimable': 'Winnings Available',
+  };
+  return labels[phase];
+}
