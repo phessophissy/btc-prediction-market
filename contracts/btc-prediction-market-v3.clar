@@ -275,6 +275,245 @@
     (ok market-id))
 )
 
+;; Create a multi-outcome market (up to 4 outcomes)
+(define-public (create-multi-market
+    (title (string-utf8 256))
+    (description (string-utf8 1024))
+    (settlement-burn-height uint)
+    (enable-outcome-a bool)
+    (enable-outcome-b bool)
+    (enable-outcome-c bool)
+    (enable-outcome-d bool))
+  (let (
+    (market-id (var-get market-nonce))
+    (current-burn-height tenure-height)
+    (packed-outcomes (pack-outcomes enable-outcome-a enable-outcome-b enable-outcome-c enable-outcome-d))
+  )
+    (asserts! (not (var-get platform-paused)) ERR-NOT-AUTHORIZED)
+    (asserts! (> settlement-burn-height (+ current-burn-height BLOCKS-BEFORE-SETTLEMENT)) ERR-INVALID-MARKET-PARAMS)
+    (asserts! (>= (count-enabled-outcomes packed-outcomes) u2) ERR-INVALID-MARKET-PARAMS)
+    
+    (try! (stx-transfer? MARKET-CREATION-FEE tx-sender (var-get contract-owner)))
+    
+    (map-set markets market-id {
+      creator: tx-sender,
+      title: title,
+      description: description,
+      settlement-burn-height: settlement-burn-height,
+      settlement-type: "hash-range",
+      possible-outcomes: packed-outcomes,
+      total-pool: u0,
+      outcome-a-pool: u0,
+      outcome-b-pool: u0,
+      outcome-c-pool: u0,
+      outcome-d-pool: u0,
+      winning-outcome: none,
+      settled: false,
+      settled-at-burn-height: none,
+      settlement-block-hash: none,
+      created-at-burn-height: current-burn-height,
+      created-at-stacks-height: stacks-block-height
+    })
+    
+    (map-set market-participants market-id (list))
+    (var-set market-nonce (+ market-id u1))
+    (var-set total-fees-collected (+ (var-get total-fees-collected) MARKET-CREATION-FEE))
+    
+    (ok market-id))
+)
+
+;; =============================================
+;; BETTING FUNCTIONS
+;; =============================================
+
+(define-public (bet-outcome-a (market-id uint) (amount uint))
+  (place-bet-internal market-id amount OUTCOME-A)
+)
+
+(define-public (bet-outcome-b (market-id uint) (amount uint))
+  (place-bet-internal market-id amount OUTCOME-B)
+)
+
+(define-public (bet-outcome-c (market-id uint) (amount uint))
+  (place-bet-internal market-id amount OUTCOME-C)
+)
+
+(define-public (bet-outcome-d (market-id uint) (amount uint))
+  (place-bet-internal market-id amount OUTCOME-D)
+)
+
+(define-private (place-bet-internal (market-id uint) (amount uint) (outcome uint))
+  (let (
+    (market (unwrap! (map-get? markets market-id) ERR-MARKET-NOT-FOUND))
+    (current-burn-height tenure-height)
+    (current-position (default-to 
+      { outcome-a-amount: u0, outcome-b-amount: u0, outcome-c-amount: u0, outcome-d-amount: u0, total-invested: u0, claimed: false }
+      (map-get? user-positions { market-id: market-id, user: tx-sender })))
+  )
+    (asserts! (not (var-get platform-paused)) ERR-NOT-AUTHORIZED)
+    (asserts! (not (get settled market)) ERR-MARKET-CLOSED)
+    (asserts! (< current-burn-height (get settlement-burn-height market)) ERR-MARKET-CLOSED)
+    (asserts! (is-outcome-enabled (get possible-outcomes market) outcome) ERR-INVALID-OUTCOME)
+    (asserts! (>= amount MIN-BET-AMOUNT) ERR-BET-TOO-SMALL)
+    
+    (try! (stx-transfer? amount tx-sender (as-contract tx-sender)))
+    
+    (map-set markets market-id (merge market {
+      total-pool: (+ (get total-pool market) amount),
+      outcome-a-pool: (if (is-eq outcome OUTCOME-A) (+ (get outcome-a-pool market) amount) (get outcome-a-pool market)),
+      outcome-b-pool: (if (is-eq outcome OUTCOME-B) (+ (get outcome-b-pool market) amount) (get outcome-b-pool market)),
+      outcome-c-pool: (if (is-eq outcome OUTCOME-C) (+ (get outcome-c-pool market) amount) (get outcome-c-pool market)),
+      outcome-d-pool: (if (is-eq outcome OUTCOME-D) (+ (get outcome-d-pool market) amount) (get outcome-d-pool market))
+    }))
+    
+    (map-set user-positions { market-id: market-id, user: tx-sender } {
+      outcome-a-amount: (if (is-eq outcome OUTCOME-A) (+ (get outcome-a-amount current-position) amount) (get outcome-a-amount current-position)),
+      outcome-b-amount: (if (is-eq outcome OUTCOME-B) (+ (get outcome-b-amount current-position) amount) (get outcome-b-amount current-position)),
+      outcome-c-amount: (if (is-eq outcome OUTCOME-C) (+ (get outcome-c-amount current-position) amount) (get outcome-c-amount current-position)),
+      outcome-d-amount: (if (is-eq outcome OUTCOME-D) (+ (get outcome-d-amount current-position) amount) (get outcome-d-amount current-position)),
+      total-invested: (+ (get total-invested current-position) amount),
+      claimed: false
+    })
+    
+    (update-user-bets-placed tx-sender amount)
+    (add-participant market-id tx-sender)
+    
+    (ok { market-id: market-id, outcome: outcome, amount: amount }))
+)
+
+;; =============================================
+;; SETTLEMENT
+;; =============================================
+
+(define-public (settle-market (market-id uint))
+  (let (
+    (market (unwrap! (map-get? markets market-id) ERR-MARKET-NOT-FOUND))
+    (settlement-height (get settlement-burn-height market))
+    (current-burn-height tenure-height)
+    (block-hash (unwrap! (get-burn-block-info? header-hash settlement-height) ERR-BURN-BLOCK-NOT-AVAILABLE))
+    (num-outcomes (count-enabled-outcomes (get possible-outcomes market)))
+    (winning-outcome (if (is-eq (get settlement-type market) "hash-even-odd")
+                        (if (is-hash-even block-hash) OUTCOME-A OUTCOME-B)
+                        (determine-outcome-from-hash block-hash num-outcomes)))
+  )
+    (asserts! (not (get settled market)) ERR-MARKET-ALREADY-SETTLED)
+    (asserts! (>= current-burn-height (+ settlement-height BLOCKS-BEFORE-SETTLEMENT)) ERR-MARKET-NOT-READY-TO-SETTLE)
+    
+    (map-set markets market-id (merge market {
+      settled: true,
+      winning-outcome: (some winning-outcome),
+      settled-at-burn-height: (some current-burn-height),
+      settlement-block-hash: (some block-hash)
+    }))
+    
+    (ok { 
+      market-id: market-id, 
+      winning-outcome: winning-outcome,
+      block-hash: block-hash,
+      settlement-height: settlement-height
+    }))
+)
+
+;; =============================================
+;; CLAIMING WINNINGS
+;; =============================================
+
+(define-public (claim-winnings (market-id uint))
+  (let (
+    (claimant tx-sender)
+    (market (unwrap! (map-get? markets market-id) ERR-MARKET-NOT-FOUND))
+    (position (unwrap! (map-get? user-positions { market-id: market-id, user: claimant }) ERR-NO-POSITION))
+    (winning-outcome (unwrap! (get winning-outcome market) ERR-MARKET-NOT-SETTLED))
+  )
+    (asserts! (get settled market) ERR-MARKET-NOT-SETTLED)
+    (asserts! (not (get claimed position)) ERR-ALREADY-CLAIMED)
+    
+    (let (
+      (user-winning-amount (get-position-for-outcome position winning-outcome))
+      (winning-pool (get-pool-for-outcome market winning-outcome))
+      (total-pool (get total-pool market))
+      (gross-payout (if (is-eq winning-pool u0) 
+                       u0 
+                       (/ (* user-winning-amount total-pool) winning-pool)))
+      (platform-fee (/ (* gross-payout PLATFORM-FEE-PERCENT) u10000))
+      (net-payout (- gross-payout platform-fee))
+    )
+      (asserts! (> user-winning-amount u0) ERR-NO-POSITION)
+      
+      (map-set user-positions { market-id: market-id, user: claimant }
+        (merge position { claimed: true }))
+      
+      (if (> net-payout u0)
+        (begin
+          (try! (as-contract (stx-transfer? net-payout tx-sender claimant)))
+          (var-set total-fees-collected (+ (var-get total-fees-collected) platform-fee))
+          (update-user-winnings claimant net-payout)
+          (ok {
+            market-id: market-id,
+            gross-payout: gross-payout,
+            platform-fee: platform-fee,
+            net-payout: net-payout
+          }))
+        (ok {
+          market-id: market-id,
+          gross-payout: u0,
+          platform-fee: u0,
+          net-payout: u0
+        })))
+  )
+)
+
+;; =============================================
+;; PRIVATE HELPERS
+;; =============================================
+
+(define-private (get-position-for-outcome (position { outcome-a-amount: uint, outcome-b-amount: uint, outcome-c-amount: uint, outcome-d-amount: uint, total-invested: uint, claimed: bool }) (outcome uint))
+  (if (is-eq outcome OUTCOME-A) (get outcome-a-amount position)
+    (if (is-eq outcome OUTCOME-B) (get outcome-b-amount position)
+      (if (is-eq outcome OUTCOME-C) (get outcome-c-amount position)
+        (get outcome-d-amount position))))
+)
+
+(define-private (get-pool-for-outcome (market { creator: principal, title: (string-utf8 256), description: (string-utf8 1024), settlement-burn-height: uint, settlement-type: (string-ascii 32), possible-outcomes: uint, total-pool: uint, outcome-a-pool: uint, outcome-b-pool: uint, outcome-c-pool: uint, outcome-d-pool: uint, winning-outcome: (optional uint), settled: bool, settled-at-burn-height: (optional uint), settlement-block-hash: (optional (buff 32)), created-at-burn-height: uint, created-at-stacks-height: uint }) (outcome uint))
+  (if (is-eq outcome OUTCOME-A) (get outcome-a-pool market)
+    (if (is-eq outcome OUTCOME-B) (get outcome-b-pool market)
+      (if (is-eq outcome OUTCOME-C) (get outcome-c-pool market)
+        (get outcome-d-pool market))))
+)
+
+(define-private (update-user-bets-placed (user principal) (amount uint))
+  (let ((stats (default-to 
+    { markets-created: u0, total-bets-placed: u0, total-winnings: u0, total-losses: u0, achievements: u0 }
+    (map-get? user-stats user))))
+    (map-set user-stats user (merge stats {
+      total-bets-placed: (+ (get total-bets-placed stats) amount)
+    })))
+)
+
+(define-private (update-user-winnings (user principal) (amount uint))
+  (let ((stats (default-to 
+    { markets-created: u0, total-bets-placed: u0, total-winnings: u0, total-losses: u0, achievements: u0 }
+    (map-get? user-stats user))))
+    (map-set user-stats user (merge stats {
+      total-winnings: (+ (get total-winnings stats) amount)
+    })))
+)
+
+(define-private (add-participant (market-id uint) (user principal))
+  (let ((current-participants (default-to (list) (map-get? market-participants market-id))))
+    (if (is-none (index-of? current-participants user))
+      (begin
+        (map-set market-participants market-id (unwrap! (as-max-len? (append current-participants user) u500) false))
+        true)
+      true))
+)
+
+(define-private (calculate-odds (outcome-pool uint) (total-pool uint))
+  (if (is-eq outcome-pool u0)
+    u0
+    (/ (* total-pool u10000) outcome-pool))
+)
+
 ;; =============================================
 ;; READ-ONLY FUNCTIONS
 ;; =============================================
@@ -301,6 +540,63 @@
 
 (define-read-only (is-emergency)
   (var-get emergency-mode)
+)
+
+(define-read-only (get-user-stats (user principal))
+  (map-get? user-stats user)
+)
+
+(define-read-only (get-market-participants (market-id uint))
+  (map-get? market-participants market-id)
+)
+
+(define-read-only (get-market-odds (market-id uint))
+  (let ((market (unwrap! (map-get? markets market-id) none)))
+    (some {
+      outcome-a-odds: (calculate-odds (get outcome-a-pool market) (get total-pool market)),
+      outcome-b-odds: (calculate-odds (get outcome-b-pool market) (get total-pool market)),
+      outcome-c-odds: (calculate-odds (get outcome-c-pool market) (get total-pool market)),
+      outcome-d-odds: (calculate-odds (get outcome-d-pool market) (get total-pool market)),
+      total-pool: (get total-pool market)
+    }))
+)
+
+(define-read-only (calculate-potential-payout (market-id uint) (outcome uint) (bet-amount uint))
+  (let (
+    (market (unwrap! (map-get? markets market-id) none))
+    (outcome-pool (get-pool-for-outcome market outcome))
+    (new-pool (+ outcome-pool bet-amount))
+    (new-total (+ (get total-pool market) bet-amount))
+    (gross-payout (/ (* bet-amount new-total) new-pool))
+    (platform-fee (/ (* gross-payout PLATFORM-FEE-PERCENT) u10000))
+  )
+    (some {
+      gross-payout: gross-payout,
+      platform-fee: platform-fee,
+      net-payout: (- gross-payout platform-fee)
+    }))
+)
+
+(define-read-only (get-blocks-until-settlement (market-id uint))
+  (let (
+    (market (unwrap! (map-get? markets market-id) none))
+    (current-burn-height tenure-height)
+    (settlement-height (get settlement-burn-height market))
+  )
+    (if (>= current-burn-height settlement-height)
+      (some u0)
+      (some (- settlement-height current-burn-height))))
+)
+
+(define-read-only (is-market-settleable (market-id uint))
+  (let (
+    (market (unwrap! (map-get? markets market-id) (some false)))
+    (current-burn-height tenure-height)
+    (settlement-height (get settlement-burn-height market))
+  )
+    (some (and 
+      (not (get settled market))
+      (>= current-burn-height (+ settlement-height BLOCKS-BEFORE-SETTLEMENT)))))
 )
 
 ;; =============================================
