@@ -19,3 +19,26 @@ export function formatBlockHeight(height: number): string {
 export function formatBlockRange(start: number, end: number): string {
   return `${formatBlockHeight(start)} → ${formatBlockHeight(end)}`;
 }
+
+export function estimateBlockTimestamp(
+  targetBlock: number,
+  currentBlock: number,
+  currentTimestamp: number = Date.now()
+): number {
+  const blocksAway = targetBlock - currentBlock;
+  const msPerBlock = 10 * 60 * 1000;
+  return currentTimestamp + blocksAway * msPerBlock;
+}
+
+export function formatEstimatedDate(
+  targetBlock: number,
+  currentBlock: number
+): string {
+  const ts = estimateBlockTimestamp(targetBlock, currentBlock);
+  return new Date(ts).toLocaleDateString(undefined, {
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
