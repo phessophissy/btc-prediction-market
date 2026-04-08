@@ -74,3 +74,21 @@ export class RateLimitingHandler {
     }
     return results;
   }
+
+  validate(input: unknown): { valid: boolean; errors: string[] } {
+    const errors: string[] = [];
+
+    if (input === null || input === undefined) {
+      errors.push('Input cannot be null or undefined');
+    }
+
+    if (typeof input === 'string' && input.length > 1024) {
+      errors.push('Input exceeds maximum length of 1024 characters');
+    }
+
+    if (typeof input === 'number' && !Number.isFinite(input)) {
+      errors.push('Numeric input must be finite');
+    }
+
+    return { valid: errors.length === 0, errors };
+  }
