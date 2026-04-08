@@ -16,3 +16,6 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
+      - run: npm ci
+      - run: cd sdk && npm ci || true
+      - run: cd frontend && npm ci || true
