@@ -15,3 +15,18 @@ describe('market card render - input validation', () => {
   it('rejects undefined', () => expect(validateInput(undefined).valid).toBe(false));
   it('rejects numbers', () => expect(validateInput(42).valid).toBe(false));
 });
+
+function validateBounds(input: string, max: number = 128): { valid: boolean; value?: string } {
+  const trimmed = input.trim();
+  if (trimmed.length === 0) return { valid: false };
+  if (trimmed.length > max) return { valid: false };
+  return { valid: true, value: trimmed };
+}
+
+describe('market card render - boundary conditions', () => {
+  it('rejects over max length', () => expect(validateBounds('x'.repeat(256)).valid).toBe(false));
+  it('accepts min length', () => expect(validateBounds('a').valid).toBe(true));
+  it('accepts exactly max', () => expect(validateBounds('y'.repeat(128)).valid).toBe(true));
+  it('trims whitespace', () => expect(validateBounds('  ok  ').value).toBe('ok'));
+  it('rejects whitespace-only', () => expect(validateBounds('   ').valid).toBe(false));
+});
