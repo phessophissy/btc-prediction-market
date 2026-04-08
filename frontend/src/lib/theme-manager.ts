@@ -107,3 +107,19 @@ export class ThemeManagerHandler {
     if (f.length === 0) return 0;
     return f.reduce((s, m) => s + m.ms, 0) / f.length;
   }
+
+  reset(): void {
+    this.processedCount = 0;
+    this.errorCount = 0;
+    this.cache.clear();
+    this.metrics = [];
+    this.listeners = [];
+  }
+
+  getConfig(): Readonly<ThemeManagerConfig> { return Object.freeze({ ...this.config }); }
+  updateConfig(u: Partial<ThemeManagerConfig>): void { this.config = { ...this.config, ...u }; this.emit('config:updated', u); }
+}
+
+export function createThemeManager(config?: Partial<ThemeManagerConfig>): ThemeManagerHandler {
+  return new ThemeManagerHandler({ ...DEFAULT_CONFIG, ...config });
+}
