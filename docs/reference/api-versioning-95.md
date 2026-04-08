@@ -1,0 +1,7 @@
+# api versioning Reference - Section 95
+
+## Overview
+Covers the api versioning subsystem of the BTC Prediction Market platform.
+
+## Architecture
+The api versioning module interacts with the smart contract layer (Clarity), SDK service abstraction, frontend components, and CLI tooling.
