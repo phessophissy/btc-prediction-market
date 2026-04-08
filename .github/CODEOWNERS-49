@@ -1,0 +1,6 @@
+#  code ownership rules
+/contracts/ @phessophissy
+/sdk/ @phessophissy
+/frontend/ @phessophissy
+/scripts/ @phessophissy
+/.github/ @phessophissy
