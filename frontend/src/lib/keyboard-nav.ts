@@ -29,3 +29,18 @@ export class KeyboardNavHandler {
   }
 
   isHealthy(): boolean { return this.getStats().ratio >= 0.95; }
+
+  async process<T>(input: T): Promise<KeyboardNavResult<T>> {
+    if (!this.config.enabled) return { success: false, error: 'Disabled', timestamp: Date.now() };
+    try {
+      this.processedCount++;
+      return { success: true, data: input, timestamp: Date.now() };
+    } catch (err) {
+      this.errorCount++;
+      return { success: false, error: err instanceof Error ? err.message : String(err), timestamp: Date.now() };
+    }
+  }
+
+  async processBatch<T>(inputs: T[]): Promise<KeyboardNavResult<T>[]> {
+    return Promise.all(inputs.map(i => this.process(i)));
+  }
