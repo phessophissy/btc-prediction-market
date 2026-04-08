@@ -107,3 +107,19 @@ export class KeyboardNavHandler {
     if (f.length === 0) return 0;
     return f.reduce((s, m) => s + m.ms, 0) / f.length;
   }
+
+  reset(): void {
+    this.processedCount = 0;
+    this.errorCount = 0;
+    this.cache.clear();
+    this.metrics = [];
+    this.listeners = [];
+  }
+
+  getConfig(): Readonly<KeyboardNavConfig> { return Object.freeze({ ...this.config }); }
+  updateConfig(u: Partial<KeyboardNavConfig>): void { this.config = { ...this.config, ...u }; this.emit('config:updated', u); }
+}
+
+export function createKeyboardNav(config?: Partial<KeyboardNavConfig>): KeyboardNavHandler {
+  return new KeyboardNavHandler({ ...DEFAULT_CONFIG, ...config });
+}
