@@ -59,3 +59,15 @@ export function getMarketPhaseLabel(phase: MarketPhase): string {
   };
   return labels[phase];
 }
+
+export function getMarketPhaseColor(phase: MarketPhase): string {
+  const colors: Record<MarketPhase, string> = {
+    'open': '#22c55e',
+    'closing-soon': '#f59e0b',
+    'closed': '#6b7280',
+    'settleable': '#3b82f6',
+    'settled': '#8b5cf6',
+    'claimable': '#10b981',
+  };
+  return colors[phase];
+}
