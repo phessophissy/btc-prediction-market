@@ -52,3 +52,18 @@ export class DarkModeHandler {
     if (typeof input === 'number' && !Number.isFinite(input)) errors.push('Must be finite');
     return { valid: errors.length === 0, errors };
   }
+
+  private cache = new Map<string, { value: unknown; expiresAt: number }>();
+
+  getCached<T>(key: string): T | undefined {
+    const e = this.cache.get(key);
+    if (!e) return undefined;
+    if (Date.now() > e.expiresAt) { this.cache.delete(key); return undefined; }
+    return e.value as T;
+  }
+
+  setCached<T>(key: string, value: T, ttlMs = 60000): void {
+    this.cache.set(key, { value, expiresAt: Date.now() + ttlMs });
+  }
+
+  clearCache(): void { this.cache.clear(); }
