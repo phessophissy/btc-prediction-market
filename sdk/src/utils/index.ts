@@ -1,1 +1,1 @@
-export * from './health-checker';
+export * from './rate-limiter';
