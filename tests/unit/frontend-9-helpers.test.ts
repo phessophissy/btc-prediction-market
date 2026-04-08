@@ -59,3 +59,35 @@ function validateBounds(input: string): { valid: boolean; value?: string; error?
   if (trimmed.length > 128) return { valid: false, error: 'Exceeds max length of 128' };
   return { valid: true, value: trimmed };
 }
+
+describe('wallet connection - numeric processing', () => {
+  it('converts positive integers correctly', () => {
+    expect(processAmount(100)).toBe(100);
+  });
+
+  it('rejects negative numbers', () => {
+    expect(() => processAmount(-1)).toThrow('Amount must be positive');
+  });
+
+  it('handles zero', () => {
+    expect(processAmount(0)).toBe(0);
+  });
+
+  it('rounds fractional microSTX', () => {
+    expect(processAmount(1.5)).toBe(2);
+  });
+
+  it('rejects NaN', () => {
+    expect(() => processAmount(NaN)).toThrow('Invalid amount');
+  });
+
+  it('rejects Infinity', () => {
+    expect(() => processAmount(Infinity)).toThrow('Invalid amount');
+  });
+});
+
+function processAmount(amount: number): number {
+  if (!Number.isFinite(amount)) throw new Error('Invalid amount');
+  if (amount < 0) throw new Error('Amount must be positive');
+  return Math.round(amount);
+}
