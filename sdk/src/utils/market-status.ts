@@ -23,3 +23,11 @@ export function getMarketPhase(market: Market, currentBurnHeight: number): Marke
   }
   return 'open';
 }
+
+export function isMarketOpen(market: Market, currentBurnHeight: number): boolean {
+  return currentBurnHeight < market.settlementBurnHeight && !market.settled;
+}
+
+export function isMarketClosed(market: Market, currentBurnHeight: number): boolean {
+  return currentBurnHeight >= market.settlementBurnHeight || market.settled;
+}
