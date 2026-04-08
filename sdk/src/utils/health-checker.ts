@@ -92,3 +92,23 @@ export class HealthCheckHandler {
 
     return { valid: errors.length === 0, errors };
   }
+
+  private cache = new Map<string, { value: unknown; expiresAt: number }>();
+
+  getCached<T>(key: string): T | undefined {
+    const entry = this.cache.get(key);
+    if (!entry) return undefined;
+    if (Date.now() > entry.expiresAt) {
+      this.cache.delete(key);
+      return undefined;
+    }
+    return entry.value as T;
+  }
+
+  setCached<T>(key: string, value: T, ttlMs: number = 60000): void {
+    this.cache.set(key, { value, expiresAt: Date.now() + ttlMs });
+  }
+
+  clearCache(): void {
+    this.cache.clear();
+  }
