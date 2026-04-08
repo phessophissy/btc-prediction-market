@@ -32,3 +32,16 @@ export function formatPercentage(value: number, total: number): string {
 export function formatBasisPoints(bps: number): string {
   return `${(bps / 100).toFixed(1)}%`;
 }
+
+export function validateStxAmount(stxAmount: number): { valid: boolean; error?: string } {
+  if (!Number.isFinite(stxAmount) || stxAmount <= 0) {
+    return { valid: false, error: 'Amount must be a positive number' };
+  }
+  if (stxAmount < 0.01) {
+    return { valid: false, error: 'Minimum bet is 0.01 STX' };
+  }
+  if (stxAmount > 1_000_000) {
+    return { valid: false, error: 'Maximum single bet is 1,000,000 STX' };
+  }
+  return { valid: true };
+}
