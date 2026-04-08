@@ -1,6 +1,6 @@
 # Contract V3 Overview
 
-`contracts/btc-prediction-market-v3.clar` is the contract version the frontend now targets by default.
+`contracts/btc-prediction-market-v5.clar` is the contract version the frontend now targets by default.
 
 ## Differences from V1
 
