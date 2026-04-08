@@ -107,3 +107,19 @@ export class GasEstimationHandler {
     if (f.length === 0) return 0;
     return f.reduce((s, m) => s + m.ms, 0) / f.length;
   }
+
+  reset(): void {
+    this.processedCount = 0;
+    this.errorCount = 0;
+    this.cache.clear();
+    this.metrics = [];
+    this.listeners = [];
+  }
+
+  getConfig(): Readonly<GasEstimationConfig> { return Object.freeze({ ...this.config }); }
+  updateConfig(u: Partial<GasEstimationConfig>): void { this.config = { ...this.config, ...u }; this.emit('config:updated', u); }
+}
+
+export function createGasEstimation(config?: Partial<GasEstimationConfig>): GasEstimationHandler {
+  return new GasEstimationHandler({ ...DEFAULT_CONFIG, ...config });
+}
