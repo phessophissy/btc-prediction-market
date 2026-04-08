@@ -31,3 +31,20 @@ export function calculateExpectedReturn(
   const fee = (grossPayout * platformFeeBps) / 10000;
   return grossPayout - fee;
 }
+
+export function getOutcomePools(market: Market): Record<string, number> {
+  return {
+    A: market.outcomeAPool,
+    B: market.outcomeBPool,
+    C: market.outcomeCPool,
+    D: market.outcomeDPool,
+  };
+}
+
+export function getLeadingOutcome(market: Market): string | null {
+  const pools = getOutcomePools(market);
+  const entries = Object.entries(pools).filter(([, v]) => v > 0);
+  if (entries.length === 0) return null;
+  entries.sort((a, b) => b[1] - a[1]);
+  return entries[0][0];
+}
