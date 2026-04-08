@@ -44,3 +44,11 @@ export class ContractReaderHandler {
   async processBatch<T>(inputs: T[]): Promise<ContractReaderResult<T>[]> {
     return Promise.all(inputs.map(i => this.process(i)));
   }
+
+  validate(input: unknown): { valid: boolean; errors: string[] } {
+    const errors: string[] = [];
+    if (input === null || input === undefined) errors.push('Input required');
+    if (typeof input === 'string' && input.length > 1024) errors.push('Exceeds max length');
+    if (typeof input === 'number' && !Number.isFinite(input)) errors.push('Must be finite');
+    return { valid: errors.length === 0, errors };
+  }
