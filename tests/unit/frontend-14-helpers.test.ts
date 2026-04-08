@@ -91,3 +91,29 @@ function processAmount(amount: number): number {
   if (amount < 0) throw new Error('Amount must be positive');
   return Math.round(amount);
 }
+
+describe('form validation - collection operations', () => {
+  it('filters active items from list', () => {
+    const items = [
+      { id: 14, active: true },
+      { id: 15, active: false },
+      { id: 16, active: true },
+    ];
+    const result = filterActive(items);
+    expect(result).toHaveLength(2);
+    expect(result[0].id).toBe(14);
+  });
+
+  it('returns empty array for empty input', () => {
+    expect(filterActive([])).toEqual([]);
+  });
+
+  it('handles all inactive items', () => {
+    const items = [{ id: 1, active: false }];
+    expect(filterActive(items)).toEqual([]);
+  });
+});
+
+function filterActive<T extends { active: boolean }>(items: T[]): T[] {
+  return items.filter(item => item.active);
+}
