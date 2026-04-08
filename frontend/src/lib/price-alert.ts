@@ -51,3 +51,26 @@ export class PriceAlertsHandler {
     const stats = this.getStats();
     return stats.ratio >= 0.95;
   }
+
+  async process<T>(input: T): Promise<PriceAlertsResult<T>> {
+    if (!this.config.enabled) {
+      return { success: false, error: 'price-alerts is disabled', timestamp: Date.now() };
+    }
+
+    try {
+      this.processedCount++;
+      return { success: true, data: input, timestamp: Date.now() };
+    } catch (err) {
+      this.errorCount++;
+      const message = err instanceof Error ? err.message : String(err);
+      return { success: false, error: message, timestamp: Date.now() };
+    }
+  }
+
+  async processBatch<T>(inputs: T[]): Promise<PriceAlertsResult<T>[]> {
+    const results: PriceAlertsResult<T>[] = [];
+    for (const input of inputs) {
+      results.push(await this.process(input));
+    }
+    return results;
+  }
