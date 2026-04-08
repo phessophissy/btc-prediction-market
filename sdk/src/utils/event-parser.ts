@@ -131,3 +131,24 @@ export class ContractEventsHandler {
       }
     }
   }
+
+  async withRetry<T>(
+    fn: () => Promise<T>,
+    maxAttempts: number = this.config.maxRetries
+  ): Promise<T> {
+    let lastError: Error | undefined;
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+      try {
+        const result = await fn();
+        this.emit('retry:success', { attempt });
+        return result;
+      } catch (err) {
+        lastError = err instanceof Error ? err : new Error(String(err));
+        this.emit('retry:failure', { attempt, error: lastError.message });
+        if (attempt < maxAttempts) {
+          await new Promise(r => setTimeout(r, 1000 * Math.pow(2, attempt - 1)));
+        }
+      }
+    }
+    throw lastError!;
+  }
