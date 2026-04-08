@@ -94,3 +94,16 @@ export class ChartDataHandler {
     }
     throw last!;
   }
+
+  private metrics: Array<{ op: string; ms: number; ts: number }> = [];
+
+  recordMetric(op: string, ms: number): void {
+    this.metrics.push({ op, ms, ts: Date.now() });
+    if (this.metrics.length > 1000) this.metrics = this.metrics.slice(-500);
+  }
+
+  getAverageDuration(op?: string): number {
+    const f = op ? this.metrics.filter(m => m.op === op) : this.metrics;
+    if (f.length === 0) return 0;
+    return f.reduce((s, m) => s + m.ms, 0) / f.length;
+  }
