@@ -107,3 +107,19 @@ export class MarketAggregatorHandler {
     if (f.length === 0) return 0;
     return f.reduce((s, m) => s + m.ms, 0) / f.length;
   }
+
+  reset(): void {
+    this.processedCount = 0;
+    this.errorCount = 0;
+    this.cache.clear();
+    this.metrics = [];
+    this.listeners = [];
+  }
+
+  getConfig(): Readonly<MarketAggregatorConfig> { return Object.freeze({ ...this.config }); }
+  updateConfig(u: Partial<MarketAggregatorConfig>): void { this.config = { ...this.config, ...u }; this.emit('config:updated', u); }
+}
+
+export function createMarketAggregator(config?: Partial<MarketAggregatorConfig>): MarketAggregatorHandler {
+  return new MarketAggregatorHandler({ ...DEFAULT_CONFIG, ...config });
+}
