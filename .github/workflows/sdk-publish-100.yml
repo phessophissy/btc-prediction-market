@@ -19,3 +19,7 @@ jobs:
       - run: npm ci
       - run: cd sdk && npm ci || true
       - run: cd frontend && npm ci || true
+      - name: TypeScript check
+        run: npx tsc --noEmit || true
+      - name: SDK type check
+        run: cd sdk && npx tsc --noEmit || true
