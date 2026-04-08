@@ -31,3 +31,19 @@ export function isMarketOpen(market: Market, currentBurnHeight: number): boolean
 export function isMarketClosed(market: Market, currentBurnHeight: number): boolean {
   return currentBurnHeight >= market.settlementBurnHeight || market.settled;
 }
+
+export function blocksUntilSettlement(market: Market, currentBurnHeight: number): number {
+  const remaining = market.settlementBurnHeight - currentBurnHeight;
+  return Math.max(remaining, 0);
+}
+
+export function estimatedTimeToSettlement(market: Market, currentBurnHeight: number): string {
+  const blocks = blocksUntilSettlement(market, currentBurnHeight);
+  if (blocks === 0) return 'Now';
+  const minutes = blocks * 10;
+  if (minutes < 60) return `${minutes}m`;
+  if (minutes < 1440) return `${Math.floor(minutes / 60)}h ${minutes % 60}m`;
+  const days = Math.floor(minutes / 1440);
+  const hours = Math.floor((minutes % 1440) / 60);
+  return `${days}d ${hours}h`;
+}
