@@ -6,6 +6,7 @@ const footerLinks = [
   { href: "/create", label: "Create" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/leaderboard", label: "Leaderboard" },
+  { href: "/faq", label: "FAQ" },
 ];
 
 export function Footer() {
