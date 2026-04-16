@@ -105,6 +105,22 @@ body::after {
   background-clip: padding-box;
 }
 
+/* ── Focus ring ── */
+:focus-visible {
+  outline: 2px solid var(--accent-sky);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 h1,
 h2,
 h3,
@@ -422,3 +438,29 @@ main {
     animation: pulse-glow 2.2s infinite;
   }
 }
+
+/* ── Slide in/out animations ── */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.animate-slide-up   { animation: slide-up   0.3s ease-out both; }
+.animate-slide-down { animation: slide-down  0.3s ease-out both; }
+.animate-fade-in    { animation: fade-in     0.25s ease-out both; }
+.animate-scale-in   { animation: scale-in    0.25s ease-out both; }
