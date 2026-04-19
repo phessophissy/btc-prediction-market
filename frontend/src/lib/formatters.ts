@@ -68,4 +68,4 @@ export function estimateBlockTime(blocksRemaining: number): number {
   return Date.now() + blocksRemaining * MS_PER_BLOCK;
 }
 
-// [fix/api-timeout-retry] commit 4/10: extend lib layer – 1776638488392159767
+// [refactor/contract-service-split] commit 4/10: extend lib layer – 1776638498206040756
