@@ -17,4 +17,4 @@ describe("sdk defaults", () => {
   });
 });
 
-// [docs/deployment-playbook] commit 8/10: augment test layer – 1776638550016355271
+// [docs/market-lifecycle-diagrams] commit 8/10: augment test layer – 1776638559386962005
