@@ -268,4 +268,4 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
   );
 }
 
-// [fix/odds-calculation-overflow] commit 2/10: improve ui layer – 1776638425783161399
+// [fix/wallet-reconnect-state] commit 2/10: improve ui layer – 1776638435290024904

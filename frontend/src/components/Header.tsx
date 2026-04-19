@@ -144,4 +144,4 @@ export function Header() {
   );
 }
 
-// [fix/odds-calculation-overflow] commit 2/10: improve ui layer – 1776638425780719325
+// [fix/wallet-reconnect-state] commit 2/10: improve ui layer – 1776638435287559129
