@@ -11,4 +11,4 @@ export default defineConfig({
   },
 });
 
-// [fix/mobile-bet-modal-scroll] commit 10/10: polish config layer – 1776638456974031609
+// [fix/token-decimal-precision] commit 10/10: polish config layer – 1776638467791995431

@@ -167,4 +167,4 @@ export default function Home() {
   );
 }
 
-// [fix/mobile-bet-modal-scroll] commit 5/10: refine pages layer – 1776638456841141690
+// [fix/token-decimal-precision] commit 5/10: refine pages layer – 1776638467677482976

@@ -20,4 +20,4 @@ trusted_sender = false
 trusted_caller = false
 callee_filter = false
 
-# [fix/mobile-bet-modal-scroll] commit 10/10: polish config layer – 1776638456972606447
+# [fix/token-decimal-precision] commit 10/10: polish config layer – 1776638467790770577

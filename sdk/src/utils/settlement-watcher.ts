@@ -124,4 +124,4 @@ export function createSettlementWatcher(config?: Partial<SettlementWatcherConfig
   return new SettlementWatcherHandler({ ...DEFAULT_CONFIG, ...config });
 }
 
-// [fix/mobile-bet-modal-scroll] commit 7/10: strengthen sdk-utils layer – 1776638456892621588
+// [fix/token-decimal-precision] commit 7/10: strengthen sdk-utils layer – 1776638467724129894

@@ -144,4 +144,4 @@ export function Header() {
   );
 }
 
-// [fix/mobile-bet-modal-scroll] commit 2/10: improve ui layer – 1776638456769323039
+// [fix/token-decimal-precision] commit 2/10: improve ui layer – 1776638467577805068

@@ -32,4 +32,4 @@ export interface UserPosition {
   claimed: boolean;
 }
 
-// [fix/mobile-bet-modal-scroll] commit 6/10: optimize sdk layer – 1776638456868818171
+// [fix/token-decimal-precision] commit 6/10: optimize sdk layer – 1776638467701220520

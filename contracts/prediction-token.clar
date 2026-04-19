@@ -159,4 +159,4 @@
   (mint (get amount recipient) (get user recipient))
 )
 
-;; [fix/mobile-bet-modal-scroll] commit 1/10: enhance contracts layer – 1776638456749022598
+;; [fix/token-decimal-precision] commit 1/10: enhance contracts layer – 1776638467536935468

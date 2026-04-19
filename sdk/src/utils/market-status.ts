@@ -72,4 +72,4 @@ export function getMarketPhaseColor(phase: MarketPhase): string {
   return colors[phase];
 }
 
-// [fix/mobile-bet-modal-scroll] commit 7/10: strengthen sdk-utils layer – 1776638456891309625
+// [fix/token-decimal-precision] commit 7/10: strengthen sdk-utils layer – 1776638467722901453

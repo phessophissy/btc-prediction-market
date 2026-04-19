@@ -436,4 +436,4 @@ export class MarketContractService {
 
 export default MarketContractService;
 
-// [fix/mobile-bet-modal-scroll] commit 6/10: optimize sdk layer – 1776638456867206952
+// [fix/token-decimal-precision] commit 6/10: optimize sdk layer – 1776638467699948455
