@@ -636,4 +636,4 @@
     (ok paused))
 )
 
-;; [feat/social-trading] commit 1/10: enhance contracts layer – 1776638339092350787
+;; [feat/batch-betting] commit 1/10: enhance contracts layer – 1776638348874506668

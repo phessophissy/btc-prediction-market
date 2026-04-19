@@ -159,4 +159,4 @@
   (mint (get amount recipient) (get user recipient))
 )
 
-;; [feat/social-trading] commit 1/10: enhance contracts layer – 1776638339094110635
+;; [feat/batch-betting] commit 1/10: enhance contracts layer – 1776638348876821352
