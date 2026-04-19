@@ -15,4 +15,4 @@ The project is centered on a Bitcoin-anchored prediction market implemented in C
 - Transactions are submitted from the browser with `@stacks/connect`.
 - The deployed frontend defaults to the V3 market contract on mainnet, but can now be overridden with `NEXT_PUBLIC_*` environment variables.
 
-<!-- [refactor/hook-composition] commit 9/10: revise docs layer – 1776638509428062350 -->
+<!-- [refactor/css-design-tokens] commit 9/10: revise docs layer – 1776638519409098516 -->
