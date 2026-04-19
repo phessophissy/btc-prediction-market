@@ -636,4 +636,4 @@
     (ok paused))
 )
 
-;; [fix/mobile-bet-modal-scroll] commit 1/10: enhance contracts layer – 1776638456747436662
+;; [fix/token-decimal-precision] commit 1/10: enhance contracts layer – 1776638467533686478
