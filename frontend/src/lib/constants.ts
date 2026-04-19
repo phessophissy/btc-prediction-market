@@ -50,4 +50,4 @@ export const CONTRACT_CAPABILITIES = {
   onChainUserStats: false,
 } as const;
 
-// [chore/github-actions-matrix] commit 4/10: extend lib layer – 1776638601132010760
+// [chore/dependency-audit-update] commit 4/10: extend lib layer – 1776638611513182728
