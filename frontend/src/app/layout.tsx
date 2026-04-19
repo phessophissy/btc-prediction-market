@@ -35,4 +35,4 @@ export default function RootLayout({
   );
 }
 
-// [fix/mobile-bet-modal-scroll] commit 5/10: refine pages layer – 1776638456842599566
+// [fix/token-decimal-precision] commit 5/10: refine pages layer – 1776638467678604684
