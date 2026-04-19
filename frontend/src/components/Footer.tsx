@@ -65,4 +65,4 @@ export function Footer() {
   );
 }
 
-// [feat/batch-betting] commit 2/10: improve ui layer – 1776638348907870630
+// [feat/price-chart-widget] commit 2/10: improve ui layer – 1776638359621662500
