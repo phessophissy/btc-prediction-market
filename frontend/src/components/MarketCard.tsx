@@ -387,4 +387,4 @@ export function MarketCard({ market }: MarketCardProps) {
   );
 }
 
-// [fix/ssr-hydration-mismatch] commit 2/10: improve ui layer – 1776638478270605103
+// [fix/api-timeout-retry] commit 2/10: improve ui layer – 1776638488345678477
