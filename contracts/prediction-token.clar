@@ -159,4 +159,4 @@
   (mint (get amount recipient) (get user recipient))
 )
 
-;; [refactor/contract-service-split] commit 1/10: enhance contracts layer – 1776638498108273967
+;; [refactor/hook-composition] commit 1/10: enhance contracts layer – 1776638509228402469
