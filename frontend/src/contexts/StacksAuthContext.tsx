@@ -85,4 +85,4 @@ export function useStacksAuth() {
   return context;
 }
 
-// [feat/limit-order-engine] commit 3/10: update hooks layer – 1776638317433197980
+// [feat/market-categories] commit 3/10: update hooks layer – 1776638327557425961
