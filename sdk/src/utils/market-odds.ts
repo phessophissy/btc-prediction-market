@@ -49,4 +49,4 @@ export function getLeadingOutcome(market: Market): string | null {
   return entries[0][0];
 }
 
-// [chore/vitest-coverage-config] commit 7/10: strengthen sdk-utils layer – 1776638580511150694
+// [chore/eslint-strict-rules] commit 7/10: strengthen sdk-utils layer – 1776638591031251211

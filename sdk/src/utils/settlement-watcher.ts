@@ -124,4 +124,4 @@ export function createSettlementWatcher(config?: Partial<SettlementWatcherConfig
   return new SettlementWatcherHandler({ ...DEFAULT_CONFIG, ...config });
 }
 
-// [chore/vitest-coverage-config] commit 7/10: strengthen sdk-utils layer – 1776638580515120229
+// [chore/eslint-strict-rules] commit 7/10: strengthen sdk-utils layer – 1776638591033794378
