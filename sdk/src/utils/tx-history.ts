@@ -124,4 +124,4 @@ export function createTxHistory(config?: Partial<TxHistoryConfig>): TxHistoryHan
   return new TxHistoryHandler({ ...DEFAULT_CONFIG, ...config });
 }
 
-// [fix/market-expiry-display] commit 7/10: strengthen sdk-utils layer – 1776638446451606594
+// [fix/mobile-bet-modal-scroll] commit 7/10: strengthen sdk-utils layer – 1776638456893907109
