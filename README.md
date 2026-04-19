@@ -261,4 +261,4 @@ When contributing, please consider:
 
 MIT License
 
-<!-- [refactor/css-design-tokens] commit 9/10: revise docs layer – 1776638519404694896 -->
+<!-- [refactor/sdk-error-hierarchy] commit 9/10: revise docs layer – 1776638529143195455 -->
