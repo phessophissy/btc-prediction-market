@@ -123,3 +123,5 @@ export class TxHistoryHandler {
 export function createTxHistory(config?: Partial<TxHistoryConfig>): TxHistoryHandler {
   return new TxHistoryHandler({ ...DEFAULT_CONFIG, ...config });
 }
+
+// [feat/multi-chain-support] commit 7/10: strengthen sdk-utils layer – 1776638306070591828
