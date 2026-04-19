@@ -261,4 +261,4 @@ When contributing, please consider:
 
 MIT License
 
-<!-- [docs/market-lifecycle-diagrams] commit 9/10: revise docs layer – 1776638559418061846 -->
+<!-- [docs/testing-handbook] commit 9/10: revise docs layer – 1776638570752470751 -->
