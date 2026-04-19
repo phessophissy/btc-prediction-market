@@ -726,4 +726,4 @@ export function getOutcomeLabel(
   return "Unknown";
 }
 
-// [docs/api-reference-guide] commit 4/10: extend lib layer – 1776638540297224521
+// [docs/deployment-playbook] commit 4/10: extend lib layer – 1776638549871818518
