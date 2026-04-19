@@ -50,4 +50,4 @@ export const CONTRACT_CAPABILITIES = {
   onChainUserStats: false,
 } as const;
 
-// [refactor/css-design-tokens] commit 4/10: extend lib layer – 1776638519257191716
+// [refactor/sdk-error-hierarchy] commit 4/10: extend lib layer – 1776638529022924435

@@ -35,4 +35,4 @@ export default function RootLayout({
   );
 }
 
-// [refactor/css-design-tokens] commit 5/10: refine pages layer – 1776638519286877314
+// [refactor/sdk-error-hierarchy] commit 5/10: refine pages layer – 1776638529054239939

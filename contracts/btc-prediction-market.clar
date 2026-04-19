@@ -636,4 +636,4 @@
     (ok paused))
 )
 
-;; [refactor/css-design-tokens] commit 1/10: enhance contracts layer – 1776638519185510910
+;; [refactor/sdk-error-hierarchy] commit 1/10: enhance contracts layer – 1776638528919401583

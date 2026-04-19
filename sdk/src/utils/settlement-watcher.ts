@@ -124,4 +124,4 @@ export function createSettlementWatcher(config?: Partial<SettlementWatcherConfig
   return new SettlementWatcherHandler({ ...DEFAULT_CONFIG, ...config });
 }
 
-// [refactor/css-design-tokens] commit 7/10: strengthen sdk-utils layer – 1776638519350746563
+// [refactor/sdk-error-hierarchy] commit 7/10: strengthen sdk-utils layer – 1776638529103661251

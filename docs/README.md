@@ -16,4 +16,4 @@ This folder breaks the project into smaller references instead of forcing every 
 - `testing/`: current strategy and gaps
 - `product/`: roadmap, user journeys, and known gaps
 
-<!-- [refactor/css-design-tokens] commit 9/10: revise docs layer – 1776638519407371712 -->
+<!-- [refactor/sdk-error-hierarchy] commit 9/10: revise docs layer – 1776638529145437468 -->

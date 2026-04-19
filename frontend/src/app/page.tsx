@@ -167,4 +167,4 @@ export default function Home() {
   );
 }
 
-// [refactor/css-design-tokens] commit 5/10: refine pages layer – 1776638519285257687
+// [refactor/sdk-error-hierarchy] commit 5/10: refine pages layer – 1776638529051691542

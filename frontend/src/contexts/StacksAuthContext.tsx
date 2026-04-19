@@ -85,4 +85,4 @@ export function useStacksAuth() {
   return context;
 }
 
-// [refactor/css-design-tokens] commit 3/10: update hooks layer – 1776638519234951149
+// [refactor/sdk-error-hierarchy] commit 3/10: update hooks layer – 1776638528993214404
