@@ -65,4 +65,4 @@ export function Footer() {
   );
 }
 
-// [docs/market-lifecycle-diagrams] commit 2/10: improve ui layer – 1776638559228497098
+// [docs/testing-handbook] commit 2/10: improve ui layer – 1776638570531117420
