@@ -124,4 +124,4 @@ export function createTxHistory(config?: Partial<TxHistoryConfig>): TxHistoryHan
   return new TxHistoryHandler({ ...DEFAULT_CONFIG, ...config });
 }
 
-// [feat/notification-system] commit 7/10: strengthen sdk-utils layer – 1776638370070067783
+// [feat/market-templates] commit 7/10: strengthen sdk-utils layer – 1776638382299746186
