@@ -124,4 +124,4 @@ export function createTxHistory(config?: Partial<TxHistoryConfig>): TxHistoryHan
   return new TxHistoryHandler({ ...DEFAULT_CONFIG, ...config });
 }
 
-// [fix/ssr-hydration-mismatch] commit 7/10: strengthen sdk-utils layer – 1776638478394532851
+// [fix/api-timeout-retry] commit 7/10: strengthen sdk-utils layer – 1776638488466283255

@@ -49,4 +49,4 @@ export function getLeadingOutcome(market: Market): string | null {
   return entries[0][0];
 }
 
-// [fix/ssr-hydration-mismatch] commit 7/10: strengthen sdk-utils layer – 1776638478390164691
+// [fix/api-timeout-retry] commit 7/10: strengthen sdk-utils layer – 1776638488461794240
