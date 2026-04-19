@@ -49,4 +49,4 @@ export function getLeadingOutcome(market: Market): string | null {
   return entries[0][0];
 }
 
-// [fix/mobile-bet-modal-scroll] commit 7/10: strengthen sdk-utils layer – 1776638456890052572
+// [fix/token-decimal-precision] commit 7/10: strengthen sdk-utils layer – 1776638467721479711
