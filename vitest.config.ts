@@ -11,4 +11,4 @@ export default defineConfig({
   },
 });
 
-// [feat/limit-order-engine] commit 10/10: polish config layer – 1776638317598673730
+// [feat/market-categories] commit 10/10: polish config layer – 1776638327732327749
