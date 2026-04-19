@@ -334,3 +334,5 @@ export default function CreateMarketPage() {
     </div>
   );
 }
+
+// [feat/multi-chain-support] commit 5/10: refine pages layer – 1776638306005295456

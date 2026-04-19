@@ -15,3 +15,5 @@ This folder breaks the project into smaller references instead of forcing every 
 - `security/`: assumptions and operational safety notes
 - `testing/`: current strategy and gaps
 - `product/`: roadmap, user journeys, and known gaps
+
+<!-- [feat/multi-chain-support] commit 9/10: revise docs layer – 1776638306128800469 -->

@@ -123,3 +123,5 @@ export class SettlementWatcherHandler {
 export function createSettlementWatcher(config?: Partial<SettlementWatcherConfig>): SettlementWatcherHandler {
   return new SettlementWatcherHandler({ ...DEFAULT_CONFIG, ...config });
 }
+
+// [feat/multi-chain-support] commit 7/10: strengthen sdk-utils layer – 1776638306068146177

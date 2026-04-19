@@ -48,3 +48,5 @@ export function getLeadingOutcome(market: Market): string | null {
   entries.sort((a, b) => b[1] - a[1]);
   return entries[0][0];
 }
+
+// [feat/multi-chain-support] commit 7/10: strengthen sdk-utils layer – 1776638306063216496

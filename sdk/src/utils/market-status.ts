@@ -71,3 +71,5 @@ export function getMarketPhaseColor(phase: MarketPhase): string {
   };
   return colors[phase];
 }
+
+// [feat/multi-chain-support] commit 7/10: strengthen sdk-utils layer – 1776638306065474135

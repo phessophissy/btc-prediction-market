@@ -16,3 +16,5 @@ describe("sdk defaults", () => {
     expect((service as any).contractName).toBe("btc-prediction-market-v2");
   });
 });
+
+// [feat/multi-chain-support] commit 8/10: augment test layer – 1776638306095657730

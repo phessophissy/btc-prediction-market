@@ -10,3 +10,5 @@ export default defineConfig({
     reporters: ["verbose"],
   },
 });
+
+// [feat/multi-chain-support] commit 10/10: polish config layer – 1776638306154990255

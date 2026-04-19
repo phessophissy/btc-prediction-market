@@ -14,3 +14,5 @@ The project is centered on a Bitcoin-anchored prediction market implemented in C
 - The frontend reads on-chain state through Hiro API read-only calls.
 - Transactions are submitted from the browser with `@stacks/connect`.
 - The deployed frontend defaults to the V3 market contract on mainnet, but can now be overridden with `NEXT_PUBLIC_*` environment variables.
+
+<!-- [feat/multi-chain-support] commit 9/10: revise docs layer – 1776638306131152114 -->

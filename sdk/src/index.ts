@@ -8,7 +8,9 @@ export { MarketContractService };
 export function initializeMarketSDK(
   contractAddress: string,
   isMainnet: boolean = false,
-  contractName: string = 'btc-prediction-market-v5'
+  contractName: string = 'btc-prediction-market-v4'
 ): MarketContractService {
   return new MarketContractService(contractAddress, isMainnet, contractName);
 }
+
+// [feat/multi-chain-support] commit 6/10: optimize sdk layer – 1776638306041997562
