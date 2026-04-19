@@ -17,4 +17,4 @@ export function useDebounce<T>(value: T, delay = 300): T {
   return debounced;
 }
 
-// [fix/api-timeout-retry] commit 3/10: update hooks layer – 1776638488370138493
+// [refactor/contract-service-split] commit 3/10: update hooks layer – 1776638498184977237

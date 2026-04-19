@@ -85,4 +85,4 @@ export function useStacksAuth() {
   return context;
 }
 
-// [fix/api-timeout-retry] commit 3/10: update hooks layer – 1776638488368945863
+// [refactor/contract-service-split] commit 3/10: update hooks layer – 1776638498182523342
