@@ -140,4 +140,4 @@ describe("contractService derived helpers", () => {
   });
 });
 
-// [feat/price-chart-widget] commit 8/10: augment test layer – 1776638359903737471
+// [feat/notification-system] commit 8/10: augment test layer – 1776638370090588492

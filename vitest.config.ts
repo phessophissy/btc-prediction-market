@@ -11,4 +11,4 @@ export default defineConfig({
   },
 });
 
-// [feat/price-chart-widget] commit 10/10: polish config layer – 1776638359985776800
+// [feat/notification-system] commit 10/10: polish config layer – 1776638370135014843

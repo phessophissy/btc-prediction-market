@@ -50,4 +50,4 @@ export const CONTRACT_CAPABILITIES = {
   onChainUserStats: false,
 } as const;
 
-// [feat/price-chart-widget] commit 4/10: extend lib layer – 1776638359727506239
+// [feat/notification-system] commit 4/10: extend lib layer – 1776638369997456562

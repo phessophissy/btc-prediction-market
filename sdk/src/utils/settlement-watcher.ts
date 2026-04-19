@@ -124,4 +124,4 @@ export function createSettlementWatcher(config?: Partial<SettlementWatcherConfig
   return new SettlementWatcherHandler({ ...DEFAULT_CONFIG, ...config });
 }
 
-// [feat/price-chart-widget] commit 7/10: strengthen sdk-utils layer – 1776638359867901934
+// [feat/notification-system] commit 7/10: strengthen sdk-utils layer – 1776638370068056426

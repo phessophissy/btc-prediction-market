@@ -13,4 +13,4 @@ export function initializeMarketSDK(
   return new MarketContractService(contractAddress, isMainnet, contractName);
 }
 
-// [feat/price-chart-widget] commit 6/10: optimize sdk layer – 1776638359835544358
+// [feat/notification-system] commit 6/10: optimize sdk layer – 1776638370045626168

@@ -118,4 +118,4 @@ describe("sdk V3 decoders", () => {
   });
 });
 
-// [feat/price-chart-widget] commit 8/10: augment test layer – 1776638359901044978
+// [feat/notification-system] commit 8/10: augment test layer – 1776638370089281912

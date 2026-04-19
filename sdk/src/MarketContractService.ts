@@ -436,4 +436,4 @@ export class MarketContractService {
 
 export default MarketContractService;
 
-// [feat/price-chart-widget] commit 6/10: optimize sdk layer – 1776638359831610611
+// [feat/notification-system] commit 6/10: optimize sdk layer – 1776638370043027399
