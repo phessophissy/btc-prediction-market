@@ -17,4 +17,4 @@ describe("sdk defaults", () => {
   });
 });
 
-// [feat/batch-betting] commit 8/10: augment test layer – 1776638349051803314
+// [feat/price-chart-widget] commit 8/10: augment test layer – 1776638359898452575
