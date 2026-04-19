@@ -32,4 +32,4 @@ export interface UserPosition {
   claimed: boolean;
 }
 
-// [feat/portfolio-analytics] commit 6/10: optimize sdk layer – 1776638391599705889
+// [feat/stx-staking-rewards] commit 6/10: optimize sdk layer – 1776638402006270526
