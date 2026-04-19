@@ -335,4 +335,4 @@ export default function CreateMarketPage() {
   );
 }
 
-// [refactor/contract-service-split] commit 5/10: refine pages layer – 1776638498226786942
+// [refactor/hook-composition] commit 5/10: refine pages layer – 1776638509322654058

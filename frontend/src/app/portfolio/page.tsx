@@ -359,4 +359,4 @@ export default function PortfolioPage() {
   );
 }
 
-// [refactor/contract-service-split] commit 5/10: refine pages layer – 1776638498227977035
+// [refactor/hook-composition] commit 5/10: refine pages layer – 1776638509323874240
