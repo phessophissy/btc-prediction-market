@@ -17,4 +17,4 @@ describe("sdk defaults", () => {
   });
 });
 
-// [fix/odds-calculation-overflow] commit 8/10: augment test layer – 1776638425987136612
+// [fix/wallet-reconnect-state] commit 8/10: augment test layer – 1776638435497302781
