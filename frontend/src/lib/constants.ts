@@ -50,4 +50,4 @@ export const CONTRACT_CAPABILITIES = {
   onChainUserStats: false,
 } as const;
 
-// [fix/ssr-hydration-mismatch] commit 4/10: extend lib layer – 1776638478316764373
+// [fix/api-timeout-retry] commit 4/10: extend lib layer – 1776638488389647367
