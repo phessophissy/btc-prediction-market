@@ -35,4 +35,4 @@ export default function RootLayout({
   );
 }
 
-// [feat/price-chart-widget] commit 5/10: refine pages layer – 1776638359776646388
+// [feat/notification-system] commit 5/10: refine pages layer – 1776638370021067673
