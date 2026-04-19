@@ -13,4 +13,4 @@ export function initializeMarketSDK(
   return new MarketContractService(contractAddress, isMainnet, contractName);
 }
 
-// [feat/stx-staking-rewards] commit 6/10: optimize sdk layer – 1776638402007753175
+// [fix/settlement-race-condition] commit 6/10: optimize sdk layer – 1776638414730023126

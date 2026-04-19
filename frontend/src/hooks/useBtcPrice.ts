@@ -52,4 +52,4 @@ export function useBtcPrice(intervalMs = 60_000): BtcPriceData {
   return { price, change24h, loading, error };
 }
 
-// [feat/stx-staking-rewards] commit 3/10: update hooks layer – 1776638401921185361
+// [fix/settlement-race-condition] commit 3/10: update hooks layer – 1776638414660978817

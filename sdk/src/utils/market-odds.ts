@@ -49,4 +49,4 @@ export function getLeadingOutcome(market: Market): string | null {
   return entries[0][0];
 }
 
-// [feat/stx-staking-rewards] commit 7/10: strengthen sdk-utils layer – 1776638402030450433
+// [fix/settlement-race-condition] commit 7/10: strengthen sdk-utils layer – 1776638414748609748

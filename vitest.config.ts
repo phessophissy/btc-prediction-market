@@ -11,4 +11,4 @@ export default defineConfig({
   },
 });
 
-// [feat/stx-staking-rewards] commit 10/10: polish config layer – 1776638402109057773
+// [fix/settlement-race-condition] commit 10/10: polish config layer – 1776638414825347757

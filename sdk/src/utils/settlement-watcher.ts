@@ -124,4 +124,4 @@ export function createSettlementWatcher(config?: Partial<SettlementWatcherConfig
   return new SettlementWatcherHandler({ ...DEFAULT_CONFIG, ...config });
 }
 
-// [feat/stx-staking-rewards] commit 7/10: strengthen sdk-utils layer – 1776638402033397499
+// [fix/settlement-race-condition] commit 7/10: strengthen sdk-utils layer – 1776638414751306203

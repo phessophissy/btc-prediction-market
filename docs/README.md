@@ -16,4 +16,4 @@ This folder breaks the project into smaller references instead of forcing every 
 - `testing/`: current strategy and gaps
 - `product/`: roadmap, user journeys, and known gaps
 
-<!-- [feat/stx-staking-rewards] commit 9/10: revise docs layer – 1776638402086739105 -->
+<!-- [fix/settlement-race-condition] commit 9/10: revise docs layer – 1776638414801258298 -->

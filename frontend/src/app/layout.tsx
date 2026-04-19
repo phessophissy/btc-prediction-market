@@ -35,4 +35,4 @@ export default function RootLayout({
   );
 }
 
-// [feat/stx-staking-rewards] commit 5/10: refine pages layer – 1776638401976651590
+// [fix/settlement-race-condition] commit 5/10: refine pages layer – 1776638414704702529

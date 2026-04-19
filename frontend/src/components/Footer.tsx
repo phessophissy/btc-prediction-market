@@ -65,4 +65,4 @@ export function Footer() {
   );
 }
 
-// [feat/stx-staking-rewards] commit 2/10: improve ui layer – 1776638401888327465
+// [fix/settlement-race-condition] commit 2/10: improve ui layer – 1776638414642730458

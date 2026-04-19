@@ -726,4 +726,4 @@ export function getOutcomeLabel(
   return "Unknown";
 }
 
-// [feat/stx-staking-rewards] commit 4/10: extend lib layer – 1776638401953507278
+// [fix/settlement-race-condition] commit 4/10: extend lib layer – 1776638414683932353

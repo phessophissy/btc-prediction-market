@@ -319,4 +319,4 @@
     (ok paused))
 )
 
-;; [feat/stx-staking-rewards] commit 1/10: enhance contracts layer – 1776638401854147219
+;; [fix/settlement-race-condition] commit 1/10: enhance contracts layer – 1776638414619015416

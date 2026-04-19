@@ -140,4 +140,4 @@ describe("contractService derived helpers", () => {
   });
 });
 
-// [feat/stx-staking-rewards] commit 8/10: augment test layer – 1776638402063773227
+// [fix/settlement-race-condition] commit 8/10: augment test layer – 1776638414776693750

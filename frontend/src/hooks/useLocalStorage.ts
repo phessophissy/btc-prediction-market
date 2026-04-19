@@ -48,4 +48,4 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   return [storedValue, setValue, removeValue] as const;
 }
 
-// [feat/stx-staking-rewards] commit 3/10: update hooks layer – 1776638401922530888
+// [fix/settlement-race-condition] commit 3/10: update hooks layer – 1776638414662180912

@@ -436,4 +436,4 @@ export class MarketContractService {
 
 export default MarketContractService;
 
-// [feat/stx-staking-rewards] commit 6/10: optimize sdk layer – 1776638402004837722
+// [fix/settlement-race-condition] commit 6/10: optimize sdk layer – 1776638414727563874

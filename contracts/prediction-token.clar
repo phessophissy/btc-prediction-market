@@ -159,4 +159,4 @@
   (mint (get amount recipient) (get user recipient))
 )
 
-;; [feat/stx-staking-rewards] commit 1/10: enhance contracts layer – 1776638401851698216
+;; [fix/settlement-race-condition] commit 1/10: enhance contracts layer – 1776638414617121885
