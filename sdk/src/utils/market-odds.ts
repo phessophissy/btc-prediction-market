@@ -49,4 +49,4 @@ export function getLeadingOutcome(market: Market): string | null {
   return entries[0][0];
 }
 
-// [fix/wallet-reconnect-state] commit 7/10: strengthen sdk-utils layer – 1776638435468569736
+// [fix/market-expiry-display] commit 7/10: strengthen sdk-utils layer – 1776638446444406476

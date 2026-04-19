@@ -124,4 +124,4 @@ export function createTxHistory(config?: Partial<TxHistoryConfig>): TxHistoryHan
   return new TxHistoryHandler({ ...DEFAULT_CONFIG, ...config });
 }
 
-// [fix/wallet-reconnect-state] commit 7/10: strengthen sdk-utils layer – 1776638435475695981
+// [fix/market-expiry-display] commit 7/10: strengthen sdk-utils layer – 1776638446451606594
