@@ -359,4 +359,4 @@ export default function PortfolioPage() {
   );
 }
 
-// [fix/api-timeout-retry] commit 5/10: refine pages layer – 1776638488417505133
+// [refactor/contract-service-split] commit 5/10: refine pages layer – 1776638498227977035

@@ -436,4 +436,4 @@ export class MarketContractService {
 
 export default MarketContractService;
 
-// [fix/api-timeout-retry] commit 6/10: optimize sdk layer – 1776638488438380406
+// [refactor/contract-service-split] commit 6/10: optimize sdk layer – 1776638498247331789

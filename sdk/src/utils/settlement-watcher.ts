@@ -124,4 +124,4 @@ export function createSettlementWatcher(config?: Partial<SettlementWatcherConfig
   return new SettlementWatcherHandler({ ...DEFAULT_CONFIG, ...config });
 }
 
-// [fix/api-timeout-retry] commit 7/10: strengthen sdk-utils layer – 1776638488464797246
+// [refactor/contract-service-split] commit 7/10: strengthen sdk-utils layer – 1776638498270159256

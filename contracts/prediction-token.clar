@@ -159,4 +159,4 @@
   (mint (get amount recipient) (get user recipient))
 )
 
-;; [fix/api-timeout-retry] commit 1/10: enhance contracts layer – 1776638488324376410
+;; [refactor/contract-service-split] commit 1/10: enhance contracts layer – 1776638498108273967

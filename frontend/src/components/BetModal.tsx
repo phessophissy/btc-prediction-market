@@ -268,4 +268,4 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
   );
 }
 
-// [fix/api-timeout-retry] commit 2/10: improve ui layer – 1776638488346856626
+// [refactor/contract-service-split] commit 2/10: improve ui layer – 1776638498153169128

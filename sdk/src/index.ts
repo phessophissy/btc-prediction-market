@@ -13,4 +13,4 @@ export function initializeMarketSDK(
   return new MarketContractService(contractAddress, isMainnet, contractName);
 }
 
-// [fix/api-timeout-retry] commit 6/10: optimize sdk layer – 1776638488441251444
+// [refactor/contract-service-split] commit 6/10: optimize sdk layer – 1776638498249831460
