@@ -20,4 +20,4 @@ trusted_sender = false
 trusted_caller = false
 callee_filter = false
 
-# [feat/batch-betting] commit 10/10: polish config layer – 1776638349094980485
+# [feat/price-chart-widget] commit 10/10: polish config layer – 1776638359983170806
