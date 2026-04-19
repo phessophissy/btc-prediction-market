@@ -72,4 +72,4 @@ export function getMarketPhaseColor(phase: MarketPhase): string {
   return colors[phase];
 }
 
-// [chore/github-actions-matrix] commit 7/10: strengthen sdk-utils layer – 1776638601212388396
+// [chore/dependency-audit-update] commit 7/10: strengthen sdk-utils layer – 1776638611601079378
