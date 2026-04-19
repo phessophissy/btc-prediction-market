@@ -268,4 +268,4 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
   );
 }
 
-// [docs/testing-handbook] commit 2/10: improve ui layer – 1776638570529363414
+// [chore/vitest-coverage-config] commit 2/10: improve ui layer – 1776638580387091995

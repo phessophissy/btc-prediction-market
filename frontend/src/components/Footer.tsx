@@ -65,4 +65,4 @@ export function Footer() {
   );
 }
 
-// [docs/testing-handbook] commit 2/10: improve ui layer – 1776638570531117420
+// [chore/vitest-coverage-config] commit 2/10: improve ui layer – 1776638580388828910
