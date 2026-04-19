@@ -436,4 +436,4 @@ export class MarketContractService {
 
 export default MarketContractService;
 
-// [feat/social-trading] commit 6/10: optimize sdk layer – 1776638339264428778
+// [feat/batch-betting] commit 6/10: optimize sdk layer – 1776638349005407224
