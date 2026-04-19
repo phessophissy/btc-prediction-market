@@ -29,4 +29,4 @@ Keep changes narrow. A small reviewable commit is preferred over a broad refacto
 - Call out any network-specific assumptions.
 - Include screenshots for frontend visual changes when relevant.
 
-<!-- [fix/mobile-bet-modal-scroll] commit 9/10: revise docs layer – 1776638456944567500 -->
+<!-- [fix/token-decimal-precision] commit 9/10: revise docs layer – 1776638467767215089 -->
