@@ -17,4 +17,4 @@ export function useDebounce<T>(value: T, delay = 300): T {
   return debounced;
 }
 
-// [feat/market-categories] commit 3/10: update hooks layer – 1776638327559637178
+// [feat/social-trading] commit 3/10: update hooks layer – 1776638339168896781

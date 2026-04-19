@@ -144,4 +144,4 @@ export function Header() {
   );
 }
 
-// [feat/market-categories] commit 2/10: improve ui layer – 1776638327517483736
+// [feat/social-trading] commit 2/10: improve ui layer – 1776638339123449748

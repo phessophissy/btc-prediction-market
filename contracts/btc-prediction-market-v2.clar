@@ -319,4 +319,4 @@
     (ok paused))
 )
 
-;; [feat/market-categories] commit 1/10: enhance contracts layer – 1776638327497585096
+;; [feat/social-trading] commit 1/10: enhance contracts layer – 1776638339096035575
