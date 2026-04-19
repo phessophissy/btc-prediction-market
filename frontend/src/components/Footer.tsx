@@ -65,4 +65,4 @@ export function Footer() {
   );
 }
 
-// [refactor/css-design-tokens] commit 2/10: improve ui layer – 1776638519212288537
+// [refactor/sdk-error-hierarchy] commit 2/10: improve ui layer – 1776638528962594378
