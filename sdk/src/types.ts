@@ -32,4 +32,4 @@ export interface UserPosition {
   claimed: boolean;
 }
 
-// [docs/testing-handbook] commit 6/10: optimize sdk layer – 1776638570655984220
+// [chore/vitest-coverage-config] commit 6/10: optimize sdk layer – 1776638580485716253

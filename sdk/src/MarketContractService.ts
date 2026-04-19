@@ -436,4 +436,4 @@ export class MarketContractService {
 
 export default MarketContractService;
 
-// [docs/testing-handbook] commit 6/10: optimize sdk layer – 1776638570654499322
+// [chore/vitest-coverage-config] commit 6/10: optimize sdk layer – 1776638580484253116
