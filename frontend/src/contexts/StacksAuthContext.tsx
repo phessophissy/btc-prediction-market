@@ -85,4 +85,4 @@ export function useStacksAuth() {
   return context;
 }
 
-// [feat/stx-staking-rewards] commit 3/10: update hooks layer – 1776638401923931690
+// [fix/settlement-race-condition] commit 3/10: update hooks layer – 1776638414663449081

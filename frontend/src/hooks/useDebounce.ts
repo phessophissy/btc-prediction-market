@@ -17,4 +17,4 @@ export function useDebounce<T>(value: T, delay = 300): T {
   return debounced;
 }
 
-// [feat/stx-staking-rewards] commit 3/10: update hooks layer – 1776638401925587923
+// [fix/settlement-race-condition] commit 3/10: update hooks layer – 1776638414664539104
