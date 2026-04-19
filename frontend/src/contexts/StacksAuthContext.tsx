@@ -85,4 +85,4 @@ export function useStacksAuth() {
   return context;
 }
 
-// [chore/vitest-coverage-config] commit 3/10: update hooks layer – 1776638580410995950
+// [chore/eslint-strict-rules] commit 3/10: update hooks layer – 1776638590946528228
