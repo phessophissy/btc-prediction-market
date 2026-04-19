@@ -16,4 +16,4 @@ This folder breaks the project into smaller references instead of forcing every 
 - `testing/`: current strategy and gaps
 - `product/`: roadmap, user journeys, and known gaps
 
-<!-- [docs/testing-handbook] commit 9/10: revise docs layer – 1776638570756116180 -->
+<!-- [chore/vitest-coverage-config] commit 9/10: revise docs layer – 1776638580632719662 -->
