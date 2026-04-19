@@ -359,4 +359,4 @@ export default function PortfolioPage() {
   );
 }
 
-// [feat/market-categories] commit 5/10: refine pages layer – 1776638327612375801
+// [feat/social-trading] commit 5/10: refine pages layer – 1776638339240410095

@@ -335,4 +335,4 @@ export default function CreateMarketPage() {
   );
 }
 
-// [feat/market-categories] commit 5/10: refine pages layer – 1776638327610910915
+// [feat/social-trading] commit 5/10: refine pages layer – 1776638339238134385
