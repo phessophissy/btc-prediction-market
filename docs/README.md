@@ -16,4 +16,4 @@ This folder breaks the project into smaller references instead of forcing every 
 - `testing/`: current strategy and gaps
 - `product/`: roadmap, user journeys, and known gaps
 
-<!-- [docs/api-reference-guide] commit 9/10: revise docs layer – 1776638540440305885 -->
+<!-- [docs/deployment-playbook] commit 9/10: revise docs layer – 1776638550056828745 -->

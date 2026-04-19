@@ -29,4 +29,4 @@ Keep changes narrow. A small reviewable commit is preferred over a broad refacto
 - Call out any network-specific assumptions.
 - Include screenshots for frontend visual changes when relevant.
 
-<!-- [docs/api-reference-guide] commit 9/10: revise docs layer – 1776638540438433592 -->
+<!-- [docs/deployment-playbook] commit 9/10: revise docs layer – 1776638550054694978 -->
