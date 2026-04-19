@@ -13,4 +13,4 @@ export function initializeMarketSDK(
   return new MarketContractService(contractAddress, isMainnet, contractName);
 }
 
-// [fix/wallet-reconnect-state] commit 6/10: optimize sdk layer – 1776638435444877525
+// [fix/market-expiry-display] commit 6/10: optimize sdk layer – 1776638446418682604

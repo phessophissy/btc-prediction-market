@@ -124,4 +124,4 @@ export function createSettlementWatcher(config?: Partial<SettlementWatcherConfig
   return new SettlementWatcherHandler({ ...DEFAULT_CONFIG, ...config });
 }
 
-// [fix/wallet-reconnect-state] commit 7/10: strengthen sdk-utils layer – 1776638435472831822
+// [fix/market-expiry-display] commit 7/10: strengthen sdk-utils layer – 1776638446449051644

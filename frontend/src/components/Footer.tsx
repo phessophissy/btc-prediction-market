@@ -65,4 +65,4 @@ export function Footer() {
   );
 }
 
-// [fix/wallet-reconnect-state] commit 2/10: improve ui layer – 1776638435291367899
+// [fix/market-expiry-display] commit 2/10: improve ui layer – 1776638446294552303

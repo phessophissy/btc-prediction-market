@@ -72,4 +72,4 @@ export function getMarketPhaseColor(phase: MarketPhase): string {
   return colors[phase];
 }
 
-// [fix/wallet-reconnect-state] commit 7/10: strengthen sdk-utils layer – 1776638435470775573
+// [fix/market-expiry-display] commit 7/10: strengthen sdk-utils layer – 1776638446446229766

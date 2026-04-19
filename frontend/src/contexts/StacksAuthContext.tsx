@@ -85,4 +85,4 @@ export function useStacksAuth() {
   return context;
 }
 
-// [fix/wallet-reconnect-state] commit 3/10: update hooks layer – 1776638435321525224
+// [fix/market-expiry-display] commit 3/10: update hooks layer – 1776638446318315124

@@ -32,4 +32,4 @@ export interface UserPosition {
   claimed: boolean;
 }
 
-// [fix/wallet-reconnect-state] commit 6/10: optimize sdk layer – 1776638435442994018
+// [fix/market-expiry-display] commit 6/10: optimize sdk layer – 1776638446416799465

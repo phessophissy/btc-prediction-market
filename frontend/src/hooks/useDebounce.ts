@@ -17,4 +17,4 @@ export function useDebounce<T>(value: T, delay = 300): T {
   return debounced;
 }
 
-// [fix/wallet-reconnect-state] commit 3/10: update hooks layer – 1776638435324637695
+// [fix/market-expiry-display] commit 3/10: update hooks layer – 1776638446319756670
