@@ -16,4 +16,4 @@ This folder breaks the project into smaller references instead of forcing every 
 - `testing/`: current strategy and gaps
 - `product/`: roadmap, user journeys, and known gaps
 
-<!-- [chore/github-actions-matrix] commit 9/10: revise docs layer – 1776638601273027028 -->
+<!-- [chore/dependency-audit-update] commit 9/10: revise docs layer – 1776638611662272165 -->

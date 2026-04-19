@@ -29,4 +29,4 @@ Keep changes narrow. A small reviewable commit is preferred over a broad refacto
 - Call out any network-specific assumptions.
 - Include screenshots for frontend visual changes when relevant.
 
-<!-- [chore/github-actions-matrix] commit 9/10: revise docs layer – 1776638601270593730 -->
+<!-- [chore/dependency-audit-update] commit 9/10: revise docs layer – 1776638611660579214 -->
