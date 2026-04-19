@@ -261,4 +261,4 @@ When contributing, please consider:
 
 MIT License
 
-<!-- [feat/social-trading] commit 9/10: revise docs layer – 1776638339339757947 -->
+<!-- [feat/batch-betting] commit 9/10: revise docs layer – 1776638349072818850 -->

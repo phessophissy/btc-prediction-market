@@ -16,4 +16,4 @@ This folder breaks the project into smaller references instead of forcing every 
 - `testing/`: current strategy and gaps
 - `product/`: roadmap, user journeys, and known gaps
 
-<!-- [feat/social-trading] commit 9/10: revise docs layer – 1776638339343251546 -->
+<!-- [feat/batch-betting] commit 9/10: revise docs layer – 1776638349075339784 -->
