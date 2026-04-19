@@ -85,4 +85,4 @@ export function useStacksAuth() {
   return context;
 }
 
-// [docs/market-lifecycle-diagrams] commit 3/10: update hooks layer – 1776638559253395274
+// [docs/testing-handbook] commit 3/10: update hooks layer – 1776638570556403578
