@@ -359,4 +359,4 @@ export default function PortfolioPage() {
   );
 }
 
-// [docs/testing-handbook] commit 5/10: refine pages layer – 1776638570628298507
+// [chore/vitest-coverage-config] commit 5/10: refine pages layer – 1776638580461246516
