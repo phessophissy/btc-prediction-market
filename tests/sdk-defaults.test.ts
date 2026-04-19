@@ -17,4 +17,4 @@ describe("sdk defaults", () => {
   });
 });
 
-// [docs/api-reference-guide] commit 8/10: augment test layer – 1776638540409937992
+// [docs/deployment-playbook] commit 8/10: augment test layer – 1776638550016355271
