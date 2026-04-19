@@ -636,4 +636,4 @@
     (ok paused))
 )
 
-;; [refactor/sdk-error-hierarchy] commit 1/10: enhance contracts layer – 1776638528919401583
+;; [docs/api-reference-guide] commit 1/10: enhance contracts layer – 1776638540212702968
