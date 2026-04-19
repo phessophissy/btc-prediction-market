@@ -335,4 +335,4 @@ export default function CreateMarketPage() {
   );
 }
 
-// [docs/market-lifecycle-diagrams] commit 5/10: refine pages layer – 1776638559309224182
+// [docs/testing-handbook] commit 5/10: refine pages layer – 1776638570626146420

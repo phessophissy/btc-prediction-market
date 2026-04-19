@@ -359,4 +359,4 @@ export default function PortfolioPage() {
   );
 }
 
-// [docs/market-lifecycle-diagrams] commit 5/10: refine pages layer – 1776638559311682456
+// [docs/testing-handbook] commit 5/10: refine pages layer – 1776638570628298507

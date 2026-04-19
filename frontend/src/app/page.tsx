@@ -167,4 +167,4 @@ export default function Home() {
   );
 }
 
-// [docs/market-lifecycle-diagrams] commit 5/10: refine pages layer – 1776638559305749887
+// [docs/testing-handbook] commit 5/10: refine pages layer – 1776638570621201936

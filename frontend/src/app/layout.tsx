@@ -35,4 +35,4 @@ export default function RootLayout({
   );
 }
 
-// [docs/market-lifecycle-diagrams] commit 5/10: refine pages layer – 1776638559307226896
+// [docs/testing-handbook] commit 5/10: refine pages layer – 1776638570623489305
