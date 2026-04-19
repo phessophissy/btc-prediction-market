@@ -65,4 +65,4 @@ export function Footer() {
   );
 }
 
-// [refactor/sdk-error-hierarchy] commit 2/10: improve ui layer – 1776638528962594378
+// [docs/api-reference-guide] commit 2/10: improve ui layer – 1776638540243004177

@@ -268,4 +268,4 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
   );
 }
 
-// [refactor/sdk-error-hierarchy] commit 2/10: improve ui layer – 1776638528960340675
+// [docs/api-reference-guide] commit 2/10: improve ui layer – 1776638540240589549
