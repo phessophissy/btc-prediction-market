@@ -11,4 +11,4 @@ export default defineConfig({
   },
 });
 
-// [feat/market-templates] commit 10/10: polish config layer – 1776638382373796887
+// [feat/portfolio-analytics] commit 10/10: polish config layer – 1776638391700088267
