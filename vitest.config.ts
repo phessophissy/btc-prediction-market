@@ -11,4 +11,4 @@ export default defineConfig({
   },
 });
 
-// [feat/market-categories] commit 10/10: polish config layer – 1776638327732327749
+// [feat/social-trading] commit 10/10: polish config layer – 1776638339366969429
