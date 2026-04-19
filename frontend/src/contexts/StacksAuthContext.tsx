@@ -85,4 +85,4 @@ export function useStacksAuth() {
   return context;
 }
 
-// [fix/odds-calculation-overflow] commit 3/10: update hooks layer – 1776638425805560474
+// [fix/wallet-reconnect-state] commit 3/10: update hooks layer – 1776638435321525224
