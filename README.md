@@ -261,4 +261,4 @@ When contributing, please consider:
 
 MIT License
 
-<!-- [fix/wallet-reconnect-state] commit 9/10: revise docs layer – 1776638435521953167 -->
+<!-- [fix/market-expiry-display] commit 9/10: revise docs layer – 1776638446517802340 -->
