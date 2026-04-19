@@ -17,4 +17,4 @@ describe("sdk defaults", () => {
   });
 });
 
-// [feat/market-categories] commit 8/10: augment test layer – 1776638327682565672
+// [feat/social-trading] commit 8/10: augment test layer – 1776638339315967667

@@ -118,4 +118,4 @@ describe("sdk V3 decoders", () => {
   });
 });
 
-// [feat/market-categories] commit 8/10: augment test layer – 1776638327684072316
+// [feat/social-trading] commit 8/10: augment test layer – 1776638339317221608
