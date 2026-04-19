@@ -11,4 +11,4 @@ export default defineConfig({
   },
 });
 
-// [fix/ssr-hydration-mismatch] commit 10/10: polish config layer – 1776638478470278628
+// [fix/api-timeout-retry] commit 10/10: polish config layer – 1776638488536234759

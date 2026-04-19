@@ -32,4 +32,4 @@ export interface UserPosition {
   claimed: boolean;
 }
 
-// [fix/ssr-hydration-mismatch] commit 6/10: optimize sdk layer – 1776638478368390820
+// [fix/api-timeout-retry] commit 6/10: optimize sdk layer – 1776638488439936211

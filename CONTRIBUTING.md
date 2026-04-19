@@ -29,4 +29,4 @@ Keep changes narrow. A small reviewable commit is preferred over a broad refacto
 - Call out any network-specific assumptions.
 - Include screenshots for frontend visual changes when relevant.
 
-<!-- [fix/ssr-hydration-mismatch] commit 9/10: revise docs layer – 1776638478442341426 -->
+<!-- [fix/api-timeout-retry] commit 9/10: revise docs layer – 1776638488512242469 -->
