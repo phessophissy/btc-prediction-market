@@ -85,4 +85,4 @@ export function useStacksAuth() {
   return context;
 }
 
-// [feat/portfolio-analytics] commit 3/10: update hooks layer – 1776638391531535720
+// [feat/stx-staking-rewards] commit 3/10: update hooks layer – 1776638401923931690

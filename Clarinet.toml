@@ -20,4 +20,4 @@ trusted_sender = false
 trusted_caller = false
 callee_filter = false
 
-# [feat/portfolio-analytics] commit 10/10: polish config layer – 1776638391698436247
+# [feat/stx-staking-rewards] commit 10/10: polish config layer – 1776638402106697308

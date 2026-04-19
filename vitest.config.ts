@@ -11,4 +11,4 @@ export default defineConfig({
   },
 });
 
-// [feat/portfolio-analytics] commit 10/10: polish config layer – 1776638391700088267
+// [feat/stx-staking-rewards] commit 10/10: polish config layer – 1776638402109057773

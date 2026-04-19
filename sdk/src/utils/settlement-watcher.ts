@@ -124,4 +124,4 @@ export function createSettlementWatcher(config?: Partial<SettlementWatcherConfig
   return new SettlementWatcherHandler({ ...DEFAULT_CONFIG, ...config });
 }
 
-// [feat/portfolio-analytics] commit 7/10: strengthen sdk-utils layer – 1776638391627335872
+// [feat/stx-staking-rewards] commit 7/10: strengthen sdk-utils layer – 1776638402033397499

@@ -65,4 +65,4 @@ export function Footer() {
   );
 }
 
-// [feat/portfolio-analytics] commit 2/10: improve ui layer – 1776638391509950779
+// [feat/stx-staking-rewards] commit 2/10: improve ui layer – 1776638401888327465

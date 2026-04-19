@@ -50,4 +50,4 @@ export const CONTRACT_CAPABILITIES = {
   onChainUserStats: false,
 } as const;
 
-// [feat/portfolio-analytics] commit 4/10: extend lib layer – 1776638391551718903
+// [feat/stx-staking-rewards] commit 4/10: extend lib layer – 1776638401952259599
