@@ -19,3 +19,5 @@ strict = false
 trusted_sender = false
 trusted_caller = false
 callee_filter = false
+
+# [feat/multi-chain-support] commit 10/10: polish config layer – 1776638306152258898

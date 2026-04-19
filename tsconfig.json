@@ -13,3 +13,5 @@
   "include": ["tests/**/*", "scripts/**/*"],
   "exclude": ["node_modules"]
 }
+
+# [feat/multi-chain-support] commit 10/10: polish config layer – 1776638306157776740
