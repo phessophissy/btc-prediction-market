@@ -32,4 +32,4 @@ export interface UserPosition {
   claimed: boolean;
 }
 
-// [feat/notification-system] commit 6/10: optimize sdk layer – 1776638370044329992
+// [feat/market-templates] commit 6/10: optimize sdk layer – 1776638382273052118

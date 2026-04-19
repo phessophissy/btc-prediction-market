@@ -436,4 +436,4 @@ export class MarketContractService {
 
 export default MarketContractService;
 
-// [feat/notification-system] commit 6/10: optimize sdk layer – 1776638370043027399
+// [feat/market-templates] commit 6/10: optimize sdk layer – 1776638382271606527

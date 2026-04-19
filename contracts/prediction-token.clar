@@ -159,4 +159,4 @@
   (mint (get amount recipient) (get user recipient))
 )
 
-;; [feat/notification-system] commit 1/10: enhance contracts layer – 1776638369925062667
+;; [feat/market-templates] commit 1/10: enhance contracts layer – 1776638382112279826
