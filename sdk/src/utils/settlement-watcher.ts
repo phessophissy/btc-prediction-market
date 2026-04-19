@@ -124,4 +124,4 @@ export function createSettlementWatcher(config?: Partial<SettlementWatcherConfig
   return new SettlementWatcherHandler({ ...DEFAULT_CONFIG, ...config });
 }
 
-// [chore/eslint-strict-rules] commit 7/10: strengthen sdk-utils layer – 1776638591033794378
+// [chore/github-actions-matrix] commit 7/10: strengthen sdk-utils layer – 1776638601213892999
