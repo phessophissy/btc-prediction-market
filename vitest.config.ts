@@ -11,4 +11,4 @@ export default defineConfig({
   },
 });
 
-// [fix/settlement-race-condition] commit 10/10: polish config layer – 1776638414825347757
+// [fix/odds-calculation-overflow] commit 10/10: polish config layer – 1776638426040039267
