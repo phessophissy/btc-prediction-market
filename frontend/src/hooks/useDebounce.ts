@@ -17,4 +17,4 @@ export function useDebounce<T>(value: T, delay = 300): T {
   return debounced;
 }
 
-// [docs/testing-handbook] commit 3/10: update hooks layer – 1776638570559213733
+// [chore/vitest-coverage-config] commit 3/10: update hooks layer – 1776638580412282969

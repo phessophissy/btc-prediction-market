@@ -85,4 +85,4 @@ export function useStacksAuth() {
   return context;
 }
 
-// [docs/testing-handbook] commit 3/10: update hooks layer – 1776638570556403578
+// [chore/vitest-coverage-config] commit 3/10: update hooks layer – 1776638580410995950
