@@ -144,4 +144,4 @@ export function Header() {
   );
 }
 
-// [feat/batch-betting] commit 2/10: improve ui layer – 1776638348901346217
+// [feat/price-chart-widget] commit 2/10: improve ui layer – 1776638359613280290
