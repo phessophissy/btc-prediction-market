@@ -17,4 +17,4 @@ describe("sdk defaults", () => {
   });
 });
 
-// [fix/api-timeout-retry] commit 8/10: augment test layer – 1776638488486399353
+// [refactor/contract-service-split] commit 8/10: augment test layer – 1776638498292061300
