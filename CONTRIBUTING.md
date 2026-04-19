@@ -29,4 +29,4 @@ Keep changes narrow. A small reviewable commit is preferred over a broad refacto
 - Call out any network-specific assumptions.
 - Include screenshots for frontend visual changes when relevant.
 
-<!-- [feat/notification-system] commit 9/10: revise docs layer – 1776638370110622526 -->
+<!-- [feat/market-templates] commit 9/10: revise docs layer – 1776638382347936445 -->
