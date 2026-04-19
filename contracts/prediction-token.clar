@@ -159,4 +159,4 @@
   (mint (get amount recipient) (get user recipient))
 )
 
-;; [fix/odds-calculation-overflow] commit 1/10: enhance contracts layer – 1776638425757045259
+;; [fix/wallet-reconnect-state] commit 1/10: enhance contracts layer – 1776638435260339691

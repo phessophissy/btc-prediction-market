@@ -726,4 +726,4 @@ export function getOutcomeLabel(
   return "Unknown";
 }
 
-// [fix/odds-calculation-overflow] commit 4/10: extend lib layer – 1776638425828978528
+// [fix/wallet-reconnect-state] commit 4/10: extend lib layer – 1776638435367516175

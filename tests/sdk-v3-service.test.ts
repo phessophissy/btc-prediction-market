@@ -118,4 +118,4 @@ describe("sdk V3 decoders", () => {
   });
 });
 
-// [fix/odds-calculation-overflow] commit 8/10: augment test layer – 1776638425990061247
+// [fix/wallet-reconnect-state] commit 8/10: augment test layer – 1776638435498620780

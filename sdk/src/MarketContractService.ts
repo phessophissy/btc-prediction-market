@@ -436,4 +436,4 @@ export class MarketContractService {
 
 export default MarketContractService;
 
-// [fix/odds-calculation-overflow] commit 6/10: optimize sdk layer – 1776638425909690871
+// [fix/wallet-reconnect-state] commit 6/10: optimize sdk layer – 1776638435441030486

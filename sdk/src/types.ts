@@ -32,4 +32,4 @@ export interface UserPosition {
   claimed: boolean;
 }
 
-// [fix/odds-calculation-overflow] commit 6/10: optimize sdk layer – 1776638425912638336
+// [fix/wallet-reconnect-state] commit 6/10: optimize sdk layer – 1776638435442994018

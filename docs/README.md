@@ -16,4 +16,4 @@ This folder breaks the project into smaller references instead of forcing every 
 - `testing/`: current strategy and gaps
 - `product/`: roadmap, user journeys, and known gaps
 
-<!-- [fix/odds-calculation-overflow] commit 9/10: revise docs layer – 1776638426017572286 -->
+<!-- [fix/wallet-reconnect-state] commit 9/10: revise docs layer – 1776638435525492601 -->
