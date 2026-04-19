@@ -319,4 +319,4 @@
     (ok paused))
 )
 
-;; [feat/batch-betting] commit 1/10: enhance contracts layer – 1776638348879199735
+;; [feat/price-chart-widget] commit 1/10: enhance contracts layer – 1776638359573703902
