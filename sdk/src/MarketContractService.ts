@@ -436,4 +436,4 @@ export class MarketContractService {
 
 export default MarketContractService;
 
-// [feat/market-templates] commit 6/10: optimize sdk layer – 1776638382271606527
+// [feat/portfolio-analytics] commit 6/10: optimize sdk layer – 1776638391598122520

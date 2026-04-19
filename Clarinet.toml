@@ -20,4 +20,4 @@ trusted_sender = false
 trusted_caller = false
 callee_filter = false
 
-# [feat/market-templates] commit 10/10: polish config layer – 1776638382372357704
+# [feat/portfolio-analytics] commit 10/10: polish config layer – 1776638391698436247
