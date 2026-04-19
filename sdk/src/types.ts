@@ -32,4 +32,4 @@ export interface UserPosition {
   claimed: boolean;
 }
 
-// [fix/api-timeout-retry] commit 6/10: optimize sdk layer – 1776638488439936211
+// [refactor/contract-service-split] commit 6/10: optimize sdk layer – 1776638498248615084
