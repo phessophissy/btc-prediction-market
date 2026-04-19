@@ -17,4 +17,4 @@ describe("sdk defaults", () => {
   });
 });
 
-// [feat/stx-staking-rewards] commit 8/10: augment test layer – 1776638402060310642
+// [fix/settlement-race-condition] commit 8/10: augment test layer – 1776638414773095455
