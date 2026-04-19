@@ -20,4 +20,4 @@ trusted_sender = false
 trusted_caller = false
 callee_filter = false
 
-# [refactor/sdk-error-hierarchy] commit 10/10: polish config layer – 1776638529164715427
+# [docs/api-reference-guide] commit 10/10: polish config layer – 1776638540464172374
