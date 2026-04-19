@@ -17,4 +17,4 @@ describe("sdk defaults", () => {
   });
 });
 
-// [fix/wallet-reconnect-state] commit 8/10: augment test layer – 1776638435497302781
+// [fix/market-expiry-display] commit 8/10: augment test layer – 1776638446478736961

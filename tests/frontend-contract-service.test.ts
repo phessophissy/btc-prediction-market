@@ -140,4 +140,4 @@ describe("contractService derived helpers", () => {
   });
 });
 
-// [fix/wallet-reconnect-state] commit 8/10: augment test layer – 1776638435500074997
+// [fix/market-expiry-display] commit 8/10: augment test layer – 1776638446485134148
