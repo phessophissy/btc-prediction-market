@@ -124,4 +124,4 @@ export function createSettlementWatcher(config?: Partial<SettlementWatcherConfig
   return new SettlementWatcherHandler({ ...DEFAULT_CONFIG, ...config });
 }
 
-// [docs/deployment-playbook] commit 7/10: strengthen sdk-utils layer – 1776638549992632275
+// [docs/market-lifecycle-diagrams] commit 7/10: strengthen sdk-utils layer – 1776638559362383745

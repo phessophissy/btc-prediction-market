@@ -49,4 +49,4 @@ export function getLeadingOutcome(market: Market): string | null {
   return entries[0][0];
 }
 
-// [docs/deployment-playbook] commit 7/10: strengthen sdk-utils layer – 1776638549989514123
+// [docs/market-lifecycle-diagrams] commit 7/10: strengthen sdk-utils layer – 1776638559359391563
