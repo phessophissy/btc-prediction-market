@@ -67,3 +67,5 @@ export function estimateBlockTime(blocksRemaining: number): number {
   const MS_PER_BLOCK = 10 * 60 * 1000;
   return Date.now() + blocksRemaining * MS_PER_BLOCK;
 }
+
+// [feat/multi-chain-support] commit 4/10: extend lib layer – 1776638305936134670

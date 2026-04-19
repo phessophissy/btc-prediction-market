@@ -19,3 +19,5 @@ export function formatBlocksToEta(blocks: number): string {
   if (minutes < 1440) return `${Math.floor(minutes / 60)}h ${minutes % 60}m`;
   return `${Math.floor(minutes / 1440)}d ${Math.floor((minutes % 1440) / 60)}h`;
 }
+
+// [feat/multi-chain-support] commit 4/10: extend lib layer – 1776638305930209402

@@ -49,3 +49,5 @@ export const CONTRACT_CAPABILITIES = {
   claimWinnings: false,
   onChainUserStats: false,
 } as const;
+
+// [feat/multi-chain-support] commit 4/10: extend lib layer – 1776638305932172562
