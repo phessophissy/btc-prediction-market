@@ -48,4 +48,4 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   return [storedValue, setValue, removeValue] as const;
 }
 
-// [docs/api-reference-guide] commit 3/10: update hooks layer – 1776638540267086509
+// [docs/deployment-playbook] commit 3/10: update hooks layer – 1776638549842780425

@@ -50,4 +50,4 @@ export const CONTRACT_CAPABILITIES = {
   onChainUserStats: false,
 } as const;
 
-// [docs/api-reference-guide] commit 4/10: extend lib layer – 1776638540295633096
+// [docs/deployment-playbook] commit 4/10: extend lib layer – 1776638549870370632

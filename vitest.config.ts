@@ -11,4 +11,4 @@ export default defineConfig({
   },
 });
 
-// [docs/api-reference-guide] commit 10/10: polish config layer – 1776638540465726850
+// [docs/deployment-playbook] commit 10/10: polish config layer – 1776638550080027959
