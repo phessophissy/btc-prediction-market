@@ -50,4 +50,4 @@ export const CONTRACT_CAPABILITIES = {
   onChainUserStats: false,
 } as const;
 
-// [feat/limit-order-engine] commit 4/10: extend lib layer – 1776638317452779494
+// [feat/market-categories] commit 4/10: extend lib layer – 1776638327583272677
