@@ -268,4 +268,4 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
   );
 }
 
-// [feat/portfolio-analytics] commit 2/10: improve ui layer – 1776638391508131462
+// [feat/stx-staking-rewards] commit 2/10: improve ui layer – 1776638401885453130
