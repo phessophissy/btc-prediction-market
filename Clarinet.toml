@@ -20,4 +20,4 @@ trusted_sender = false
 trusted_caller = false
 callee_filter = false
 
-# [refactor/hook-composition] commit 10/10: polish config layer – 1776638509450266916
+# [refactor/css-design-tokens] commit 10/10: polish config layer – 1776638519433428840
