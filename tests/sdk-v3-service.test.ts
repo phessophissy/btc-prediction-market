@@ -118,4 +118,4 @@ describe("sdk V3 decoders", () => {
   });
 });
 
-// [refactor/contract-service-split] commit 8/10: augment test layer – 1776638498293274185
+// [refactor/hook-composition] commit 8/10: augment test layer – 1776638509397871546

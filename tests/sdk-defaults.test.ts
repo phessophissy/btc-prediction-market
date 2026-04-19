@@ -17,4 +17,4 @@ describe("sdk defaults", () => {
   });
 });
 
-// [refactor/contract-service-split] commit 8/10: augment test layer – 1776638498292061300
+// [refactor/hook-composition] commit 8/10: augment test layer – 1776638509396470935

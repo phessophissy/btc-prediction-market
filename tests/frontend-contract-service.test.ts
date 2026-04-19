@@ -140,4 +140,4 @@ describe("contractService derived helpers", () => {
   });
 });
 
-// [refactor/contract-service-split] commit 8/10: augment test layer – 1776638498294576586
+// [refactor/hook-composition] commit 8/10: augment test layer – 1776638509399399041
