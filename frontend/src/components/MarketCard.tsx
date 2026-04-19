@@ -387,4 +387,4 @@ export function MarketCard({ market }: MarketCardProps) {
   );
 }
 
-// [fix/wallet-reconnect-state] commit 2/10: improve ui layer – 1776638435288813088
+// [fix/market-expiry-display] commit 2/10: improve ui layer – 1776638446291521491
