@@ -20,4 +20,4 @@ export function formatBlocksToEta(blocks: number): string {
   return `${Math.floor(minutes / 1440)}d ${Math.floor((minutes % 1440) / 60)}h`;
 }
 
-// [feat/price-chart-widget] commit 4/10: extend lib layer – 1776638359724311556
+// [feat/notification-system] commit 4/10: extend lib layer – 1776638369996209492
