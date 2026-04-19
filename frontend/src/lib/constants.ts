@@ -50,4 +50,4 @@ export const CONTRACT_CAPABILITIES = {
   onChainUserStats: false,
 } as const;
 
-// [fix/market-expiry-display] commit 4/10: extend lib layer – 1776638446340055581
+// [fix/mobile-bet-modal-scroll] commit 4/10: extend lib layer – 1776638456817221119

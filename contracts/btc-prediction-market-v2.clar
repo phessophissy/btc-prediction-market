@@ -319,4 +319,4 @@
     (ok paused))
 )
 
-;; [fix/market-expiry-display] commit 1/10: enhance contracts layer – 1776638446259143855
+;; [fix/mobile-bet-modal-scroll] commit 1/10: enhance contracts layer – 1776638456750332148

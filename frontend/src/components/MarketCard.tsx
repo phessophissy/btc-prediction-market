@@ -387,4 +387,4 @@ export function MarketCard({ market }: MarketCardProps) {
   );
 }
 
-// [fix/market-expiry-display] commit 2/10: improve ui layer – 1776638446291521491
+// [fix/mobile-bet-modal-scroll] commit 2/10: improve ui layer – 1776638456771020533
