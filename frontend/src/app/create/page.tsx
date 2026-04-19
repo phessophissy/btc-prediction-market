@@ -335,4 +335,4 @@ export default function CreateMarketPage() {
   );
 }
 
-// [chore/vitest-coverage-config] commit 5/10: refine pages layer – 1776638580459657357
+// [chore/eslint-strict-rules] commit 5/10: refine pages layer – 1776638590991170589

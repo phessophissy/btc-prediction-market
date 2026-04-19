@@ -35,4 +35,4 @@ export default function RootLayout({
   );
 }
 
-// [chore/vitest-coverage-config] commit 5/10: refine pages layer – 1776638580458156501
+// [chore/eslint-strict-rules] commit 5/10: refine pages layer – 1776638590989811119
