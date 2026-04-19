@@ -387,4 +387,4 @@ export function MarketCard({ market }: MarketCardProps) {
   );
 }
 
-// [docs/testing-handbook] commit 2/10: improve ui layer – 1776638570527819124
+// [chore/vitest-coverage-config] commit 2/10: improve ui layer – 1776638580385763261

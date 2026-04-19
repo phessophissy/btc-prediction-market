@@ -13,4 +13,4 @@ export function initializeMarketSDK(
   return new MarketContractService(contractAddress, isMainnet, contractName);
 }
 
-// [docs/testing-handbook] commit 6/10: optimize sdk layer – 1776638570657770251
+// [chore/vitest-coverage-config] commit 6/10: optimize sdk layer – 1776638580487479484

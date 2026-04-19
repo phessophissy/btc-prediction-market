@@ -726,4 +726,4 @@ export function getOutcomeLabel(
   return "Unknown";
 }
 
-// [docs/testing-handbook] commit 4/10: extend lib layer – 1776638570589465143
+// [chore/vitest-coverage-config] commit 4/10: extend lib layer – 1776638580433830719

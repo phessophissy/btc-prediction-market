@@ -124,4 +124,4 @@ export function createTxHistory(config?: Partial<TxHistoryConfig>): TxHistoryHan
   return new TxHistoryHandler({ ...DEFAULT_CONFIG, ...config });
 }
 
-// [docs/testing-handbook] commit 7/10: strengthen sdk-utils layer – 1776638570691046287
+// [chore/vitest-coverage-config] commit 7/10: strengthen sdk-utils layer – 1776638580517111040

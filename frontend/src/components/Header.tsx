@@ -144,4 +144,4 @@ export function Header() {
   );
 }
 
-// [docs/testing-handbook] commit 2/10: improve ui layer – 1776638570526213307
+// [chore/vitest-coverage-config] commit 2/10: improve ui layer – 1776638580384333651

@@ -49,4 +49,4 @@ export function getLeadingOutcome(market: Market): string | null {
   return entries[0][0];
 }
 
-// [docs/testing-handbook] commit 7/10: strengthen sdk-utils layer – 1776638570685309425
+// [chore/vitest-coverage-config] commit 7/10: strengthen sdk-utils layer – 1776638580511150694

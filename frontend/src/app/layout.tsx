@@ -35,4 +35,4 @@ export default function RootLayout({
   );
 }
 
-// [docs/testing-handbook] commit 5/10: refine pages layer – 1776638570623489305
+// [chore/vitest-coverage-config] commit 5/10: refine pages layer – 1776638580458156501

@@ -335,4 +335,4 @@ export default function CreateMarketPage() {
   );
 }
 
-// [docs/testing-handbook] commit 5/10: refine pages layer – 1776638570626146420
+// [chore/vitest-coverage-config] commit 5/10: refine pages layer – 1776638580459657357

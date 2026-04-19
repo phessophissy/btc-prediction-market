@@ -167,4 +167,4 @@ export default function Home() {
   );
 }
 
-// [docs/testing-handbook] commit 5/10: refine pages layer – 1776638570621201936
+// [chore/vitest-coverage-config] commit 5/10: refine pages layer – 1776638580456689465

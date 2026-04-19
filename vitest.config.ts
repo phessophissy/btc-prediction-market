@@ -11,4 +11,4 @@ export default defineConfig({
   },
 });
 
-// [docs/testing-handbook] commit 10/10: polish config layer – 1776638570788342471
+// [chore/vitest-coverage-config] commit 10/10: polish config layer – 1776638580702252416

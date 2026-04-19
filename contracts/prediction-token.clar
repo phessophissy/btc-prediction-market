@@ -159,4 +159,4 @@
   (mint (get amount recipient) (get user recipient))
 )
 
-;; [docs/testing-handbook] commit 1/10: enhance contracts layer – 1776638570501366572
+;; [chore/vitest-coverage-config] commit 1/10: enhance contracts layer – 1776638580363417958

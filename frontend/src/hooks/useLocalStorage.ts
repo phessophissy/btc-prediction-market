@@ -48,4 +48,4 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   return [storedValue, setValue, removeValue] as const;
 }
 
-// [docs/testing-handbook] commit 3/10: update hooks layer – 1776638570554276334
+// [chore/vitest-coverage-config] commit 3/10: update hooks layer – 1776638580409693726

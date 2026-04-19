@@ -261,4 +261,4 @@ When contributing, please consider:
 
 MIT License
 
-<!-- [docs/testing-handbook] commit 9/10: revise docs layer – 1776638570752470751 -->
+<!-- [chore/vitest-coverage-config] commit 9/10: revise docs layer – 1776638580622684227 -->
