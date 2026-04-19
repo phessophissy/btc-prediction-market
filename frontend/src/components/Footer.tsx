@@ -65,4 +65,4 @@ export function Footer() {
   );
 }
 
-// [fix/token-decimal-precision] commit 2/10: improve ui layer – 1776638467585985658
+// [fix/ssr-hydration-mismatch] commit 2/10: improve ui layer – 1776638478274425219
