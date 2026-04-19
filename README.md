@@ -261,4 +261,4 @@ When contributing, please consider:
 
 MIT License
 
-<!-- [feat/limit-order-engine] commit 9/10: revise docs layer – 1776638317573688861 -->
+<!-- [feat/market-categories] commit 9/10: revise docs layer – 1776638327706307252 -->

@@ -268,4 +268,4 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
   );
 }
 
-// [feat/limit-order-engine] commit 2/10: improve ui layer – 1776638317410431615
+// [feat/market-categories] commit 2/10: improve ui layer – 1776638327521696804

@@ -65,4 +65,4 @@ export function Footer() {
   );
 }
 
-// [feat/limit-order-engine] commit 2/10: improve ui layer – 1776638317412227895
+// [feat/market-categories] commit 2/10: improve ui layer – 1776638327524472277

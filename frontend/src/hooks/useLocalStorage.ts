@@ -48,4 +48,4 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   return [storedValue, setValue, removeValue] as const;
 }
 
-// [feat/limit-order-engine] commit 3/10: update hooks layer – 1776638317432095025
+// [feat/market-categories] commit 3/10: update hooks layer – 1776638327555023315

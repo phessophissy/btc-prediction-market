@@ -124,4 +124,4 @@ export function createSettlementWatcher(config?: Partial<SettlementWatcherConfig
   return new SettlementWatcherHandler({ ...DEFAULT_CONFIG, ...config });
 }
 
-// [feat/limit-order-engine] commit 7/10: strengthen sdk-utils layer – 1776638317521233462
+// [feat/market-categories] commit 7/10: strengthen sdk-utils layer – 1776638327660097742
