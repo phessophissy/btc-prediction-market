@@ -20,4 +20,4 @@ export function formatBlocksToEta(blocks: number): string {
   return `${Math.floor(minutes / 1440)}d ${Math.floor((minutes % 1440) / 60)}h`;
 }
 
-// [chore/eslint-strict-rules] commit 4/10: extend lib layer – 1776638590966394907
+// [chore/github-actions-matrix] commit 4/10: extend lib layer – 1776638601130593019
