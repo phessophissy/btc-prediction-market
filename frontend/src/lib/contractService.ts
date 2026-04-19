@@ -726,4 +726,4 @@ export function getOutcomeLabel(
   return "Unknown";
 }
 
-// [docs/deployment-playbook] commit 4/10: extend lib layer – 1776638549871818518
+// [docs/market-lifecycle-diagrams] commit 4/10: extend lib layer – 1776638559283511514
