@@ -52,4 +52,4 @@ export function useBtcPrice(intervalMs = 60_000): BtcPriceData {
   return { price, change24h, loading, error };
 }
 
-// [docs/api-reference-guide] commit 3/10: update hooks layer – 1776638540265743587
+// [docs/deployment-playbook] commit 3/10: update hooks layer – 1776638549840527353
