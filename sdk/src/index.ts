@@ -8,7 +8,7 @@ export { MarketContractService };
 export function initializeMarketSDK(
   contractAddress: string,
   isMainnet: boolean = false,
-  contractName: string = 'btc-prediction-market-v5'
+  contractName: string = 'btc-prediction-market-v4'
 ): MarketContractService {
   return new MarketContractService(contractAddress, isMainnet, contractName);
 }
