@@ -11,4 +11,4 @@ export default defineConfig({
   },
 });
 
-// [feat/notification-system] commit 10/10: polish config layer – 1776638370135014843
+// [feat/market-templates] commit 10/10: polish config layer – 1776638382373796887
