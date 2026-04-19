@@ -260,3 +260,5 @@ When contributing, please consider:
 ## 📄 License
 
 MIT License
+
+<!-- [feat/multi-chain-support] commit 9/10: revise docs layer – 1776638306124901863 -->

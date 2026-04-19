@@ -28,3 +28,5 @@ Keep changes narrow. A small reviewable commit is preferred over a broad refacto
 - Document which contract version the change targets.
 - Call out any network-specific assumptions.
 - Include screenshots for frontend visual changes when relevant.
+
+<!-- [feat/multi-chain-support] commit 9/10: revise docs layer – 1776638306126352027 -->
