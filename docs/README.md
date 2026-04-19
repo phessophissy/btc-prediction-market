@@ -16,4 +16,4 @@ This folder breaks the project into smaller references instead of forcing every 
 - `testing/`: current strategy and gaps
 - `product/`: roadmap, user journeys, and known gaps
 
-<!-- [fix/token-decimal-precision] commit 9/10: revise docs layer – 1776638467769150911 -->
+<!-- [fix/ssr-hydration-mismatch] commit 9/10: revise docs layer – 1776638478443638117 -->

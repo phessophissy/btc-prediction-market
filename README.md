@@ -261,4 +261,4 @@ When contributing, please consider:
 
 MIT License
 
-<!-- [fix/token-decimal-precision] commit 9/10: revise docs layer – 1776638467766075446 -->
+<!-- [fix/ssr-hydration-mismatch] commit 9/10: revise docs layer – 1776638478440967753 -->
