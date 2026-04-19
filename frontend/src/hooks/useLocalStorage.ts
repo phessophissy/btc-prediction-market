@@ -48,4 +48,4 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   return [storedValue, setValue, removeValue] as const;
 }
 
-// [fix/wallet-reconnect-state] commit 3/10: update hooks layer – 1776638435319466843
+// [fix/market-expiry-display] commit 3/10: update hooks layer – 1776638446316356807
