@@ -387,4 +387,4 @@ export function MarketCard({ market }: MarketCardProps) {
   );
 }
 
-// [fix/settlement-race-condition] commit 2/10: improve ui layer – 1776638414639283120
+// [fix/odds-calculation-overflow] commit 2/10: improve ui layer – 1776638425781928264
