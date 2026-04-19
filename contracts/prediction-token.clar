@@ -159,4 +159,4 @@
   (mint (get amount recipient) (get user recipient))
 )
 
-;; [docs/deployment-playbook] commit 1/10: enhance contracts layer – 1776638549784273196
+;; [docs/market-lifecycle-diagrams] commit 1/10: enhance contracts layer – 1776638559197994155

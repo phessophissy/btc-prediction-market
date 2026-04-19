@@ -17,4 +17,4 @@ export function useDebounce<T>(value: T, delay = 300): T {
   return debounced;
 }
 
-// [docs/deployment-playbook] commit 3/10: update hooks layer – 1776638549848074753
+// [docs/market-lifecycle-diagrams] commit 3/10: update hooks layer – 1776638559255478041
