@@ -14,4 +14,4 @@
   "exclude": ["node_modules"]
 }
 
-# [fix/odds-calculation-overflow] commit 10/10: polish config layer – 1776638426041408507
+# [fix/wallet-reconnect-state] commit 10/10: polish config layer – 1776638435549471780
