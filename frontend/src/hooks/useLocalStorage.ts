@@ -48,4 +48,4 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   return [storedValue, setValue, removeValue] as const;
 }
 
-// [feat/market-categories] commit 3/10: update hooks layer – 1776638327555023315
+// [feat/social-trading] commit 3/10: update hooks layer – 1776638339161787699

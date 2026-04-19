@@ -85,4 +85,4 @@ export function useStacksAuth() {
   return context;
 }
 
-// [feat/market-categories] commit 3/10: update hooks layer – 1776638327557425961
+// [feat/social-trading] commit 3/10: update hooks layer – 1776638339166579798
