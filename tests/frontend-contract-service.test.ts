@@ -140,4 +140,4 @@ describe("contractService derived helpers", () => {
   });
 });
 
-// [chore/github-actions-matrix] commit 8/10: augment test layer – 1776638601241548469
+// [chore/dependency-audit-update] commit 8/10: augment test layer – 1776638611633223819
