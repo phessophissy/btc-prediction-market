@@ -261,4 +261,4 @@ When contributing, please consider:
 
 MIT License
 
-<!-- [feat/stx-staking-rewards] commit 9/10: revise docs layer – 1776638402083980558 -->
+<!-- [fix/settlement-race-condition] commit 9/10: revise docs layer – 1776638414798518086 -->
