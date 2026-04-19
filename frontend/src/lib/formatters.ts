@@ -68,4 +68,4 @@ export function estimateBlockTime(blocksRemaining: number): number {
   return Date.now() + blocksRemaining * MS_PER_BLOCK;
 }
 
-// [fix/market-expiry-display] commit 4/10: extend lib layer – 1776638446342580948
+// [fix/mobile-bet-modal-scroll] commit 4/10: extend lib layer – 1776638456820623248
