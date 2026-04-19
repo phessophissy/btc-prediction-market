@@ -436,4 +436,4 @@ export class MarketContractService {
 
 export default MarketContractService;
 
-// [refactor/contract-service-split] commit 6/10: optimize sdk layer – 1776638498247331789
+// [refactor/hook-composition] commit 6/10: optimize sdk layer – 1776638509345584335

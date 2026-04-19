@@ -29,4 +29,4 @@ Keep changes narrow. A small reviewable commit is preferred over a broad refacto
 - Call out any network-specific assumptions.
 - Include screenshots for frontend visual changes when relevant.
 
-<!-- [refactor/contract-service-split] commit 9/10: revise docs layer – 1776638498316026781 -->
+<!-- [refactor/hook-composition] commit 9/10: revise docs layer – 1776638509423657952 -->

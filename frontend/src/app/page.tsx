@@ -167,4 +167,4 @@ export default function Home() {
   );
 }
 
-// [refactor/contract-service-split] commit 5/10: refine pages layer – 1776638498224400160
+// [refactor/hook-composition] commit 5/10: refine pages layer – 1776638509320137621

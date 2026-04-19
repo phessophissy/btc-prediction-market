@@ -16,4 +16,4 @@ This folder breaks the project into smaller references instead of forcing every 
 - `testing/`: current strategy and gaps
 - `product/`: roadmap, user journeys, and known gaps
 
-<!-- [refactor/contract-service-split] commit 9/10: revise docs layer – 1776638498317423450 -->
+<!-- [refactor/hook-composition] commit 9/10: revise docs layer – 1776638509425313405 -->

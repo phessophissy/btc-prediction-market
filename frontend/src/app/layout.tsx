@@ -35,4 +35,4 @@ export default function RootLayout({
   );
 }
 
-// [refactor/contract-service-split] commit 5/10: refine pages layer – 1776638498225634187
+// [refactor/hook-composition] commit 5/10: refine pages layer – 1776638509321368824

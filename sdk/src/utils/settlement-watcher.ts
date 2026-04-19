@@ -124,4 +124,4 @@ export function createSettlementWatcher(config?: Partial<SettlementWatcherConfig
   return new SettlementWatcherHandler({ ...DEFAULT_CONFIG, ...config });
 }
 
-// [refactor/contract-service-split] commit 7/10: strengthen sdk-utils layer – 1776638498270159256
+// [refactor/hook-composition] commit 7/10: strengthen sdk-utils layer – 1776638509372442875

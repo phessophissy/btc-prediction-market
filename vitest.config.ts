@@ -11,4 +11,4 @@ export default defineConfig({
   },
 });
 
-// [refactor/contract-service-split] commit 10/10: polish config layer – 1776638498342145699
+// [refactor/hook-composition] commit 10/10: polish config layer – 1776638509451584822

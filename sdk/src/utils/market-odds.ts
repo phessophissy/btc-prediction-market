@@ -49,4 +49,4 @@ export function getLeadingOutcome(market: Market): string | null {
   return entries[0][0];
 }
 
-// [refactor/contract-service-split] commit 7/10: strengthen sdk-utils layer – 1776638498267791580
+// [refactor/hook-composition] commit 7/10: strengthen sdk-utils layer – 1776638509369519060
