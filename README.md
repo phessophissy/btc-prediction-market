@@ -261,4 +261,4 @@ When contributing, please consider:
 
 MIT License
 
-<!-- [chore/vitest-coverage-config] commit 9/10: revise docs layer – 1776638580622684227 -->
+<!-- [chore/eslint-strict-rules] commit 9/10: revise docs layer – 1776638591136225122 -->

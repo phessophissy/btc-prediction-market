@@ -48,4 +48,4 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   return [storedValue, setValue, removeValue] as const;
 }
 
-// [chore/vitest-coverage-config] commit 3/10: update hooks layer – 1776638580409693726
+// [chore/eslint-strict-rules] commit 3/10: update hooks layer – 1776638590944965344

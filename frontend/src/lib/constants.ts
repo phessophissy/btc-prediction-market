@@ -50,4 +50,4 @@ export const CONTRACT_CAPABILITIES = {
   onChainUserStats: false,
 } as const;
 
-// [chore/vitest-coverage-config] commit 4/10: extend lib layer – 1776638580432236882
+// [chore/eslint-strict-rules] commit 4/10: extend lib layer – 1776638590968128991

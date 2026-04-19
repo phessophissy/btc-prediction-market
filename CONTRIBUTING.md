@@ -29,4 +29,4 @@ Keep changes narrow. A small reviewable commit is preferred over a broad refacto
 - Call out any network-specific assumptions.
 - Include screenshots for frontend visual changes when relevant.
 
-<!-- [chore/vitest-coverage-config] commit 9/10: revise docs layer – 1776638580625456898 -->
+<!-- [chore/eslint-strict-rules] commit 9/10: revise docs layer – 1776638591137638414 -->

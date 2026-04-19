@@ -359,4 +359,4 @@ export default function PortfolioPage() {
   );
 }
 
-// [chore/vitest-coverage-config] commit 5/10: refine pages layer – 1776638580461246516
+// [chore/eslint-strict-rules] commit 5/10: refine pages layer – 1776638590992313214
