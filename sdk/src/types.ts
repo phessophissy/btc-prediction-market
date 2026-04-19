@@ -32,4 +32,4 @@ export interface UserPosition {
   claimed: boolean;
 }
 
-// [fix/market-expiry-display] commit 6/10: optimize sdk layer – 1776638446416799465
+// [fix/mobile-bet-modal-scroll] commit 6/10: optimize sdk layer – 1776638456868818171
