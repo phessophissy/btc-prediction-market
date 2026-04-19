@@ -261,4 +261,4 @@ When contributing, please consider:
 
 MIT License
 
-<!-- [refactor/contract-service-split] commit 9/10: revise docs layer – 1776638498314718269 -->
+<!-- [refactor/hook-composition] commit 9/10: revise docs layer – 1776638509422059748 -->
