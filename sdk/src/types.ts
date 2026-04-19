@@ -32,4 +32,4 @@ export interface UserPosition {
   claimed: boolean;
 }
 
-// [docs/market-lifecycle-diagrams] commit 6/10: optimize sdk layer – 1776638559337265833
+// [docs/testing-handbook] commit 6/10: optimize sdk layer – 1776638570655984220
