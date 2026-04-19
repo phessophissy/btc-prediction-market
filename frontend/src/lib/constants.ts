@@ -50,4 +50,4 @@ export const CONTRACT_CAPABILITIES = {
   onChainUserStats: false,
 } as const;
 
-// [fix/token-decimal-precision] commit 4/10: extend lib layer – 1776638467653496875
+// [fix/ssr-hydration-mismatch] commit 4/10: extend lib layer – 1776638478316764373

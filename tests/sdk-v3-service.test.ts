@@ -118,4 +118,4 @@ describe("sdk V3 decoders", () => {
   });
 });
 
-// [fix/token-decimal-precision] commit 8/10: augment test layer – 1776638467745587086
+// [fix/ssr-hydration-mismatch] commit 8/10: augment test layer – 1776638478417493452

@@ -48,4 +48,4 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   return [storedValue, setValue, removeValue] as const;
 }
 
-// [fix/token-decimal-precision] commit 3/10: update hooks layer – 1776638467620432991
+// [fix/ssr-hydration-mismatch] commit 3/10: update hooks layer – 1776638478293689031

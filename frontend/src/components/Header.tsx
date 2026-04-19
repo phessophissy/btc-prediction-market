@@ -144,4 +144,4 @@ export function Header() {
   );
 }
 
-// [fix/token-decimal-precision] commit 2/10: improve ui layer – 1776638467577805068
+// [fix/ssr-hydration-mismatch] commit 2/10: improve ui layer – 1776638478268765929

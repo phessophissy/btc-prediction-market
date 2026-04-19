@@ -35,4 +35,4 @@ export default function RootLayout({
   );
 }
 
-// [fix/token-decimal-precision] commit 5/10: refine pages layer – 1776638467678604684
+// [fix/ssr-hydration-mismatch] commit 5/10: refine pages layer – 1776638478342945432

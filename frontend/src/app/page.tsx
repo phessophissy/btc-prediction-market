@@ -167,4 +167,4 @@ export default function Home() {
   );
 }
 
-// [fix/token-decimal-precision] commit 5/10: refine pages layer – 1776638467677482976
+// [fix/ssr-hydration-mismatch] commit 5/10: refine pages layer – 1776638478341694110

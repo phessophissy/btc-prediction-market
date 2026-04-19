@@ -159,4 +159,4 @@
   (mint (get amount recipient) (get user recipient))
 )
 
-;; [fix/token-decimal-precision] commit 1/10: enhance contracts layer – 1776638467536935468
+;; [fix/ssr-hydration-mismatch] commit 1/10: enhance contracts layer – 1776638478243603978
