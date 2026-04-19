@@ -261,4 +261,4 @@ When contributing, please consider:
 
 MIT License
 
-<!-- [fix/odds-calculation-overflow] commit 9/10: revise docs layer – 1776638426014881712 -->
+<!-- [fix/wallet-reconnect-state] commit 9/10: revise docs layer – 1776638435521953167 -->
