@@ -11,4 +11,4 @@ export default defineConfig({
   },
 });
 
-// [fix/token-decimal-precision] commit 10/10: polish config layer – 1776638467791995431
+// [fix/ssr-hydration-mismatch] commit 10/10: polish config layer – 1776638478470278628
