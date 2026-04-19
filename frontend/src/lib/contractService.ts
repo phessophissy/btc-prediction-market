@@ -726,4 +726,4 @@ export function getOutcomeLabel(
   return "Unknown";
 }
 
-// [refactor/contract-service-split] commit 4/10: extend lib layer – 1776638498204711684
+// [refactor/hook-composition] commit 4/10: extend lib layer – 1776638509299280317

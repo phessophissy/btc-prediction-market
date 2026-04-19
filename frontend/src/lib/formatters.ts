@@ -68,4 +68,4 @@ export function estimateBlockTime(blocksRemaining: number): number {
   return Date.now() + blocksRemaining * MS_PER_BLOCK;
 }
 
-// [refactor/contract-service-split] commit 4/10: extend lib layer – 1776638498206040756
+// [refactor/hook-composition] commit 4/10: extend lib layer – 1776638509300768216

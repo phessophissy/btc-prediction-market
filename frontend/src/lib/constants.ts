@@ -50,4 +50,4 @@ export const CONTRACT_CAPABILITIES = {
   onChainUserStats: false,
 } as const;
 
-// [refactor/contract-service-split] commit 4/10: extend lib layer – 1776638498203547970
+// [refactor/hook-composition] commit 4/10: extend lib layer – 1776638509297436536
