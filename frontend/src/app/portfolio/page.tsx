@@ -359,4 +359,4 @@ export default function PortfolioPage() {
   );
 }
 
-// [fix/token-decimal-precision] commit 5/10: refine pages layer – 1776638467680808743
+// [fix/ssr-hydration-mismatch] commit 5/10: refine pages layer – 1776638478345661263

@@ -335,4 +335,4 @@ export default function CreateMarketPage() {
   );
 }
 
-// [fix/token-decimal-precision] commit 5/10: refine pages layer – 1776638467679680249
+// [fix/ssr-hydration-mismatch] commit 5/10: refine pages layer – 1776638478344373548
