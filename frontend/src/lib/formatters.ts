@@ -68,4 +68,4 @@ export function estimateBlockTime(blocksRemaining: number): number {
   return Date.now() + blocksRemaining * MS_PER_BLOCK;
 }
 
-// [fix/token-decimal-precision] commit 4/10: extend lib layer – 1776638467658340646
+// [fix/ssr-hydration-mismatch] commit 4/10: extend lib layer – 1776638478320296466
