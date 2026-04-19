@@ -50,4 +50,4 @@ export const CONTRACT_CAPABILITIES = {
   onChainUserStats: false,
 } as const;
 
-// [fix/settlement-race-condition] commit 4/10: extend lib layer – 1776638414682832974
+// [fix/odds-calculation-overflow] commit 4/10: extend lib layer – 1776638425827885692
