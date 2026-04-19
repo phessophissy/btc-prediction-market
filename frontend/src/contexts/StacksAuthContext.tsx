@@ -85,4 +85,4 @@ export function useStacksAuth() {
   return context;
 }
 
-// [refactor/contract-service-split] commit 3/10: update hooks layer – 1776638498182523342
+// [refactor/hook-composition] commit 3/10: update hooks layer – 1776638509275615941

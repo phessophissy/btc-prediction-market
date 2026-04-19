@@ -17,4 +17,4 @@ export function useDebounce<T>(value: T, delay = 300): T {
   return debounced;
 }
 
-// [refactor/contract-service-split] commit 3/10: update hooks layer – 1776638498184977237
+// [refactor/hook-composition] commit 3/10: update hooks layer – 1776638509276683686
