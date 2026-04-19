@@ -11,4 +11,4 @@ export default defineConfig({
   },
 });
 
-// [fix/market-expiry-display] commit 10/10: polish config layer – 1776638446553825190
+// [fix/mobile-bet-modal-scroll] commit 10/10: polish config layer – 1776638456974031609
