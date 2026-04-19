@@ -13,4 +13,4 @@ export function initializeMarketSDK(
   return new MarketContractService(contractAddress, isMainnet, contractName);
 }
 
-// [fix/mobile-bet-modal-scroll] commit 6/10: optimize sdk layer – 1776638456870061906
+// [fix/token-decimal-precision] commit 6/10: optimize sdk layer – 1776638467702310141
