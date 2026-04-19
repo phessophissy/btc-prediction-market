@@ -11,4 +11,4 @@ export default defineConfig({
   },
 });
 
-// [fix/wallet-reconnect-state] commit 10/10: polish config layer – 1776638435548220340
+// [fix/market-expiry-display] commit 10/10: polish config layer – 1776638446553825190
