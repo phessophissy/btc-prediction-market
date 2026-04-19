@@ -124,4 +124,4 @@ export function createTxHistory(config?: Partial<TxHistoryConfig>): TxHistoryHan
   return new TxHistoryHandler({ ...DEFAULT_CONFIG, ...config });
 }
 
-// [feat/stx-staking-rewards] commit 7/10: strengthen sdk-utils layer – 1776638402035113081
+// [fix/settlement-race-condition] commit 7/10: strengthen sdk-utils layer – 1776638414752581486
