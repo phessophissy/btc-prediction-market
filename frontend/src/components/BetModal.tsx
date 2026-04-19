@@ -268,4 +268,4 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
   );
 }
 
-// [feat/price-chart-widget] commit 2/10: improve ui layer – 1776638359618972919
+// [feat/notification-system] commit 2/10: improve ui layer – 1776638369947273460

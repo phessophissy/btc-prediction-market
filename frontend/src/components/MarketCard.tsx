@@ -387,4 +387,4 @@ export function MarketCard({ market }: MarketCardProps) {
   );
 }
 
-// [feat/price-chart-widget] commit 2/10: improve ui layer – 1776638359616186454
+// [feat/notification-system] commit 2/10: improve ui layer – 1776638369946083954
