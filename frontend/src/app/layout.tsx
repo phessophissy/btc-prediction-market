@@ -35,4 +35,4 @@ export default function RootLayout({
   );
 }
 
-// [fix/api-timeout-retry] commit 5/10: refine pages layer – 1776638488414740190
+// [refactor/contract-service-split] commit 5/10: refine pages layer – 1776638498225634187
