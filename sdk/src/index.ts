@@ -13,4 +13,4 @@ export function initializeMarketSDK(
   return new MarketContractService(contractAddress, isMainnet, contractName);
 }
 
-// [fix/settlement-race-condition] commit 6/10: optimize sdk layer – 1776638414730023126
+// [fix/odds-calculation-overflow] commit 6/10: optimize sdk layer – 1776638425914339788

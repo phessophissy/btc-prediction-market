@@ -32,4 +32,4 @@ export interface UserPosition {
   claimed: boolean;
 }
 
-// [fix/settlement-race-condition] commit 6/10: optimize sdk layer – 1776638414728793451
+// [fix/odds-calculation-overflow] commit 6/10: optimize sdk layer – 1776638425912638336
