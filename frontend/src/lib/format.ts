@@ -20,4 +20,4 @@ export function formatBlocksToEta(blocks: number): string {
   return `${Math.floor(minutes / 1440)}d ${Math.floor((minutes % 1440) / 60)}h`;
 }
 
-// [feat/social-trading] commit 4/10: extend lib layer – 1776638339201436523
+// [feat/batch-betting] commit 4/10: extend lib layer – 1776638348954876686
