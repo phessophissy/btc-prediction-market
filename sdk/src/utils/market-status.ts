@@ -72,4 +72,4 @@ export function getMarketPhaseColor(phase: MarketPhase): string {
   return colors[phase];
 }
 
-// [docs/testing-handbook] commit 7/10: strengthen sdk-utils layer – 1776638570687086236
+// [chore/vitest-coverage-config] commit 7/10: strengthen sdk-utils layer – 1776638580512724064
