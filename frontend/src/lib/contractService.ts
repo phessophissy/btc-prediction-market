@@ -726,4 +726,4 @@ export function getOutcomeLabel(
   return "Unknown";
 }
 
-// [feat/market-categories] commit 4/10: extend lib layer – 1776638327585567120
+// [feat/social-trading] commit 4/10: extend lib layer – 1776638339206347414

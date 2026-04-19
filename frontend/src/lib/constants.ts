@@ -50,4 +50,4 @@ export const CONTRACT_CAPABILITIES = {
   onChainUserStats: false,
 } as const;
 
-// [feat/market-categories] commit 4/10: extend lib layer – 1776638327583272677
+// [feat/social-trading] commit 4/10: extend lib layer – 1776638339204045219
