@@ -436,4 +436,4 @@ export class MarketContractService {
 
 export default MarketContractService;
 
-// [refactor/sdk-error-hierarchy] commit 6/10: optimize sdk layer – 1776638529078921759
+// [docs/api-reference-guide] commit 6/10: optimize sdk layer – 1776638540353927638

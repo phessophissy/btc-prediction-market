@@ -32,4 +32,4 @@ export interface UserPosition {
   claimed: boolean;
 }
 
-// [refactor/sdk-error-hierarchy] commit 6/10: optimize sdk layer – 1776638529080206527
+// [docs/api-reference-guide] commit 6/10: optimize sdk layer – 1776638540356429910

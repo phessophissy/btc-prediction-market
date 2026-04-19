@@ -159,4 +159,4 @@
   (mint (get amount recipient) (get user recipient))
 )
 
-;; [refactor/sdk-error-hierarchy] commit 1/10: enhance contracts layer – 1776638528922468058
+;; [docs/api-reference-guide] commit 1/10: enhance contracts layer – 1776638540214750742

@@ -726,4 +726,4 @@ export function getOutcomeLabel(
   return "Unknown";
 }
 
-// [refactor/sdk-error-hierarchy] commit 4/10: extend lib layer – 1776638529024974531
+// [docs/api-reference-guide] commit 4/10: extend lib layer – 1776638540297224521

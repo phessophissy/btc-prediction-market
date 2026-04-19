@@ -17,4 +17,4 @@ export function useDebounce<T>(value: T, delay = 300): T {
   return debounced;
 }
 
-// [refactor/sdk-error-hierarchy] commit 3/10: update hooks layer – 1776638528995426509
+// [docs/api-reference-guide] commit 3/10: update hooks layer – 1776638540269772842

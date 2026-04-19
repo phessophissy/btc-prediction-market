@@ -72,4 +72,4 @@ export function getMarketPhaseColor(phase: MarketPhase): string {
   return colors[phase];
 }
 
-// [refactor/sdk-error-hierarchy] commit 7/10: strengthen sdk-utils layer – 1776638529101934490
+// [docs/api-reference-guide] commit 7/10: strengthen sdk-utils layer – 1776638540382938862

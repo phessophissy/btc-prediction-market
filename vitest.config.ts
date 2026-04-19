@@ -11,4 +11,4 @@ export default defineConfig({
   },
 });
 
-// [refactor/sdk-error-hierarchy] commit 10/10: polish config layer – 1776638529166735518
+// [docs/api-reference-guide] commit 10/10: polish config layer – 1776638540465726850

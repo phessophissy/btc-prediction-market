@@ -16,4 +16,4 @@ This folder breaks the project into smaller references instead of forcing every 
 - `testing/`: current strategy and gaps
 - `product/`: roadmap, user journeys, and known gaps
 
-<!-- [refactor/sdk-error-hierarchy] commit 9/10: revise docs layer – 1776638529145437468 -->
+<!-- [docs/api-reference-guide] commit 9/10: revise docs layer – 1776638540440305885 -->

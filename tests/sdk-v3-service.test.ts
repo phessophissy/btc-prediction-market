@@ -118,4 +118,4 @@ describe("sdk V3 decoders", () => {
   });
 });
 
-// [refactor/sdk-error-hierarchy] commit 8/10: augment test layer – 1776638529123971759
+// [docs/api-reference-guide] commit 8/10: augment test layer – 1776638540411279258

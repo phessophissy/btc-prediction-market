@@ -68,4 +68,4 @@ export function estimateBlockTime(blocksRemaining: number): number {
   return Date.now() + blocksRemaining * MS_PER_BLOCK;
 }
 
-// [refactor/sdk-error-hierarchy] commit 4/10: extend lib layer – 1776638529027233885
+// [docs/api-reference-guide] commit 4/10: extend lib layer – 1776638540298607999

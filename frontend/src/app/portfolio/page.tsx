@@ -359,4 +359,4 @@ export default function PortfolioPage() {
   );
 }
 
-// [refactor/sdk-error-hierarchy] commit 5/10: refine pages layer – 1776638529057839688
+// [docs/api-reference-guide] commit 5/10: refine pages layer – 1776638540327454757

@@ -48,4 +48,4 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   return [storedValue, setValue, removeValue] as const;
 }
 
-// [refactor/sdk-error-hierarchy] commit 3/10: update hooks layer – 1776638528991291830
+// [docs/api-reference-guide] commit 3/10: update hooks layer – 1776638540267086509

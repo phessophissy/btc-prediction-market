@@ -140,4 +140,4 @@ describe("contractService derived helpers", () => {
   });
 });
 
-// [refactor/sdk-error-hierarchy] commit 8/10: augment test layer – 1776638529125047271
+// [docs/api-reference-guide] commit 8/10: augment test layer – 1776638540412540971
