@@ -17,4 +17,4 @@ describe("sdk defaults", () => {
   });
 });
 
-// [docs/testing-handbook] commit 8/10: augment test layer – 1776638570718981796
+// [chore/vitest-coverage-config] commit 8/10: augment test layer – 1776638580566566978
