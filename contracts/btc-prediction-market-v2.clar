@@ -319,4 +319,4 @@
     (ok paused))
 )
 
-;; [docs/deployment-playbook] commit 1/10: enhance contracts layer – 1776638549786288722
+;; [docs/market-lifecycle-diagrams] commit 1/10: enhance contracts layer – 1776638559200055114
