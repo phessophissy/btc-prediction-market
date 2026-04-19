@@ -140,4 +140,4 @@ describe("contractService derived helpers", () => {
   });
 });
 
-// [feat/social-trading] commit 8/10: augment test layer – 1776638339318656300
+// [feat/batch-betting] commit 8/10: augment test layer – 1776638349054331294

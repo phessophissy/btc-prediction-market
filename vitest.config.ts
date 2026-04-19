@@ -11,4 +11,4 @@ export default defineConfig({
   },
 });
 
-// [feat/social-trading] commit 10/10: polish config layer – 1776638339366969429
+// [feat/batch-betting] commit 10/10: polish config layer – 1776638349096616293

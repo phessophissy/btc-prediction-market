@@ -72,4 +72,4 @@ export function getMarketPhaseColor(phase: MarketPhase): string {
   return colors[phase];
 }
 
-// [feat/social-trading] commit 7/10: strengthen sdk-utils layer – 1776638339291890313
+// [feat/batch-betting] commit 7/10: strengthen sdk-utils layer – 1776638349029192216
