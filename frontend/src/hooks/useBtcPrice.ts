@@ -52,4 +52,4 @@ export function useBtcPrice(intervalMs = 60_000): BtcPriceData {
   return { price, change24h, loading, error };
 }
 
-// [fix/ssr-hydration-mismatch] commit 3/10: update hooks layer – 1776638478292535377
+// [fix/api-timeout-retry] commit 3/10: update hooks layer – 1776638488366417534
