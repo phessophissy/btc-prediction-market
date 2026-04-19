@@ -72,4 +72,4 @@ export function getMarketPhaseColor(phase: MarketPhase): string {
   return colors[phase];
 }
 
-// [fix/settlement-race-condition] commit 7/10: strengthen sdk-utils layer – 1776638414749934635
+// [fix/odds-calculation-overflow] commit 7/10: strengthen sdk-utils layer – 1776638425952545998

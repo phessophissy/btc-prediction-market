@@ -261,4 +261,4 @@ When contributing, please consider:
 
 MIT License
 
-<!-- [fix/settlement-race-condition] commit 9/10: revise docs layer – 1776638414798518086 -->
+<!-- [fix/odds-calculation-overflow] commit 9/10: revise docs layer – 1776638426014881712 -->

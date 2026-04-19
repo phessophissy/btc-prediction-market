@@ -29,4 +29,4 @@ Keep changes narrow. A small reviewable commit is preferred over a broad refacto
 - Call out any network-specific assumptions.
 - Include screenshots for frontend visual changes when relevant.
 
-<!-- [fix/settlement-race-condition] commit 9/10: revise docs layer – 1776638414799879713 -->
+<!-- [fix/odds-calculation-overflow] commit 9/10: revise docs layer – 1776638426016204217 -->

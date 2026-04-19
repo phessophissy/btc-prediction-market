@@ -17,4 +17,4 @@ describe("sdk defaults", () => {
   });
 });
 
-// [fix/settlement-race-condition] commit 8/10: augment test layer – 1776638414773095455
+// [fix/odds-calculation-overflow] commit 8/10: augment test layer – 1776638425987136612
