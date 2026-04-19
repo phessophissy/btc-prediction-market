@@ -117,3 +117,5 @@ describe("sdk V3 decoders", () => {
     ).toBeNull();
   });
 });
+
+// [feat/multi-chain-support] commit 8/10: augment test layer – 1776638306097763144
