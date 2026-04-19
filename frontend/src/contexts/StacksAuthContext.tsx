@@ -85,4 +85,4 @@ export function useStacksAuth() {
   return context;
 }
 
-// [fix/token-decimal-precision] commit 3/10: update hooks layer – 1776638467623627791
+// [fix/ssr-hydration-mismatch] commit 3/10: update hooks layer – 1776638478294805610

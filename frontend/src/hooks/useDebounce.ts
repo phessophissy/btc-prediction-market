@@ -17,4 +17,4 @@ export function useDebounce<T>(value: T, delay = 300): T {
   return debounced;
 }
 
-// [fix/token-decimal-precision] commit 3/10: update hooks layer – 1776638467627024519
+// [fix/ssr-hydration-mismatch] commit 3/10: update hooks layer – 1776638478296355883
