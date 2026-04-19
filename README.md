@@ -261,4 +261,4 @@ When contributing, please consider:
 
 MIT License
 
-<!-- [fix/market-expiry-display] commit 9/10: revise docs layer – 1776638446517802340 -->
+<!-- [fix/mobile-bet-modal-scroll] commit 9/10: revise docs layer – 1776638456943049695 -->
