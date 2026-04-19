@@ -68,4 +68,4 @@ export function estimateBlockTime(blocksRemaining: number): number {
   return Date.now() + blocksRemaining * MS_PER_BLOCK;
 }
 
-// [fix/odds-calculation-overflow] commit 4/10: extend lib layer – 1776638425830132537
+// [fix/wallet-reconnect-state] commit 4/10: extend lib layer – 1776638435370482739
