@@ -49,4 +49,4 @@ export function getLeadingOutcome(market: Market): string | null {
   return entries[0][0];
 }
 
-// [fix/odds-calculation-overflow] commit 7/10: strengthen sdk-utils layer – 1776638425949358814
+// [fix/wallet-reconnect-state] commit 7/10: strengthen sdk-utils layer – 1776638435468569736

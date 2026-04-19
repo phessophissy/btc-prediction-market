@@ -124,4 +124,4 @@ export function createSettlementWatcher(config?: Partial<SettlementWatcherConfig
   return new SettlementWatcherHandler({ ...DEFAULT_CONFIG, ...config });
 }
 
-// [fix/odds-calculation-overflow] commit 7/10: strengthen sdk-utils layer – 1776638425956202279
+// [fix/wallet-reconnect-state] commit 7/10: strengthen sdk-utils layer – 1776638435472831822
