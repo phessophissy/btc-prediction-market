@@ -159,4 +159,4 @@
   (mint (get amount recipient) (get user recipient))
 )
 
-;; [fix/settlement-race-condition] commit 1/10: enhance contracts layer – 1776638414617121885
+;; [fix/odds-calculation-overflow] commit 1/10: enhance contracts layer – 1776638425757045259

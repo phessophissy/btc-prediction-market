@@ -319,4 +319,4 @@
     (ok paused))
 )
 
-;; [fix/settlement-race-condition] commit 1/10: enhance contracts layer – 1776638414619015416
+;; [fix/odds-calculation-overflow] commit 1/10: enhance contracts layer – 1776638425759484405
