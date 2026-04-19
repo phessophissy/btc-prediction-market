@@ -13,4 +13,4 @@ export function initializeMarketSDK(
   return new MarketContractService(contractAddress, isMainnet, contractName);
 }
 
-// [feat/market-templates] commit 6/10: optimize sdk layer – 1776638382274581888
+// [feat/portfolio-analytics] commit 6/10: optimize sdk layer – 1776638391601161400
