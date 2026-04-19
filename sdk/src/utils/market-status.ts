@@ -72,4 +72,4 @@ export function getMarketPhaseColor(phase: MarketPhase): string {
   return colors[phase];
 }
 
-// [refactor/contract-service-split] commit 7/10: strengthen sdk-utils layer – 1776638498268967999
+// [refactor/hook-composition] commit 7/10: strengthen sdk-utils layer – 1776638509370966289
