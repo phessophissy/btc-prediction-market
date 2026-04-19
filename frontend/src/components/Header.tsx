@@ -143,3 +143,5 @@ export function Header() {
     </header>
   );
 }
+
+// [feat/multi-chain-support] commit 2/10: improve ui layer – 1776638305883628792

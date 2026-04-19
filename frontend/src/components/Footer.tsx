@@ -64,3 +64,5 @@ export function Footer() {
     </footer>
   );
 }
+
+// [feat/multi-chain-support] commit 2/10: improve ui layer – 1776638305888012781
