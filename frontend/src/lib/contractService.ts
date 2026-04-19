@@ -726,4 +726,4 @@ export function getOutcomeLabel(
   return "Unknown";
 }
 
-// [fix/wallet-reconnect-state] commit 4/10: extend lib layer – 1776638435367516175
+// [fix/market-expiry-display] commit 4/10: extend lib layer – 1776638446341231664

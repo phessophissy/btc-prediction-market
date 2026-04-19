@@ -50,4 +50,4 @@ export const CONTRACT_CAPABILITIES = {
   onChainUserStats: false,
 } as const;
 
-// [fix/wallet-reconnect-state] commit 4/10: extend lib layer – 1776638435364731460
+// [fix/market-expiry-display] commit 4/10: extend lib layer – 1776638446340055581
