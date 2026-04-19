@@ -11,4 +11,4 @@ export default defineConfig({
   },
 });
 
-// [refactor/hook-composition] commit 10/10: polish config layer – 1776638509451584822
+// [refactor/css-design-tokens] commit 10/10: polish config layer – 1776638519434978174

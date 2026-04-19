@@ -387,4 +387,4 @@ export function MarketCard({ market }: MarketCardProps) {
   );
 }
 
-// [refactor/hook-composition] commit 2/10: improve ui layer – 1776638509252954454
+// [refactor/css-design-tokens] commit 2/10: improve ui layer – 1776638519209584106

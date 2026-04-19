@@ -65,4 +65,4 @@ export function Footer() {
   );
 }
 
-// [refactor/hook-composition] commit 2/10: improve ui layer – 1776638509255311236
+// [refactor/css-design-tokens] commit 2/10: improve ui layer – 1776638519212288537

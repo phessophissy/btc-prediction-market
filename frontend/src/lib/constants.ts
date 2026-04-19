@@ -50,4 +50,4 @@ export const CONTRACT_CAPABILITIES = {
   onChainUserStats: false,
 } as const;
 
-// [refactor/hook-composition] commit 4/10: extend lib layer – 1776638509297436536
+// [refactor/css-design-tokens] commit 4/10: extend lib layer – 1776638519257191716

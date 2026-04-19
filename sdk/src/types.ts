@@ -32,4 +32,4 @@ export interface UserPosition {
   claimed: boolean;
 }
 
-// [refactor/hook-composition] commit 6/10: optimize sdk layer – 1776638509347583674
+// [refactor/css-design-tokens] commit 6/10: optimize sdk layer – 1776638519320769076
