@@ -268,4 +268,4 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
   );
 }
 
-// [feat/social-trading] commit 2/10: improve ui layer – 1776638339126818078
+// [feat/batch-betting] commit 2/10: improve ui layer – 1776638348905705445
