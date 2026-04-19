@@ -319,4 +319,4 @@
     (ok paused))
 )
 
-;; [fix/wallet-reconnect-state] commit 1/10: enhance contracts layer – 1776638435262605111
+;; [fix/market-expiry-display] commit 1/10: enhance contracts layer – 1776638446259143855

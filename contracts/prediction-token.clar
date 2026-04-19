@@ -159,4 +159,4 @@
   (mint (get amount recipient) (get user recipient))
 )
 
-;; [fix/wallet-reconnect-state] commit 1/10: enhance contracts layer – 1776638435260339691
+;; [fix/market-expiry-display] commit 1/10: enhance contracts layer – 1776638446256084046
