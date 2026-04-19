@@ -29,4 +29,4 @@ Keep changes narrow. A small reviewable commit is preferred over a broad refacto
 - Call out any network-specific assumptions.
 - Include screenshots for frontend visual changes when relevant.
 
-<!-- [refactor/sdk-error-hierarchy] commit 9/10: revise docs layer – 1776638529144342375 -->
+<!-- [docs/api-reference-guide] commit 9/10: revise docs layer – 1776638540438433592 -->
