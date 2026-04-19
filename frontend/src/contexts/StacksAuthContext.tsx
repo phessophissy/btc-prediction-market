@@ -85,4 +85,4 @@ export function useStacksAuth() {
   return context;
 }
 
-// [fix/mobile-bet-modal-scroll] commit 3/10: update hooks layer – 1776638456795224438
+// [fix/token-decimal-precision] commit 3/10: update hooks layer – 1776638467623627791
