@@ -436,4 +436,4 @@ export class MarketContractService {
 
 export default MarketContractService;
 
-// [docs/api-reference-guide] commit 6/10: optimize sdk layer – 1776638540353927638
+// [docs/deployment-playbook] commit 6/10: optimize sdk layer – 1776638549951881164
