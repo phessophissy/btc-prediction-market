@@ -261,4 +261,4 @@ When contributing, please consider:
 
 MIT License
 
-<!-- [docs/deployment-playbook] commit 9/10: revise docs layer – 1776638550051190704 -->
+<!-- [docs/market-lifecycle-diagrams] commit 9/10: revise docs layer – 1776638559418061846 -->
