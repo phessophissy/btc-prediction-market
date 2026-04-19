@@ -436,4 +436,4 @@ export class MarketContractService {
 
 export default MarketContractService;
 
-// [feat/batch-betting] commit 6/10: optimize sdk layer – 1776638349005407224
+// [feat/price-chart-widget] commit 6/10: optimize sdk layer – 1776638359831610611

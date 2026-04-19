@@ -32,4 +32,4 @@ export interface UserPosition {
   claimed: boolean;
 }
 
-// [feat/batch-betting] commit 6/10: optimize sdk layer – 1776638349006725406
+// [feat/price-chart-widget] commit 6/10: optimize sdk layer – 1776638359833310856
