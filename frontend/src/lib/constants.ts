@@ -50,4 +50,4 @@ export const CONTRACT_CAPABILITIES = {
   onChainUserStats: false,
 } as const;
 
-// [fix/mobile-bet-modal-scroll] commit 4/10: extend lib layer – 1776638456817221119
+// [fix/token-decimal-precision] commit 4/10: extend lib layer – 1776638467653496875
