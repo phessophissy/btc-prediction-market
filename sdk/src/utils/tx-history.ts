@@ -124,4 +124,4 @@ export function createTxHistory(config?: Partial<TxHistoryConfig>): TxHistoryHan
   return new TxHistoryHandler({ ...DEFAULT_CONFIG, ...config });
 }
 
-// [chore/eslint-strict-rules] commit 7/10: strengthen sdk-utils layer – 1776638591035248548
+// [chore/github-actions-matrix] commit 7/10: strengthen sdk-utils layer – 1776638601215524062

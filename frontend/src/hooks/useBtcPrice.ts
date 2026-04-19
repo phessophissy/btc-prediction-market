@@ -52,4 +52,4 @@ export function useBtcPrice(intervalMs = 60_000): BtcPriceData {
   return { price, change24h, loading, error };
 }
 
-// [chore/eslint-strict-rules] commit 3/10: update hooks layer – 1776638590943577162
+// [chore/github-actions-matrix] commit 3/10: update hooks layer – 1776638601100811616

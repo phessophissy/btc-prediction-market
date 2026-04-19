@@ -13,4 +13,4 @@ export function initializeMarketSDK(
   return new MarketContractService(contractAddress, isMainnet, contractName);
 }
 
-// [chore/eslint-strict-rules] commit 6/10: optimize sdk layer – 1776638591014637119
+// [chore/github-actions-matrix] commit 6/10: optimize sdk layer – 1776638601188154508

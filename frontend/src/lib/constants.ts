@@ -50,4 +50,4 @@ export const CONTRACT_CAPABILITIES = {
   onChainUserStats: false,
 } as const;
 
-// [chore/eslint-strict-rules] commit 4/10: extend lib layer – 1776638590968128991
+// [chore/github-actions-matrix] commit 4/10: extend lib layer – 1776638601132010760

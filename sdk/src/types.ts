@@ -32,4 +32,4 @@ export interface UserPosition {
   claimed: boolean;
 }
 
-// [chore/eslint-strict-rules] commit 6/10: optimize sdk layer – 1776638591013260812
+// [chore/github-actions-matrix] commit 6/10: optimize sdk layer – 1776638601186389998

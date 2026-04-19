@@ -268,4 +268,4 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
   );
 }
 
-// [chore/eslint-strict-rules] commit 2/10: improve ui layer – 1776638590920242413
+// [chore/github-actions-matrix] commit 2/10: improve ui layer – 1776638601079353718
