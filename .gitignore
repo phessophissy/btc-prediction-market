@@ -12,8 +12,10 @@ frontend/.next/
 .env.local
 .env.*.local
 
-# Clarinet
+# Clarinet - never expose wallet keys/mnemonics
 settings/Mainnet.toml
+settings/Devnet.toml
+settings/Testnet.toml
 
 # IDE
 .vscode/
@@ -30,7 +32,6 @@ npm-debug.log*
 # Test coverage
 coverage/
 *.sh
-settings/Mainnet.toml
 
 # Mainnet wallet secrets
 scripts/mainnet-wallets.json
