@@ -9,3 +9,15 @@ Current route surfaces:
 - `/leaderboard`: ranked wallet view with podium cards, summary metrics, and highlighted top rows
 
 Each route lives under `frontend/src/app/`.
+
+## Leaderboard Page
+
+Displays the top traders by total winnings. Columns:
+- Rank
+- Address (truncated)
+- Total Won (STX)
+- Total Invested (STX)
+- ROI %
+- Win Rate %
+
+Data is fetched from the `buildLeaderboard` SDK utility and cached for 60s.
