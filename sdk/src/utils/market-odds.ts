@@ -81,3 +81,17 @@ export function toMoneyline(oddsMultiplier: number): string {
   }
   return `${Math.round(-100 / (oddsMultiplier - 1))}`;
 }
+
+/**
+ * Convert decimal odds to fractional notation (e.g. '3/2', '5/4').
+ * Uses GCD reduction for clean fractions.
+ */
+function gcd(a: number, b: number): number { return b === 0 ? a : gcd(b, a % b); }
+
+export function toFractionalOdds(oddsMultiplier: number, precision: number = 100): string {
+  if (oddsMultiplier <= 1) return 'N/A';
+  const numerator = Math.round((oddsMultiplier - 1) * precision);
+  const denominator = precision;
+  const d = gcd(numerator, denominator);
+  return `${numerator / d}/${denominator / d}`;
+}
