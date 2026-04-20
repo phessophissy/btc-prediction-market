@@ -13,3 +13,18 @@ export function getAddressNetwork(address: string): 'mainnet' | 'testnet' | 'unk
   if (address.startsWith('ST')) return 'testnet';
   return 'unknown';
 }
+
+/**
+ * Returns true if the string looks like a valid Stacks principal.
+ */
+export function isValidPrincipal(address: string): boolean {
+  return /^(SP|ST|SM)[A-Z0-9]{28,41}$/.test(address);
+}
+
+/**
+ * Truncate a principal for display: 'SP1234…ABCD'.
+ */
+export function truncatePrincipal(address: string, chars: number = 6): string {
+  if (address.length <= chars * 2 + 1) return address;
+  return `${address.slice(0, chars)}…${address.slice(-chars)}`;
+}
