@@ -212,3 +212,12 @@ export function clearNonceCache(address?: string): void {
 }
 
 import type { NonceState } from '../types';
+
+const NONCE_STALE_MS = 30_000;
+
+/**
+ * Returns true if the cached nonce is older than NONCE_STALE_MS.
+ */
+export function isNonceStale(state: NonceState): boolean {
+  return Date.now() - state.lastRefreshed > NONCE_STALE_MS;
+}
