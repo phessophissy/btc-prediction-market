@@ -189,3 +189,35 @@ export class NonceManagementHandler {
     this.emit('config:updated', updates);
   }
 }
+
+/**
+ * Simple in-memory nonce cache to avoid nonce collisions on rapid submissions.
+ */
+const nonceCache = new Map<string, NonceState>();
+
+export function getCachedNonce(address: string): NonceState | undefined {
+  return nonceCache.get(address);
+}
+
+export function updateCachedNonce(state: NonceState): void {
+  nonceCache.set(state.address, { ...state, lastRefreshed: Date.now() });
+}
+
+export function clearNonceCache(address?: string): void {
+  if (address) {
+    nonceCache.delete(address);
+  } else {
+    nonceCache.clear();
+  }
+}
+
+import type { NonceState } from '../types';
+
+const NONCE_STALE_MS = 30_000;
+
+/**
+ * Returns true if the cached nonce is older than NONCE_STALE_MS.
+ */
+export function isNonceStale(state: NonceState): boolean {
+  return Date.now() - state.lastRefreshed > NONCE_STALE_MS;
+}

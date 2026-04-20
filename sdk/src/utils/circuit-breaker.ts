@@ -123,3 +123,14 @@ export class CircuitBreakerHandler {
 export function createCircuitBreaker(config?: Partial<CircuitBreakerConfig>): CircuitBreakerHandler {
   return new CircuitBreakerHandler({ ...DEFAULT_CONFIG, ...config });
 }
+
+export const DEFAULT_FAILURE_THRESHOLD = 5;
+export const DEFAULT_RECOVERY_WINDOW_MS = 60_000;
+
+/**
+ * Returns a human-readable circuit breaker state label.
+ */
+export function getCircuitLabel(state: 'closed' | 'open' | 'half-open'): string {
+  const labels = { closed: 'Healthy', open: 'Circuit Open', 'half-open': 'Recovering' };
+  return labels[state];
+}
