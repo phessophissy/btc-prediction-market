@@ -189,3 +189,19 @@ export class PortfolioTrackingHandler {
     this.emit('config:updated', updates);
   }
 }
+
+export const PORTFOLIO_REFRESH_INTERVAL_MS = 30_000;
+
+export interface PortfolioSummary {
+  totalInvested: number;
+  totalWon: number;
+  totalLost: number;
+  activeBets: number;
+  settledBets: number;
+  winRate: number;
+}
+
+export function calculateWinRate(won: number, total: number): number {
+  if (total === 0) return 0;
+  return Math.round((won / total) * 100);
+}
