@@ -69,3 +69,7 @@ export function estimateBlockTime(blocksRemaining: number): number {
 }
 
 // [chore/dependency-audit-update] commit 4/10: extend lib layer – 1776638611516490283
+
+export function formatTag(tag: string): string {
+  return tag.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+}
