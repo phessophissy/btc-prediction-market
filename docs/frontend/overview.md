@@ -16,3 +16,10 @@ The frontend is a Next.js App Router application under `frontend/`.
 `frontend/src/lib/contractService.ts` is the main boundary between UI components and on-chain data.
 
 `frontend/src/lib/marketPresentation.ts` holds display-only market summaries that should stay pure and reusable.
+
+## Accessibility
+
+- All interactive elements have `aria-label` attributes
+- Focus is trapped within modals while open
+- Keyboard shortcuts are documented in the Help overlay (press `?`)
+- Colour contrast ratios meet WCAG 2.1 AA standards
