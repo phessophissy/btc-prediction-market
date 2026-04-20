@@ -615,3 +615,8 @@
     (var-set platform-paused paused)
     (ok paused))
 )
+
+;; Fee tier constants for dynamic fee model
+(define-constant FEE-TIER-STANDARD u300)
+(define-constant FEE-TIER-REDUCED u150)
+(define-constant FEE-TIER-PREMIUM u500)

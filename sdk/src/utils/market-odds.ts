@@ -50,3 +50,60 @@ export function getLeadingOutcome(market: Market): string | null {
 }
 
 // [chore/dependency-audit-update] commit 7/10: strengthen sdk-utils layer – 1776638611599468282
+
+/**
+ * Return implied probability as a percentage string (e.g. '67.3%').
+ */
+export function formatImpliedProbability(outcomePool: number, totalPool: number): string {
+  const prob = calculateImpliedProbability(outcomePool, totalPool);
+  return `${(prob * 100).toFixed(1)}%`;
+}
+
+/**
+ * Return Kelly criterion fraction for optimal bet sizing.
+ * edge = (b * p - q) / b  where b = odds-1, p = win prob, q = 1-p
+ */
+export function kellyFraction(prob: number, oddsMultiplier: number): number {
+  if (oddsMultiplier <= 1 || prob <= 0 || prob >= 1) return 0;
+  const b = oddsMultiplier - 1;
+  const q = 1 - prob;
+  return Math.max(0, (b * prob - q) / b);
+}
+
+/**
+ * Convert a decimal odds multiplier to American moneyline format.
+ * e.g. 2.5x → +150, 1.4x → -250
+ */
+export function toMoneyline(oddsMultiplier: number): string {
+  if (oddsMultiplier <= 0) return 'N/A';
+  if (oddsMultiplier >= 2) {
+    return `+${Math.round((oddsMultiplier - 1) * 100)}`;
+  }
+  return `${Math.round(-100 / (oddsMultiplier - 1))}`;
+}
+
+/**
+ * Convert decimal odds to fractional notation (e.g. '3/2', '5/4').
+ * Uses GCD reduction for clean fractions.
+ */
+function gcd(a: number, b: number): number { return b === 0 ? a : gcd(b, a % b); }
+
+export function toFractionalOdds(oddsMultiplier: number, precision: number = 100): string {
+  if (oddsMultiplier <= 1) return 'N/A';
+  const numerator = Math.round((oddsMultiplier - 1) * precision);
+  const denominator = precision;
+  const d = gcd(numerator, denominator);
+  return `${numerator / d}/${denominator / d}`;
+}
+
+/**
+ * Rank outcomes by their odds multiplier (highest first).
+ */
+export function rankOutcomesByOdds(market: import('../types').Market): { outcome: string; odds: number }[] {
+  const pools = getOutcomePools(market);
+  const total = market.totalPool;
+  return Object.entries(pools)
+    .filter(([, p]) => p > 0)
+    .map(([outcome, pool]) => ({ outcome, odds: calculateOddsMultiplier(pool, total) }))
+    .sort((a, b) => b.odds - a.odds);
+}
