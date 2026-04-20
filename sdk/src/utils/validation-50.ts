@@ -89,3 +89,16 @@ export function validateBetAmount(amount: number): string[] {
   if (amount > MAX_BET_MICROSTX) errors.push(`Maximum bet is ${MAX_BET_MICROSTX} microstx`);
   return errors;
 }
+
+const VALID_OUTCOME_FLAGS = [1, 2, 4, 8] as const;
+
+/**
+ * Validate an outcome flag (must be a power of 2 from 1 to 8).
+ */
+export function validateOutcomeFlag(flag: number): string[] {
+  const errors: string[] = [];
+  if (!(VALID_OUTCOME_FLAGS as readonly number[]).includes(flag)) {
+    errors.push(`Invalid outcome flag ${flag}. Must be one of: ${VALID_OUTCOME_FLAGS.join(', ')}`);
+  }
+  return errors;
+}
