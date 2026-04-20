@@ -95,3 +95,19 @@ export function compareByPhaseUrgency(
 ): number {
   return (PHASE_SORT_ORDER[a.phase] ?? 99) - (PHASE_SORT_ORDER[b.phase] ?? 99);
 }
+
+/**
+ * Estimate the wall-clock settlement date given a Bitcoin block interval of ~10 minutes.
+ * @param settlementBurnHeight - target Bitcoin block height
+ * @param currentBurnHeight - current Bitcoin block height
+ * @param currentDate - reference date (default: now)
+ */
+export function estimatedSettlementDate(
+  settlementBurnHeight: number,
+  currentBurnHeight: number,
+  currentDate: Date = new Date()
+): Date {
+  const blocksRemaining = Math.max(0, settlementBurnHeight - currentBurnHeight);
+  const msRemaining = blocksRemaining * 10 * 60 * 1000;
+  return new Date(currentDate.getTime() + msRemaining);
+}
