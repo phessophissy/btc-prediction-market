@@ -616,7 +616,6 @@
     (ok paused))
 )
 
-;; Fee tier constants for dynamic fee model
-(define-constant FEE-TIER-STANDARD u300)
-(define-constant FEE-TIER-REDUCED u150)
-(define-constant FEE-TIER-PREMIUM u500)
+;; Settlement grace period – extra blocks after expiry during which
+;; the creator can still settle without losing their creation stake.
+(define-constant SETTLEMENT-GRACE-PERIOD u6)

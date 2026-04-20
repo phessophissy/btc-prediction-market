@@ -17,8 +17,11 @@ The project is centered on a Bitcoin-anchored prediction market implemented in C
 
 <!-- [chore/dependency-audit-update] commit 9/10: revise docs layer – 1776638611664060420 -->
 
-## Market Metadata
+## Settlement Architecture
 
-Extended metadata (tags, images, creator notes) is stored off-chain.
-Only a content hash is anchored to the Stacks transaction to minimise
-on-chain storage costs while preserving verifiability.
+Settlement is a two-step process:
+1. The block producer mines the Bitcoin block at the settlement height
+2. The Stacks transaction confirms the `settle-market` call referencing
+   the Bitcoin block hash via `get-burn-block-info`
+
+This provides cryptographic proof of the settlement condition.

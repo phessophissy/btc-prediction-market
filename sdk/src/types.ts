@@ -34,17 +34,11 @@ export interface UserPosition {
 
 // [chore/dependency-audit-update] commit 6/10: optimize sdk layer – 1776638611571524501
 
-export interface NonceState {
-  address: string;
-  currentNonce: number;
-  pendingCount: number;
-  lastRefreshed: number;
-}
+export type SettlementType = 'btc-price' | 'btc-hash' | 'manual' | 'oracle';
 
-export interface QueuedTransaction {
-  id: string;
-  address: string;
-  nonce: number;
-  broadcastedAt: number;
-  status: 'pending' | 'confirmed' | 'failed';
+export interface SettlementConfig {
+  type: SettlementType;
+  targetValue?: number;
+  oracleAddress?: string;
+  gracePeriodBlocks?: number;
 }

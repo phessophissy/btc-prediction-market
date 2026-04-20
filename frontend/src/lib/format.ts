@@ -22,14 +22,12 @@ export function formatBlocksToEta(blocks: number): string {
 
 // [chore/dependency-audit-update] commit 4/10: extend lib layer – 1776638611511642964
 
-export function getPhaseLabel(phase: string): string {
+export function getSettlementTypeLabel(type: string): string {
   const labels: Record<string, string> = {
-    'open': 'Open',
-    'closing-soon': 'Closing Soon',
-    'closed': 'Closed',
-    'settleable': 'Ready to Settle',
-    'settled': 'Settled',
-    'claimable': 'Claim Winnings',
+    'btc-price': 'BTC Price Target',
+    'btc-hash': 'Bitcoin Block Hash',
+    'manual': 'Manual Settlement',
+    'oracle': 'Oracle Resolved',
   };
-  return labels[phase] ?? phase;
+  return labels[type] ?? type;
 }
