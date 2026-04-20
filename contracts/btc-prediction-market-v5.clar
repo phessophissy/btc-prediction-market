@@ -615,3 +615,7 @@
     (var-set platform-paused paused)
     (ok paused))
 )
+
+;; NOTE: v5 is superseded by v7 which adds dynamic fee tiers and
+;; the two-step ownership transfer pattern. New deployments should
+;; use btc-prediction-market-v7.clar.

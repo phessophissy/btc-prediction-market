@@ -11,3 +11,14 @@ Wallet state is managed through `StacksAuthContext`.
 ## Write operations
 
 Transactions are submitted through `openContractCall` with explicit post conditions where appropriate.
+
+## Supported Wallets
+
+| Wallet | Extension | Mobile |
+|--------|-----------|--------|
+| Leather (Hiro) | ✅ | ✅ |
+| Xverse | ✅ | ✅ |
+| OKX | ✅ | ❌ |
+
+All wallets use the `@stacks/connect` library for deep-link and
+extension-based authentication.

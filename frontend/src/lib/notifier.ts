@@ -123,3 +123,12 @@ export class NotificationSystemHandler {
 export function createNotificationSystem(config?: Partial<NotificationSystemConfig>): NotificationSystemHandler {
   return new NotificationSystemHandler({ ...DEFAULT_CONFIG, ...config });
 }
+
+export type ToastType = 'success' | 'error' | 'info' | 'warning';
+
+export const TOAST_DURATION_MS: Record<ToastType, number> = {
+  success: 4000,
+  error: 8000,
+  info: 5000,
+  warning: 6000,
+};

@@ -123,3 +123,24 @@ export class DarkModeHandler {
 export function createDarkMode(config?: Partial<DarkModeConfig>): DarkModeHandler {
   return new DarkModeHandler({ ...DEFAULT_CONFIG, ...config });
 }
+
+export const DARK_MODE_STORAGE_KEY = 'btcpm-theme';
+export const DARK_MODE_CLASS = 'dark';
+
+/**
+ * Persist the user's theme preference to localStorage.
+ */
+export function persistTheme(isDark: boolean): void {
+  if (typeof localStorage !== 'undefined') {
+    localStorage.setItem(DARK_MODE_STORAGE_KEY, isDark ? 'dark' : 'light');
+  }
+}
+
+/**
+ * Load the user's stored theme preference.
+ */
+export function loadStoredTheme(): 'dark' | 'light' | null {
+  if (typeof localStorage === 'undefined') return null;
+  const stored = localStorage.getItem(DARK_MODE_STORAGE_KEY);
+  return stored === 'dark' || stored === 'light' ? stored : null;
+}

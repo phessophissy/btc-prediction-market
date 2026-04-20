@@ -189,3 +189,15 @@ export class TxMonitoringHandler {
     this.emit('config:updated', updates);
   }
 }
+
+export interface TxMonitorOptions {
+  pollIntervalMs: number;
+  maxAttempts: number;
+  onConfirmed?: (txId: string) => void;
+  onFailed?: (txId: string, reason: string) => void;
+}
+
+export const DEFAULT_MONITOR_OPTIONS: TxMonitorOptions = {
+  pollIntervalMs: 3_000,
+  maxAttempts: 60,
+};

@@ -123,3 +123,17 @@ export class OnboardingFlowHandler {
 export function createOnboardingFlow(config?: Partial<OnboardingFlowConfig>): OnboardingFlowHandler {
   return new OnboardingFlowHandler({ ...DEFAULT_CONFIG, ...config });
 }
+
+export interface OnboardingStep {
+  id: string;
+  title: string;
+  description: string;
+  action?: string;
+}
+
+export const ONBOARDING_STEPS: OnboardingStep[] = [
+  { id: 'connect-wallet', title: 'Connect Wallet', description: 'Connect your Leather or Xverse wallet to get started.', action: 'Connect' },
+  { id: 'browse-markets', title: 'Browse Markets', description: 'Explore open prediction markets and check the odds.', action: 'Browse' },
+  { id: 'place-bet', title: 'Place a Bet', description: 'Choose an outcome and place your STX bet.', action: 'Bet' },
+  { id: 'claim-winnings', title: 'Claim Winnings', description: 'After settlement, claim your winnings from your portfolio.', action: 'Claim' },
+];

@@ -46,3 +46,88 @@ export function validateBetAmount(amount: number, minBet = 10000): { valid: bool
   }
   return { valid: true };
 }
+
+/**
+ * Validate a Stacks principal address (mainnet SP… or testnet ST…).
+ */
+export function validatePrincipal(address: string): string[] {
+  const errors: string[] = [];
+  if (!address) { errors.push('Address is required'); return errors; }
+  if (!/^(SP|ST|SM)[A-Z0-9]{28,41}$/.test(address)) {
+    errors.push(`Invalid Stacks address format: ${address.slice(0, 20)}`);
+  }
+  return errors;
+}
+
+/**
+ * Validate a contract identifier in the format 'address.contract-name'.
+ */
+export function validateContractId(contractId: string): string[] {
+  const errors: string[] = [];
+  if (!contractId.includes('.')) {
+    errors.push('Contract ID must be in format address.contract-name');
+    return errors;
+  }
+  const [address, name] = contractId.split('.');
+  errors.push(...validatePrincipal(address));
+  if (!/^[a-z][a-z0-9-]{0,39}$/.test(name)) {
+    errors.push(`Invalid contract name: ${name}`);
+  }
+  return errors;
+}
+
+const MIN_BET_MICROSTX = 10_000;
+const MAX_BET_MICROSTX = 1_000_000_000_000;
+
+/**
+ * Validate a bet amount in microstx.
+ */
+export function validateBetAmount(amount: number): string[] {
+  const errors: string[] = [];
+  if (!Number.isInteger(amount)) errors.push('Bet amount must be an integer');
+  if (amount < MIN_BET_MICROSTX) errors.push(`Minimum bet is ${MIN_BET_MICROSTX} microstx`);
+  if (amount > MAX_BET_MICROSTX) errors.push(`Maximum bet is ${MAX_BET_MICROSTX} microstx`);
+  return errors;
+}
+
+const VALID_OUTCOME_FLAGS = [1, 2, 4, 8] as const;
+
+/**
+ * Validate an outcome flag (must be a power of 2 from 1 to 8).
+ */
+export function validateOutcomeFlag(flag: number): string[] {
+  const errors: string[] = [];
+  if (!(VALID_OUTCOME_FLAGS as readonly number[]).includes(flag)) {
+    errors.push(`Invalid outcome flag ${flag}. Must be one of: ${VALID_OUTCOME_FLAGS.join(', ')}`);
+  }
+  return errors;
+}
+
+const MIN_SETTLEMENT_BLOCKS_AHEAD = 10;
+
+/**
+ * Validate that a settlement burn height is sufficiently in the future.
+ */
+export function validateSettlementBurnHeight(height: number, currentBurnHeight: number): string[] {
+  const errors: string[] = [];
+  if (!Number.isInteger(height) || height <= 0) {
+    errors.push('Settlement height must be a positive integer');
+  } else if (height <= currentBurnHeight + MIN_SETTLEMENT_BLOCKS_AHEAD) {
+    errors.push(`Settlement height must be at least ${MIN_SETTLEMENT_BLOCKS_AHEAD} blocks in the future`);
+  }
+  return errors;
+}
+
+export function validateTitle(title: string): string[] {
+  const errors: string[] = [];
+  if (!title || title.trim().length === 0) errors.push('Title is required');
+  if (title.length > 120) errors.push('Title must be 120 characters or fewer');
+  return errors;
+}
+
+export function validateDescription(desc: string): string[] {
+  const errors: string[] = [];
+  if (!desc || desc.trim().length === 0) errors.push('Description is required');
+  if (desc.length > 500) errors.push('Description must be 500 characters or fewer');
+  return errors;
+}

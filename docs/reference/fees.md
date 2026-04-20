@@ -9,3 +9,9 @@
 ## Why this doc exists
 
 The root README and older contract history can mention larger values. Use the deployed contract version as the final source of truth.
+
+## Kelly Criterion
+
+The `kellyFraction` helper in `market-odds.ts` implements the Kelly criterion
+for bet sizing. It returns the fraction of bankroll to stake for maximum
+log-growth given the implied probability and odds multiplier.

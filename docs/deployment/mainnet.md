@@ -9,3 +9,9 @@ The repository includes `deployments/default.mainnet-plan.yaml` for mainnet depl
 - address: `SP2KYZRNME33Y39GP3RKC90DQJ45EF1N0NZNVRE09`
 
 Operators should confirm the deployed contract version before releasing UI changes.
+
+## Post-Deployment Settlement Test
+
+Create a short-lived test market (2-3 blocks settlement height) and verify
+the full settlement flow: `create-market` → `place-bet` → `settle-market`
+→ `claim-winnings`. Confirm events appear in Stacks Explorer.
