@@ -42,3 +42,17 @@ export function formatEstimatedDate(
     minute: '2-digit',
   });
 }
+
+/**
+ * Format a future Date as a relative human-readable string.
+ */
+export function formatRelativeDate(date: Date): string {
+  const diff = date.getTime() - Date.now();
+  if (diff <= 0) return 'now';
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins = Math.floor((diff % 3600000) / 60000);
+  if (days > 0) return `${days}d ${hours}h`;
+  if (hours > 0) return `${hours}h ${mins}m`;
+  return `${mins}m`;
+}
