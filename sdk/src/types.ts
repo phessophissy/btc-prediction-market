@@ -40,3 +40,11 @@ export interface NonceState {
   pendingCount: number;
   lastRefreshed: number;
 }
+
+export interface QueuedTransaction {
+  id: string;
+  address: string;
+  nonce: number;
+  broadcastedAt: number;
+  status: 'pending' | 'confirmed' | 'failed';
+}
