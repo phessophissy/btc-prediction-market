@@ -75,3 +75,17 @@ export function validateContractId(contractId: string): string[] {
   }
   return errors;
 }
+
+const MIN_BET_MICROSTX = 10_000;
+const MAX_BET_MICROSTX = 1_000_000_000_000;
+
+/**
+ * Validate a bet amount in microstx.
+ */
+export function validateBetAmount(amount: number): string[] {
+  const errors: string[] = [];
+  if (!Number.isInteger(amount)) errors.push('Bet amount must be an integer');
+  if (amount < MIN_BET_MICROSTX) errors.push(`Minimum bet is ${MIN_BET_MICROSTX} microstx`);
+  if (amount > MAX_BET_MICROSTX) errors.push(`Maximum bet is ${MAX_BET_MICROSTX} microstx`);
+  return errors;
+}
