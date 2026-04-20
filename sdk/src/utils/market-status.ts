@@ -73,3 +73,11 @@ export function getMarketPhaseColor(phase: MarketPhase): string {
 }
 
 // [chore/dependency-audit-update] commit 7/10: strengthen sdk-utils layer – 1776638611601079378
+
+/**
+ * Returns true if the market closes within the next `blocks` Bitcoin blocks.
+ */
+export function isClosingWithin(market: import('../types').Market, currentBurnHeight: number, blocks: number): boolean {
+  const remaining = market.settlementBurnHeight - currentBurnHeight;
+  return remaining > 0 && remaining <= blocks;
+}
