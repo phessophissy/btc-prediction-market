@@ -34,15 +34,4 @@ export interface UserPosition {
 
 // [chore/dependency-audit-update] commit 6/10: optimize sdk layer – 1776638611571524501
 
-export interface MarketMetadata {
-  marketId: number;
-  tags: string[];
-  imageUrl?: string;
-  externalUrl?: string;
-  creatorNote?: string;
-}
-
-export interface MetadataValidationResult {
-  valid: boolean;
-  errors: string[];
-}
+export type OddsFormat = 'decimal' | 'fractional' | 'american';

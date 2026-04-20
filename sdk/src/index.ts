@@ -15,4 +15,4 @@ export function initializeMarketSDK(
 
 // [chore/dependency-audit-update] commit 6/10: optimize sdk layer – 1776638611574578985
 
-export type { MarketMetadata } from './types';
+export type { OddsFormat } from './types';

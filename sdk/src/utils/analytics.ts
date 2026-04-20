@@ -125,8 +125,12 @@ export function createAnalyticsCollector(config?: Partial<AnalyticsCollectorConf
 }
 
 /**
- * Estimate total fees collected across a set of markets.
+ * Return the market's most and least favoured outcome by pool size.
  */
-export function estimateTotalFees(markets: { totalPool: number }[], feeBps: number = 300): number {
-  return markets.reduce((sum, m) => sum + Math.floor((m.totalPool * feeBps) / 10000), 0);
+export function getMarketFavourite(pools: Record<string, number>): { favourite: string | null; underdog: string | null } {
+  const entries = Object.entries(pools).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]);
+  return {
+    favourite: entries[0]?.[0] ?? null,
+    underdog: entries[entries.length - 1]?.[0] ?? null,
+  };
 }

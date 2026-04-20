@@ -52,9 +52,5 @@ export const CONTRACT_CAPABILITIES = {
 
 // [chore/dependency-audit-update] commit 4/10: extend lib layer – 1776638611513182728
 
-export const MARKET_TAGS = [
-  'bitcoin', 'price', 'halving', 'etf', 'macro',
-  'defi', 'regulation', 'mining', 'lightning', 'stacks',
-] as const;
-
-export type MarketTag = typeof MARKET_TAGS[number];
+export type OddsFormat = 'decimal' | 'fractional' | 'american';
+export const DEFAULT_ODDS_FORMAT: OddsFormat = 'decimal';
