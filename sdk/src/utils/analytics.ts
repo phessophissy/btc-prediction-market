@@ -123,3 +123,14 @@ export class AnalyticsCollectorHandler {
 export function createAnalyticsCollector(config?: Partial<AnalyticsCollectorConfig>): AnalyticsCollectorHandler {
   return new AnalyticsCollectorHandler({ ...DEFAULT_CONFIG, ...config });
 }
+
+/**
+ * Return the market's most and least favoured outcome by pool size.
+ */
+export function getMarketFavourite(pools: Record<string, number>): { favourite: string | null; underdog: string | null } {
+  const entries = Object.entries(pools).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]);
+  return {
+    favourite: entries[0]?.[0] ?? null,
+    underdog: entries[entries.length - 1]?.[0] ?? null,
+  };
+}
