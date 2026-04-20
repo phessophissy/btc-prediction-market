@@ -123,3 +123,21 @@ export class AnalyticsCollectorHandler {
 export function createAnalyticsCollector(config?: Partial<AnalyticsCollectorConfig>): AnalyticsCollectorHandler {
   return new AnalyticsCollectorHandler({ ...DEFAULT_CONFIG, ...config });
 }
+
+/**
+ * Calculate return on investment as a percentage.
+ * ROI = (net gain / total invested) × 100
+ */
+export function calculateROI(totalWon: number, totalInvested: number): number {
+  if (totalInvested === 0) return 0;
+  return ((totalWon - totalInvested) / totalInvested) * 100;
+}
+
+/**
+ * Calculate a Sharpe-like ratio using win rate and average return.
+ */
+export function calculateWinScore(winCount: number, totalBets: number, avgReturn: number): number {
+  if (totalBets === 0) return 0;
+  const winRate = winCount / totalBets;
+  return winRate * avgReturn;
+}
