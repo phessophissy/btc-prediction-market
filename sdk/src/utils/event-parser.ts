@@ -189,3 +189,25 @@ export class ContractEventsHandler {
     this.emit('config:updated', updates);
   }
 }
+
+export interface SettlementEvent {
+  marketId: number;
+  winningOutcome: number;
+  settlementBurnHeight: number;
+  settlementBlockHash: string;
+  settledBy: string;
+}
+
+export function parseSettlementEvent(rawEvent: Record<string, unknown>): SettlementEvent | null {
+  try {
+    return {
+      marketId: Number(rawEvent['market-id']),
+      winningOutcome: Number(rawEvent['winning-outcome']),
+      settlementBurnHeight: Number(rawEvent['settlement-burn-height']),
+      settlementBlockHash: String(rawEvent['settlement-block-hash'] ?? ''),
+      settledBy: String(rawEvent['settled-by'] ?? ''),
+    };
+  } catch {
+    return null;
+  }
+}
