@@ -14,3 +14,8 @@ Shared UI components currently include:
 - `ConnectionRequired`
 
 These components are intended to keep route files thin and easier to review.
+
+## OddsDisplay
+
+Accepts `format` prop: `'decimal'` (default) | `'fractional'` | `'american'`.
+User preference is persisted in localStorage under `odds-format`.
