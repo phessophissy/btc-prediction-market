@@ -12,3 +12,9 @@ Current testing coverage is light.
 - add unit tests for frontend utilities
 - add contract-level Clarinet tests
 - add smoke tests for wallet-gated flows
+
+## Market Status Utils
+
+Tests should cover all six phases with boundary block heights.
+Pay special attention to the `settled` vs `claimable` distinction:
+a market is `claimable` only when `winningOutcome !== null`.
