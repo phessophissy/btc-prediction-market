@@ -46,3 +46,32 @@ export function validateBetAmount(amount: number, minBet = 10000): { valid: bool
   }
   return { valid: true };
 }
+
+/**
+ * Validate a Stacks principal address (mainnet SP… or testnet ST…).
+ */
+export function validatePrincipal(address: string): string[] {
+  const errors: string[] = [];
+  if (!address) { errors.push('Address is required'); return errors; }
+  if (!/^(SP|ST|SM)[A-Z0-9]{28,41}$/.test(address)) {
+    errors.push(`Invalid Stacks address format: ${address.slice(0, 20)}`);
+  }
+  return errors;
+}
+
+/**
+ * Validate a contract identifier in the format 'address.contract-name'.
+ */
+export function validateContractId(contractId: string): string[] {
+  const errors: string[] = [];
+  if (!contractId.includes('.')) {
+    errors.push('Contract ID must be in format address.contract-name');
+    return errors;
+  }
+  const [address, name] = contractId.split('.');
+  errors.push(...validatePrincipal(address));
+  if (!/^[a-z][a-z0-9-]{0,39}$/.test(name)) {
+    errors.push(`Invalid contract name: ${name}`);
+  }
+  return errors;
+}
