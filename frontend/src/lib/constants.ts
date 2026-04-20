@@ -51,3 +51,6 @@ export const CONTRACT_CAPABILITIES = {
 } as const;
 
 // [chore/dependency-audit-update] commit 4/10: extend lib layer – 1776638611513182728
+
+export type OddsFormat = 'decimal' | 'fractional' | 'american';
+export const DEFAULT_ODDS_FORMAT: OddsFormat = 'decimal';
