@@ -139,3 +139,27 @@ export function buildTwitterShareUrl(text: string, url: string): string {
   const params = new URLSearchParams({ text, url });
   return `https://x.com/intent/tweet?${params.toString()}`;
 }
+
+/**
+ * Copy text to clipboard; returns true on success.
+ */
+export async function copyToClipboard(text: string): Promise<boolean> {
+  try {
+    if (navigator.clipboard) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    const ok = document.execCommand('copy');
+    document.body.removeChild(ta);
+    return ok;
+  } catch {
+    return false;
+  }
+}
