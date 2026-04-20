@@ -123,3 +123,27 @@ export class MarketAggregatorHandler {
 export function createMarketAggregator(config?: Partial<MarketAggregatorConfig>): MarketAggregatorHandler {
   return new MarketAggregatorHandler({ ...DEFAULT_CONFIG, ...config });
 }
+
+import { LeaderboardEntry } from '../types';
+
+/**
+ * Build a leaderboard from a flat list of position records.
+ */
+export function buildLeaderboard(
+  positions: { address: string; won: number; invested: number; isWin: boolean }[]
+): LeaderboardEntry[] {
+  const map = new Map<string, Omit<LeaderboardEntry, 'rank'>>();
+  for (const p of positions) {
+    const existing = map.get(p.address) ?? {
+      address: p.address, totalWon: 0, totalInvested: 0, winCount: 0, lossCount: 0
+    };
+    existing.totalWon += p.won;
+    existing.totalInvested += p.invested;
+    if (p.isWin) existing.winCount++;
+    else existing.lossCount++;
+    map.set(p.address, existing);
+  }
+  return [...map.values()]
+    .sort((a, b) => b.totalWon - a.totalWon)
+    .map((e, i) => ({ ...e, rank: i + 1 }));
+}
