@@ -123,3 +123,23 @@ export class PositionTrackerHandler {
 export function createPositionTracker(config?: Partial<PositionTrackerConfig>): PositionTrackerHandler {
   return new PositionTrackerHandler({ ...DEFAULT_CONFIG, ...config });
 }
+
+import { UserPosition } from '../types';
+
+/**
+ * Sum the total invested across all four outcomes for a position.
+ */
+export function totalInvestedInPosition(pos: UserPosition): number {
+  return pos.outcomeAAmount + pos.outcomeBAmount + pos.outcomeCAmount + pos.outcomeDAmount;
+}
+
+/**
+ * Return the outcomes a user has bet on.
+ */
+export function activatedOutcomes(pos: UserPosition): string[] {
+  const flags: [string, number][] = [
+    ['A', pos.outcomeAAmount], ['B', pos.outcomeBAmount],
+    ['C', pos.outcomeCAmount], ['D', pos.outcomeDAmount],
+  ];
+  return flags.filter(([, amt]) => amt > 0).map(([o]) => o);
+}
