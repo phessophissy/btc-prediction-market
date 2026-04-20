@@ -33,3 +33,11 @@ export interface UserPosition {
 }
 
 // [chore/dependency-audit-update] commit 6/10: optimize sdk layer – 1776638611571524501
+
+export type FeeTier = 'standard' | 'reduced' | 'premium';
+
+export interface FeeConfig {
+  tier: FeeTier;
+  basisPoints: number;
+  minBetMicrostx: number;
+}
