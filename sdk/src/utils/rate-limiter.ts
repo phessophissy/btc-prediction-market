@@ -189,3 +189,30 @@ export class RateLimitingHandler {
     this.emit('config:updated', updates);
   }
 }
+
+export const MAX_REQUESTS_PER_MINUTE = 60;
+export const RATE_LIMIT_WINDOW_MS = 60_000;
+
+/**
+ * Token bucket state for a single API consumer.
+ */
+export interface TokenBucket {
+  tokens: number;
+  lastRefill: number;
+}
+
+export function refillBucket(bucket: TokenBucket, maxTokens: number = MAX_REQUESTS_PER_MINUTE): TokenBucket {
+  const now = Date.now();
+  const elapsed = now - bucket.lastRefill;
+  const refill = Math.floor((elapsed / RATE_LIMIT_WINDOW_MS) * maxTokens);
+  return {
+    tokens: Math.min(maxTokens, bucket.tokens + refill),
+    lastRefill: now,
+  };
+}
+
+export function consumeToken(bucket: TokenBucket): { allowed: boolean; bucket: TokenBucket } {
+  const filled = refillBucket(bucket);
+  if (filled.tokens <= 0) return { allowed: false, bucket: filled };
+  return { allowed: true, bucket: { ...filled, tokens: filled.tokens - 1 } };
+}
