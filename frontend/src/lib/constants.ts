@@ -51,3 +51,12 @@ export const CONTRACT_CAPABILITIES = {
 } as const;
 
 // [chore/dependency-audit-update] commit 4/10: extend lib layer – 1776638611513182728
+
+export const KEYBOARD_SHORTCUTS: Record<string, string> = {
+  SEARCH: '/',
+  CLOSE_MODAL: 'Escape',
+  NEXT_MARKET: 'ArrowRight',
+  PREV_MARKET: 'ArrowLeft',
+  REFRESH: 'r',
+  TOGGLE_THEME: 't',
+};
