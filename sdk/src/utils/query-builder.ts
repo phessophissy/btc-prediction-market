@@ -123,3 +123,17 @@ export class QueryBuilderHandler {
 export function createQueryBuilder(config?: Partial<QueryBuilderConfig>): QueryBuilderHandler {
   return new QueryBuilderHandler({ ...DEFAULT_CONFIG, ...config });
 }
+
+/**
+ * Filter markets by minimum pool size.
+ */
+export function filterByMinPool(markets: { totalPool: number }[], minPool: number): typeof markets {
+  return markets.filter((m) => m.totalPool >= minPool);
+}
+
+/**
+ * Sort markets by total pool descending (most liquidity first).
+ */
+export function sortByLiquidity<T extends { totalPool: number }>(markets: T[]): T[] {
+  return [...markets].sort((a, b) => b.totalPool - a.totalPool);
+}
