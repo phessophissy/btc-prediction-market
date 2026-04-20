@@ -23,3 +23,15 @@
 - `sdk/`: package intended for reusable integration code
 - `cli/`: package intended for command-line workflows
 - `deployments/`: Clarinet deployment plan files
+
+## Directory Glossary
+
+| Directory | Purpose |
+|-----------|---------|
+| `contracts/` | Clarity smart contracts |
+| `sdk/` | TypeScript SDK for contract interaction |
+| `frontend/` | Next.js web application |
+| `tests/` | Vitest unit and integration tests |
+| `docs/` | Project documentation |
+| `deployments/` | Clarinet deployment plan YAMLs |
+| `tools/` | Developer automation scripts |
