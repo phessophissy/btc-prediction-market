@@ -95,3 +95,15 @@ export function toFractionalOdds(oddsMultiplier: number, precision: number = 100
   const d = gcd(numerator, denominator);
   return `${numerator / d}/${denominator / d}`;
 }
+
+/**
+ * Rank outcomes by their odds multiplier (highest first).
+ */
+export function rankOutcomesByOdds(market: import('../types').Market): { outcome: string; odds: number }[] {
+  const pools = getOutcomePools(market);
+  const total = market.totalPool;
+  return Object.entries(pools)
+    .filter(([, p]) => p > 0)
+    .map(([outcome, pool]) => ({ outcome, odds: calculateOddsMultiplier(pool, total) }))
+    .sort((a, b) => b.odds - a.odds);
+}
