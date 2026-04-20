@@ -123,3 +123,17 @@ export class MarketAggregatorHandler {
 export function createMarketAggregator(config?: Partial<MarketAggregatorConfig>): MarketAggregatorHandler {
   return new MarketAggregatorHandler({ ...DEFAULT_CONFIG, ...config });
 }
+
+/**
+ * Count markets by settlement status.
+ */
+export function countBySettlement(markets: { settled: boolean }[]): { settled: number; unsettled: number } {
+  return markets.reduce(
+    (acc, m) => {
+      if (m.settled) acc.settled++;
+      else acc.unsettled++;
+      return acc;
+    },
+    { settled: 0, unsettled: 0 }
+  );
+}
