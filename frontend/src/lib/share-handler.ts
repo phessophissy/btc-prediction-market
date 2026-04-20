@@ -123,3 +123,19 @@ export class SocialSharingHandler {
 export function createSocialSharing(config?: Partial<SocialSharingConfig>): SocialSharingHandler {
   return new SocialSharingHandler({ ...DEFAULT_CONFIG, ...config });
 }
+
+/**
+ * Build a shareable URL for a specific market.
+ */
+export function buildMarketShareUrl(marketId: number, baseUrl: string = ''): string {
+  const base = baseUrl || (typeof window !== 'undefined' ? window.location.origin : '');
+  return `${base}/markets/${marketId}`;
+}
+
+/**
+ * Build a Twitter/X share intent URL.
+ */
+export function buildTwitterShareUrl(text: string, url: string): string {
+  const params = new URLSearchParams({ text, url });
+  return `https://x.com/intent/tweet?${params.toString()}`;
+}
