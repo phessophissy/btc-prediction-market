@@ -189,3 +189,8 @@ export class MarketSearchHandler {
     this.emit('config:updated', updates);
   }
 }
+
+export function searchByTag(items: { tags?: string[] }[], query: string): typeof items {
+  const q = query.toLowerCase();
+  return items.filter((m) => m.tags?.some((t) => t.includes(q)));
+}

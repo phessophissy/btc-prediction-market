@@ -189,3 +189,8 @@ export class MarketFilteringHandler {
     this.emit('config:updated', updates);
   }
 }
+
+export function filterByTags(markets: { tags?: string[] }[], tags: string[]): typeof markets {
+  if (tags.length === 0) return markets;
+  return markets.filter((m) => m.tags && tags.every((t) => m.tags!.includes(t)));
+}
