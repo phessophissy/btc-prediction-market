@@ -69,3 +69,15 @@ export function kellyFraction(prob: number, oddsMultiplier: number): number {
   const q = 1 - prob;
   return Math.max(0, (b * prob - q) / b);
 }
+
+/**
+ * Convert a decimal odds multiplier to American moneyline format.
+ * e.g. 2.5x → +150, 1.4x → -250
+ */
+export function toMoneyline(oddsMultiplier: number): string {
+  if (oddsMultiplier <= 0) return 'N/A';
+  if (oddsMultiplier >= 2) {
+    return `+${Math.round((oddsMultiplier - 1) * 100)}`;
+  }
+  return `${Math.round(-100 / (oddsMultiplier - 1))}`;
+}
