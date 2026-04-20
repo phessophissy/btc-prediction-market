@@ -117,3 +117,17 @@ export function validateSettlementBurnHeight(height: number, currentBurnHeight: 
   }
   return errors;
 }
+
+export function validateTitle(title: string): string[] {
+  const errors: string[] = [];
+  if (!title || title.trim().length === 0) errors.push('Title is required');
+  if (title.length > 120) errors.push('Title must be 120 characters or fewer');
+  return errors;
+}
+
+export function validateDescription(desc: string): string[] {
+  const errors: string[] = [];
+  if (!desc || desc.trim().length === 0) errors.push('Description is required');
+  if (desc.length > 500) errors.push('Description must be 500 characters or fewer');
+  return errors;
+}
