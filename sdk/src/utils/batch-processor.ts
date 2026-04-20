@@ -189,3 +189,17 @@ export class BatchOperationsHandler {
     this.emit('config:updated', updates);
   }
 }
+
+export const DEFAULT_BATCH_SIZE = 10;
+export const DEFAULT_BATCH_DELAY_MS = 500;
+
+/**
+ * Split an array into chunks of at most `size` items.
+ */
+export function chunk<T>(array: T[], size: number = DEFAULT_BATCH_SIZE): T[][] {
+  const chunks: T[][] = [];
+  for (let i = 0; i < array.length; i += size) {
+    chunks.push(array.slice(i, i + size));
+  }
+  return chunks;
+}
