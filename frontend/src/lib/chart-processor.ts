@@ -123,3 +123,20 @@ export class ChartDataHandler {
 export function createChartData(config?: Partial<ChartDataConfig>): ChartDataHandler {
   return new ChartDataHandler({ ...DEFAULT_CONFIG, ...config });
 }
+
+/**
+ * Aggregate daily P&L from a list of positions.
+ * Returns an array of { date: string; pnl: number } sorted by date.
+ */
+export function aggregateDailyPnL(
+  records: { date: string; won: number; invested: number }[]
+): { date: string; pnl: number }[] {
+  const byDate = new Map<string, number>();
+  for (const r of records) {
+    const existing = byDate.get(r.date) ?? 0;
+    byDate.set(r.date, existing + r.won - r.invested);
+  }
+  return [...byDate.entries()]
+    .map(([date, pnl]) => ({ date, pnl }))
+    .sort((a, b) => a.date.localeCompare(b.date));
+}

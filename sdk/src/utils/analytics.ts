@@ -125,12 +125,19 @@ export function createAnalyticsCollector(config?: Partial<AnalyticsCollectorConf
 }
 
 /**
- * Return the market's most and least favoured outcome by pool size.
+ * Calculate return on investment as a percentage.
+ * ROI = (net gain / total invested) × 100
  */
-export function getMarketFavourite(pools: Record<string, number>): { favourite: string | null; underdog: string | null } {
-  const entries = Object.entries(pools).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]);
-  return {
-    favourite: entries[0]?.[0] ?? null,
-    underdog: entries[entries.length - 1]?.[0] ?? null,
-  };
+export function calculateROI(totalWon: number, totalInvested: number): number {
+  if (totalInvested === 0) return 0;
+  return ((totalWon - totalInvested) / totalInvested) * 100;
+}
+
+/**
+ * Calculate a Sharpe-like ratio using win rate and average return.
+ */
+export function calculateWinScore(winCount: number, totalBets: number, avgReturn: number): number {
+  if (totalBets === 0) return 0;
+  const winRate = winCount / totalBets;
+  return winRate * avgReturn;
 }

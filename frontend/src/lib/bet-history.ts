@@ -189,3 +189,25 @@ export class BetHistoryHandler {
     this.emit('config:updated', updates);
   }
 }
+
+export interface BetRecord {
+  marketId: number;
+  outcome: string;
+  amountMicrostx: number;
+  placedAt: number;
+  result: 'win' | 'loss' | 'pending';
+}
+
+/**
+ * Filter bet records to only those with a specific result.
+ */
+export function filterBetsByResult(bets: BetRecord[], result: BetRecord['result']): BetRecord[] {
+  return bets.filter((b) => b.result === result);
+}
+
+/**
+ * Calculate total amount bet on a specific outcome.
+ */
+export function totalBetOnOutcome(bets: BetRecord[], outcome: string): number {
+  return bets.filter((b) => b.outcome === outcome).reduce((s, b) => s + b.amountMicrostx, 0);
+}
