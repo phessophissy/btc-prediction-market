@@ -1,3 +1,3 @@
 export * from './rate-limiter';
 
-export * from './fee-calculator';
+export * from './metadata-validator';

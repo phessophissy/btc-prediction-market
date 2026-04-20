@@ -52,8 +52,9 @@ export const CONTRACT_CAPABILITIES = {
 
 // [chore/dependency-audit-update] commit 4/10: extend lib layer – 1776638611513182728
 
-export const FEE_TIERS = {
-  standard: { bps: 300, label: '3.00%' },
-  reduced: { bps: 150, label: '1.50%' },
-  premium: { bps: 500, label: '5.00%' },
-} as const;
+export const MARKET_TAGS = [
+  'bitcoin', 'price', 'halving', 'etf', 'macro',
+  'defi', 'regulation', 'mining', 'lightning', 'stacks',
+] as const;
+
+export type MarketTag = typeof MARKET_TAGS[number];
