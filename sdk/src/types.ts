@@ -41,3 +41,8 @@ export interface MarketMetadata {
   externalUrl?: string;
   creatorNote?: string;
 }
+
+export interface MetadataValidationResult {
+  valid: boolean;
+  errors: string[];
+}
