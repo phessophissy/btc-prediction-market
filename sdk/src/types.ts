@@ -33,3 +33,12 @@ export interface UserPosition {
 }
 
 // [chore/dependency-audit-update] commit 6/10: optimize sdk layer – 1776638611571524501
+
+export interface LeaderboardEntry {
+  address: string;
+  totalWon: number;
+  totalInvested: number;
+  winCount: number;
+  lossCount: number;
+  rank: number;
+}
