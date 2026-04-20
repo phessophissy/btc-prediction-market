@@ -123,3 +123,15 @@ export class ContractReaderHandler {
 export function createContractReader(config?: Partial<ContractReaderConfig>): ContractReaderHandler {
   return new ContractReaderHandler({ ...DEFAULT_CONFIG, ...config });
 }
+
+/**
+ * Parse a raw Clarity buffer response as a hex string.
+ */
+export function parseBufferAsHex(clarityValue: unknown): string | null {
+  if (!clarityValue || typeof clarityValue !== 'object') return null;
+  const cv = clarityValue as Record<string, unknown>;
+  if (cv['type'] === 'buffer' && typeof cv['value'] === 'string') {
+    return cv['value'];
+  }
+  return null;
+}

@@ -16,3 +16,12 @@ The project is centered on a Bitcoin-anchored prediction market implemented in C
 - The deployed frontend defaults to the V3 market contract on mainnet, but can now be overridden with `NEXT_PUBLIC_*` environment variables.
 
 <!-- [chore/dependency-audit-update] commit 9/10: revise docs layer – 1776638611664060420 -->
+
+## Settlement Architecture
+
+Settlement is a two-step process:
+1. The block producer mines the Bitcoin block at the settlement height
+2. The Stacks transaction confirms the `settle-market` call referencing
+   the Bitcoin block hash via `get-burn-block-info`
+
+This provides cryptographic proof of the settlement condition.

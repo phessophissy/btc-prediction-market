@@ -73,3 +73,41 @@ export function getMarketPhaseColor(phase: MarketPhase): string {
 }
 
 // [chore/dependency-audit-update] commit 7/10: strengthen sdk-utils layer – 1776638611601079378
+
+/**
+ * Returns true if the market closes within the next `blocks` Bitcoin blocks.
+ */
+export function isClosingWithin(market: import('../types').Market, currentBurnHeight: number, blocks: number): boolean {
+  const remaining = market.settlementBurnHeight - currentBurnHeight;
+  return remaining > 0 && remaining <= blocks;
+}
+
+const PHASE_SORT_ORDER: Record<string, number> = {
+  claimable: 0, settleable: 1, 'closing-soon': 2, open: 3, closed: 4, settled: 5,
+};
+
+/**
+ * Compare two markets by urgency phase for list sorting.
+ */
+export function compareByPhaseUrgency(
+  a: { phase: string },
+  b: { phase: string }
+): number {
+  return (PHASE_SORT_ORDER[a.phase] ?? 99) - (PHASE_SORT_ORDER[b.phase] ?? 99);
+}
+
+/**
+ * Estimate the wall-clock settlement date given a Bitcoin block interval of ~10 minutes.
+ * @param settlementBurnHeight - target Bitcoin block height
+ * @param currentBurnHeight - current Bitcoin block height
+ * @param currentDate - reference date (default: now)
+ */
+export function estimatedSettlementDate(
+  settlementBurnHeight: number,
+  currentBurnHeight: number,
+  currentDate: Date = new Date()
+): Date {
+  const blocksRemaining = Math.max(0, settlementBurnHeight - currentBurnHeight);
+  const msRemaining = blocksRemaining * 10 * 60 * 1000;
+  return new Date(currentDate.getTime() + msRemaining);
+}
