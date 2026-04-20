@@ -19,3 +19,12 @@
 
 - Winning users claim payouts after settlement.
 - Platform fee is deducted from winnings according to contract rules.
+
+## Settlement Types
+
+| Type | Description |
+|------|-------------|
+| `btc-price` | Settle when BTC price crosses a target value |
+| `btc-hash` | Settle based on a specific Bitcoin block hash prefix |
+| `manual` | Market creator settles manually after expiry |
+| `oracle` | Delegated to a trusted oracle address |

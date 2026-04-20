@@ -125,3 +125,33 @@ export function createSettlementWatcher(config?: Partial<SettlementWatcherConfig
 }
 
 // [chore/dependency-audit-update] commit 7/10: strengthen sdk-utils layer – 1776638611602741926
+
+import { SettlementConfig } from '../types';
+
+export function validateSettlementConfig(config: SettlementConfig): string[] {
+  const errors: string[] = [];
+  const validTypes = ['btc-price', 'btc-hash', 'manual', 'oracle'];
+  if (!validTypes.includes(config.type)) {
+    errors.push(`Invalid settlement type: ${config.type}`);
+  }
+  if (config.type === 'btc-price' && (config.targetValue === undefined || config.targetValue <= 0)) {
+    errors.push('btc-price settlement requires a positive targetValue');
+  }
+  if (config.type === 'oracle' && !config.oracleAddress) {
+    errors.push('oracle settlement requires an oracleAddress');
+  }
+  if (config.gracePeriodBlocks !== undefined && config.gracePeriodBlocks < 1) {
+    errors.push('gracePeriodBlocks must be at least 1');
+  }
+  return errors;
+}
+
+export const SETTLEMENT_POLL_INTERVAL_MS = 15_000;
+export const MAX_SETTLEMENT_WAIT_BLOCKS = 144; // ~24 hours
+
+/**
+ * Returns true if the market has exceeded the maximum wait window.
+ */
+export function isSettlementOverdue(market: { settlementBurnHeight: number }, currentBurnHeight: number): boolean {
+  return currentBurnHeight > market.settlementBurnHeight + MAX_SETTLEMENT_WAIT_BLOCKS;
+}

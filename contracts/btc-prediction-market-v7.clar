@@ -615,3 +615,7 @@
     (var-set platform-paused paused)
     (ok paused))
 )
+
+;; Settlement grace period – extra blocks after expiry during which
+;; the creator can still settle without losing their creation stake.
+(define-constant SETTLEMENT-GRACE-PERIOD u6)
