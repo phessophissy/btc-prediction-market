@@ -145,3 +145,13 @@ export function validateSettlementConfig(config: SettlementConfig): string[] {
   }
   return errors;
 }
+
+export const SETTLEMENT_POLL_INTERVAL_MS = 15_000;
+export const MAX_SETTLEMENT_WAIT_BLOCKS = 144; // ~24 hours
+
+/**
+ * Returns true if the market has exceeded the maximum wait window.
+ */
+export function isSettlementOverdue(market: { settlementBurnHeight: number }, currentBurnHeight: number): boolean {
+  return currentBurnHeight > market.settlementBurnHeight + MAX_SETTLEMENT_WAIT_BLOCKS;
+}
