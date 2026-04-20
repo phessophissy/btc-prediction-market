@@ -13,10 +13,8 @@ Current testing coverage is light.
 - add contract-level Clarinet tests
 - add smoke tests for wallet-gated flows
 
-## Odds Utilities
+## Market Status Utils
 
-Unit tests for `market-odds.ts` should cover:
-- `calculateImpliedProbability` with zero and non-zero pool
-- `toMoneyline` for favourite (< 2x) and underdog (≥ 2x)
-- `toFractionalOdds` GCD reduction correctness
-- `kellyFraction` boundary conditions (prob=0, prob=1, odds=1)
+Tests should cover all six phases with boundary block heights.
+Pay special attention to the `settled` vs `claimable` distinction:
+a market is `claimable` only when `winningOutcome !== null`.

@@ -45,3 +45,10 @@ export function validateStxAmount(stxAmount: number): { valid: boolean; error?: 
   }
   return { valid: true };
 }
+
+/**
+ * Convert microstx to STX as a display string.
+ */
+export function microstxToStxDisplay(microstx: number, decimals: number = 2): string {
+  return (microstx / 1_000_000).toFixed(decimals);
+}

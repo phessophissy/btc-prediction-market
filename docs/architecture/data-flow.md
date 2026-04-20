@@ -17,3 +17,11 @@
 ## Operational implication
 
 The frontend is thin by design. Contract correctness and network configuration are the real sources of truth.
+
+## Phase Resolution Flow
+
+```
+currentBurnHeight → getMarketPhase() → MarketPhase
+    ↓
+compareByPhaseUrgency() → sorted list for display
+```
