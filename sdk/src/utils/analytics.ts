@@ -123,3 +123,10 @@ export class AnalyticsCollectorHandler {
 export function createAnalyticsCollector(config?: Partial<AnalyticsCollectorConfig>): AnalyticsCollectorHandler {
   return new AnalyticsCollectorHandler({ ...DEFAULT_CONFIG, ...config });
 }
+
+/**
+ * Estimate total fees collected across a set of markets.
+ */
+export function estimateTotalFees(markets: { totalPool: number }[], feeBps: number = 300): number {
+  return markets.reduce((sum, m) => sum + Math.floor((m.totalPool * feeBps) / 10000), 0);
+}

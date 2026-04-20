@@ -69,3 +69,7 @@ export function estimateBlockTime(blocksRemaining: number): number {
 }
 
 // [chore/dependency-audit-update] commit 4/10: extend lib layer – 1776638611516490283
+
+export function formatFeeBps(bps: number): string {
+  return `${(bps / 100).toFixed(2)}%`;
+}
