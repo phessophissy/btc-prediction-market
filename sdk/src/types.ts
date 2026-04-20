@@ -33,3 +33,10 @@ export interface UserPosition {
 }
 
 // [chore/dependency-audit-update] commit 6/10: optimize sdk layer – 1776638611571524501
+
+export interface NonceState {
+  address: string;
+  currentNonce: number;
+  pendingCount: number;
+  lastRefreshed: number;
+}
