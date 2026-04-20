@@ -8,8 +8,8 @@ This system assumes:
 
 The frontend is not the trust boundary. Contract logic and wallet confirmation remain the critical controls.
 
-## Fee Handling
+## Client-Side Validation
 
-All fee calculations use integer arithmetic (basis points) to avoid
-floating-point rounding errors. Fee deductions occur post-settlement
-during the claim step.
+Client-side validation (TypeScript helpers) is a UX convenience layer only.
+All security-critical constraints are enforced on-chain by the Clarity contract.
+Never rely solely on client-side checks for security guarantees.

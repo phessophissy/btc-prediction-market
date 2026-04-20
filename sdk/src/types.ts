@@ -34,11 +34,14 @@ export interface UserPosition {
 
 // [chore/dependency-audit-update] commit 6/10: optimize sdk layer – 1776638611571524501
 
-export type SettlementType = 'btc-price' | 'btc-hash' | 'manual' | 'oracle';
+export interface ValidationError {
+  field: string;
+  message: string;
+  code: string;
+}
 
-export interface SettlementConfig {
-  type: SettlementType;
-  targetValue?: number;
-  oracleAddress?: string;
-  gracePeriodBlocks?: number;
+export interface ValidationResult<T> {
+  valid: boolean;
+  value?: T;
+  errors: ValidationError[];
 }
