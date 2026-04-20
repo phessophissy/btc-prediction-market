@@ -22,12 +22,12 @@ export function formatBlocksToEta(blocks: number): string {
 
 // [chore/dependency-audit-update] commit 4/10: extend lib layer – 1776638611511642964
 
-export function getSettlementTypeLabel(type: string): string {
-  const labels: Record<string, string> = {
-    'btc-price': 'BTC Price Target',
-    'btc-hash': 'Bitcoin Block Hash',
-    'manual': 'Manual Settlement',
-    'oracle': 'Oracle Resolved',
-  };
-  return labels[type] ?? type;
+/**
+ * Format a microstx amount as a compact STX string, e.g. '1.25M STX', '300K STX'.
+ */
+export function formatPoolSize(microstx: number): string {
+  const stx = microstx / 1_000_000;
+  if (stx >= 1_000_000) return `${(stx / 1_000_000).toFixed(2)}M STX`;
+  if (stx >= 1_000) return `${(stx / 1_000).toFixed(1)}K STX`;
+  return `${stx.toFixed(2)} STX`;
 }

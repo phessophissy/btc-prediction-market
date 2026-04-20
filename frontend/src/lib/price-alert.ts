@@ -189,3 +189,21 @@ export class PriceAlertsHandler {
     this.emit('config:updated', updates);
   }
 }
+
+export interface PriceAlert {
+  id: string;
+  targetPrice: number;
+  direction: 'above' | 'below';
+  createdAt: number;
+  triggered: boolean;
+}
+
+/**
+ * Returns true if the alert should trigger given the current price.
+ */
+export function shouldTriggerAlert(alert: PriceAlert, currentPrice: number): boolean {
+  if (alert.triggered) return false;
+  return alert.direction === 'above'
+    ? currentPrice >= alert.targetPrice
+    : currentPrice <= alert.targetPrice;
+}

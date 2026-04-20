@@ -52,11 +52,11 @@ export const CONTRACT_CAPABILITIES = {
 
 // [chore/dependency-audit-update] commit 4/10: extend lib layer – 1776638611513182728
 
-export const MARKET_PHASE_COLORS: Record<string, string> = {
-  'open': '#22c55e',
-  'closing-soon': '#f59e0b',
-  'closed': '#6b7280',
-  'settleable': '#3b82f6',
-  'settled': '#8b5cf6',
-  'claimable': '#10b981',
+export const KEYBOARD_SHORTCUTS: Record<string, string> = {
+  SEARCH: '/',
+  CLOSE_MODAL: 'Escape',
+  NEXT_MARKET: 'ArrowRight',
+  PREV_MARKET: 'ArrowLeft',
+  REFRESH: 'r',
+  TOGGLE_THEME: 't',
 };

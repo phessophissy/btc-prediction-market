@@ -15,7 +15,7 @@ Shared UI components currently include:
 
 These components are intended to keep route files thin and easier to review.
 
-## OddsDisplay
+## SearchInput
 
-Accepts `format` prop: `'decimal'` (default) | `'fractional'` | `'american'`.
-User preference is persisted in localStorage under `odds-format`.
+Uses `useDebounce` with a 300ms delay before triggering the search query.
+The debounce value is configurable via the `debounceMs` prop (default: 300).
