@@ -102,3 +102,18 @@ export function validateOutcomeFlag(flag: number): string[] {
   }
   return errors;
 }
+
+const MIN_SETTLEMENT_BLOCKS_AHEAD = 10;
+
+/**
+ * Validate that a settlement burn height is sufficiently in the future.
+ */
+export function validateSettlementBurnHeight(height: number, currentBurnHeight: number): string[] {
+  const errors: string[] = [];
+  if (!Number.isInteger(height) || height <= 0) {
+    errors.push('Settlement height must be a positive integer');
+  } else if (height <= currentBurnHeight + MIN_SETTLEMENT_BLOCKS_AHEAD) {
+    errors.push(`Settlement height must be at least ${MIN_SETTLEMENT_BLOCKS_AHEAD} blocks in the future`);
+  }
+  return errors;
+}
