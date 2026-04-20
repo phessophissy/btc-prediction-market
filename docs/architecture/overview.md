@@ -16,3 +16,9 @@ The project is centered on a Bitcoin-anchored prediction market implemented in C
 - The deployed frontend defaults to the V3 market contract on mainnet, but can now be overridden with `NEXT_PUBLIC_*` environment variables.
 
 <!-- [chore/dependency-audit-update] commit 9/10: revise docs layer – 1776638611664060420 -->
+
+## Market Metadata
+
+Extended metadata (tags, images, creator notes) is stored off-chain.
+Only a content hash is anchored to the Stacks transaction to minimise
+on-chain storage costs while preserving verifiability.

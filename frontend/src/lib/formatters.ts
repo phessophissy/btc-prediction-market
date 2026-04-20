@@ -69,3 +69,11 @@ export function estimateBlockTime(blocksRemaining: number): number {
 }
 
 // [chore/dependency-audit-update] commit 4/10: extend lib layer – 1776638611516490283
+
+import type { OddsFormat } from './constants';
+
+export function formatOddsValue(multiplier: number, format: OddsFormat = 'decimal'): string {
+  if (format === 'decimal') return `${multiplier.toFixed(2)}x`;
+  // fractional and american handled by SDK utils where imported
+  return `${multiplier.toFixed(2)}x`;
+}
