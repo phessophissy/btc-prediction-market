@@ -50,3 +50,22 @@ export function getLeadingOutcome(market: Market): string | null {
 }
 
 // [chore/dependency-audit-update] commit 7/10: strengthen sdk-utils layer – 1776638611599468282
+
+/**
+ * Return implied probability as a percentage string (e.g. '67.3%').
+ */
+export function formatImpliedProbability(outcomePool: number, totalPool: number): string {
+  const prob = calculateImpliedProbability(outcomePool, totalPool);
+  return `${(prob * 100).toFixed(1)}%`;
+}
+
+/**
+ * Return Kelly criterion fraction for optimal bet sizing.
+ * edge = (b * p - q) / b  where b = odds-1, p = win prob, q = 1-p
+ */
+export function kellyFraction(prob: number, oddsMultiplier: number): number {
+  if (oddsMultiplier <= 1 || prob <= 0 || prob >= 1) return 0;
+  const b = oddsMultiplier - 1;
+  const q = 1 - prob;
+  return Math.max(0, (b * prob - q) / b);
+}
