@@ -41,3 +41,10 @@ export interface FeeConfig {
   basisPoints: number;
   minBetMicrostx: number;
 }
+
+export interface MarketFeeInfo {
+  marketId: number;
+  tier: FeeTier;
+  totalFeesCollected: number;
+  lastUpdated: number;
+}
