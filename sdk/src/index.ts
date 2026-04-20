@@ -14,3 +14,11 @@ export function initializeMarketSDK(
 }
 
 // [chore/dependency-audit-update] commit 6/10: optimize sdk layer – 1776638611574578985
+
+export {
+  validatePrincipal,
+  validateContractId,
+  validateBetAmount,
+  validateOutcomeFlag,
+  validateSettlementBurnHeight,
+} from './utils/validation-50';
