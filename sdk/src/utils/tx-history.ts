@@ -125,3 +125,26 @@ export function createTxHistory(config?: Partial<TxHistoryConfig>): TxHistoryHan
 }
 
 // [chore/dependency-audit-update] commit 7/10: strengthen sdk-utils layer – 1776638611604981751
+
+export interface TxRecord {
+  txId: string;
+  contractFunction: string;
+  args: Record<string, string>;
+  broadcastedAt: number;
+  confirmedAt?: number;
+  status: 'pending' | 'success' | 'abort_by_response' | 'abort_by_post_condition';
+}
+
+const history: TxRecord[] = [];
+
+export function recordTx(record: TxRecord): void {
+  history.push(record);
+}
+
+export function getTxHistory(): Readonly<TxRecord[]> {
+  return history;
+}
+
+export function clearTxHistory(): void {
+  history.length = 0;
+}

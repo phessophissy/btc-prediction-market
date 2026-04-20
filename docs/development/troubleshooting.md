@@ -15,3 +15,10 @@
 ## UI copy mismatch
 
 If fee or minimum bet values look wrong, compare the frontend constants with the deployed contract version before changing text.
+
+## Rate Limit Errors
+
+If you receive HTTP 429 from the Stacks API, the SDK rate-limiter
+has a token bucket implementation in `sdk/src/utils/rate-limiter.ts`.
+The default limit is 60 requests per minute. Use `refillBucket` and
+`consumeToken` to integrate backpressure into custom tooling.

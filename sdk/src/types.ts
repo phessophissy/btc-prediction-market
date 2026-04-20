@@ -34,4 +34,17 @@ export interface UserPosition {
 
 // [chore/dependency-audit-update] commit 6/10: optimize sdk layer – 1776638611571524501
 
-export type OddsFormat = 'decimal' | 'fractional' | 'american';
+export interface NonceState {
+  address: string;
+  currentNonce: number;
+  pendingCount: number;
+  lastRefreshed: number;
+}
+
+export interface QueuedTransaction {
+  id: string;
+  address: string;
+  nonce: number;
+  broadcastedAt: number;
+  status: 'pending' | 'confirmed' | 'failed';
+}
