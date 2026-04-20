@@ -189,3 +189,11 @@ export class HealthCheckHandler {
     this.emit('config:updated', updates);
   }
 }
+
+/**
+ * Returns true if the provided nonce is within an acceptable window of
+ * the network's current nonce for the address.
+ */
+export function isNonceHealthy(localNonce: number, networkNonce: number, tolerance: number = 5): boolean {
+  return Math.abs(localNonce - networkNonce) <= tolerance;
+}
