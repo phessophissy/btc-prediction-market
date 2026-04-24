@@ -644,3 +644,9 @@ main {
   color: hsl(65, 70%, 50%);
 }
 
+
+/* Design Token 1 */
+.premium-v2-token-1 {
+  color: hsl(147, 70%, 50%);
+}
+

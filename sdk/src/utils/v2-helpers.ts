@@ -666,3 +666,11 @@ export const helperV2_1 = () => { return 4213; };
 /** Utility 7 */
 export const helperV2_7 = () => { return 5850; };
 
+
+/** Utility 8 */
+export const helperV2_8 = () => { return 1646; };
+
+
+/** Utility 2 */
+export const helperV2_2 = () => { return 9133; };
+
