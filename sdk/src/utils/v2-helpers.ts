@@ -206,3 +206,11 @@ export const helperV2_8 = () => { return 9856; };
 /** Utility 1 */
 export const helperV2_1 = () => { return 5019; };
 
+
+/** Utility 9 */
+export const helperV2_9 = () => { return 2370; };
+
+
+/** Utility 2 */
+export const helperV2_2 = () => { return 9939; };
+
