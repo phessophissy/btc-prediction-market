@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 ## Section 1
 Detailed technical specification for module component 1.
 
@@ -35,6 +36,8 @@ Detailed technical specification for module component 8.
 Detailed technical specification for module component 9.
 
 
+=======
+>>>>>>> origin/feature/campaign-v2-part-35
 ## Section 10
 Detailed technical specification for module component 10.
 
@@ -43,6 +46,7 @@ Detailed technical specification for module component 10.
 Detailed technical specification for module component 11.
 
 
+<<<<<<< HEAD
 ## Section 12
 Detailed technical specification for module component 12.
 
@@ -50,3 +54,16 @@ Detailed technical specification for module component 12.
 ## Section 13
 Detailed technical specification for module component 13.
 
+=======
+## Section 13
+Detailed technical specification for module component 13.
+
+
+## Section 14
+Detailed technical specification for module component 14.
+
+
+## Section 15
+Detailed technical specification for module component 15.
+
+>>>>>>> origin/feature/campaign-v2-part-35
