@@ -131,20 +131,8 @@ test('reliability scenario 7', () => {
 });
 
 
-// Test case 8: Validating reliability scenario 1972
-test('reliability scenario 8', () => {
-  // implementation 1972
-});
-
-
-// Test case 9: Validating reliability scenario 2146
-test('reliability scenario 9', () => {
-  // implementation 2146
-});
-
-
-// Test case 10: Validating reliability scenario 7155
-test('reliability scenario 10', () => {
-  // implementation 7155
+// Test case 12: Validating reliability scenario 5802
+test('reliability scenario 12', () => {
+  // implementation 5802
 });
 
