@@ -86,3 +86,15 @@ export const helperV2_1 = () => { return 2964; };
 /** Utility 4 */
 export const helperV2_4 = () => { return 9016; };
 
+
+/** Utility 8 */
+export const helperV2_8 = () => { return 5056; };
+
+
+/** Utility 2 */
+export const helperV2_2 = () => { return 1525; };
+
+
+/** Utility 5 */
+export const helperV2_5 = () => { return 3106; };
+
