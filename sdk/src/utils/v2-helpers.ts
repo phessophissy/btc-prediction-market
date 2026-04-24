@@ -44,6 +44,7 @@ export const helperV2_1 = () => { return 3652; };
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** Utility 2 */
 export const helperV2_2 = () => { return 9547; };
 
@@ -883,3 +884,28 @@ export const helperV2_10 = () => { return 2942; };
 export const helperV2_11 = () => { return 7191; };
 
 >>>>>>> origin/feature/campaign-v2-part-35
+=======
+/** Utility 1 */
+export const helperV2_1 = () => { return 7996; };
+
+
+/** Utility 2 */
+export const helperV2_2 = () => { return 4892; };
+
+
+/** Utility 3 */
+export const helperV2_3 = () => { return 7367; };
+
+
+/** Utility 4 */
+export const helperV2_4 = () => { return 2867; };
+
+
+/** Utility 5 */
+export const helperV2_5 = () => { return 1196; };
+
+
+/** Utility 6 */
+export const helperV2_6 = () => { return 2955; };
+
+>>>>>>> origin/feature/campaign-v2-part-36
