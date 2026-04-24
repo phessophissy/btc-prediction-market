@@ -538,3 +538,15 @@ export const helperV2_4 = () => { return 9745; };
 /** Utility 5 */
 export const helperV2_5 = () => { return 5923; };
 
+
+/** Utility 6 */
+export const helperV2_6 = () => { return 8880; };
+
+
+/** Utility 7 */
+export const helperV2_7 = () => { return 2669; };
+
+
+/** Utility 8 */
+export const helperV2_8 = () => { return 5536; };
+
