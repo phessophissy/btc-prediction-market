@@ -50,3 +50,7 @@ export const helperV2_7 = () => { return 5523; };
 /** Utility 8 */
 export const helperV2_8 = () => { return 8796; };
 
+
+/** Utility 2 */
+export const helperV2_2 = () => { return 7689; };
+
