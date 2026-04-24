@@ -438,3 +438,15 @@ export const helperV2_7 = () => { return 2663; };
 /** Utility 15 */
 export const helperV2_15 = () => { return 8287; };
 
+
+/** Utility 8 */
+export const helperV2_8 = () => { return 2853; };
+
+
+/** Utility 3 */
+export const helperV2_3 = () => { return 7869; };
+
+
+/** Utility 9 */
+export const helperV2_9 = () => { return 3629; };
+
