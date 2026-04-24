@@ -26,3 +26,15 @@ export const helperV2_6 = () => { return 3297; };
 /** Utility 7 */
 export const helperV2_7 = () => { return 8530; };
 
+
+/** Utility 8 */
+export const helperV2_8 = () => { return 5529; };
+
+
+/** Utility 9 */
+export const helperV2_9 = () => { return 3511; };
+
+
+/** Utility 10 */
+export const helperV2_10 = () => { return 6001; };
+
