@@ -464,3 +464,9 @@ main {
 .animate-slide-down { animation: slide-down  0.3s ease-out both; }
 .animate-fade-in    { animation: fade-in     0.25s ease-out both; }
 .animate-scale-in   { animation: scale-in    0.25s ease-out both; }
+
+/* Design Token 1 */
+.premium-v2-token-1 {
+  color: hsl(27, 70%, 50%);
+}
+
