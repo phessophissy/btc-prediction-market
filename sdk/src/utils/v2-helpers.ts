@@ -278,3 +278,15 @@ export const helperV2_3 = () => { return 7736; };
 /** Utility 9 */
 export const helperV2_9 = () => { return 3376; };
 
+
+/** Utility 4 */
+export const helperV2_4 = () => { return 9809; };
+
+
+/** Utility 10 */
+export const helperV2_10 = () => { return 7509; };
+
+
+/** Utility 5 */
+export const helperV2_5 = () => { return 4709; };
+
