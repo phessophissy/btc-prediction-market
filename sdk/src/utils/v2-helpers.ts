@@ -574,3 +574,11 @@ export const helperV2_4 = () => { return 7901; };
 /** Utility 11 */
 export const helperV2_11 = () => { return 2830; };
 
+
+/** Utility 5 */
+export const helperV2_5 = () => { return 8250; };
+
+
+/** Utility 12 */
+export const helperV2_12 = () => { return 5510; };
+
