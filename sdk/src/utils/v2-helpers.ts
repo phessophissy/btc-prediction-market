@@ -210,3 +210,7 @@ export const helperV2_15 = () => { return 7142; };
 /** Utility 1 */
 export const helperV2_1 = () => { return 7848; };
 
+
+/** Utility 2 */
+export const helperV2_2 = () => { return 7127; };
+
