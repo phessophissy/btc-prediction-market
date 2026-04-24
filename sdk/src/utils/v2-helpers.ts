@@ -98,3 +98,15 @@ export const helperV2_2 = () => { return 1525; };
 /** Utility 5 */
 export const helperV2_5 = () => { return 3106; };
 
+
+/** Utility 9 */
+export const helperV2_9 = () => { return 5558; };
+
+
+/** Utility 3 */
+export const helperV2_3 = () => { return 4704; };
+
+
+/** Utility 6 */
+export const helperV2_6 = () => { return 4555; };
+
