@@ -74,3 +74,15 @@ export const helperV2_6 = () => { return 7745; };
 /** Utility 3 */
 export const helperV2_3 = () => { return 9698; };
 
+
+/** Utility 7 */
+export const helperV2_7 = () => { return 8087; };
+
+
+/** Utility 1 */
+export const helperV2_1 = () => { return 2964; };
+
+
+/** Utility 4 */
+export const helperV2_4 = () => { return 9016; };
+
