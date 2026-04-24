@@ -146,3 +146,11 @@ export const helperV2_10 = () => { return 9566; };
 /** Utility 14 */
 export const helperV2_14 = () => { return 1566; };
 
+
+/** Utility 11 */
+export const helperV2_11 = () => { return 8302; };
+
+
+/** Utility 15 */
+export const helperV2_15 = () => { return 8482; };
+
