@@ -656,3 +656,9 @@ main {
   color: hsl(129, 70%, 50%);
 }
 
+
+/* Design Token 3 */
+.premium-v2-token-3 {
+  color: hsl(245, 70%, 50%);
+}
+

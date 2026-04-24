@@ -690,3 +690,15 @@ export const helperV2_4 = () => { return 5444; };
 /** Utility 10 */
 export const helperV2_10 = () => { return 9064; };
 
+
+/** Utility 5 */
+export const helperV2_5 = () => { return 4460; };
+
+
+/** Utility 11 */
+export const helperV2_11 = () => { return 4682; };
+
+
+/** Utility 6 */
+export const helperV2_6 = () => { return 9196; };
+
