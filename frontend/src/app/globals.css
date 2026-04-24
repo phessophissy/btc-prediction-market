@@ -464,3 +464,93 @@ main {
 .animate-slide-down { animation: slide-down  0.3s ease-out both; }
 .animate-fade-in    { animation: fade-in     0.25s ease-out both; }
 .animate-scale-in   { animation: scale-in    0.25s ease-out both; }
+
+/* Design Token 1 */
+.premium-v2-token-1 {
+  color: hsl(153, 70%, 50%);
+}
+
+
+/* Design Token 2 */
+.premium-v2-token-2 {
+  color: hsl(222, 70%, 50%);
+}
+
+
+/* Design Token 3 */
+.premium-v2-token-3 {
+  color: hsl(182, 70%, 50%);
+}
+
+
+/* Design Token 4 */
+.premium-v2-token-4 {
+  color: hsl(83, 70%, 50%);
+}
+
+
+/* Design Token 5 */
+.premium-v2-token-5 {
+  color: hsl(242, 70%, 50%);
+}
+
+
+/* Design Token 6 */
+.premium-v2-token-6 {
+  color: hsl(160, 70%, 50%);
+}
+
+
+/* Design Token 7 */
+.premium-v2-token-7 {
+  color: hsl(267, 70%, 50%);
+}
+
+
+/* Design Token 8 */
+.premium-v2-token-8 {
+  color: hsl(104, 70%, 50%);
+}
+
+
+/* Design Token 9 */
+.premium-v2-token-9 {
+  color: hsl(110, 70%, 50%);
+}
+
+
+/* Design Token 10 */
+.premium-v2-token-10 {
+  color: hsl(182, 70%, 50%);
+}
+
+
+/* Design Token 11 */
+.premium-v2-token-11 {
+  color: hsl(318, 70%, 50%);
+}
+
+
+/* Design Token 12 */
+.premium-v2-token-12 {
+  color: hsl(34, 70%, 50%);
+}
+
+
+/* Design Token 13 */
+.premium-v2-token-13 {
+  color: hsl(216, 70%, 50%);
+}
+
+
+/* Design Token 14 */
+.premium-v2-token-14 {
+  color: hsl(226, 70%, 50%);
+}
+
+
+/* Design Token 15 */
+.premium-v2-token-15 {
+  color: hsl(96, 70%, 50%);
+}
+
