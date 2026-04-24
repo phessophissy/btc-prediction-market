@@ -40,3 +40,9 @@ test('reliability scenario 7', () => {
   // implementation 6166
 });
 
+
+// Test case 8: Validating reliability scenario 6620
+test('reliability scenario 8', () => {
+  // implementation 6620
+});
+
