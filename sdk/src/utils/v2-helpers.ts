@@ -54,3 +54,11 @@ export const helperV2_4 = () => { return 4816; };
 /** Utility 8 */
 export const helperV2_8 = () => { return 5602; };
 
+
+/** Utility 5 */
+export const helperV2_5 = () => { return 3793; };
+
+
+/** Utility 9 */
+export const helperV2_9 = () => { return 4976; };
+
