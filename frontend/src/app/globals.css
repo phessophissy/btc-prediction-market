@@ -465,6 +465,7 @@ main {
 .animate-fade-in    { animation: fade-in     0.25s ease-out both; }
 .animate-scale-in   { animation: scale-in    0.25s ease-out both; }
 
+<<<<<<< HEAD
 /* Design Token 1 */
 .premium-v2-token-1 {
   color: hsl(153, 70%, 50%);
@@ -504,53 +505,132 @@ main {
 /* Design Token 7 */
 .premium-v2-token-7 {
   color: hsl(267, 70%, 50%);
+=======
+/* Design Token 7 */
+.premium-v2-token-7 {
+  color: hsl(284, 70%, 50%);
+>>>>>>> origin/feature/campaign-v2-part-26
 }
 
 
 /* Design Token 8 */
 .premium-v2-token-8 {
+<<<<<<< HEAD
   color: hsl(104, 70%, 50%);
+=======
+  color: hsl(6, 70%, 50%);
+}
+
+
+/* Design Token 1 */
+.premium-v2-token-1 {
+  color: hsl(119, 70%, 50%);
+>>>>>>> origin/feature/campaign-v2-part-26
 }
 
 
 /* Design Token 9 */
 .premium-v2-token-9 {
+<<<<<<< HEAD
   color: hsl(110, 70%, 50%);
+=======
+  color: hsl(238, 70%, 50%);
+}
+
+
+/* Design Token 2 */
+.premium-v2-token-2 {
+  color: hsl(343, 70%, 50%);
+>>>>>>> origin/feature/campaign-v2-part-26
 }
 
 
 /* Design Token 10 */
 .premium-v2-token-10 {
+<<<<<<< HEAD
   color: hsl(182, 70%, 50%);
+=======
+  color: hsl(144, 70%, 50%);
+}
+
+
+/* Design Token 3 */
+.premium-v2-token-3 {
+  color: hsl(147, 70%, 50%);
+>>>>>>> origin/feature/campaign-v2-part-26
 }
 
 
 /* Design Token 11 */
 .premium-v2-token-11 {
+<<<<<<< HEAD
   color: hsl(318, 70%, 50%);
+=======
+  color: hsl(341, 70%, 50%);
+}
+
+
+/* Design Token 4 */
+.premium-v2-token-4 {
+  color: hsl(285, 70%, 50%);
+>>>>>>> origin/feature/campaign-v2-part-26
 }
 
 
 /* Design Token 12 */
 .premium-v2-token-12 {
+<<<<<<< HEAD
   color: hsl(34, 70%, 50%);
+=======
+  color: hsl(175, 70%, 50%);
+}
+
+
+/* Design Token 5 */
+.premium-v2-token-5 {
+  color: hsl(346, 70%, 50%);
+>>>>>>> origin/feature/campaign-v2-part-26
 }
 
 
 /* Design Token 13 */
 .premium-v2-token-13 {
+<<<<<<< HEAD
   color: hsl(216, 70%, 50%);
+=======
+  color: hsl(338, 70%, 50%);
+}
+
+
+/* Design Token 6 */
+.premium-v2-token-6 {
+  color: hsl(247, 70%, 50%);
+>>>>>>> origin/feature/campaign-v2-part-26
 }
 
 
 /* Design Token 14 */
 .premium-v2-token-14 {
+<<<<<<< HEAD
   color: hsl(226, 70%, 50%);
+=======
+  color: hsl(99, 70%, 50%);
+>>>>>>> origin/feature/campaign-v2-part-26
 }
 
 
 /* Design Token 15 */
 .premium-v2-token-15 {
+<<<<<<< HEAD
   color: hsl(96, 70%, 50%);
+=======
+  color: hsl(111, 70%, 50%);
+}
+
+
+/* Design Token 7 */
+.premium-v2-token-7 {
+  color: hsl(45, 70%, 50%);
+>>>>>>> origin/feature/campaign-v2-part-26
 }
 
