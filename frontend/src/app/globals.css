@@ -554,3 +554,15 @@ main {
   color: hsl(23, 70%, 50%);
 }
 
+
+/* Design Token 1 */
+.premium-v2-token-1 {
+  color: hsl(135, 70%, 50%);
+}
+
+
+/* Design Token 2 */
+.premium-v2-token-2 {
+  color: hsl(255, 70%, 50%);
+}
+
