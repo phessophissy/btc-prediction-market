@@ -270,3 +270,15 @@ export const helperV2_3 = () => { return 6075; };
 /** Utility 5 */
 export const helperV2_5 = () => { return 4146; };
 
+
+/** Utility 6 */
+export const helperV2_6 = () => { return 5629; };
+
+
+/** Utility 10 */
+export const helperV2_10 = () => { return 9523; };
+
+
+/** Utility 4 */
+export const helperV2_4 = () => { return 6553; };
+
