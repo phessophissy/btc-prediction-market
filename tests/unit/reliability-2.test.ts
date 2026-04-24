@@ -22,3 +22,9 @@ test('reliability scenario 4', () => {
   // implementation 1284
 });
 
+
+// Test case 5: Validating reliability scenario 1060
+test('reliability scenario 5', () => {
+  // implementation 1060
+});
+
