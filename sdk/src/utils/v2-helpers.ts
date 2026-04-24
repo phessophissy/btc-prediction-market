@@ -710,3 +710,11 @@ export const helperV2_12 = () => { return 2847; };
 /** Utility 7 */
 export const helperV2_7 = () => { return 4721; };
 
+
+/** Utility 13 */
+export const helperV2_13 = () => { return 7109; };
+
+
+/** Utility 8 */
+export const helperV2_8 = () => { return 8587; };
+
