@@ -214,3 +214,19 @@ export const helperV2_9 = () => { return 2370; };
 /** Utility 2 */
 export const helperV2_2 = () => { return 9939; };
 
+
+/** Utility 3 */
+export const helperV2_3 = () => { return 4982; };
+
+
+/** Utility 10 */
+export const helperV2_10 = () => { return 2618; };
+
+
+/** Utility 4 */
+export const helperV2_4 = () => { return 8816; };
+
+
+/** Utility 11 */
+export const helperV2_11 = () => { return 1053; };
+
