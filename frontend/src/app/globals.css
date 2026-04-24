@@ -476,3 +476,27 @@ main {
   color: hsl(6, 70%, 50%);
 }
 
+
+/* Design Token 1 */
+.premium-v2-token-1 {
+  color: hsl(119, 70%, 50%);
+}
+
+
+/* Design Token 9 */
+.premium-v2-token-9 {
+  color: hsl(238, 70%, 50%);
+}
+
+
+/* Design Token 2 */
+.premium-v2-token-2 {
+  color: hsl(343, 70%, 50%);
+}
+
+
+/* Design Token 10 */
+.premium-v2-token-10 {
+  color: hsl(144, 70%, 50%);
+}
+
