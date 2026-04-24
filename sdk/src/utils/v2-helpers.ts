@@ -190,3 +190,7 @@ export const helperV2_4 = () => { return 7313; };
 /** Utility 5 */
 export const helperV2_5 = () => { return 2163; };
 
+
+/** Utility 6 */
+export const helperV2_6 = () => { return 8362; };
+
