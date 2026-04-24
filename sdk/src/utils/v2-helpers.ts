@@ -110,3 +110,15 @@ export const helperV2_10 = () => { return 8338; };
 /** Utility 14 */
 export const helperV2_14 = () => { return 8580; };
 
+
+/** Utility 7 */
+export const helperV2_7 = () => { return 7763; };
+
+
+/** Utility 15 */
+export const helperV2_15 = () => { return 4400; };
+
+
+/** Utility 11 */
+export const helperV2_11 = () => { return 3962; };
+
