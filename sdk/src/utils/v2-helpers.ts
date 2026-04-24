@@ -654,3 +654,7 @@ export const helperV2_4 = () => { return 7701; };
 /** Utility 5 */
 export const helperV2_5 = () => { return 2155; };
 
+
+/** Utility 6 */
+export const helperV2_6 = () => { return 3226; };
+
