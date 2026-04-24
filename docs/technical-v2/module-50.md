@@ -58,3 +58,7 @@ Detailed technical specification for module component 6.
 ## Section 7
 Detailed technical specification for module component 7.
 
+
+## Section 8
+Detailed technical specification for module component 8.
+
