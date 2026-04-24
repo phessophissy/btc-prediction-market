@@ -298,3 +298,11 @@ export const helperV2_12 = () => { return 5920; };
 /** Utility 8 */
 export const helperV2_8 = () => { return 3879; };
 
+
+/** Utility 13 */
+export const helperV2_13 = () => { return 3421; };
+
+
+/** Utility 9 */
+export const helperV2_9 = () => { return 8695; };
+
