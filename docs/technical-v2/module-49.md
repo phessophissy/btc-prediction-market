@@ -50,3 +50,11 @@ Detailed technical specification for module component 12.
 ## Section 13
 Detailed technical specification for module component 13.
 
+
+## Section 14
+Detailed technical specification for module component 14.
+
+
+## Section 15
+Detailed technical specification for module component 15.
+
