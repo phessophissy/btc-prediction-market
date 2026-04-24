@@ -10,3 +10,11 @@ Detailed technical specification for module component 2.
 ## Section 3
 Detailed technical specification for module component 3.
 
+
+## Section 4
+Detailed technical specification for module component 4.
+
+
+## Section 5
+Detailed technical specification for module component 5.
+
