@@ -478,3 +478,7 @@ body {
   border-radius: 8px;
   box-shadow: inset 0 0 10px #000;
 }
+
+/* add old-world typography styles */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;700&display=swap');
+* { font-family: 'Crimson Text', serif; }
