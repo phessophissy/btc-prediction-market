@@ -62,3 +62,13 @@ module.exports = {
   },
   plugins: [],
 }
+
+/* define wooden color palette in tailwind config */
+        extend: {
+          colors: {
+            'wood-dark': '#3d2b1f',
+            'wood-medium': '#8b5a2b',
+            'wood-light': '#d2b48c',
+            'paper': '#f5f5dc',
+          },
+        },
