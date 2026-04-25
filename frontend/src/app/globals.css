@@ -471,3 +471,10 @@ body {
   background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
   color: #f5f5dc;
 }
+
+/* style main containers with carved borders */
+.container-carved {
+  border: 4px solid #8b5a2b;
+  border-radius: 8px;
+  box-shadow: inset 0 0 10px #000;
+}
