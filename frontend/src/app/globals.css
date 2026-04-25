@@ -489,3 +489,9 @@ body {
   color: #3d2b1f;
   box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
 }
+
+/* add hover effects for wooden interactive elements */
+.wood-hover:hover {
+  filter: brightness(1.1);
+  cursor: pointer;
+}
