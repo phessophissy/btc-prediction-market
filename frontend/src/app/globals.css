@@ -495,3 +495,7 @@ body {
   filter: brightness(1.1);
   cursor: pointer;
 }
+
+/* add RusticTable base styles */
+table.rustic { width: 100%; border-collapse: collapse; }
+table.rustic th { background: #8b5a2b; color: #f5f5dc; padding: 10px; }
