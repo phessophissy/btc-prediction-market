@@ -499,3 +499,6 @@ body {
 /* add RusticTable base styles */
 table.rustic { width: 100%; border-collapse: collapse; }
 table.rustic th { background: #8b5a2b; color: #f5f5dc; padding: 10px; }
+
+/* refine typography spacing for readability */
+p { line-height: 1.6; margin-bottom: 1rem; }
