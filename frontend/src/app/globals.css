@@ -464,3 +464,10 @@ main {
 .animate-slide-down { animation: slide-down  0.3s ease-out both; }
 .animate-fade-in    { animation: fade-in     0.25s ease-out both; }
 .animate-scale-in   { animation: scale-in    0.25s ease-out both; }
+
+/* apply wooden background to global layout */
+body {
+  background-color: #3d2b1f;
+  background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+  color: #f5f5dc;
+}
