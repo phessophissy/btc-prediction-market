@@ -482,3 +482,10 @@ body {
 /* add old-world typography styles */
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;700&display=swap');
 * { font-family: 'Crimson Text', serif; }
+
+/* enhance card aesthetics with paper texture */
+.card-paper {
+  background: #f5f5dc;
+  color: #3d2b1f;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+}
