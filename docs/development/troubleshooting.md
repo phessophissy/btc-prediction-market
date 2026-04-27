@@ -22,3 +22,8 @@ If you receive HTTP 429 from the Stacks API, the SDK rate-limiter
 has a token bucket implementation in `sdk/src/utils/rate-limiter.ts`.
 The default limit is 60 requests per minute. Use `refillBucket` and
 `consumeToken` to integrate backpressure into custom tooling.
+
+For batched calls and smarter scheduling, use:
+
+- `consumeTokens(bucket, count)` for grouped request reservations.
+- `timeUntilNextTokenMs(bucket)` to delay work until capacity is available.
