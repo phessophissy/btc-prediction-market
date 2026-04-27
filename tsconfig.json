@@ -13,5 +13,3 @@
   "include": ["tests/**/*", "scripts/**/*"],
   "exclude": ["node_modules"]
 }
-
-# [chore/dependency-audit-update] commit 10/10: polish config layer – 1776638611692555559

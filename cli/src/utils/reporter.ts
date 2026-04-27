@@ -20,7 +20,7 @@ export class ReportingEngineHandler {
   private errorCount = 0;
 
   constructor(config: ReportingEngineConfig = DEFAULT_CONFIG) {
-    this.config = { ...config };
+    this.config = normalizeConfig(config);
   }
 
   getStats() {
@@ -117,9 +117,21 @@ export class ReportingEngineHandler {
   }
 
   getConfig(): Readonly<ReportingEngineConfig> { return Object.freeze({ ...this.config }); }
-  updateConfig(u: Partial<ReportingEngineConfig>): void { this.config = { ...this.config, ...u }; this.emit('config:updated', u); }
+  updateConfig(u: Partial<ReportingEngineConfig>): void {
+    this.config = normalizeConfig({ ...this.config, ...u });
+    this.emit('config:updated', u);
+  }
 }
 
 export function createReportingEngine(config?: Partial<ReportingEngineConfig>): ReportingEngineHandler {
-  return new ReportingEngineHandler({ ...DEFAULT_CONFIG, ...config });
+  return new ReportingEngineHandler(normalizeConfig({ ...DEFAULT_CONFIG, ...config }));
+}
+
+function normalizeConfig(config: ReportingEngineConfig): ReportingEngineConfig {
+  return {
+    enabled: Boolean(config.enabled),
+    threshold: Math.max(0, config.threshold),
+    maxRetries: Math.max(1, Math.floor(config.maxRetries)),
+    timeoutMs: Math.max(100, Math.floor(config.timeoutMs)),
+  };
 }
