@@ -44,6 +44,9 @@ cp frontend/.env.example frontend/.env.local
 # 3. Run tests
 npm test
 
+# Optional: run node-only utility tests (without Clarinet environment)
+npm run test:node
+
 # 4. Start frontend
 cd frontend && npm run dev
 ```
