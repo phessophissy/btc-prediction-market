@@ -22,3 +22,20 @@ If you receive HTTP 429 from the Stacks API, the SDK rate-limiter
 has a token bucket implementation in `sdk/src/utils/rate-limiter.ts`.
 The default limit is 60 requests per minute. Use `refillBucket` and
 `consumeToken` to integrate backpressure into custom tooling.
+
+## Treasury withdrawal fails
+
+If `withdraw-fees` fails after security hardening:
+
+- Verify caller is current contract owner.
+- Verify requested amount does not exceed tracked withdrawable fees.
+- Cross-check `get-total-fees-collected` and `get-withdrawable-fees` outputs before retrying.
+
+## Settlement readiness confusion
+
+Remember there are two milestones:
+
+- betting close at `settlementBurnHeight`
+- settlement eligibility at `settlementBurnHeight + 6`
+
+Use SDK helpers in `sdk/src/utils/market-status.ts` to avoid attempting settle too early.
