@@ -88,6 +88,12 @@ clarinet test
 # Or with vitest
 pnpm test
 
+# Run all unit-style vitest specs
+pnpm run test:unit
+
+# Validate JSON config files are parseable
+pnpm run validate:json
+
 # Start console
 clarinet console
 ```

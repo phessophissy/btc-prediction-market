@@ -18,6 +18,19 @@ npm run dev
 
 The frontend can target alternate contracts by editing `.env.local`.
 
+## Useful Root Scripts
+
+```bash
+# Run unit-focused specs
+npm run test:unit
+
+# Check JSON config validity
+npm run validate:json
+
+# Run a focused market status suite
+npm run test:market-status
+```
+
 ## Quick-Start Checklist
 
 ```bash
