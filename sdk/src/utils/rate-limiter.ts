@@ -216,3 +216,25 @@ export function consumeToken(bucket: TokenBucket): { allowed: boolean; bucket: T
   if (filled.tokens <= 0) return { allowed: false, bucket: filled };
   return { allowed: true, bucket: { ...filled, tokens: filled.tokens - 1 } };
 }
+
+export function consumeTokens(bucket: TokenBucket, count: number): { allowed: boolean; bucket: TokenBucket } {
+  if (count <= 0) return { allowed: true, bucket };
+  const filled = refillBucket(bucket);
+  if (filled.tokens < count) return { allowed: false, bucket: filled };
+  return { allowed: true, bucket: { ...filled, tokens: filled.tokens - count } };
+}
+
+export function timeUntilNextTokenMs(
+  bucket: TokenBucket,
+  maxTokens: number = MAX_REQUESTS_PER_MINUTE
+): number {
+  const filled = refillBucket(bucket, maxTokens);
+  if (filled.tokens > 0) {
+    return 0;
+  }
+
+  const msPerToken = RATE_LIMIT_WINDOW_MS / maxTokens;
+  const elapsedSinceRefill = Date.now() - filled.lastRefill;
+  const remainder = elapsedSinceRefill % msPerToken;
+  return Math.ceil(msPerToken - remainder);
+}
