@@ -7,6 +7,12 @@
 - Bridge between the original feature set and the later V3 deployment
 - Preserve market behavior while iterating on ownership and operational control
 
+## Parameter snapshot
+
+- `MARKET-CREATION-FEE`: `u100000` (0.1 STX)
+- `MIN-BET-AMOUNT`: `u10000` (0.01 STX)
+- `PLATFORM-FEE-PERCENT`: `u300` (3%)
+
 ## Recommendation
 
 Treat V2 as historical context unless a deployment explicitly references it. The frontend currently points at V3 by default.

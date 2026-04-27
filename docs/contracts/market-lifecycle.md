@@ -24,7 +24,7 @@
 
 | Type | Description |
 |------|-------------|
-| `btc-price` | Settle when BTC price crosses a target value |
-| `btc-hash` | Settle based on a specific Bitcoin block hash prefix |
-| `manual` | Market creator settles manually after expiry |
-| `oracle` | Delegated to a trusted oracle address |
+| `hash-even-odd` | Binary market: last byte parity decides outcome A/B |
+| `hash-range` | Multi-outcome market: hash byte modulo enabled outcomes |
+
+Settlement eligibility requires the configured settlement height plus confirmation buffer (`+6` burn blocks by default).
