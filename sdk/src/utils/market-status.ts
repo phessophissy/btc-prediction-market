@@ -2,6 +2,14 @@ import { Market } from '../types';
 
 export type MarketPhase = 'open' | 'closing-soon' | 'closed' | 'settleable' | 'settled' | 'claimable';
 
+export interface SettleabilitySummary {
+  settleable: boolean;
+  blocksUntilSettlement: number;
+  blocksUntilSettleable: number;
+  settlementEta: string;
+  settleableEta: string;
+}
+
 const BLOCKS_BEFORE_SETTLEMENT = 6;
 const CLOSING_SOON_THRESHOLD = 50;
 
@@ -86,6 +94,21 @@ export function getMarketPhaseColor(phase: MarketPhase): string {
     'claimable': '#10b981',
   };
   return colors[phase];
+}
+
+export function getSettleabilitySummary(
+  market: Market,
+  currentBurnHeight: number
+): SettleabilitySummary {
+  const untilSettlement = blocksUntilSettlement(market, currentBurnHeight);
+  const untilSettleable = blocksUntilSettleable(market, currentBurnHeight);
+  return {
+    settleable: untilSettleable === 0 && !market.settled,
+    blocksUntilSettlement: untilSettlement,
+    blocksUntilSettleable: untilSettleable,
+    settlementEta: estimatedTimeToSettlement(market, currentBurnHeight),
+    settleableEta: estimatedTimeToSettleable(market, currentBurnHeight),
+  };
 }
 
 // [chore/dependency-audit-update] commit 7/10: strengthen sdk-utils layer – 1776638611601079378
