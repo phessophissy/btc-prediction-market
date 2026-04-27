@@ -201,8 +201,11 @@ export interface TokenBucket {
   lastRefill: number;
 }
 
-export function refillBucket(bucket: TokenBucket, maxTokens: number = MAX_REQUESTS_PER_MINUTE): TokenBucket {
-  const now = Date.now();
+export function refillBucket(
+  bucket: TokenBucket,
+  maxTokens: number = MAX_REQUESTS_PER_MINUTE,
+  now: number = Date.now()
+): TokenBucket {
   const elapsed = now - bucket.lastRefill;
   const refill = Math.floor((elapsed / RATE_LIMIT_WINDOW_MS) * maxTokens);
   return {
@@ -211,8 +214,40 @@ export function refillBucket(bucket: TokenBucket, maxTokens: number = MAX_REQUES
   };
 }
 
-export function consumeToken(bucket: TokenBucket): { allowed: boolean; bucket: TokenBucket } {
-  const filled = refillBucket(bucket);
+export function consumeToken(
+  bucket: TokenBucket,
+  maxTokens: number = MAX_REQUESTS_PER_MINUTE,
+  now: number = Date.now()
+): { allowed: boolean; bucket: TokenBucket } {
+  const filled = refillBucket(bucket, maxTokens, now);
   if (filled.tokens <= 0) return { allowed: false, bucket: filled };
   return { allowed: true, bucket: { ...filled, tokens: filled.tokens - 1 } };
+}
+
+export function consumeTokens(
+  bucket: TokenBucket,
+  count: number,
+  maxTokens: number = MAX_REQUESTS_PER_MINUTE,
+  now: number = Date.now()
+): { allowed: boolean; bucket: TokenBucket } {
+  if (count <= 0) return { allowed: true, bucket };
+  const filled = refillBucket(bucket, maxTokens, now);
+  if (filled.tokens < count) return { allowed: false, bucket: filled };
+  return { allowed: true, bucket: { ...filled, tokens: filled.tokens - count } };
+}
+
+export function timeUntilNextTokenMs(
+  bucket: TokenBucket,
+  maxTokens: number = MAX_REQUESTS_PER_MINUTE,
+  now: number = Date.now()
+): number {
+  const filled = refillBucket(bucket, maxTokens, now);
+  if (filled.tokens > 0) {
+    return 0;
+  }
+
+  const msPerToken = RATE_LIMIT_WINDOW_MS / maxTokens;
+  const elapsedSinceRefill = now - filled.lastRefill;
+  const remainder = elapsedSinceRefill % msPerToken;
+  return Math.ceil(msPerToken - remainder);
 }
