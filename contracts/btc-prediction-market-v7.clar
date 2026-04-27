@@ -24,6 +24,7 @@
 (define-constant ERR-TRANSFER-FAILED (err u1013))
 (define-constant ERR-PENDING-OWNER-ONLY (err u1014))
 (define-constant ERR-NO-PENDING-OWNER (err u1015))
+(define-constant ERR-INSUFFICIENT-FEE-BALANCE (err u1016))
 
 ;; Platform constants
 (define-constant INITIAL-OWNER tx-sender)
@@ -604,9 +605,12 @@
 ;; =============================================
 
 (define-public (withdraw-fees (amount uint) (recipient principal))
-  (begin
+  (let ((available-fees (var-get total-fees-collected)))
     (asserts! (is-eq tx-sender (var-get contract-owner)) ERR-NOT-AUTHORIZED)
-    (as-contract (stx-transfer? amount tx-sender recipient)))
+    (asserts! (<= amount available-fees) ERR-INSUFFICIENT-FEE-BALANCE)
+    (try! (as-contract (stx-transfer? amount tx-sender recipient)))
+    (var-set total-fees-collected (- available-fees amount))
+    (ok amount))
 )
 
 (define-public (set-platform-paused (paused bool))
