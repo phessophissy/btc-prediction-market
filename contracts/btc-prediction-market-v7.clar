@@ -24,6 +24,7 @@
 (define-constant ERR-TRANSFER-FAILED (err u1013))
 (define-constant ERR-PENDING-OWNER-ONLY (err u1014))
 (define-constant ERR-NO-PENDING-OWNER (err u1015))
+(define-constant ERR-INSUFFICIENT-FEE-BALANCE (err u1016))
 
 ;; Platform constants
 (define-constant INITIAL-OWNER tx-sender)
@@ -270,7 +271,6 @@
     
     (map-set market-participants market-id (list))
     (var-set market-nonce (+ market-id u1))
-    (var-set total-fees-collected (+ (var-get total-fees-collected) MARKET-CREATION-FEE))
     
     (ok market-id))
 )
@@ -317,7 +317,6 @@
     
     (map-set market-participants market-id (list))
     (var-set market-nonce (+ market-id u1))
-    (var-set total-fees-collected (+ (var-get total-fees-collected) MARKET-CREATION-FEE))
     
     (ok market-id))
 )
@@ -534,6 +533,10 @@
   (var-get total-fees-collected)
 )
 
+(define-read-only (get-withdrawable-fees)
+  (var-get total-fees-collected)
+)
+
 (define-read-only (is-paused)
   (var-get platform-paused)
 )
@@ -604,9 +607,12 @@
 ;; =============================================
 
 (define-public (withdraw-fees (amount uint) (recipient principal))
-  (begin
+  (let ((available-fees (var-get total-fees-collected)))
     (asserts! (is-eq tx-sender (var-get contract-owner)) ERR-NOT-AUTHORIZED)
-    (as-contract (stx-transfer? amount tx-sender recipient)))
+    (asserts! (<= amount available-fees) ERR-INSUFFICIENT-FEE-BALANCE)
+    (try! (as-contract (stx-transfer? amount tx-sender recipient)))
+    (var-set total-fees-collected (- available-fees amount))
+    (ok amount))
 )
 
 (define-public (set-platform-paused (paused bool))
