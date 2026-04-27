@@ -121,7 +121,7 @@ export function isClosingWithin(market: import('../types').Market, currentBurnHe
   return remaining > 0 && remaining <= blocks;
 }
 
-const PHASE_SORT_ORDER: Record<string, number> = {
+const PHASE_SORT_ORDER: Record<MarketPhase, number> = {
   claimable: 0, settleable: 1, 'closing-soon': 2, open: 3, closed: 4, settled: 5,
 };
 
@@ -129,10 +129,10 @@ const PHASE_SORT_ORDER: Record<string, number> = {
  * Compare two markets by urgency phase for list sorting.
  */
 export function compareByPhaseUrgency(
-  a: { phase: string },
-  b: { phase: string }
+  a: { phase: MarketPhase },
+  b: { phase: MarketPhase }
 ): number {
-  return (PHASE_SORT_ORDER[a.phase] ?? 99) - (PHASE_SORT_ORDER[b.phase] ?? 99);
+  return PHASE_SORT_ORDER[a.phase] - PHASE_SORT_ORDER[b.phase];
 }
 
 /**
