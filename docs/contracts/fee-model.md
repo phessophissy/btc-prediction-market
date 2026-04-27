@@ -23,3 +23,14 @@ Three tiers are now supported:
 | premium | 500 | 5.00% |
 
 The fee tier is set at market creation and cannot be changed afterwards.
+
+## Withdrawable Fee Accounting
+
+Recent contract hardening separates tracking of withdrawable fees from creation-fee transfers:
+
+- Market creation fees are transferred directly to owner and are not counted as contract-held withdrawable fees.
+- Platform fees retained during winner payout are accumulated in `total-fees-collected`.
+- `withdraw-fees` now enforces `amount <= total-fees-collected` before transfer.
+- Successful `withdraw-fees` calls decrement `total-fees-collected` by the withdrawn amount.
+
+This prevents owner withdrawals from unintentionally draining active user pools.
