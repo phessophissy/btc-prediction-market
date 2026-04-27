@@ -35,6 +35,9 @@ btc-prediction-market/
 
 ## 💰 Fee Structure
 
+The table below reflects the original contract defaults (`contracts/btc-prediction-market.clar`).
+Other deployed versions may use different values.
+
 | Action | Fee |
 |--------|-----|
 | Market Creation | 5 STX |
