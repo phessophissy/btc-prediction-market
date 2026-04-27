@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import {
   RATE_LIMIT_WINDOW_MS,
   consumeToken,
@@ -15,8 +15,11 @@ describe('node lane: rate limiter basics', () => {
   });
 
   it('denies token consumption when empty', () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(1_000);
     const bucket: TokenBucket = { tokens: 0, lastRefill: 1_000 };
-    const result = consumeToken(bucket, 60, 1_000);
+    const result = consumeToken(bucket);
     expect(result.allowed).toBe(false);
+    vi.useRealTimers();
   });
 });
