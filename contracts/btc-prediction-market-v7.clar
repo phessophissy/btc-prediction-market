@@ -271,7 +271,6 @@
     
     (map-set market-participants market-id (list))
     (var-set market-nonce (+ market-id u1))
-    (var-set total-fees-collected (+ (var-get total-fees-collected) MARKET-CREATION-FEE))
     
     (ok market-id))
 )
@@ -318,7 +317,6 @@
     
     (map-set market-participants market-id (list))
     (var-set market-nonce (+ market-id u1))
-    (var-set total-fees-collected (+ (var-get total-fees-collected) MARKET-CREATION-FEE))
     
     (ok market-id))
 )
