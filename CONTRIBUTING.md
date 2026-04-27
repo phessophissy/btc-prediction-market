@@ -15,7 +15,9 @@ Keep changes narrow. A small reviewable commit is preferred over a broad refacto
 1. Install root dependencies with `npm install`.
 2. Install frontend dependencies with `cd frontend && npm install`.
 3. Run `clarinet check` before contract-facing changes.
-4. Run `npm run build` inside `frontend/` before frontend pushes.
+4. Run `npm run validate:json` to confirm config files are valid JSON.
+5. Run `npm run test:unit` for unit-level regressions.
+6. Run `npm run build` inside `frontend/` before frontend pushes.
 
 ## Commit guidance
 
