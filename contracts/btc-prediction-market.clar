@@ -560,6 +560,10 @@
   (var-get total-fees-collected)
 )
 
+(define-read-only (get-withdrawable-fees)
+  (var-get total-fees-collected)
+)
+
 (define-read-only (get-market-odds (market-id uint))
   (let ((market (unwrap! (map-get? markets market-id) none)))
     (some {

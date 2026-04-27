@@ -533,6 +533,10 @@
   (var-get total-fees-collected)
 )
 
+(define-read-only (get-withdrawable-fees)
+  (var-get total-fees-collected)
+)
+
 (define-read-only (is-paused)
   (var-get platform-paused)
 )
