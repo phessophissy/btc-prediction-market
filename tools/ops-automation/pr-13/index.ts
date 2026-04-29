@@ -14,3 +14,4 @@ export * from './derive-outcome-plan';
 export * from './summarize-failures';
 export * from './estimate-settlement-window';
 export * from './map-wallet-health';
+export * from './render-ops-checklist';
