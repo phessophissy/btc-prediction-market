@@ -11,3 +11,4 @@ export * from './compute-fee-aware-budget';
 export * from './format-broadcast-report';
 export * from './build-retry-candidates';
 export * from './derive-outcome-plan';
+export * from './summarize-failures';
