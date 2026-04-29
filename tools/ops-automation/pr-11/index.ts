@@ -13,3 +13,4 @@ export * from './build-retry-candidates';
 export * from './derive-outcome-plan';
 export * from './summarize-failures';
 export * from './estimate-settlement-window';
+export * from './map-wallet-health';
