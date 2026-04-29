@@ -7,3 +7,4 @@ export type WalletRow = {
 export type Outcome = 'outcome-a' | 'outcome-b';
 export * from './normalize-wallet-rows';
 export * from './group-bets-by-outcome';
+export * from './compute-fee-aware-budget';
