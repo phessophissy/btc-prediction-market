@@ -35,3 +35,4 @@ V3 adds extra owner-transfer and emergency-related codes on top of the base set.
 | u1013 | ERR-TRANSFER-FAILED | STX transfer failed |
 | u1014 | ERR-PENDING-OWNER-ONLY | Caller is not the pending owner |
 | u1015 | ERR-NO-PENDING-OWNER | No pending ownership transfer |
+| u1016 | ERR-INSUFFICIENT-FEE-BALANCE | Requested fee withdrawal exceeds tracked withdrawable balance |
