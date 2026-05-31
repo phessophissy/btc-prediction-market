@@ -15,7 +15,9 @@ Keep changes narrow. A small reviewable commit is preferred over a broad refacto
 1. Install root dependencies with `npm install`.
 2. Install frontend dependencies with `cd frontend && npm install`.
 3. Run `clarinet check` before contract-facing changes.
-4. Run `npm run build` inside `frontend/` before frontend pushes.
+4. Run `npm run validate:json` to confirm config files are valid JSON.
+5. Run `npm run test:unit` for unit-level regressions.
+6. Run `npm run build` inside `frontend/` before frontend pushes.
 
 ## Commit guidance
 
@@ -28,5 +30,15 @@ Keep changes narrow. A small reviewable commit is preferred over a broad refacto
 - Document which contract version the change targets.
 - Call out any network-specific assumptions.
 - Include screenshots for frontend visual changes when relevant.
+
+## Security contribution notes
+
+- If a PR addresses audit feedback, link the issue and list exactly which finding IDs are covered.
+- Include at least one verification artifact for contract-security PRs:
+	- clarinet check output
+	- targeted test case(s)
+	- before/after behavior summary
+- Never commit secrets, wallet files, or private keys.
+- Prefer reversible controls for emergency admin capabilities (timelocks, two-step ownership, transparent logs).
 
 <!-- [chore/dependency-audit-update] commit 9/10: revise docs layer – 1776638611660579214 -->

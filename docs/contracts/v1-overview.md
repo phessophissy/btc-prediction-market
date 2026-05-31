@@ -8,6 +8,14 @@
 - Uses a 1 STX minimum bet
 - Includes richer market creation and read-only helpers than the stripped V3 contract
 
+## Parameter snapshot
+
+- `MARKET-CREATION-FEE`: `u5000000` (5 STX)
+- `MIN-BET-AMOUNT`: `u1000000` (1 STX)
+- `PLATFORM-FEE-PERCENT`: `u300` (3%)
+
+The large difference between V1 and V2+/V3 defaults is a frequent source of operator confusion when switching environments.
+
 ## Why it still matters
 
 - It is the easiest place to inspect the original intended feature set
