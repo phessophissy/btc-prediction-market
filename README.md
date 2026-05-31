@@ -35,6 +35,9 @@ btc-prediction-market/
 
 ## 💰 Fee Structure
 
+The table below reflects the original contract defaults (`contracts/btc-prediction-market.clar`).
+Other deployed versions may use different values.
+
 | Action | Fee |
 |--------|-----|
 | Market Creation | 5 STX |
@@ -87,6 +90,12 @@ clarinet test
 
 # Or with vitest
 pnpm test
+
+# Run all unit-style vitest specs
+pnpm run test:unit
+
+# Validate JSON config files are parseable
+pnpm run validate:json
 
 # Start console
 clarinet console
