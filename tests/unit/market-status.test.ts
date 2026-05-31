@@ -4,7 +4,10 @@ import {
   isMarketOpen,
   isMarketClosed,
   blocksUntilSettlement,
+  blocksUntilSettleable,
   estimatedTimeToSettlement,
+  estimatedTimeToSettleable,
+  getSettleabilitySummary,
   getMarketPhaseLabel,
 } from '../../sdk/src/utils/market-status';
 
@@ -72,6 +75,16 @@ describe('blocksUntilSettlement', () => {
   });
 });
 
+describe('blocksUntilSettleable', () => {
+  it('includes post-settlement confirmation window', () => {
+    expect(blocksUntilSettleable(baseMarket, 1000)).toBe(6);
+  });
+
+  it('returns 0 when already settleable', () => {
+    expect(blocksUntilSettleable(baseMarket, 1006)).toBe(0);
+  });
+});
+
 describe('estimatedTimeToSettlement', () => {
   it('formats minutes', () => {
     const m = { ...baseMarket, settlementBurnHeight: 105 };
@@ -81,6 +94,22 @@ describe('estimatedTimeToSettlement', () => {
   it('formats hours', () => {
     const m = { ...baseMarket, settlementBurnHeight: 200 };
     expect(estimatedTimeToSettlement(m, 100)).toContain('h');
+  });
+});
+
+describe('estimatedTimeToSettleable', () => {
+  it('returns now for settleable markets', () => {
+    expect(estimatedTimeToSettleable(baseMarket, 1006)).toBe('Now');
+  });
+});
+
+describe('getSettleabilitySummary', () => {
+  it('returns settleability timeline details', () => {
+    const summary = getSettleabilitySummary(baseMarket, 1000);
+    expect(summary.settleable).toBe(false);
+    expect(summary.blocksUntilSettlement).toBe(0);
+    expect(summary.blocksUntilSettleable).toBe(6);
+    expect(summary.settleableEta).toBe('1h 0m');
   });
 });
 
