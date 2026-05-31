@@ -18,3 +18,5 @@ export function initializeMarketSDK(
 export type { LeaderboardEntry } from './types';
 export { buildLeaderboard } from './utils/market-aggregator';
 export { calculateROI, calculateWinScore } from './utils/analytics';
+export * from './utils/rate-limiter';
+export * from './utils/market-status';
