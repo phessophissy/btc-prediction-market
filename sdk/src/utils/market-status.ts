@@ -2,6 +2,14 @@ import { Market } from '../types';
 
 export type MarketPhase = 'open' | 'closing-soon' | 'closed' | 'settleable' | 'settled' | 'claimable';
 
+export interface SettleabilitySummary {
+  settleable: boolean;
+  blocksUntilSettlement: number;
+  blocksUntilSettleable: number;
+  settlementEta: string;
+  settleableEta: string;
+}
+
 const BLOCKS_BEFORE_SETTLEMENT = 6;
 const CLOSING_SOON_THRESHOLD = 50;
 
@@ -37,8 +45,24 @@ export function blocksUntilSettlement(market: Market, currentBurnHeight: number)
   return Math.max(remaining, 0);
 }
 
+export function blocksUntilSettleable(market: Market, currentBurnHeight: number): number {
+  const settleableAt = market.settlementBurnHeight + BLOCKS_BEFORE_SETTLEMENT;
+  return Math.max(settleableAt - currentBurnHeight, 0);
+}
+
 export function estimatedTimeToSettlement(market: Market, currentBurnHeight: number): string {
   const blocks = blocksUntilSettlement(market, currentBurnHeight);
+  if (blocks === 0) return 'Now';
+  const minutes = blocks * 10;
+  if (minutes < 60) return `${minutes}m`;
+  if (minutes < 1440) return `${Math.floor(minutes / 60)}h ${minutes % 60}m`;
+  const days = Math.floor(minutes / 1440);
+  const hours = Math.floor((minutes % 1440) / 60);
+  return `${days}d ${hours}h`;
+}
+
+export function estimatedTimeToSettleable(market: Market, currentBurnHeight: number): string {
+  const blocks = blocksUntilSettleable(market, currentBurnHeight);
   if (blocks === 0) return 'Now';
   const minutes = blocks * 10;
   if (minutes < 60) return `${minutes}m`;
@@ -72,6 +96,21 @@ export function getMarketPhaseColor(phase: MarketPhase): string {
   return colors[phase];
 }
 
+export function getSettleabilitySummary(
+  market: Market,
+  currentBurnHeight: number
+): SettleabilitySummary {
+  const untilSettlement = blocksUntilSettlement(market, currentBurnHeight);
+  const untilSettleable = blocksUntilSettleable(market, currentBurnHeight);
+  return {
+    settleable: untilSettleable === 0 && !market.settled,
+    blocksUntilSettlement: untilSettlement,
+    blocksUntilSettleable: untilSettleable,
+    settlementEta: estimatedTimeToSettlement(market, currentBurnHeight),
+    settleableEta: estimatedTimeToSettleable(market, currentBurnHeight),
+  };
+}
+
 // [chore/dependency-audit-update] commit 7/10: strengthen sdk-utils layer – 1776638611601079378
 
 /**
@@ -82,7 +121,7 @@ export function isClosingWithin(market: import('../types').Market, currentBurnHe
   return remaining > 0 && remaining <= blocks;
 }
 
-const PHASE_SORT_ORDER: Record<string, number> = {
+const PHASE_SORT_ORDER: Record<MarketPhase, number> = {
   claimable: 0, settleable: 1, 'closing-soon': 2, open: 3, closed: 4, settled: 5,
 };
 
@@ -90,10 +129,10 @@ const PHASE_SORT_ORDER: Record<string, number> = {
  * Compare two markets by urgency phase for list sorting.
  */
 export function compareByPhaseUrgency(
-  a: { phase: string },
-  b: { phase: string }
+  a: { phase: MarketPhase },
+  b: { phase: MarketPhase }
 ): number {
-  return (PHASE_SORT_ORDER[a.phase] ?? 99) - (PHASE_SORT_ORDER[b.phase] ?? 99);
+  return PHASE_SORT_ORDER[a.phase] - PHASE_SORT_ORDER[b.phase];
 }
 
 /**
