@@ -464,3 +464,44 @@ main {
 .animate-slide-down { animation: slide-down  0.3s ease-out both; }
 .animate-fade-in    { animation: fade-in     0.25s ease-out both; }
 .animate-scale-in   { animation: scale-in    0.25s ease-out both; }
+
+/* apply wooden background to global layout */
+body {
+  background-color: #3d2b1f;
+  background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+  color: #f5f5dc;
+}
+
+/* style main containers with carved borders */
+.container-carved {
+  border: 4px solid #8b5a2b;
+  border-radius: 8px;
+  box-shadow: inset 0 0 10px #000;
+}
+
+/* add old-world typography styles */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;700&display=swap');
+* { font-family: 'Crimson Text', serif; }
+
+/* enhance card aesthetics with paper texture */
+.card-paper {
+  background: #f5f5dc;
+  color: #3d2b1f;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+}
+
+/* add hover effects for wooden interactive elements */
+.wood-hover:hover {
+  filter: brightness(1.1);
+  cursor: pointer;
+}
+
+/* add RusticTable base styles */
+table.rustic { width: 100%; border-collapse: collapse; }
+table.rustic th { background: #8b5a2b; color: #f5f5dc; padding: 10px; }
+
+/* refine typography spacing for readability */
+p { line-height: 1.6; margin-bottom: 1rem; }
+
+/* add subtle inner glow to wooden elements */
+.wood-glow { box-shadow: inset 0 0 5px rgba(255,255,255,0.1); }
