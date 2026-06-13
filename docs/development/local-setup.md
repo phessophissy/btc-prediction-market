@@ -50,4 +50,4 @@ npm run test:node
 # 4. Start frontend
 cd frontend && npm run dev
 ```
-\n\nDocumentation improvement: PR 11 commit 4 — clarified wording and examples. (2026-06-13T20:47:01Z)
+\n\nDocumentation improvement: PR 12 commit 4 — clarified wording and examples. (2026-06-13T20:47:19Z)
