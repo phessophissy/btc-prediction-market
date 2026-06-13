@@ -18,4 +18,4 @@ Current testing coverage is light.
 Tests should cover all six phases with boundary block heights.
 Pay special attention to the `settled` vs `claimable` distinction:
 a market is `claimable` only when `winningOutcome !== null`.
-\n\nDocumentation improvement: PR 01 commit 5 — clarified wording and examples. (2026-06-13T20:44:17Z)
+\n\nDocumentation improvement: PR 15 commit 5 — clarified wording and examples. (2026-06-13T20:48:09Z)
