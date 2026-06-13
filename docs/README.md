@@ -17,4 +17,4 @@ This folder breaks the project into smaller references instead of forcing every 
 - `product/`: roadmap, user journeys, and known gaps
 
 <!-- [chore/dependency-audit-update] commit 9/10: revise docs layer – 1776638611662272165 -->
-\n\nDocumentation improvement: PR 01 commit 2 — clarified wording and examples. (2026-06-13T20:44:18Z)
+\n\nDocumentation improvement: PR 25 commit 2 — clarified wording and examples. (2026-06-13T20:50:56Z)
