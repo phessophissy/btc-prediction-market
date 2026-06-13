@@ -271,4 +271,4 @@ When contributing, please consider:
 MIT License
 
 <!-- [chore/dependency-audit-update] commit 9/10: revise docs layer – 1776638611658712417 -->
-\n\nDocumentation improvement: PR 01 commit 1 — clarified wording and examples. (2026-06-13T20:44:18Z)
+\n\nDocumentation improvement: PR 28 commit 1 — clarified wording and examples. (2026-06-13T20:51:39Z)
