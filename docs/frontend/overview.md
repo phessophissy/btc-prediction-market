@@ -23,4 +23,4 @@ The frontend is a Next.js App Router application under `frontend/`.
 - Focus is trapped within modals while open
 - Keyboard shortcuts are documented in the Help overlay (press `?`)
 - Colour contrast ratios meet WCAG 2.1 AA standards
-\n\nDocumentation improvement: PR 01 commit 3 — clarified wording and examples. (2026-06-13T20:44:18Z)
+\n\nDocumentation improvement: PR 15 commit 3 — clarified wording and examples. (2026-06-13T20:48:09Z)
