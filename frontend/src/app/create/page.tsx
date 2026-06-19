@@ -211,7 +211,8 @@ export default function CreateMarketPage() {
 
       <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-6">
-          <div className="card">
+          {currentStep === 1 && (
+            <div className="card">
             <label className="mb-3 block text-sm font-medium text-slate-200">
               Market Type
             </label>
@@ -240,12 +241,14 @@ export default function CreateMarketPage() {
               </button>
             </div>
           </div>
+          )}
 
-          <div className="card space-y-6">
-            <div>
-              <label className="mb-2 block text-sm font-medium text-slate-200">
-                Question *
-              </label>
+          {currentStep === 2 && (
+            <div className="card space-y-6">
+              <div>
+                <label className="mb-2 block text-sm font-medium text-slate-200">
+                  Question *
+                </label>
               <input
                 type="text"
                 value={question}
@@ -291,31 +294,26 @@ export default function CreateMarketPage() {
               </p>
             </div>
 
-            <button
-              onClick={handleCreateMarket}
-              disabled={isSubmitting || !!validationError}
-              className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              {isSubmitting
-                ? "Creating Market..."
-                : `Create Market (${formatMicroStx(MARKET_CREATION_FEE)} STX)`}
-            </button>
+            {validationError && <p className="text-sm text-amber-200">{validationError}</p>}
+          </div>
+          )}
 
-            {validationError && !submissionError ? (
-              <p className="text-sm text-amber-200">{validationError}</p>
-            ) : null}
-
-            {submissionError ? (
-              <div className="rounded-[1.25rem] border border-rose-300/20 bg-rose-300/10 p-4 text-sm text-rose-100">
-                {submissionError}
-              </div>
-            ) : null}
-
-            {submissionSuccess ? (
-              <div className="rounded-[1.25rem] border border-emerald-300/20 bg-emerald-300/10 p-4 text-sm text-emerald-100">
-                {submissionSuccess}
-              </div>
-            ) : null}
+          <div className="flex gap-3">
+            {currentStep > 1 && (
+              <button type="button" onClick={() => setCurrentStep(currentStep - 1)} className="btn-secondary flex-1">
+                ← Previous
+              </button>
+            )}
+            {currentStep < totalSteps && (
+              <button
+                type="button"
+                onClick={() => setCurrentStep(currentStep + 1)}
+                disabled={currentStep === 2 && !!validationError}
+                className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Next →
+              </button>
+            )}
           </div>
         </div>
 
