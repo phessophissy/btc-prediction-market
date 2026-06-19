@@ -322,10 +322,19 @@ export default function PortfolioPage() {
         </div>
 
         {positions.length === 0 ? (
-          <div className="p-10 text-center text-slate-300">
-            {CONTRACT_CAPABILITIES.placeBets
-              ? "No positions yet. Start betting on prediction markets."
-              : "No positions tracked yet. The current V3 deployment does not accept bets, so this view stays informational until trading is redeployed."}
+          <div className="p-10 text-center">
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-white/10 bg-white/5">
+              <TrendingUp className="h-8 w-8 text-slate-400" />
+            </div>
+            <h3 className="mb-2 text-2xl text-white">No positions yet</h3>
+            <p className="mb-6 text-sm text-slate-300">
+              {CONTRACT_CAPABILITIES.placeBets
+                ? 'Start betting on prediction markets to build your portfolio.'
+                : 'The current V3 deployment does not accept bets. Positions will appear here once trading is redeployed.'}
+            </p>
+            <a href="/" className="btn-primary inline-flex">
+              Browse Markets
+            </a>
           </div>
         ) : visiblePositions.length === 0 ? (
           <div className="p-10 text-center text-slate-300">
