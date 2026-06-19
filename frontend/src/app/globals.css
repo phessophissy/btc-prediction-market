@@ -241,7 +241,7 @@ main {
     @apply relative rounded-[1.75rem] border p-6 transition-transform duration-300;
     border-color: var(--border);
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+      linear-gradient(180deg, var(--surface-soft), rgba(255, 255, 255, 0.02)),
       var(--surface);
     box-shadow: var(--shadow-glow);
     backdrop-filter: blur(18px);
@@ -253,9 +253,9 @@ main {
 
   .panel-soft {
     @apply relative overflow-hidden rounded-[1.5rem] border p-5;
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--border);
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03)),
+      linear-gradient(180deg, var(--surface-soft), rgba(255, 255, 255, 0.03)),
       var(--surface-frost);
     backdrop-filter: blur(14px);
   }
