@@ -201,6 +201,16 @@ main {
 }
 
 @layer components {
+  .market-card-grid {
+    @apply grid gap-6;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 1024px) {
+    .market-card-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
   .app-shell {
     @apply mx-auto w-full max-w-7xl px-4 pb-20 pt-8 sm:px-6 lg:px-8;
   }

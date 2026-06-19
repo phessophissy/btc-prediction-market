@@ -234,7 +234,7 @@ export function MarketList({ showSettled = false }: MarketListProps) {
         <span className="text-slate-400">Search, filter, and sort update instantly.</span>
       </div>
 
-      <div className="grid gap-6">
+      <div className="market-card-grid">
         {visibleMarkets.map((market) => (
         <MarketCard
           key={market.id}
