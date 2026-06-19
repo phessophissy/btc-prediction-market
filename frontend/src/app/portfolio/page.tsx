@@ -282,7 +282,7 @@ export default function PortfolioPage() {
             No positions match the current portfolio filter.
           </div>
         ) : (
-          <div className="divide-y divide-white/10">
+          <div className="grid gap-4">
             {visiblePositions.map((pm) => {
               const status = getPositionStatus(pm);
               const statusClasses =
@@ -295,7 +295,7 @@ export default function PortfolioPage() {
                       : "status-warning";
 
               return (
-                <div key={pm.market.id} className="px-6 py-5 transition hover:bg-white/6">
+                <div key={pm.market.id} className="card mb-4 transition-transform duration-300 hover:-translate-y-1">
                   <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                     <div className="space-y-2">
                       <h3 className="text-2xl">{pm.market.title}</h3>
