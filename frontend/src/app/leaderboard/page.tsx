@@ -2,12 +2,13 @@
 
 import { PageHero } from "@/components/PageHero";
 import { formatAddress } from "@/lib/format";
-import { Award, Medal, Trophy, ChevronUp, ChevronDown } from "lucide-react";
+import { Award, Medal, Trophy, ChevronUp, ChevronDown, Search } from "lucide-react";
 import { useState } from "react";
 
 export default function LeaderboardPage() {
   const [sortField, setSortField] = useState<'winnings' | 'bets' | 'winRate'>('winnings');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleSort = (field: typeof sortField) => {
     if (sortField === field) {
@@ -55,7 +56,11 @@ export default function LeaderboardPage() {
       panelClass: "card mt-6",
     },
   ];
-  const sortedLeaderboard = [...leaderboard].sort((a, b) => {
+  const filteredLeaderboard = leaderboard.filter(user =>
+    !searchQuery || user.address.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const sortedLeaderboard = [...filteredLeaderboard].sort((a, b) => {
     const multiplier = sortDirection === 'desc' ? -1 : 1;
     return multiplier * (a[sortField] - b[sortField]);
   });
@@ -123,6 +128,28 @@ export default function LeaderboardPage() {
           <p className="mt-2 text-3xl font-semibold text-amber-300">{totals.totalBets}</p>
         </div>
       </section>
+
+      <div className="card">
+        <label className="mb-2 block text-sm text-slate-300">Search by wallet address</label>
+        <div className="relative">
+          <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+          <input
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="input pl-11"
+            placeholder="Filter by wallet address..."
+          />
+          {searchQuery && (
+            <button
+              type="button"
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full border border-white/10 px-3 py-1 text-xs text-slate-300 transition hover:bg-white/8"
+            >
+              Clear
+            </button>
+          )}
+        </div>
+      </div>
 
       <div className="glass-strip flex flex-wrap items-center justify-between gap-3 text-sm text-slate-200">
         <span>Podium cards emphasize the best overall performance while the table below keeps the full field visible.</span>
