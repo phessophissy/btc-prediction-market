@@ -31,7 +31,7 @@ export function Header() {
       : "rounded-full border border-transparent px-4 py-2 text-slate-300 transition hover:border-white/10 hover:bg-white/8 hover:text-white";
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/40 backdrop-blur-xl">
+    <header role="banner" aria-label="Main navigation" className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/40 backdrop-blur-xl">
       <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-3">
@@ -53,7 +53,7 @@ export function Header() {
           </Link>
         </div>
 
-        <nav className="hidden items-center gap-2 lg:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-2 lg:flex">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -109,7 +109,7 @@ export function Header() {
             <Dot className="h-5 w-5 text-emerald-300" />
             Design refresh live on {NETWORK_NAME}
           </div>
-          <nav className="flex flex-col gap-2">
+          <nav aria-label="Mobile navigation" className="flex flex-col gap-2">
             {navItems.map((item) => (
               <Link
                 key={item.href}
