@@ -195,6 +195,25 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
                 STX
               </span>
             </div>
+            <div className="mt-3">
+              <input
+                type="range"
+                min={minimumBet}
+                max={10}
+                step={0.01}
+                value={parsedAmount || minimumBet}
+                onChange={(e) => {
+                  setAmount(e.target.value);
+                  setError(null);
+                }}
+                className="bet-slider w-full"
+                aria-label="Bet amount slider"
+              />
+              <div className="mt-1 flex justify-between text-xs text-slate-400">
+                <span>{minimumBet} STX</span>
+                <span>10 STX</span>
+              </div>
+            </div>
             <p className="mt-2 text-xs text-slate-400">
               Minimum bet: {minimumBet} STX. Total pool: {formatMicroStx(market.totalPool)} STX.
             </p>

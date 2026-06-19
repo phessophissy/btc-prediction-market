@@ -201,6 +201,41 @@ main {
 }
 
 @layer components {
+  .bet-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent-sky), var(--accent-sun));
+    outline: none;
+    cursor: pointer;
+  }
+
+  .bet-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--accent-gold);
+    box-shadow: 0 2px 8px rgba(255, 191, 60, 0.4);
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+
+  .bet-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+  }
+
+  .bet-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 50%;
+    background: var(--accent-gold);
+    box-shadow: 0 2px 8px rgba(255, 191, 60, 0.4);
+    cursor: pointer;
+  }
   .app-shell {
     @apply mx-auto w-full max-w-7xl px-4 pb-20 pt-8 sm:px-6 lg:px-8;
   }
