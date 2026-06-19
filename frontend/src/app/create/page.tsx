@@ -257,7 +257,20 @@ export default function CreateMarketPage() {
                 maxLength={100}
                 className="input"
               />
-              <p className="mt-2 text-xs text-slate-400">{question.length}/100 characters</p>
+              <div className="mt-2 space-y-1">
+                <div className="flex justify-between text-xs text-slate-400">
+                  <span>{question.length}/100 characters</span>
+                  <span className={question.length > 90 ? 'text-amber-300' : ''}>{100 - question.length} remaining</span>
+                </div>
+                <div className="h-1 w-full rounded-full bg-white/10">
+                  <div
+                    className={`h-full rounded-full transition-all duration-300 ${
+                      question.length > 90 ? 'bg-amber-300' : question.length > 0 ? 'bg-sky-300' : 'bg-white/20'
+                    }`}
+                    style={{ width: `${(question.length / 100) * 100}%` }}
+                  />
+                </div>
+              </div>
             </div>
 
             <div>
@@ -272,7 +285,20 @@ export default function CreateMarketPage() {
                 rows={3}
                 className="input min-h-[120px]"
               />
-              <p className="mt-2 text-xs text-slate-400">{description.length}/500 characters</p>
+              <div className="mt-2 space-y-1">
+                <div className="flex justify-between text-xs text-slate-400">
+                  <span>{description.length}/500 characters</span>
+                  <span className={description.length > 450 ? 'text-amber-300' : ''}>{500 - description.length} remaining</span>
+                </div>
+                <div className="h-1 w-full rounded-full bg-white/10">
+                  <div
+                    className={`h-full rounded-full transition-all duration-300 ${
+                      description.length > 450 ? 'bg-amber-300' : description.length > 0 ? 'bg-sky-300' : 'bg-white/20'
+                    }`}
+                    style={{ width: `${(description.length / 500) * 100}%` }}
+                  />
+                </div>
+              </div>
             </div>
 
             <div>
