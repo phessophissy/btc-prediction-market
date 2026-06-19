@@ -58,12 +58,22 @@ const faqItems = [
 
 export default function FAQPage() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState<'all' | 'general' | 'betting' | 'technical'>('all');
   
-  const filteredItems = faqItems.filter(item =>
-    !searchQuery ||
-    item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.content.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const categories = [
+    { value: 'all', label: 'All' },
+    { value: 'general', label: 'General' },
+    { value: 'betting', label: 'Betting' },
+    { value: 'technical', label: 'Technical' },
+  ];
+
+  const filteredItems = faqItems.filter(item => {
+    const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
+    const matchesSearch = !searchQuery ||
+      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.content.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-16">
@@ -76,6 +86,20 @@ export default function FAQPage() {
         </p>
       </div>
       
+      <div className="mb-4 flex flex-wrap gap-2">
+        {categories.map(cat => (
+          <button
+            key={cat.value}
+            type="button"
+            data-active={activeCategory === cat.value}
+            onClick={() => setActiveCategory(cat.value as typeof activeCategory)}
+            className="btn-pill"
+          >
+            {cat.label}
+          </button>
+        ))}
+      </div>
+
       <div className="relative mb-6">
         <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
         <input
