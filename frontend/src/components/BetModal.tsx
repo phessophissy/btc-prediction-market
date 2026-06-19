@@ -39,6 +39,11 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const parsedAmount = Number.parseFloat(amount || "0");
+  const validationMessage = parsedAmount > 0 && parsedAmount < minimumBet
+    ? `Minimum bet is ${minimumBet} STX`
+    : parsedAmount > 1000
+      ? 'Maximum bet is 1,000 STX'
+      : null;
   const minimumBet = MIN_BET_AMOUNT / 1_000_000;
 
   const getOutcomePool = () => {
@@ -217,6 +222,11 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
             <p className="mt-2 text-xs text-slate-400">
               Minimum bet: {minimumBet} STX. Total pool: {formatMicroStx(market.totalPool)} STX.
             </p>
+            {validationMessage && (
+              <p className="mt-1 text-xs text-amber-300" role="alert">
+                {validationMessage}
+              </p>
+            )}
           </div>
 
           <div className="mb-6 flex flex-wrap gap-2">
@@ -269,7 +279,7 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
 
           <button
             type="submit"
-            disabled={!amount || parsedAmount < minimumBet || isSubmitting}
+            disabled={!amount || parsedAmount < minimumBet || parsedAmount > 1000 || !!validationMessage || isSubmitting}
             className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? (
