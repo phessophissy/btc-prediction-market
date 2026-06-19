@@ -209,7 +209,7 @@ export default function LeaderboardPage() {
                         : "";
 
                 return (
-                  <tr key={user.address} className={`transition hover:bg-white/6 ${rowClass}`}>
+                  <tr key={user.address} className={`leaderboard-row transition ${rowClass}`}>
                     <td className="px-6 py-5 text-white">{displayRank}</td>
                     <td className="px-6 py-5 font-mono text-sm text-slate-200">
                       {formatAddress(user.address)}

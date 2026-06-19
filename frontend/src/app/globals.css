@@ -201,6 +201,29 @@ main {
 }
 
 @layer components {
+  .leaderboard-row {
+    position: relative;
+    transition: background-color 0.3s ease;
+  }
+
+  .leaderboard-row:hover {
+    background: linear-gradient(90deg, rgba(255, 211, 105, 0.06), rgba(103, 210, 255, 0.06), transparent);
+  }
+
+  .leaderboard-row::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 0;
+    background: linear-gradient(90deg, var(--accent-sun), var(--accent-sky));
+    transition: width 0.4s ease;
+  }
+
+  .leaderboard-row:hover::after {
+    width: 100%;
+  }
   .app-shell {
     @apply mx-auto w-full max-w-7xl px-4 pb-20 pt-8 sm:px-6 lg:px-8;
   }
