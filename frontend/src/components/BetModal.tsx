@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { X, AlertCircle, Loader2 } from "lucide-react";
 import { useStacksAuth } from "@/contexts/StacksAuthContext";
 import { openContractCall } from "@stacks/connect";
@@ -35,6 +35,21 @@ interface BetModalProps {
 
 export function BetModal({ market, outcome, onClose }: BetModalProps) {
   const [isClosing, setIsClosing] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const handleBackdropClick = useCallback((e: React.MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+      handleClose();
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') handleClose();
+    };
+    document.addEventListener('keydown', handleEsc);
+    return () => document.removeEventListener('keydown', handleEsc);
+  }, []);
   const handleClose = () => {
     setIsClosing(true);
     setTimeout(() => onClose(), 200);
@@ -158,8 +173,9 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
     <div
       className={`fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md ${isClosing ? 'animate-fade-out' : 'animate-fade-in'}`}
       style={{ backgroundColor: "rgba(9, 15, 29, 0.7)" }}
+      onClick={handleBackdropClick}
     >
-      <div className={`card relative w-full max-w-md ${isClosing ? 'animate-scale-out' : 'animate-scale-in'}`}>
+      <div ref={modalRef} className={`card relative w-full max-w-md ${isClosing ? 'animate-scale-out' : 'animate-scale-in'}`}>
         <button
           onClick={handleClose}
           className="absolute right-4 top-4 rounded-full border border-white/10 bg-white/6 p-2 text-slate-300 transition hover:bg-white/10 hover:text-white"
