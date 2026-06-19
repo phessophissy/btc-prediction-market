@@ -9,6 +9,7 @@ export default function LeaderboardPage() {
   const [sortField, setSortField] = useState<'winnings' | 'bets' | 'winRate'>('winnings');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
   const [searchQuery, setSearchQuery] = useState('');
+  const [expandedRow, setExpandedRow] = useState<string | null>(null);
 
   const handleSort = (field: typeof sortField) => {
     if (sortField === field) {
@@ -209,29 +210,57 @@ export default function LeaderboardPage() {
                         : "";
 
                 return (
-                  <tr key={user.address} className={`leaderboard-row transition ${rowClass}`}>
-                    <td className="px-6 py-5 text-white">{displayRank}</td>
-                    <td className="px-6 py-5 font-mono text-sm text-slate-200">
-                      {formatAddress(user.address)}
-                    </td>
-                    <td className="px-6 py-5 text-right font-semibold text-emerald-300">
-                      {user.winnings.toLocaleString()} STX
-                    </td>
-                    <td className="px-6 py-5 text-right text-slate-300">{user.bets}</td>
-                    <td className="px-6 py-5 text-right">
-                      <div className="inline-flex flex-col items-end gap-1">
-                        <span className={`pill ${winRateClass}`}>{user.winRate}%</span>
-                        <div className="h-1 w-16 rounded-full bg-white/10">
-                          <div
-                            className={`h-full rounded-full transition-all duration-500 ${
-                              user.winRate >= 70 ? 'bg-emerald-300' : user.winRate >= 50 ? 'bg-amber-300' : 'bg-rose-300'
-                            }`}
-                            style={{ width: `${user.winRate}%` }}
-                          />
+                  <>
+                    <tr key={user.address} className={`leaderboard-row cursor-pointer transition ${rowClass}`} onClick={() => setExpandedRow(expandedRow === user.address ? null : user.address)} aria-expanded={expandedRow === user.address}>
+                      <td className="px-6 py-5 text-white">{displayRank}</td>
+                      <td className="px-6 py-5 font-mono text-sm text-slate-200">
+                        {formatAddress(user.address)}
+                      </td>
+                      <td className="px-6 py-5 text-right font-semibold text-emerald-300">
+                        {user.winnings.toLocaleString()} STX
+                      </td>
+                      <td className="px-6 py-5 text-right text-slate-300">{user.bets}</td>
+                      <td className="px-6 py-5 text-right">
+                        <div className="inline-flex flex-col items-end gap-1">
+                          <span className={`pill ${winRateClass}`}>{user.winRate}%</span>
+                          <div className="h-1 w-16 rounded-full bg-white/10">
+                            <div
+                              className={`h-full rounded-full transition-all duration-500 ${
+                                user.winRate >= 70 ? 'bg-emerald-300' : user.winRate >= 50 ? 'bg-amber-300' : 'bg-rose-300'
+                              }`}
+                              style={{ width: `${user.winRate}%` }}
+                            />
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                  </tr>
+                      </td>
+                    </tr>
+                    {expandedRow === user.address && (
+                      <tr className="animate-slide-down">
+                        <td colSpan={5} className="px-6 pb-5 pt-0">
+                          <div className="grid gap-3 sm:grid-cols-3 rounded-xl border border-white/10 bg-white/4 p-4">
+                            <div>
+                              <p className="text-xs text-slate-400">Avg Bet Size</p>
+                              <p className="mt-1 text-lg font-semibold text-white">
+                                {Math.round(user.winnings / Math.max(user.bets, 1))} STX
+                              </p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-slate-400">Bets Won</p>
+                              <p className="mt-1 text-lg font-semibold text-emerald-300">
+                                {Math.round(user.bets * user.winRate / 100)}
+                              </p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-slate-400">Bets Lost</p>
+                              <p className="mt-1 text-lg font-semibold text-rose-300">
+                                {user.bets - Math.round(user.bets * user.winRate / 100)}
+                              </p>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    )}
+                  </>
                 );
               })}
             </tbody>
