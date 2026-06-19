@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useStacksAuth } from "@/contexts/StacksAuthContext";
 import {
   CheckCircle,
@@ -46,6 +47,7 @@ interface MarketCardProps {
 
 export function MarketCard({ market }: MarketCardProps) {
   const { isConnected, network } = useStacksAuth();
+  const isCompact = useMediaQuery("(max-width: 639px)");
   const [expanded, setExpanded] = useState(false);
   const [betModalOpen, setBetModalOpen] = useState(false);
   const [selectedOutcome, setSelectedOutcome] = useState<string | null>(null);
@@ -209,44 +211,48 @@ export function MarketCard({ market }: MarketCardProps) {
             </div>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-3 lg:w-[22rem] lg:grid-cols-1">
-            <div className="panel-soft">
-              <span className="subtle-copy text-xs uppercase tracking-[0.18em]">Total pool</span>
-              <p className="mt-2 text-2xl font-semibold text-white">{formatMicroStx(market.totalPool)} STX</p>
+          {!isCompact && (
+            <div className="grid gap-3 sm:grid-cols-3 lg:w-[22rem] lg:grid-cols-1">
+              <div className="panel-soft">
+                <span className="subtle-copy text-xs uppercase tracking-[0.18em]">Total pool</span>
+                <p className="mt-2 text-2xl font-semibold text-white">{formatMicroStx(market.totalPool)} STX</p>
+              </div>
+              <div className="panel-soft">
+                <span className="subtle-copy text-xs uppercase tracking-[0.18em]">Settlement pace</span>
+                <p className="mt-2 text-lg text-white">
+                  {market.settled
+                    ? "Completed"
+                    : blocksRemaining > 0
+                      ? formatBlocksToEta(blocksRemaining)
+                      : "Awaiting settlement"}
+                </p>
+              </div>
+              <div className="panel-soft">
+                <span className="subtle-copy text-xs uppercase tracking-[0.18em]">Market lead</span>
+                <p className="mt-2 text-lg text-white">
+                  {leadOutcome ? `Outcome ${leadOutcome.id}` : "Pending"}
+                </p>
+              </div>
             </div>
-            <div className="panel-soft">
-              <span className="subtle-copy text-xs uppercase tracking-[0.18em]">Settlement pace</span>
-              <p className="mt-2 text-lg text-white">
-                {market.settled
-                  ? "Completed"
-                  : blocksRemaining > 0
-                    ? formatBlocksToEta(blocksRemaining)
-                    : "Awaiting settlement"}
-              </p>
-            </div>
-            <div className="panel-soft">
-              <span className="subtle-copy text-xs uppercase tracking-[0.18em]">Market lead</span>
-              <p className="mt-2 text-lg text-white">
-                {leadOutcome ? `Outcome ${leadOutcome.id}` : "Pending"}
-              </p>
-            </div>
-          </div>
+          )}
         </div>
 
-        <div className="mb-6 flex flex-wrap items-center gap-5 text-sm text-slate-300">
-          <div className="flex items-center gap-2">
-            <TrendingUp className="h-4 w-4 text-amber-300" />
-            {liquidityLabel}
+        {!isCompact && (
+          <div className="mb-6 flex flex-wrap items-center gap-5 text-sm text-slate-300">
+            <div className="flex items-center gap-2">
+              <TrendingUp className="h-4 w-4 text-amber-300" />
+              {liquidityLabel}
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock className="h-4 w-4 text-sky-300" />
+              {market.settled ? "Market settled" : `${Math.max(blocksRemaining, 0)} blocks remaining`}
+            </div>
+            <div className="flex items-center gap-2">
+              <Users className="h-4 w-4 text-emerald-300" />
+              {leadOutcome ? `Outcome ${leadOutcome.id} currently ahead` : "Open price discovery"}
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Clock className="h-4 w-4 text-sky-300" />
-            {market.settled ? "Market settled" : `${Math.max(blocksRemaining, 0)} blocks remaining`}
-          </div>
-          <div className="flex items-center gap-2">
-            <Users className="h-4 w-4 text-emerald-300" />
-            {leadOutcome ? `Outcome ${leadOutcome.id} currently ahead` : "Open price discovery"}
-          </div>
-        </div>
+        )}
 
         <div className="space-y-4">
           {visibleOutcomes.map((outcome) => (
