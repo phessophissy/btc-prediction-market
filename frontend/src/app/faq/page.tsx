@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Search } from "lucide-react";
 import { Accordion } from "@/components/Accordion";
+import { PageHero } from "@/components/PageHero";
 
 const faqItems = [
   {
@@ -76,15 +77,19 @@ export default function FAQPage() {
   });
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-16">
-      <div className="mb-10 text-center">
-        <h1 className="mb-3 font-serif text-3xl font-bold text-white">
-          Frequently Asked Questions
-        </h1>
-        <p className="text-white/50">
-          Everything you need to know about BTC Predict.
-        </p>
-      </div>
+    <div className="mx-auto max-w-3xl space-y-6">
+      <PageHero
+        eyebrow="Help center"
+        title="Frequently Asked Questions"
+        description="Everything you need to know about BTC Predict — from wallet setup to market settlement."
+        compact
+      >
+        <div className="flex flex-wrap gap-3">
+          <span className="glass-strip text-sm text-slate-200">Searchable</span>
+          <span className="glass-strip text-sm text-slate-200">Categorized</span>
+          <span className="glass-strip text-sm text-slate-200">{faqItems.length} questions</span>
+        </div>
+      </PageHero>
       
       <div className="mb-4 flex flex-wrap gap-2">
         {categories.map(cat => (
@@ -126,6 +131,6 @@ export default function FAQPage() {
       ) : (
         <Accordion items={filteredItems} />
       )}
-    </main>
+    </div>
   );
 }
