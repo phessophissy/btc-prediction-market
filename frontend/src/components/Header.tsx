@@ -25,6 +25,16 @@ export function Header() {
     setMobileMenuOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [mobileMenuOpen]);
+
   const navClassName = (href: string) =>
     pathname === href
       ? "rounded-full border border-amber-300/20 bg-gradient-to-r from-amber-300/90 to-cyan-300/90 px-4 py-2 text-slate-950 shadow-lg shadow-amber-500/10"
@@ -94,6 +104,7 @@ export function Header() {
           className="rounded-2xl border border-white/10 bg-white/6 p-3 text-white md:hidden"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={mobileMenuOpen}
         >
           {mobileMenuOpen ? (
             <X className="h-5 w-5" />
@@ -104,7 +115,7 @@ export function Header() {
       </div>
 
       {mobileMenuOpen && (
-        <div className="mx-4 mb-4 rounded-[1.75rem] border border-white/10 bg-slate-950/85 p-4 shadow-2xl shadow-slate-950/30 md:hidden">
+        <div role="dialog" aria-modal="true" aria-label="Navigation menu" className="mx-4 mb-4 rounded-[1.75rem] border border-white/10 bg-slate-950/85 p-4 shadow-2xl shadow-slate-950/30 md:hidden">
           <div className="glass-strip mb-3 text-sm text-slate-200">
             <Dot className="h-5 w-5 text-emerald-300" />
             Design refresh live on {NETWORK_NAME}
