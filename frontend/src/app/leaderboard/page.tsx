@@ -2,9 +2,22 @@
 
 import { PageHero } from "@/components/PageHero";
 import { formatAddress } from "@/lib/format";
-import { Award, Medal, Trophy } from "lucide-react";
+import { Award, Medal, Trophy, ChevronUp, ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 export default function LeaderboardPage() {
+  const [sortField, setSortField] = useState<'winnings' | 'bets' | 'winRate'>('winnings');
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
+
+  const handleSort = (field: typeof sortField) => {
+    if (sortField === field) {
+      setSortDirection(prev => prev === 'desc' ? 'asc' : 'desc');
+    } else {
+      setSortField(field);
+      setSortDirection('desc');
+    }
+  };
+
   const leaderboard = [
     { rank: 1, address: "SP2J6ZY48GV1EZ5V2V5RB9MP66SW86PYKKNRV9EJ7", winnings: 15420, bets: 89, winRate: 72 },
     { rank: 2, address: "SP1HTBVD3JG9C05J7HBJTHGR0GGW7KXW28M5JS8QE", winnings: 12350, bets: 156, winRate: 65 },
@@ -42,6 +55,11 @@ export default function LeaderboardPage() {
       panelClass: "card mt-6",
     },
   ];
+  const sortedLeaderboard = [...leaderboard].sort((a, b) => {
+    const multiplier = sortDirection === 'desc' ? -1 : 1;
+    return multiplier * (a[sortField] - b[sortField]);
+  });
+
   const totals = {
     totalWinnings: leaderboard.reduce((sum, user) => sum + user.winnings, 0),
     averageWinRate: Math.round(
@@ -125,13 +143,29 @@ export default function LeaderboardPage() {
               <tr>
                 <th className="px-6 py-4 font-medium">Rank</th>
                 <th className="px-6 py-4 font-medium">Address</th>
-                <th className="px-6 py-4 text-right font-medium">Total Won</th>
-                <th className="px-6 py-4 text-right font-medium">Bets</th>
-                <th className="px-6 py-4 text-right font-medium">Win Rate</th>
+                <th className="px-6 py-4 text-right font-medium">
+                  <button onClick={() => handleSort('winnings')} className="inline-flex items-center gap-1 hover:text-white transition">
+                    Total Won
+                    {sortField === 'winnings' && (sortDirection === 'desc' ? <ChevronDown className="h-3 w-3" /> : <ChevronUp className="h-3 w-3" />)}
+                  </button>
+                </th>
+                <th className="px-6 py-4 text-right font-medium">
+                  <button onClick={() => handleSort('bets')} className="inline-flex items-center gap-1 hover:text-white transition">
+                    Bets
+                    {sortField === 'bets' && (sortDirection === 'desc' ? <ChevronDown className="h-3 w-3" /> : <ChevronUp className="h-3 w-3" />)}
+                  </button>
+                </th>
+                <th className="px-6 py-4 text-right font-medium">
+                  <button onClick={() => handleSort('winRate')} className="inline-flex items-center gap-1 hover:text-white transition">
+                    Win Rate
+                    {sortField === 'winRate' && (sortDirection === 'desc' ? <ChevronDown className="h-3 w-3" /> : <ChevronUp className="h-3 w-3" />)}
+                  </button>
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/10">
-              {leaderboard.map((user) => {
+              {sortedLeaderboard.map((user, idx) => {
+                const displayRank = idx + 1;
                 const winRateClass =
                   user.winRate >= 70
                     ? "status-positive"
@@ -139,17 +173,17 @@ export default function LeaderboardPage() {
                       ? "status-warning"
                       : "status-negative";
                 const rowClass =
-                  user.rank === 1
+                  displayRank === 1
                     ? "bg-amber-300/8"
-                    : user.rank === 2
+                    : displayRank === 2
                       ? "bg-sky-300/6"
-                      : user.rank === 3
+                      : displayRank === 3
                         ? "bg-rose-300/6"
                         : "";
 
                 return (
-                  <tr key={user.rank} className={`transition hover:bg-white/6 ${rowClass}`}>
-                    <td className="px-6 py-5 text-white">{user.rank}</td>
+                  <tr key={user.address} className={`transition hover:bg-white/6 ${rowClass}`}>
+                    <td className="px-6 py-5 text-white">{displayRank}</td>
                     <td className="px-6 py-5 font-mono text-sm text-slate-200">
                       {formatAddress(user.address)}
                     </td>
