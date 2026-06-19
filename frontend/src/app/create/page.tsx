@@ -17,7 +17,7 @@ import {
   makeStandardSTXPostCondition,
   FungibleConditionCode
 } from "@stacks/transactions";
-import { Bitcoin, DollarSign } from "lucide-react";
+import { Bitcoin, DollarSign, Clock } from "lucide-react";
 import { ConnectionRequired } from "@/components/ConnectionRequired";
 import { PageHero } from "@/components/PageHero";
 import { formatMicroStx } from "@/lib/format";
@@ -42,6 +42,16 @@ export default function CreateMarketPage() {
 
   const trimmedQuestion = question.trim();
   const trimmedDescription = description.trim();
+
+  const estimateSettlementDate = (targetBlock: number): string => {
+    const currentBtcBlock = 870000;
+    const blocksAway = targetBlock - currentBtcBlock;
+    if (blocksAway <= 0) return 'Block already mined';
+    const minutesAway = blocksAway * 10;
+    const date = new Date(Date.now() + minutesAway * 60 * 1000);
+    const daysAway = Math.ceil(minutesAway / 1440);
+    return `~${daysAway} day${daysAway !== 1 ? 's' : ''} from now (${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })})`;
+  };
   const parsedSettlementBlock = Number.parseInt(settlementBlock, 10);
   const validationError =
     !trimmedQuestion
@@ -318,6 +328,11 @@ export default function CreateMarketPage() {
               <p className="mt-2 text-xs text-slate-400">
                 The market will settle using the hash of this Bitcoin block
               </p>
+              {parsedSettlementBlock > 0 && !Number.isNaN(parsedSettlementBlock) && (
+                <div className="mt-2 rounded-xl border border-sky-300/15 bg-sky-300/8 px-3 py-2 text-xs text-sky-200">
+                  <Clock className="mr-1 inline h-3 w-3" /> Estimated settlement: {estimateSettlementDate(parsedSettlementBlock)}
+                </div>
+              )}
             </div>
 
             {validationError && <p className="text-sm text-amber-200">{validationError}</p>}
