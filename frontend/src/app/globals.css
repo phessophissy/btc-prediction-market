@@ -367,33 +367,33 @@ main {
   }
 
   .badge-binary {
-    color: var(--accent-sky);
-    background: rgba(103, 210, 255, 0.12);
-    border-color: rgba(103, 210, 255, 0.24);
+    color: #7dd8ff;
+    background: rgba(103, 210, 255, 0.14);
+    border-color: rgba(103, 210, 255, 0.28);
   }
 
   .badge-multi {
-    color: var(--accent-coral);
-    background: rgba(255, 123, 114, 0.12);
-    border-color: rgba(255, 123, 114, 0.24);
+    color: #ff9490;
+    background: rgba(255, 123, 114, 0.14);
+    border-color: rgba(255, 123, 114, 0.28);
   }
 
   .status-positive {
-    color: var(--accent-mint);
-    background: rgba(123, 247, 212, 0.13);
-    border-color: rgba(123, 247, 212, 0.22);
+    color: #8dfce0;
+    background: rgba(123, 247, 212, 0.16);
+    border-color: rgba(123, 247, 212, 0.28);
   }
 
   .status-warning {
-    color: var(--accent-sun);
-    background: rgba(255, 191, 60, 0.13);
-    border-color: rgba(255, 191, 60, 0.22);
+    color: #ffd06a;
+    background: rgba(255, 191, 60, 0.16);
+    border-color: rgba(255, 191, 60, 0.28);
   }
 
   .status-negative {
-    color: #ff9ea7;
-    background: rgba(255, 123, 114, 0.13);
-    border-color: rgba(255, 123, 114, 0.22);
+    color: #ffb0b6;
+    background: rgba(255, 123, 114, 0.16);
+    border-color: rgba(255, 123, 114, 0.28);
   }
 
   .market-meter {
