@@ -219,7 +219,17 @@ export default function LeaderboardPage() {
                     </td>
                     <td className="px-6 py-5 text-right text-slate-300">{user.bets}</td>
                     <td className="px-6 py-5 text-right">
-                      <span className={`pill ${winRateClass}`}>{user.winRate}%</span>
+                      <div className="inline-flex flex-col items-end gap-1">
+                        <span className={`pill ${winRateClass}`}>{user.winRate}%</span>
+                        <div className="h-1 w-16 rounded-full bg-white/10">
+                          <div
+                            className={`h-full rounded-full transition-all duration-500 ${
+                              user.winRate >= 70 ? 'bg-emerald-300' : user.winRate >= 50 ? 'bg-amber-300' : 'bg-rose-300'
+                            }`}
+                            style={{ width: `${user.winRate}%` }}
+                          />
+                        </div>
+                      </div>
                     </td>
                   </tr>
                 );
