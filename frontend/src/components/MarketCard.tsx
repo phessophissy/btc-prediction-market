@@ -329,14 +329,14 @@ export function MarketCard({ market }: MarketCardProps) {
                 <button
                   onClick={() => handleBet("A")}
                   disabled={!isConnected || blocksRemaining <= 0}
-                  className="btn-secondary flex-1 border-sky-300/20 bg-sky-300/10 text-sky-100 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="btn-secondary flex-1 min-h-[44px] border-sky-300/20 bg-sky-300/10 text-sky-100 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   Bet {market.type === "binary" ? "Yes" : "A"}
                 </button>
                 <button
                   onClick={() => handleBet("B")}
                   disabled={!isConnected || blocksRemaining <= 0}
-                  className="btn-secondary flex-1 border-amber-300/20 bg-amber-300/10 text-amber-100 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="btn-secondary flex-1 min-h-[44px] border-amber-300/20 bg-amber-300/10 text-amber-100 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   Bet {market.type === "binary" ? "No" : "B"}
                 </button>
@@ -345,14 +345,14 @@ export function MarketCard({ market }: MarketCardProps) {
                     <button
                       onClick={() => handleBet("C")}
                       disabled={!isConnected || blocksRemaining <= 0}
-                      className="btn-secondary flex-1 border-emerald-300/20 bg-emerald-300/10 text-emerald-100 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="btn-secondary flex-1 min-h-[44px] border-emerald-300/20 bg-emerald-300/10 text-emerald-100 disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       Bet C
                     </button>
                     <button
                       onClick={() => handleBet("D")}
                       disabled={!isConnected || blocksRemaining <= 0}
-                      className="btn-secondary flex-1 border-pink-300/20 bg-pink-300/10 text-pink-100 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="btn-secondary flex-1 min-h-[44px] border-pink-300/20 bg-pink-300/10 text-pink-100 disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       Bet D
                     </button>
