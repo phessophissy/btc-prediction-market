@@ -201,6 +201,10 @@ main {
 }
 
 @layer components {
+  .card-tilt {
+    transition: transform 0.15s ease-out;
+    will-change: transform;
+  }
   /* ── Staggered Entrance System ── */
   @keyframes card-enter {
     from {

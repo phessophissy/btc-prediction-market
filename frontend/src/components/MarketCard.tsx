@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useStacksAuth } from "@/contexts/StacksAuthContext";
 import {
   CheckCircle,
@@ -46,6 +46,22 @@ interface MarketCardProps {
 
 export function MarketCard({ market }: MarketCardProps) {
   const { isConnected, network } = useStacksAuth();
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    const tiltX = (y - 0.5) * -4;
+    const tiltY = (x - 0.5) * 4;
+    cardRef.current.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-2px)`;
+  };
+
+  const handleMouseLeave = () => {
+    if (!cardRef.current) return;
+    cardRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+  };
   const [expanded, setExpanded] = useState(false);
   const [betModalOpen, setBetModalOpen] = useState(false);
   const [selectedOutcome, setSelectedOutcome] = useState<string | null>(null);
@@ -172,7 +188,7 @@ export function MarketCard({ market }: MarketCardProps) {
 
   return (
     <>
-      <div className={`card transition-transform duration-300 hover:-translate-y-1 ${market.settled ? "opacity-85" : ""}`}>
+      <div ref={cardRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className={`card card-tilt ${market.settled ? "opacity-85" : ""}`}>
         <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div className="space-y-3">
             <div className="flex flex-wrap items-center gap-2">
