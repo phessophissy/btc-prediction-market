@@ -140,20 +140,21 @@ export function MarketList({ showSettled = false }: MarketListProps) {
       <div className="card">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <p className="text-sm text-slate-300">Browse and refine the current market set</p>
-          <span className="pill border border-white/10 bg-white/6 text-slate-200">
-            {visibleMarkets.length} results
+          <span className="pill border border-white/10 bg-white/6 text-slate-200" aria-live="polite" aria-atomic="true">
+            {visibleMarkets.length} {visibleMarkets.length === 1 ? 'result' : 'results'}
           </span>
         </div>
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_auto]">
           <div>
             <label className="mb-2 block text-sm text-slate-300">Search markets</label>
-            <div className="relative">
+            <div className="relative" role="search">
               <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
               <input
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 className="input pl-11"
                 placeholder="Search by market question or description"
+                aria-label="Search markets"
               />
               {query ? (
                 <button

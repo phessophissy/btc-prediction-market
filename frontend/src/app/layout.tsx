@@ -22,10 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased" suppressHydrationWarning>
+        <a href="#main-content" className="skip-to-content">Skip to main content</a>
         <ExtensionErrorSuppressor />
         <Providers>
           <Header />
-          <main className="app-shell">
+          <main id="main-content" className="app-shell">
             {children}
             <Footer />
           </main>
