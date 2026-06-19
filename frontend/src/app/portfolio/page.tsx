@@ -287,14 +287,29 @@ export default function PortfolioPage() {
       </div>
 
       {CONTRACT_CAPABILITIES.claimWinnings && positions.some((position) => position.canClaim) && (
-        <div className="card flex items-center gap-3 border-emerald-300/20 bg-emerald-300/10">
-          <Gift className="h-6 w-6 text-emerald-300" />
-          <div>
-            <p className="font-medium text-emerald-200">You have unclaimed winnings.</p>
-            <p className="text-sm text-emerald-100/75">
-              Claim your rewards from settled markets below.
-            </p>
+        <div className="card flex flex-col gap-3 border-emerald-300/20 bg-emerald-300/10 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-3">
+            <Gift className="h-6 w-6 text-emerald-300" />
+            <div>
+              <p className="font-medium text-emerald-200">
+                You have {positions.filter(p => p.canClaim).length} unclaimed {positions.filter(p => p.canClaim).length === 1 ? 'reward' : 'rewards'}
+              </p>
+              <p className="text-sm text-emerald-100/75">
+                Claim your rewards from settled markets below.
+              </p>
+            </div>
           </div>
+          <button
+            onClick={async () => {
+              for (const pm of positions.filter(p => p.canClaim)) {
+                await handleClaimWinnings(pm.market.id);
+              }
+            }}
+            className="btn-primary whitespace-nowrap"
+          >
+            <Gift className="h-4 w-4" />
+            Claim All ({positions.filter(p => p.canClaim).length})
+          </button>
         </div>
       )}
 
