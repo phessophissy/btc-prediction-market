@@ -25,6 +25,9 @@ import { formatMicroStx } from "@/lib/format";
 export default function CreateMarketPage() {
   const { isConnected, stxAddress } = useStacksAuth();
   const [marketType, setMarketType] = useState<"binary" | "multi">("binary");
+  const [currentStep, setCurrentStep] = useState(1);
+  const totalSteps = 3;
+  const stepLabels = ['Market Type', 'Details', 'Review & Submit'];
   const [question, setQuestion] = useState("");
   const [description, setDescription] = useState("");
   const [settlementBlock, setSettlementBlock] = useState("");
@@ -136,6 +139,35 @@ export default function CreateMarketPage() {
           <span className="glass-strip text-sm text-slate-200">Wallet-ready flow</span>
         </div>
       </PageHero>
+
+      <div className="card">
+        <div className="flex items-center justify-between gap-2">
+          {stepLabels.map((label, idx) => {
+            const step = idx + 1;
+            const isActive = step === currentStep;
+            const isCompleted = step < currentStep;
+            return (
+              <div key={label} className="flex flex-1 flex-col items-center gap-2 relative">
+                <div className={`flex h-10 w-10 items-center justify-center rounded-full border-2 text-sm font-bold transition-all duration-300 ${
+                  isActive
+                    ? 'border-amber-300 bg-amber-300/20 text-amber-300'
+                    : isCompleted
+                      ? 'border-emerald-300 bg-emerald-300/20 text-emerald-300'
+                      : 'border-white/20 bg-white/5 text-slate-400'
+                }`}>
+                  {isCompleted ? '✓' : step}
+                </div>
+                <span className={`text-xs font-medium ${isActive ? 'text-amber-300' : isCompleted ? 'text-emerald-300' : 'text-slate-400'}`}>
+                  {label}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+        <div className="mt-3 h-1 w-full rounded-full bg-white/10">
+          <div className="h-full rounded-full bg-gradient-to-r from-amber-300 to-emerald-300 transition-all duration-500" style={{ width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%` }} />
+        </div>
+      </div>
 
       <div className="card">
         <p className="mb-3 text-sm text-slate-300">Quick-start prompts</p>
