@@ -467,3 +467,47 @@ main {
 .animate-scale-in   { animation: scale-in    0.25s ease-out both; }
 
 /* Theme overrides removed — using unified dark mode design system above */
+
+/* ── High Contrast Mode ── */
+@media (forced-colors: active) {
+  .card,
+  .panel-soft,
+  .panel-highlight,
+  .hero-panel {
+    border: 2px solid CanvasText;
+  }
+
+  .btn-primary {
+    background: ButtonFace;
+    color: ButtonText;
+    border: 2px solid ButtonText;
+  }
+
+  .pill,
+  .eyebrow,
+  .glass-strip {
+    border: 1px solid CanvasText;
+  }
+
+  .market-meter {
+    border: 1px solid CanvasText;
+  }
+
+  .market-meter-fill {
+    background: Highlight;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --text-soft: #b8cde6;
+    --text-muted: #d4e3f5;
+    --border: rgba(147, 197, 253, 0.28);
+    --border-strong: rgba(255, 255, 255, 0.26);
+  }
+
+  .card,
+  .panel-soft {
+    border-width: 2px;
+  }
+}
