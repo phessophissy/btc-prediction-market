@@ -339,6 +339,54 @@ export default function CreateMarketPage() {
           </div>
           )}
 
+          {currentStep === 3 && (
+            <div className="space-y-4">
+              <div className="card space-y-4">
+                <span className="eyebrow">Review your market</span>
+                <div className="panel-soft">
+                  <p className="text-sm text-slate-300">Market Type</p>
+                  <p className="mt-1 text-xl font-semibold text-white">{marketType === 'binary' ? 'Binary (Yes/No)' : 'Multi-Outcome (4 options)'}</p>
+                </div>
+                <div className="panel-soft">
+                  <p className="text-sm text-slate-300">Question</p>
+                  <p className="mt-1 text-xl font-semibold text-white">{trimmedQuestion || 'Not set'}</p>
+                </div>
+                <div className="panel-soft">
+                  <p className="text-sm text-slate-300">Description</p>
+                  <p className="mt-1 text-sm text-slate-200">{trimmedDescription || 'No description provided'}</p>
+                </div>
+                <div className="panel-soft">
+                  <p className="text-sm text-slate-300">Settlement Target</p>
+                  <p className="mt-1 text-xl font-semibold text-white">{settlementBlock ? `BTC Block #${settlementBlock}` : 'Not set'}</p>
+                </div>
+                <div className="panel-soft">
+                  <p className="text-sm text-slate-300">Creation Fee</p>
+                  <p className="mt-1 text-xl font-semibold text-amber-300">{formatMicroStx(MARKET_CREATION_FEE)} STX</p>
+                </div>
+
+                <button
+                  onClick={handleCreateMarket}
+                  disabled={isSubmitting || !!validationError}
+                  className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {isSubmitting ? 'Creating Market...' : `Create Market (${formatMicroStx(MARKET_CREATION_FEE)} STX)`}
+                </button>
+
+                {validationError && <p className="text-sm text-amber-200">{validationError}</p>}
+                {submissionError && (
+                  <div className="rounded-[1.25rem] border border-rose-300/20 bg-rose-300/10 p-4 text-sm text-rose-100">
+                    {submissionError}
+                  </div>
+                )}
+                {submissionSuccess && (
+                  <div className="rounded-[1.25rem] border border-emerald-300/20 bg-emerald-300/10 p-4 text-sm text-emerald-100">
+                    {submissionSuccess}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
           <div className="flex gap-3">
             {currentStep > 1 && (
               <button type="button" onClick={() => setCurrentStep(currentStep - 1)} className="btn-secondary flex-1">
