@@ -42,6 +42,7 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
   const { stxAddress } = useStacksAuth();
   const [amount, setAmount] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const parsedAmount = Number.parseFloat(amount || "0");
   const validationMessage = parsedAmount > 0 && parsedAmount < minimumBet
@@ -96,13 +97,8 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleConfirmedSubmit = async () => {
     if (!stxAddress || !amount) return;
-    if (parsedAmount < minimumBet) {
-      setError(`Minimum bet is ${minimumBet} STX.`);
-      return;
-    }
 
     setError(null);
     setIsSubmitting(true);
@@ -139,6 +135,16 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
       setError("Failed to place bet. Please try again.");
       setIsSubmitting(false);
     }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!stxAddress || !amount) return;
+    if (parsedAmount < minimumBet) {
+      setError(`Minimum bet is ${minimumBet} STX.`);
+      return;
+    }
+    setShowConfirmation(true);
   };
 
   const outcomeColors: Record<string, string> = {
@@ -300,6 +306,19 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
             )}
           </button>
         </form>
+        {showConfirmation && (
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-[1.75rem] bg-slate-950/95 p-6 backdrop-blur-sm animate-fade-in">
+            <h3 className="mb-2 text-2xl text-white">Confirm your bet</h3>
+            <p className="mb-1 text-sm text-slate-300">Amount: <strong className="text-white">{amount} STX</strong></p>
+            <p className="mb-6 text-sm text-slate-300">Outcome: <strong className="text-white">{outcomeLabel}</strong></p>
+            <div className="flex gap-3 w-full">
+              <button type="button" onClick={() => setShowConfirmation(false)} className="btn-secondary flex-1">Go back</button>
+              <button type="button" onClick={handleConfirmedSubmit} disabled={isSubmitting} className="btn-primary flex-1">
+                {isSubmitting ? 'Submitting...' : 'Confirm bet'}
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
