@@ -76,6 +76,8 @@ export default function FAQPage() {
     return matchesCategory && matchesSearch;
   });
 
+  const [feedback, setFeedback] = useState<Record<string, 'helpful' | 'not-helpful' | null>>({});
+
   return (
     <div className="mx-auto max-w-3xl space-y-6">
       <PageHero
@@ -129,7 +131,41 @@ export default function FAQPage() {
           <p className="text-slate-300">No questions match your search.</p>
         </div>
       ) : (
-        <Accordion items={filteredItems} />
+        <div className="space-y-3">
+          {filteredItems.map(item => (
+            <div key={item.id} className="card">
+              <Accordion items={[item]} />
+              <div className="mt-3 flex items-center gap-3 border-t border-white/10 pt-3">
+                <span className="text-xs text-slate-400">Was this helpful?</span>
+                <button
+                  type="button"
+                  onClick={() => setFeedback(prev => ({ ...prev, [item.id]: 'helpful' }))}
+                  className={`rounded-full border px-3 py-1 text-xs transition ${
+                    feedback[item.id] === 'helpful'
+                      ? 'border-emerald-300/30 bg-emerald-300/15 text-emerald-300'
+                      : 'border-white/10 text-slate-400 hover:bg-white/5'
+                  }`}
+                >
+                  👍 Yes
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFeedback(prev => ({ ...prev, [item.id]: 'not-helpful' }))}
+                  className={`rounded-full border px-3 py-1 text-xs transition ${
+                    feedback[item.id] === 'not-helpful'
+                      ? 'border-rose-300/30 bg-rose-300/15 text-rose-300'
+                      : 'border-white/10 text-slate-400 hover:bg-white/5'
+                  }`}
+                >
+                  👎 No
+                </button>
+                {feedback[item.id] && (
+                  <span className="text-xs text-slate-500 animate-fade-in">Thanks for your feedback!</span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );
