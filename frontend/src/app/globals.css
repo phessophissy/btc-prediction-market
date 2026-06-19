@@ -201,6 +201,36 @@ main {
 }
 
 @layer components {
+  /* ── Button Press ── */
+  .btn-primary:active,
+  .btn-secondary:active,
+  .btn-pill:active {
+    transform: scale(0.97);
+    transition-duration: 0.1s;
+  }
+
+  /* ── Ripple Effect ── */
+  .btn-ripple {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-ripple::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 10%, transparent 70%);
+    transform: scale(0);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .btn-ripple:active::after {
+    transform: scale(2.5);
+    opacity: 1;
+    transition: transform 0s, opacity 0s;
+  }
   .card-tilt {
     transition: transform 0.15s ease-out;
     will-change: transform;
