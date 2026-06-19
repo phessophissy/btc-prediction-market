@@ -34,6 +34,11 @@ interface BetModalProps {
 }
 
 export function BetModal({ market, outcome, onClose }: BetModalProps) {
+  const [isClosing, setIsClosing] = useState(false);
+  const handleClose = () => {
+    setIsClosing(true);
+    setTimeout(() => onClose(), 200);
+  };
   const { stxAddress } = useStacksAuth();
   const [amount, setAmount] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -144,10 +149,13 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 p-4 backdrop-blur-md">
-      <div className="card relative w-full max-w-md">
+    <div
+      className={`fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md ${isClosing ? 'animate-fade-out' : 'animate-fade-in'}`}
+      style={{ backgroundColor: "rgba(9, 15, 29, 0.7)" }}
+    >
+      <div className={`card relative w-full max-w-md ${isClosing ? 'animate-scale-out' : 'animate-scale-in'}`}>
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className="absolute right-4 top-4 rounded-full border border-white/10 bg-white/6 p-2 text-slate-300 transition hover:bg-white/10 hover:text-white"
           aria-label="Close bet modal"
         >
