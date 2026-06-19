@@ -41,6 +41,14 @@ interface PositionWithMarket {
   isWinner: boolean;
 }
 
+const calculatePnlPercentage = (pm: PositionWithMarket): number => {
+  if (!pm.market.settled || pm.market.winningOutcome === null) return 0;
+  const invested = pm.position.totalInvested;
+  if (invested === 0) return 0;
+  if (pm.isWinner) return Math.min(((pm.market.totalPool / invested) * 30), 100);
+  return -100;
+};
+
 export default function PortfolioPage() {
   const { isConnected, stxAddress, network } = useStacksAuth();
   const [positions, setPositions] = useState<PositionWithMarket[]>([]);
@@ -316,6 +324,22 @@ export default function PortfolioPage() {
                             Winner: {getOutcomeLabel(pm.market.winningOutcome, pm.market.type)}
                           </span>
                         )}
+                      </div>
+                      <div className="mt-3">
+                        <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
+                          <span>P&L</span>
+                          <span className={calculatePnlPercentage(pm) >= 0 ? 'text-emerald-300' : 'text-rose-300'}>
+                            {calculatePnlPercentage(pm) >= 0 ? '+' : ''}{calculatePnlPercentage(pm).toFixed(0)}%
+                          </span>
+                        </div>
+                        <div className="h-2 w-full rounded-full bg-white/10 overflow-hidden">
+                          <div
+                            className={`h-full rounded-full transition-all duration-700 ${
+                              calculatePnlPercentage(pm) >= 0 ? 'bg-gradient-to-r from-emerald-400 to-emerald-300' : 'bg-gradient-to-r from-rose-400 to-rose-300'
+                            }`}
+                            style={{ width: `${Math.abs(calculatePnlPercentage(pm))}%` }}
+                          />
+                        </div>
                       </div>
                     </div>
 
