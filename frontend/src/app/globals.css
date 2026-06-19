@@ -201,6 +201,16 @@ main {
 }
 
 @layer components {
+  .filter-bar-scroll {
+    @apply -mx-4 px-4 sm:mx-0 sm:px-0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .filter-bar-scroll::-webkit-scrollbar {
+    display: none;
+  }
   .market-card-grid {
     @apply grid gap-6;
     grid-template-columns: 1fr;

@@ -144,7 +144,8 @@ export function MarketList({ showSettled = false }: MarketListProps) {
             {visibleMarkets.length} results
           </span>
         </div>
-        <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_auto]">
+        <div className="filter-bar-scroll">
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_auto]">
           <div>
             <label className="mb-2 block text-sm text-slate-300">Search markets</label>
             <div className="relative">
@@ -205,6 +206,7 @@ export function MarketList({ showSettled = false }: MarketListProps) {
           </div>
         </div>
       </div>
+    </div>
 
       <div className="grid gap-4 md:grid-cols-3">
         <div className="panel-soft">
