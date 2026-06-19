@@ -49,6 +49,29 @@ const calculatePnlPercentage = (pm: PositionWithMarket): number => {
   return -100;
 };
 
+function AnimatedValue({ value, suffix = '' }: { value: number | string; suffix?: string }) {
+  const [displayValue, setDisplayValue] = useState(0);
+  const numericValue = typeof value === 'number' ? value : parseFloat(String(value)) || 0;
+
+  useEffect(() => {
+    if (numericValue === 0) { setDisplayValue(0); return; }
+    let start = 0;
+    const duration = 800;
+    const startTime = performance.now();
+    
+    const animate = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplayValue(Math.round(eased * numericValue));
+      if (progress < 1) requestAnimationFrame(animate);
+    };
+    requestAnimationFrame(animate);
+  }, [numericValue]);
+
+  return <>{displayValue}{suffix}</>;
+}
+
 export default function PortfolioPage() {
   const { isConnected, stxAddress, network } = useStacksAuth();
   const [positions, setPositions] = useState<PositionWithMarket[]>([]);
@@ -215,16 +238,20 @@ export default function PortfolioPage() {
       <section className="grid gap-4 md:grid-cols-3">
         <div className="panel-soft">
           <p className="text-sm text-slate-300">Winning positions</p>
-          <p className="mt-3 text-3xl font-semibold text-emerald-300">{wonPositions}</p>
+          <p className="mt-3 text-3xl font-semibold text-emerald-300">
+            <AnimatedValue value={wonPositions} />
+          </p>
         </div>
         <div className="panel-soft">
           <p className="text-sm text-slate-300">Claimed markets</p>
-          <p className="mt-3 text-3xl font-semibold text-sky-300">{claimedPositions}</p>
+          <p className="mt-3 text-3xl font-semibold text-sky-300">
+            <AnimatedValue value={claimedPositions} />
+          </p>
         </div>
         <div className="panel-soft">
           <p className="text-sm text-slate-300">Pending rewards</p>
           <p className="mt-3 text-3xl font-semibold text-amber-300">
-            {positions.filter((position) => position.canClaim).length}
+            <AnimatedValue value={positions.filter((position) => position.canClaim).length} />
           </p>
         </div>
       </section>
