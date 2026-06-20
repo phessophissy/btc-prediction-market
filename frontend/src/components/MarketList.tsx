@@ -144,7 +144,8 @@ export function MarketList({ showSettled = false }: MarketListProps) {
             {visibleMarkets.length} {visibleMarkets.length === 1 ? 'result' : 'results'}
           </span>
         </div>
-        <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_auto]">
+        <div className="filter-bar-scroll">
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_auto]">
           <div>
             <label className="mb-2 block text-sm text-slate-300">Search markets</label>
             <div className="relative" role="search">
@@ -206,6 +207,7 @@ export function MarketList({ showSettled = false }: MarketListProps) {
           </div>
         </div>
       </div>
+    </div>
 
       <div className="grid gap-4 md:grid-cols-3">
         <div className="panel-soft">
@@ -235,7 +237,7 @@ export function MarketList({ showSettled = false }: MarketListProps) {
         <span className="text-slate-400">Search, filter, and sort update instantly.</span>
       </div>
 
-      <div className="grid gap-6">
+      <div className="market-card-grid">
         {visibleMarkets.map((market) => (
         <MarketCard
           key={market.id}
