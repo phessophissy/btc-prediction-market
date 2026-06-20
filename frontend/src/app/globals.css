@@ -107,9 +107,9 @@ body::after {
 
 /* ── Focus ring ── */
 :focus-visible {
-  outline: 2px solid var(--accent-sky);
-  outline-offset: 2px;
-  border-radius: 6px;
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 3px;
+  border-radius: 8px;
 }
 
 /* ── Reduced Motion ── */
@@ -189,8 +189,15 @@ main {
   input:focus-visible,
   textarea:focus-visible,
   select:focus-visible {
-    outline: 2px solid rgba(255, 211, 105, 0.78);
+    outline: 2px solid var(--accent-gold);
     outline-offset: 3px;
+    box-shadow: 0 0 0 4px rgba(255, 211, 105, 0.15);
+  }
+
+  .input:focus-within,
+  .select:focus-within {
+    border-color: rgba(255, 211, 105, 0.5);
+    box-shadow: 0 0 0 3px rgba(255, 211, 105, 0.12);
   }
 
   input::-webkit-outer-spin-button,
@@ -201,25 +208,15 @@ main {
 }
 
 @layer components {
-  .filter-bar-scroll {
-    @apply -mx-4 px-4 sm:mx-0 sm:px-0;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+  .skip-to-content {
+    @apply fixed left-4 top-4 z-[100] -translate-y-full rounded-xl px-5 py-3 text-sm font-semibold transition-transform duration-200;
+    color: var(--bg-void);
+    background: linear-gradient(135deg, var(--accent-sun), var(--accent-gold));
+    box-shadow: 0 8px 24px rgba(255, 191, 60, 0.3);
   }
 
-  .filter-bar-scroll::-webkit-scrollbar {
-    display: none;
-  }
-  .market-card-grid {
-    @apply grid gap-6;
-    grid-template-columns: 1fr;
-  }
-
-  @media (min-width: 1024px) {
-    .market-card-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  .skip-to-content:focus {
+    transform: translateY(0);
   }
   .app-shell {
     @apply mx-auto w-full max-w-7xl px-4 pb-20 pt-8 sm:px-6 lg:px-8;
