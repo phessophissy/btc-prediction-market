@@ -17,7 +17,7 @@ import {
   makeStandardSTXPostCondition,
   FungibleConditionCode
 } from "@stacks/transactions";
-import { Bitcoin, DollarSign } from "lucide-react";
+import { Bitcoin, DollarSign, Clock } from "lucide-react";
 import { ConnectionRequired } from "@/components/ConnectionRequired";
 import { PageHero } from "@/components/PageHero";
 import { formatMicroStx } from "@/lib/format";
@@ -25,6 +25,9 @@ import { formatMicroStx } from "@/lib/format";
 export default function CreateMarketPage() {
   const { isConnected, stxAddress } = useStacksAuth();
   const [marketType, setMarketType] = useState<"binary" | "multi">("binary");
+  const [currentStep, setCurrentStep] = useState(1);
+  const totalSteps = 3;
+  const stepLabels = ['Market Type', 'Details', 'Review & Submit'];
   const [question, setQuestion] = useState("");
   const [description, setDescription] = useState("");
   const [settlementBlock, setSettlementBlock] = useState("");
@@ -39,6 +42,16 @@ export default function CreateMarketPage() {
 
   const trimmedQuestion = question.trim();
   const trimmedDescription = description.trim();
+
+  const estimateSettlementDate = (targetBlock: number): string => {
+    const currentBtcBlock = 870000;
+    const blocksAway = targetBlock - currentBtcBlock;
+    if (blocksAway <= 0) return 'Block already mined';
+    const minutesAway = blocksAway * 10;
+    const date = new Date(Date.now() + minutesAway * 60 * 1000);
+    const daysAway = Math.ceil(minutesAway / 1440);
+    return `~${daysAway} day${daysAway !== 1 ? 's' : ''} from now (${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })})`;
+  };
   const parsedSettlementBlock = Number.parseInt(settlementBlock, 10);
   const validationError =
     !trimmedQuestion
@@ -138,6 +151,35 @@ export default function CreateMarketPage() {
       </PageHero>
 
       <div className="card">
+        <div className="flex items-center justify-between gap-2">
+          {stepLabels.map((label, idx) => {
+            const step = idx + 1;
+            const isActive = step === currentStep;
+            const isCompleted = step < currentStep;
+            return (
+              <div key={label} className="flex flex-1 flex-col items-center gap-2 relative">
+                <div className={`flex h-10 w-10 items-center justify-center rounded-full border-2 text-sm font-bold transition-all duration-300 ${
+                  isActive
+                    ? 'border-amber-300 bg-amber-300/20 text-amber-300'
+                    : isCompleted
+                      ? 'border-emerald-300 bg-emerald-300/20 text-emerald-300'
+                      : 'border-white/20 bg-white/5 text-slate-400'
+                }`}>
+                  {isCompleted ? '✓' : step}
+                </div>
+                <span className={`text-xs font-medium ${isActive ? 'text-amber-300' : isCompleted ? 'text-emerald-300' : 'text-slate-400'}`}>
+                  {label}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+        <div className="mt-3 h-1 w-full rounded-full bg-white/10">
+          <div className="h-full rounded-full bg-gradient-to-r from-amber-300 to-emerald-300 transition-all duration-500" style={{ width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%` }} />
+        </div>
+      </div>
+
+      <div className="card">
         <p className="mb-3 text-sm text-slate-300">Quick-start prompts</p>
         <div className="flex flex-wrap gap-2">
           {promptTemplates.map((template) => (
@@ -179,7 +221,8 @@ export default function CreateMarketPage() {
 
       <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-6">
-          <div className="card">
+          {currentStep === 1 && (
+            <div className="card">
             <label className="mb-3 block text-sm font-medium text-slate-200">
               Market Type
             </label>
@@ -208,12 +251,14 @@ export default function CreateMarketPage() {
               </button>
             </div>
           </div>
+          )}
 
-          <div className="card space-y-6">
-            <div>
-              <label className="mb-2 block text-sm font-medium text-slate-200">
-                Question *
-              </label>
+          {currentStep === 2 && (
+            <div className="card space-y-6">
+              <div>
+                <label className="mb-2 block text-sm font-medium text-slate-200">
+                  Question *
+                </label>
               <input
                 type="text"
                 value={question}
@@ -222,7 +267,20 @@ export default function CreateMarketPage() {
                 maxLength={100}
                 className="input"
               />
-              <p className="mt-2 text-xs text-slate-400">{question.length}/100 characters</p>
+              <div className="mt-2 space-y-1">
+                <div className="flex justify-between text-xs text-slate-400">
+                  <span>{question.length}/100 characters</span>
+                  <span className={question.length > 90 ? 'text-amber-300' : ''}>{100 - question.length} remaining</span>
+                </div>
+                <div className="h-1 w-full rounded-full bg-white/10">
+                  <div
+                    className={`h-full rounded-full transition-all duration-300 ${
+                      question.length > 90 ? 'bg-amber-300' : question.length > 0 ? 'bg-sky-300' : 'bg-white/20'
+                    }`}
+                    style={{ width: `${(question.length / 100) * 100}%` }}
+                  />
+                </div>
+              </div>
             </div>
 
             <div>
@@ -237,7 +295,20 @@ export default function CreateMarketPage() {
                 rows={3}
                 className="input min-h-[120px]"
               />
-              <p className="mt-2 text-xs text-slate-400">{description.length}/500 characters</p>
+              <div className="mt-2 space-y-1">
+                <div className="flex justify-between text-xs text-slate-400">
+                  <span>{description.length}/500 characters</span>
+                  <span className={description.length > 450 ? 'text-amber-300' : ''}>{500 - description.length} remaining</span>
+                </div>
+                <div className="h-1 w-full rounded-full bg-white/10">
+                  <div
+                    className={`h-full rounded-full transition-all duration-300 ${
+                      description.length > 450 ? 'bg-amber-300' : description.length > 0 ? 'bg-sky-300' : 'bg-white/20'
+                    }`}
+                    style={{ width: `${(description.length / 500) * 100}%` }}
+                  />
+                </div>
+              </div>
             </div>
 
             <div>
@@ -257,33 +328,81 @@ export default function CreateMarketPage() {
               <p className="mt-2 text-xs text-slate-400">
                 The market will settle using the hash of this Bitcoin block
               </p>
+              {parsedSettlementBlock > 0 && !Number.isNaN(parsedSettlementBlock) && (
+                <div className="mt-2 rounded-xl border border-sky-300/15 bg-sky-300/8 px-3 py-2 text-xs text-sky-200">
+                  <Clock className="mr-1 inline h-3 w-3" /> Estimated settlement: {estimateSettlementDate(parsedSettlementBlock)}
+                </div>
+              )}
             </div>
 
-            <button
-              onClick={handleCreateMarket}
-              disabled={isSubmitting || !!validationError}
-              className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              {isSubmitting
-                ? "Creating Market..."
-                : `Create Market (${formatMicroStx(MARKET_CREATION_FEE)} STX)`}
-            </button>
+            {validationError && <p className="text-sm text-amber-200">{validationError}</p>}
+          </div>
+          )}
 
-            {validationError && !submissionError ? (
-              <p className="text-sm text-amber-200">{validationError}</p>
-            ) : null}
+          {currentStep === 3 && (
+            <div className="space-y-4">
+              <div className="card space-y-4">
+                <span className="eyebrow">Review your market</span>
+                <div className="panel-soft">
+                  <p className="text-sm text-slate-300">Market Type</p>
+                  <p className="mt-1 text-xl font-semibold text-white">{marketType === 'binary' ? 'Binary (Yes/No)' : 'Multi-Outcome (4 options)'}</p>
+                </div>
+                <div className="panel-soft">
+                  <p className="text-sm text-slate-300">Question</p>
+                  <p className="mt-1 text-xl font-semibold text-white">{trimmedQuestion || 'Not set'}</p>
+                </div>
+                <div className="panel-soft">
+                  <p className="text-sm text-slate-300">Description</p>
+                  <p className="mt-1 text-sm text-slate-200">{trimmedDescription || 'No description provided'}</p>
+                </div>
+                <div className="panel-soft">
+                  <p className="text-sm text-slate-300">Settlement Target</p>
+                  <p className="mt-1 text-xl font-semibold text-white">{settlementBlock ? `BTC Block #${settlementBlock}` : 'Not set'}</p>
+                </div>
+                <div className="panel-soft">
+                  <p className="text-sm text-slate-300">Creation Fee</p>
+                  <p className="mt-1 text-xl font-semibold text-amber-300">{formatMicroStx(MARKET_CREATION_FEE)} STX</p>
+                </div>
 
-            {submissionError ? (
-              <div className="rounded-[1.25rem] border border-rose-300/20 bg-rose-300/10 p-4 text-sm text-rose-100">
-                {submissionError}
+                <button
+                  onClick={handleCreateMarket}
+                  disabled={isSubmitting || !!validationError}
+                  className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {isSubmitting ? 'Creating Market...' : `Create Market (${formatMicroStx(MARKET_CREATION_FEE)} STX)`}
+                </button>
+
+                {validationError && <p className="text-sm text-amber-200">{validationError}</p>}
+                {submissionError && (
+                  <div className="rounded-[1.25rem] border border-rose-300/20 bg-rose-300/10 p-4 text-sm text-rose-100">
+                    {submissionError}
+                  </div>
+                )}
+                {submissionSuccess && (
+                  <div className="rounded-[1.25rem] border border-emerald-300/20 bg-emerald-300/10 p-4 text-sm text-emerald-100">
+                    {submissionSuccess}
+                  </div>
+                )}
               </div>
-            ) : null}
+            </div>
+          )}
 
-            {submissionSuccess ? (
-              <div className="rounded-[1.25rem] border border-emerald-300/20 bg-emerald-300/10 p-4 text-sm text-emerald-100">
-                {submissionSuccess}
-              </div>
-            ) : null}
+          <div className="flex gap-3">
+            {currentStep > 1 && (
+              <button type="button" onClick={() => setCurrentStep(currentStep - 1)} className="btn-secondary flex-1">
+                ← Previous
+              </button>
+            )}
+            {currentStep < totalSteps && (
+              <button
+                type="button"
+                onClick={() => setCurrentStep(currentStep + 1)}
+                disabled={currentStep === 2 && !!validationError}
+                className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Next →
+              </button>
+            )}
           </div>
         </div>
 
