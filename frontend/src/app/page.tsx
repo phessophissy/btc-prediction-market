@@ -36,15 +36,15 @@ export default function Home() {
 
   return (
     <div className="space-y-8">
-      <section className="hero-panel">
-        <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+      <section className="hero-panel p-5 sm:p-8 lg:p-12">
+        <div className="grid gap-6 sm:gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
           <div className="space-y-6">
             <div className="flex flex-wrap items-center gap-3">
               <span className="eyebrow">Bitcoin finality. Studio polish.</span>
               <LiveNowPill />
             </div>
             <div className="space-y-4">
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl">
+              <h1 className="text-3xl sm:text-5xl lg:text-7xl">
                 Track the next BTC narrative with a brighter market studio.
               </h1>
               <p className="max-w-2xl text-lg text-slate-300">

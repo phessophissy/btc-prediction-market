@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useStacksAuth } from "@/contexts/StacksAuthContext";
 import {
   CheckCircle,
@@ -46,6 +47,7 @@ interface MarketCardProps {
 
 export function MarketCard({ market }: MarketCardProps) {
   const { isConnected, network } = useStacksAuth();
+  const isCompact = useMediaQuery("(max-width: 639px)");
   const [expanded, setExpanded] = useState(false);
   const [betModalOpen, setBetModalOpen] = useState(false);
   const [selectedOutcome, setSelectedOutcome] = useState<string | null>(null);
@@ -209,44 +211,48 @@ export function MarketCard({ market }: MarketCardProps) {
             </div>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-3 lg:w-[22rem] lg:grid-cols-1">
-            <div className="panel-soft">
-              <span className="subtle-copy text-xs uppercase tracking-[0.18em]">Total pool</span>
-              <p className="mt-2 text-2xl font-semibold text-white">{formatMicroStx(market.totalPool)} STX</p>
+          {!isCompact && (
+            <div className="grid gap-3 sm:grid-cols-3 lg:w-[22rem] lg:grid-cols-1">
+              <div className="panel-soft">
+                <span className="subtle-copy text-xs uppercase tracking-[0.18em]">Total pool</span>
+                <p className="mt-2 text-2xl font-semibold text-white">{formatMicroStx(market.totalPool)} STX</p>
+              </div>
+              <div className="panel-soft">
+                <span className="subtle-copy text-xs uppercase tracking-[0.18em]">Settlement pace</span>
+                <p className="mt-2 text-lg text-white">
+                  {market.settled
+                    ? "Completed"
+                    : blocksRemaining > 0
+                      ? formatBlocksToEta(blocksRemaining)
+                      : "Awaiting settlement"}
+                </p>
+              </div>
+              <div className="panel-soft">
+                <span className="subtle-copy text-xs uppercase tracking-[0.18em]">Market lead</span>
+                <p className="mt-2 text-lg text-white">
+                  {leadOutcome ? `Outcome ${leadOutcome.id}` : "Pending"}
+                </p>
+              </div>
             </div>
-            <div className="panel-soft">
-              <span className="subtle-copy text-xs uppercase tracking-[0.18em]">Settlement pace</span>
-              <p className="mt-2 text-lg text-white">
-                {market.settled
-                  ? "Completed"
-                  : blocksRemaining > 0
-                    ? formatBlocksToEta(blocksRemaining)
-                    : "Awaiting settlement"}
-              </p>
-            </div>
-            <div className="panel-soft">
-              <span className="subtle-copy text-xs uppercase tracking-[0.18em]">Market lead</span>
-              <p className="mt-2 text-lg text-white">
-                {leadOutcome ? `Outcome ${leadOutcome.id}` : "Pending"}
-              </p>
-            </div>
-          </div>
+          )}
         </div>
 
-        <div className="mb-6 flex flex-wrap items-center gap-5 text-sm text-slate-300">
-          <div className="flex items-center gap-2">
-            <TrendingUp className="h-4 w-4 text-amber-300" />
-            {liquidityLabel}
+        {!isCompact && (
+          <div className="mb-6 flex flex-wrap items-center gap-5 text-sm text-slate-300">
+            <div className="flex items-center gap-2">
+              <TrendingUp className="h-4 w-4 text-amber-300" />
+              {liquidityLabel}
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock className="h-4 w-4 text-sky-300" />
+              {market.settled ? "Market settled" : `${Math.max(blocksRemaining, 0)} blocks remaining`}
+            </div>
+            <div className="flex items-center gap-2">
+              <Users className="h-4 w-4 text-emerald-300" />
+              {leadOutcome ? `Outcome ${leadOutcome.id} currently ahead` : "Open price discovery"}
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Clock className="h-4 w-4 text-sky-300" />
-            {market.settled ? "Market settled" : `${Math.max(blocksRemaining, 0)} blocks remaining`}
-          </div>
-          <div className="flex items-center gap-2">
-            <Users className="h-4 w-4 text-emerald-300" />
-            {leadOutcome ? `Outcome ${leadOutcome.id} currently ahead` : "Open price discovery"}
-          </div>
-        </div>
+        )}
 
         <div className="space-y-4">
           {visibleOutcomes.map((outcome) => (
@@ -323,14 +329,14 @@ export function MarketCard({ market }: MarketCardProps) {
                 <button
                   onClick={() => handleBet("A")}
                   disabled={!isConnected || blocksRemaining <= 0}
-                  className="btn-secondary flex-1 border-sky-300/20 bg-sky-300/10 text-sky-100 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="btn-secondary flex-1 min-h-[44px] border-sky-300/20 bg-sky-300/10 text-sky-100 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   Bet {market.type === "binary" ? "Yes" : "A"}
                 </button>
                 <button
                   onClick={() => handleBet("B")}
                   disabled={!isConnected || blocksRemaining <= 0}
-                  className="btn-secondary flex-1 border-amber-300/20 bg-amber-300/10 text-amber-100 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="btn-secondary flex-1 min-h-[44px] border-amber-300/20 bg-amber-300/10 text-amber-100 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   Bet {market.type === "binary" ? "No" : "B"}
                 </button>
@@ -339,14 +345,14 @@ export function MarketCard({ market }: MarketCardProps) {
                     <button
                       onClick={() => handleBet("C")}
                       disabled={!isConnected || blocksRemaining <= 0}
-                      className="btn-secondary flex-1 border-emerald-300/20 bg-emerald-300/10 text-emerald-100 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="btn-secondary flex-1 min-h-[44px] border-emerald-300/20 bg-emerald-300/10 text-emerald-100 disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       Bet C
                     </button>
                     <button
                       onClick={() => handleBet("D")}
                       disabled={!isConnected || blocksRemaining <= 0}
-                      className="btn-secondary flex-1 border-pink-300/20 bg-pink-300/10 text-pink-100 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="btn-secondary flex-1 min-h-[44px] border-pink-300/20 bg-pink-300/10 text-pink-100 disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       Bet D
                     </button>
