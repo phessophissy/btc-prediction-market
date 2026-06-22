@@ -18,7 +18,8 @@
   --border-strong: rgba(255, 255, 255, 0.16);
   --text-main: #f8fbff;
   --text-muted: #bdd0ee;
-  --text-soft: #88a3c8;
+  --text-soft: #9cb5d6;
+  --text-subtle: #7a95b8;
   --accent-sun: #ffbf3c;
   --accent-gold: #ffd369;
   --accent-coral: #ff7b72;
@@ -107,9 +108,9 @@ body::after {
 
 /* ── Focus ring ── */
 :focus-visible {
-  outline: 2px solid var(--accent-sky);
-  outline-offset: 2px;
-  border-radius: 6px;
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 3px;
+  border-radius: 8px;
 }
 
 /* ── Reduced Motion ── */
@@ -189,8 +190,15 @@ main {
   input:focus-visible,
   textarea:focus-visible,
   select:focus-visible {
-    outline: 2px solid rgba(255, 211, 105, 0.78);
+    outline: 2px solid var(--accent-gold);
     outline-offset: 3px;
+    box-shadow: 0 0 0 4px rgba(255, 211, 105, 0.15);
+  }
+
+  .input:focus-within,
+  .select:focus-within {
+    border-color: rgba(255, 211, 105, 0.5);
+    box-shadow: 0 0 0 3px rgba(255, 211, 105, 0.12);
   }
 
   input::-webkit-outer-spin-button,
@@ -201,46 +209,15 @@ main {
 }
 
 @layer components {
-  @keyframes stagger-in {
-    from {
-      opacity: 0;
-      transform: translateY(12px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .skip-to-content {
+    @apply fixed left-4 top-4 z-[100] -translate-y-full rounded-xl px-5 py-3 text-sm font-semibold transition-transform duration-200;
+    color: var(--bg-void);
+    background: linear-gradient(135deg, var(--accent-sun), var(--accent-gold));
+    box-shadow: 0 8px 24px rgba(255, 191, 60, 0.3);
   }
 
-  .animate-stagger-in > * {
-    animation: stagger-in 0.4s ease-out both;
-  }
-
-  .animate-stagger-in > *:nth-child(1) { animation-delay: 0ms; }
-  .animate-stagger-in > *:nth-child(2) { animation-delay: 80ms; }
-  .animate-stagger-in > *:nth-child(3) { animation-delay: 160ms; }
-  .animate-stagger-in > *:nth-child(4) { animation-delay: 240ms; }
-  .animate-stagger-in > *:nth-child(5) { animation-delay: 320ms; }
-  .animate-stagger-in > *:nth-child(6) { animation-delay: 400ms; }
-  .animate-stagger-in > *:nth-child(n+7) { animation-delay: 480ms; }
-  @keyframes shimmer {
-    0% {
-      background-position: -200% 0;
-    }
-    100% {
-      background-position: 200% 0;
-    }
-  }
-
-  .skeleton-shimmer {
-    background: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.05) 25%,
-      rgba(255, 255, 255, 0.12) 50%,
-      rgba(255, 255, 255, 0.05) 75%
-    );
-    background-size: 200% 100%;
-    animation: shimmer 1.8s ease-in-out infinite;
+  .skip-to-content:focus {
+    transform: translateY(0);
   }
   .app-shell {
     @apply mx-auto w-full max-w-7xl px-4 pb-20 pt-8 sm:px-6 lg:px-8;
@@ -278,10 +255,10 @@ main {
   }
 
   .card {
-    @apply relative rounded-[1.75rem] border p-6 transition-transform duration-300;
+    @apply relative rounded-[1.75rem] border p-4 sm:p-6 transition-transform duration-300;
     border-color: var(--border);
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+      linear-gradient(180deg, var(--surface-soft), rgba(255, 255, 255, 0.02)),
       var(--surface);
     box-shadow: var(--shadow-glow);
     backdrop-filter: blur(18px);
@@ -293,9 +270,9 @@ main {
 
   .panel-soft {
     @apply relative overflow-hidden rounded-[1.5rem] border p-5;
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--border);
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03)),
+      linear-gradient(180deg, var(--surface-soft), rgba(255, 255, 255, 0.03)),
       var(--surface-frost);
     backdrop-filter: blur(14px);
   }
@@ -407,33 +384,33 @@ main {
   }
 
   .badge-binary {
-    color: var(--accent-sky);
-    background: rgba(103, 210, 255, 0.12);
-    border-color: rgba(103, 210, 255, 0.24);
+    color: #7dd8ff;
+    background: rgba(103, 210, 255, 0.14);
+    border-color: rgba(103, 210, 255, 0.28);
   }
 
   .badge-multi {
-    color: var(--accent-coral);
-    background: rgba(255, 123, 114, 0.12);
-    border-color: rgba(255, 123, 114, 0.24);
+    color: #ff9490;
+    background: rgba(255, 123, 114, 0.14);
+    border-color: rgba(255, 123, 114, 0.28);
   }
 
   .status-positive {
-    color: var(--accent-mint);
-    background: rgba(123, 247, 212, 0.13);
-    border-color: rgba(123, 247, 212, 0.22);
+    color: #8dfce0;
+    background: rgba(123, 247, 212, 0.16);
+    border-color: rgba(123, 247, 212, 0.28);
   }
 
   .status-warning {
-    color: var(--accent-sun);
-    background: rgba(255, 191, 60, 0.13);
-    border-color: rgba(255, 191, 60, 0.22);
+    color: #ffd06a;
+    background: rgba(255, 191, 60, 0.16);
+    border-color: rgba(255, 191, 60, 0.28);
   }
 
   .status-negative {
-    color: #ff9ea7;
-    background: rgba(255, 123, 114, 0.13);
-    border-color: rgba(255, 123, 114, 0.22);
+    color: #ffb0b6;
+    background: rgba(255, 123, 114, 0.16);
+    border-color: rgba(255, 123, 114, 0.28);
   }
 
   .market-meter {
@@ -491,6 +468,19 @@ main {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes scale-out {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.92); }
+}
+
+.animate-fade-out  { animation: fade-out  0.2s ease-in both; }
+.animate-scale-out { animation: scale-out 0.2s ease-in both; }
+
 @keyframes fade-in {
   from { opacity: 0; }
   to   { opacity: 1; }
@@ -506,43 +496,48 @@ main {
 .animate-fade-in    { animation: fade-in     0.25s ease-out both; }
 .animate-scale-in   { animation: scale-in    0.25s ease-out both; }
 
-/* apply wooden background to global layout */
-body {
-  background-color: #3d2b1f;
-  background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
-  color: #f5f5dc;
+/* Theme overrides removed — using unified dark mode design system above */
+
+/* ── High Contrast Mode ── */
+@media (forced-colors: active) {
+  .card,
+  .panel-soft,
+  .panel-highlight,
+  .hero-panel {
+    border: 2px solid CanvasText;
+  }
+
+  .btn-primary {
+    background: ButtonFace;
+    color: ButtonText;
+    border: 2px solid ButtonText;
+  }
+
+  .pill,
+  .eyebrow,
+  .glass-strip {
+    border: 1px solid CanvasText;
+  }
+
+  .market-meter {
+    border: 1px solid CanvasText;
+  }
+
+  .market-meter-fill {
+    background: Highlight;
+  }
 }
 
-/* style main containers with carved borders */
-.container-carved {
-  border: 4px solid #8b5a2b;
-  border-radius: 8px;
-  box-shadow: inset 0 0 10px #000;
+@media (prefers-contrast: more) {
+  :root {
+    --text-soft: #b8cde6;
+    --text-muted: #d4e3f5;
+    --border: rgba(147, 197, 253, 0.28);
+    --border-strong: rgba(255, 255, 255, 0.26);
+  }
+
+  .card,
+  .panel-soft {
+    border-width: 2px;
+  }
 }
-
-/* add old-world typography styles */
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;700&display=swap');
-* { font-family: 'Crimson Text', serif; }
-
-/* enhance card aesthetics with paper texture */
-.card-paper {
-  background: #f5f5dc;
-  color: #3d2b1f;
-  box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
-}
-
-/* add hover effects for wooden interactive elements */
-.wood-hover:hover {
-  filter: brightness(1.1);
-  cursor: pointer;
-}
-
-/* add RusticTable base styles */
-table.rustic { width: 100%; border-collapse: collapse; }
-table.rustic th { background: #8b5a2b; color: #f5f5dc; padding: 10px; }
-
-/* refine typography spacing for readability */
-p { line-height: 1.6; margin-bottom: 1rem; }
-
-/* add subtle inner glow to wooden elements */
-.wood-glow { box-shadow: inset 0 0 5px rgba(255,255,255,0.1); }

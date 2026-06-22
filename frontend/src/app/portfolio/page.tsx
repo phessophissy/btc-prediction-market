@@ -41,6 +41,37 @@ interface PositionWithMarket {
   isWinner: boolean;
 }
 
+const calculatePnlPercentage = (pm: PositionWithMarket): number => {
+  if (!pm.market.settled || pm.market.winningOutcome === null) return 0;
+  const invested = pm.position.totalInvested;
+  if (invested === 0) return 0;
+  if (pm.isWinner) return Math.min(((pm.market.totalPool / invested) * 30), 100);
+  return -100;
+};
+
+function AnimatedValue({ value, suffix = '' }: { value: number | string; suffix?: string }) {
+  const [displayValue, setDisplayValue] = useState(0);
+  const numericValue = typeof value === 'number' ? value : parseFloat(String(value)) || 0;
+
+  useEffect(() => {
+    if (numericValue === 0) { setDisplayValue(0); return; }
+    let start = 0;
+    const duration = 800;
+    const startTime = performance.now();
+    
+    const animate = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplayValue(Math.round(eased * numericValue));
+      if (progress < 1) requestAnimationFrame(animate);
+    };
+    requestAnimationFrame(animate);
+  }, [numericValue]);
+
+  return <>{displayValue}{suffix}</>;
+}
+
 export default function PortfolioPage() {
   const { isConnected, stxAddress, network } = useStacksAuth();
   const [positions, setPositions] = useState<PositionWithMarket[]>([]);
@@ -207,16 +238,20 @@ export default function PortfolioPage() {
       <section className="grid gap-4 md:grid-cols-3">
         <div className="panel-soft">
           <p className="text-sm text-slate-300">Winning positions</p>
-          <p className="mt-3 text-3xl font-semibold text-emerald-300">{wonPositions}</p>
+          <p className="mt-3 text-3xl font-semibold text-emerald-300">
+            <AnimatedValue value={wonPositions} />
+          </p>
         </div>
         <div className="panel-soft">
           <p className="text-sm text-slate-300">Claimed markets</p>
-          <p className="mt-3 text-3xl font-semibold text-sky-300">{claimedPositions}</p>
+          <p className="mt-3 text-3xl font-semibold text-sky-300">
+            <AnimatedValue value={claimedPositions} />
+          </p>
         </div>
         <div className="panel-soft">
           <p className="text-sm text-slate-300">Pending rewards</p>
           <p className="mt-3 text-3xl font-semibold text-amber-300">
-            {positions.filter((position) => position.canClaim).length}
+            <AnimatedValue value={positions.filter((position) => position.canClaim).length} />
           </p>
         </div>
       </section>
@@ -252,14 +287,29 @@ export default function PortfolioPage() {
       </div>
 
       {CONTRACT_CAPABILITIES.claimWinnings && positions.some((position) => position.canClaim) && (
-        <div className="card flex items-center gap-3 border-emerald-300/20 bg-emerald-300/10">
-          <Gift className="h-6 w-6 text-emerald-300" />
-          <div>
-            <p className="font-medium text-emerald-200">You have unclaimed winnings.</p>
-            <p className="text-sm text-emerald-100/75">
-              Claim your rewards from settled markets below.
-            </p>
+        <div className="card flex flex-col gap-3 border-emerald-300/20 bg-emerald-300/10 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-3">
+            <Gift className="h-6 w-6 text-emerald-300" />
+            <div>
+              <p className="font-medium text-emerald-200">
+                You have {positions.filter(p => p.canClaim).length} unclaimed {positions.filter(p => p.canClaim).length === 1 ? 'reward' : 'rewards'}
+              </p>
+              <p className="text-sm text-emerald-100/75">
+                Claim your rewards from settled markets below.
+              </p>
+            </div>
           </div>
+          <button
+            onClick={async () => {
+              for (const pm of positions.filter(p => p.canClaim)) {
+                await handleClaimWinnings(pm.market.id);
+              }
+            }}
+            className="btn-primary whitespace-nowrap"
+          >
+            <Gift className="h-4 w-4" />
+            Claim All ({positions.filter(p => p.canClaim).length})
+          </button>
         </div>
       )}
 
@@ -272,17 +322,26 @@ export default function PortfolioPage() {
         </div>
 
         {positions.length === 0 ? (
-          <div className="p-10 text-center text-slate-300">
-            {CONTRACT_CAPABILITIES.placeBets
-              ? "No positions yet. Start betting on prediction markets."
-              : "No positions tracked yet. The current V3 deployment does not accept bets, so this view stays informational until trading is redeployed."}
+          <div className="p-10 text-center">
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-white/10 bg-white/5">
+              <TrendingUp className="h-8 w-8 text-slate-400" />
+            </div>
+            <h3 className="mb-2 text-2xl text-white">No positions yet</h3>
+            <p className="mb-6 text-sm text-slate-300">
+              {CONTRACT_CAPABILITIES.placeBets
+                ? 'Start betting on prediction markets to build your portfolio.'
+                : 'The current V3 deployment does not accept bets. Positions will appear here once trading is redeployed.'}
+            </p>
+            <a href="/" className="btn-primary inline-flex">
+              Browse Markets
+            </a>
           </div>
         ) : visiblePositions.length === 0 ? (
           <div className="p-10 text-center text-slate-300">
             No positions match the current portfolio filter.
           </div>
         ) : (
-          <div className="divide-y divide-white/10">
+          <div className="grid gap-4">
             {visiblePositions.map((pm) => {
               const status = getPositionStatus(pm);
               const statusClasses =
@@ -295,7 +354,7 @@ export default function PortfolioPage() {
                       : "status-warning";
 
               return (
-                <div key={pm.market.id} className="px-6 py-5 transition hover:bg-white/6">
+                <div key={pm.market.id} className="card mb-4 transition-transform duration-300 hover:-translate-y-1">
                   <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                     <div className="space-y-2">
                       <h3 className="text-2xl">{pm.market.title}</h3>
@@ -316,6 +375,22 @@ export default function PortfolioPage() {
                             Winner: {getOutcomeLabel(pm.market.winningOutcome, pm.market.type)}
                           </span>
                         )}
+                      </div>
+                      <div className="mt-3">
+                        <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
+                          <span>P&L</span>
+                          <span className={calculatePnlPercentage(pm) >= 0 ? 'text-emerald-300' : 'text-rose-300'}>
+                            {calculatePnlPercentage(pm) >= 0 ? '+' : ''}{calculatePnlPercentage(pm).toFixed(0)}%
+                          </span>
+                        </div>
+                        <div className="h-2 w-full rounded-full bg-white/10 overflow-hidden">
+                          <div
+                            className={`h-full rounded-full transition-all duration-700 ${
+                              calculatePnlPercentage(pm) >= 0 ? 'bg-gradient-to-r from-emerald-400 to-emerald-300' : 'bg-gradient-to-r from-rose-400 to-rose-300'
+                            }`}
+                            style={{ width: `${Math.abs(calculatePnlPercentage(pm))}%` }}
+                          />
+                        </div>
                       </div>
                     </div>
 

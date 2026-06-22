@@ -98,7 +98,7 @@ export function StatsOverview() {
         <span>Platform snapshot</span>
         <span className="text-slate-400">Core market totals update from live contract reads and API fallbacks.</span>
       </div>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
         {stats.map((stat) => (
           <StatCard
             key={stat.label}
