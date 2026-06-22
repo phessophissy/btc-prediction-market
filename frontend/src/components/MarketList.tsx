@@ -43,7 +43,7 @@ export function MarketList({ showSettled = false }: MarketListProps) {
 
   if (loading) {
     return (
-      <div className="grid gap-6">
+      <div className="grid gap-6 animate-stagger-in">
         {[1, 2, 3].map((i) => <LoadingCard key={i} lines={4} />)}
       </div>
     );

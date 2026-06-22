@@ -5,15 +5,24 @@ interface LoadingCardProps {
 export function LoadingCard({ lines = 3 }: LoadingCardProps) {
   return (
     <div className="card animate-pulse">
-      <div className="mb-4 h-3 w-24 rounded-full bg-sky-300/15" />
-      <div className="mb-4 h-7 w-3/4 rounded-full bg-white/10" />
-      <div className="mb-6 h-4 w-1/2 rounded-full bg-white/10" />
-      <div className="space-y-3">
-        {Array.from({ length: lines }).map((_, index) => (
-          <div key={index} className="h-5 rounded-full bg-white/8" />
+      <div className="mb-4 flex items-center gap-3">
+        <div className="skeleton-shimmer h-8 w-24 rounded-full" />
+        <div className="skeleton-shimmer h-6 w-16 rounded-full" />
+      </div>
+      <div className="skeleton-shimmer mb-3 h-8 w-3/4 rounded-xl" />
+      <div className="space-y-2">
+        {Array.from({ length: lines }).map((_, i) => (
+          <div
+            key={i}
+            className="skeleton-shimmer h-4 rounded-lg"
+            style={{ width: `${85 - i * 12}%`, animationDelay: `${i * 100}ms` }}
+          />
         ))}
       </div>
-      <div className="mt-6 h-10 rounded-full bg-white/8" />
+      <div className="mt-6 flex gap-3">
+        <div className="skeleton-shimmer h-10 flex-1 rounded-full" />
+        <div className="skeleton-shimmer h-10 flex-1 rounded-full" />
+      </div>
     </div>
   );
 }
