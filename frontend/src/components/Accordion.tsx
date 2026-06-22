@@ -15,46 +15,61 @@ interface AccordionProps {
   className?: string;
 }
 
-export function Accordion({ items, allowMultiple = false, className = "" }: AccordionProps) {
-  const [openIds, setOpenIds] = useState<Set<string>>(new Set());
+import { useEffect, useRef } from "react";
 
-  function toggle(id: string) {
-    setOpenIds((prev) => {
-      const next = new Set(allowMultiple ? prev : []);
-      if (prev.has(id)) {
-        next.delete(id);
-      } else {
-        next.add(id);
-      }
-      return next;
-    });
-  }
+export function Accordion({ items, allowMultiple = false, className = "" }: AccordionProps) {
+  const [openId, setOpenId] = useState<string | null>(null);
 
   return (
-    <div className={`divide-y divide-white/5 rounded-2xl border border-white/10 bg-white/[0.02] ${className}`}>
-      {items.map((item) => {
-        const isOpen = openIds.has(item.id);
-        return (
-          <div key={item.id}>
-            <button
-              type="button"
-              onClick={() => toggle(item.id)}
-              aria-expanded={isOpen}
-              className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left text-sm font-medium text-white/80 transition-colors hover:text-white"
-            >
-              {item.title}
-              <ChevronDown
-                className={`h-4 w-4 flex-shrink-0 text-white/30 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-              />
-            </button>
-            {isOpen && (
-              <div className="animate-slide-down px-5 pb-4 text-sm text-white/60">
-                {item.content}
-              </div>
-            )}
-          </div>
-        );
-      })}
+    <div className={`space-y-3 ${className}`}>
+      {items.map((item) => (
+        <AccordionPanel
+          key={item.id}
+          item={item}
+          isOpen={openId === item.id}
+          onToggle={() => setOpenId(openId === item.id ? null : item.id)}
+        />
+      ))}
+    </div>
+  );
+}
+
+function AccordionPanel({ item, isOpen, onToggle }: { item: AccordionItem; isOpen: boolean; onToggle: () => void }) {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [maxHeight, setMaxHeight] = useState('0px');
+
+  useEffect(() => {
+    if (isOpen && contentRef.current) {
+      setMaxHeight(`${contentRef.current.scrollHeight}px`);
+    } else {
+      setMaxHeight('0px');
+    }
+  }, [isOpen]);
+
+  return (
+    <div className="card overflow-hidden">
+      <button
+        onClick={onToggle}
+        className="flex w-full items-center justify-between gap-4 text-left"
+        aria-expanded={isOpen}
+        aria-controls={`accordion-${item.id}`}
+      >
+        <h3 className="text-lg font-semibold text-white">{item.title}</h3>
+        <ChevronDown
+          className={`h-5 w-5 flex-shrink-0 text-slate-400 transition-transform duration-300 ${
+            isOpen ? 'rotate-180' : ''
+          }`}
+        />
+      </button>
+      <div
+        id={`accordion-${item.id}`}
+        ref={contentRef}
+        className="overflow-hidden transition-all duration-300 ease-in-out"
+        style={{ maxHeight }}
+        role="region"
+      >
+        <div className="pt-4 text-sm text-slate-300 leading-relaxed">{item.content}</div>
+      </div>
     </div>
   );
 }
