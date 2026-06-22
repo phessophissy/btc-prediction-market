@@ -61,6 +61,23 @@ export function SkeletonMarketList({ count = 6 }: { count?: number }) {
   );
 }
 
+export function StatsOverviewSkeleton() {
+  return (
+    <div className="space-y-4">
+      <div className="skeleton-shimmer h-12 w-full rounded-full" />
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <div key={i} className="card animate-pulse">
+            <div className="skeleton-shimmer mb-3 h-4 w-1/2 rounded-lg" />
+            <div className="skeleton-shimmer h-10 w-3/4 rounded-xl" />
+            <div className="skeleton-shimmer mt-2 h-3 w-2/3 rounded-lg" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function SkeletonTable({ rows = 5, cols = 4 }: { rows?: number; cols?: number }) {
   return (
     <div className="table-shell overflow-hidden">

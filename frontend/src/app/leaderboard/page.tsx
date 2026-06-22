@@ -2,9 +2,24 @@
 
 import { PageHero } from "@/components/PageHero";
 import { formatAddress } from "@/lib/format";
-import { Award, Medal, Trophy } from "lucide-react";
+import { Award, Medal, Trophy, ChevronUp, ChevronDown, Search } from "lucide-react";
+import { useState } from "react";
 
 export default function LeaderboardPage() {
+  const [sortField, setSortField] = useState<'winnings' | 'bets' | 'winRate'>('winnings');
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [expandedRow, setExpandedRow] = useState<string | null>(null);
+
+  const handleSort = (field: typeof sortField) => {
+    if (sortField === field) {
+      setSortDirection(prev => prev === 'desc' ? 'asc' : 'desc');
+    } else {
+      setSortField(field);
+      setSortDirection('desc');
+    }
+  };
+
   const leaderboard = [
     { rank: 1, address: "SP2J6ZY48GV1EZ5V2V5RB9MP66SW86PYKKNRV9EJ7", winnings: 15420, bets: 89, winRate: 72 },
     { rank: 2, address: "SP1HTBVD3JG9C05J7HBJTHGR0GGW7KXW28M5JS8QE", winnings: 12350, bets: 156, winRate: 65 },
@@ -42,6 +57,15 @@ export default function LeaderboardPage() {
       panelClass: "card mt-6",
     },
   ];
+  const filteredLeaderboard = leaderboard.filter(user =>
+    !searchQuery || user.address.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const sortedLeaderboard = [...filteredLeaderboard].sort((a, b) => {
+    const multiplier = sortDirection === 'desc' ? -1 : 1;
+    return multiplier * (a[sortField] - b[sortField]);
+  });
+
   const totals = {
     totalWinnings: leaderboard.reduce((sum, user) => sum + user.winnings, 0),
     averageWinRate: Math.round(
@@ -106,6 +130,28 @@ export default function LeaderboardPage() {
         </div>
       </section>
 
+      <div className="card">
+        <label className="mb-2 block text-sm text-slate-300">Search by wallet address</label>
+        <div className="relative">
+          <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+          <input
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="input pl-11"
+            placeholder="Filter by wallet address..."
+          />
+          {searchQuery && (
+            <button
+              type="button"
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full border border-white/10 px-3 py-1 text-xs text-slate-300 transition hover:bg-white/8"
+            >
+              Clear
+            </button>
+          )}
+        </div>
+      </div>
+
       <div className="glass-strip flex flex-wrap items-center justify-between gap-3 text-sm text-slate-200">
         <span>Podium cards emphasize the best overall performance while the table below keeps the full field visible.</span>
         <span className="text-slate-400">Win-rate badges update per row threshold.</span>
@@ -125,13 +171,29 @@ export default function LeaderboardPage() {
               <tr>
                 <th className="px-6 py-4 font-medium">Rank</th>
                 <th className="px-6 py-4 font-medium">Address</th>
-                <th className="px-6 py-4 text-right font-medium">Total Won</th>
-                <th className="px-6 py-4 text-right font-medium">Bets</th>
-                <th className="px-6 py-4 text-right font-medium">Win Rate</th>
+                <th className="px-6 py-4 text-right font-medium">
+                  <button onClick={() => handleSort('winnings')} className="inline-flex items-center gap-1 hover:text-white transition">
+                    Total Won
+                    {sortField === 'winnings' && (sortDirection === 'desc' ? <ChevronDown className="h-3 w-3" /> : <ChevronUp className="h-3 w-3" />)}
+                  </button>
+                </th>
+                <th className="px-6 py-4 text-right font-medium">
+                  <button onClick={() => handleSort('bets')} className="inline-flex items-center gap-1 hover:text-white transition">
+                    Bets
+                    {sortField === 'bets' && (sortDirection === 'desc' ? <ChevronDown className="h-3 w-3" /> : <ChevronUp className="h-3 w-3" />)}
+                  </button>
+                </th>
+                <th className="px-6 py-4 text-right font-medium">
+                  <button onClick={() => handleSort('winRate')} className="inline-flex items-center gap-1 hover:text-white transition">
+                    Win Rate
+                    {sortField === 'winRate' && (sortDirection === 'desc' ? <ChevronDown className="h-3 w-3" /> : <ChevronUp className="h-3 w-3" />)}
+                  </button>
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/10">
-              {leaderboard.map((user) => {
+              {sortedLeaderboard.map((user, idx) => {
+                const displayRank = idx + 1;
                 const winRateClass =
                   user.winRate >= 70
                     ? "status-positive"
@@ -139,28 +201,66 @@ export default function LeaderboardPage() {
                       ? "status-warning"
                       : "status-negative";
                 const rowClass =
-                  user.rank === 1
+                  displayRank === 1
                     ? "bg-amber-300/8"
-                    : user.rank === 2
+                    : displayRank === 2
                       ? "bg-sky-300/6"
-                      : user.rank === 3
+                      : displayRank === 3
                         ? "bg-rose-300/6"
                         : "";
 
                 return (
-                  <tr key={user.rank} className={`transition hover:bg-white/6 ${rowClass}`}>
-                    <td className="px-6 py-5 text-white">{user.rank}</td>
-                    <td className="px-6 py-5 font-mono text-sm text-slate-200">
-                      {formatAddress(user.address)}
-                    </td>
-                    <td className="px-6 py-5 text-right font-semibold text-emerald-300">
-                      {user.winnings.toLocaleString()} STX
-                    </td>
-                    <td className="px-6 py-5 text-right text-slate-300">{user.bets}</td>
-                    <td className="px-6 py-5 text-right">
-                      <span className={`pill ${winRateClass}`}>{user.winRate}%</span>
-                    </td>
-                  </tr>
+                  <>
+                    <tr key={user.address} className={`leaderboard-row cursor-pointer transition ${rowClass}`} onClick={() => setExpandedRow(expandedRow === user.address ? null : user.address)} aria-expanded={expandedRow === user.address}>
+                      <td className="px-6 py-5 text-white">{displayRank}</td>
+                      <td className="px-6 py-5 font-mono text-sm text-slate-200">
+                        {formatAddress(user.address)}
+                      </td>
+                      <td className="px-6 py-5 text-right font-semibold text-emerald-300">
+                        {user.winnings.toLocaleString()} STX
+                      </td>
+                      <td className="px-6 py-5 text-right text-slate-300">{user.bets}</td>
+                      <td className="px-6 py-5 text-right">
+                        <div className="inline-flex flex-col items-end gap-1">
+                          <span className={`pill ${winRateClass}`}>{user.winRate}%</span>
+                          <div className="h-1 w-16 rounded-full bg-white/10">
+                            <div
+                              className={`h-full rounded-full transition-all duration-500 ${
+                                user.winRate >= 70 ? 'bg-emerald-300' : user.winRate >= 50 ? 'bg-amber-300' : 'bg-rose-300'
+                              }`}
+                              style={{ width: `${user.winRate}%` }}
+                            />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    {expandedRow === user.address && (
+                      <tr className="animate-slide-down">
+                        <td colSpan={5} className="px-6 pb-5 pt-0">
+                          <div className="grid gap-3 sm:grid-cols-3 rounded-xl border border-white/10 bg-white/4 p-4">
+                            <div>
+                              <p className="text-xs text-slate-400">Avg Bet Size</p>
+                              <p className="mt-1 text-lg font-semibold text-white">
+                                {Math.round(user.winnings / Math.max(user.bets, 1))} STX
+                              </p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-slate-400">Bets Won</p>
+                              <p className="mt-1 text-lg font-semibold text-emerald-300">
+                                {Math.round(user.bets * user.winRate / 100)}
+                              </p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-slate-400">Bets Lost</p>
+                              <p className="mt-1 text-lg font-semibold text-rose-300">
+                                {user.bets - Math.round(user.bets * user.winRate / 100)}
+                              </p>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    )}
+                  </>
                 );
               })}
             </tbody>

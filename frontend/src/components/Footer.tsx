@@ -11,7 +11,7 @@ const footerLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative mt-12">
+    <footer role="contentinfo" aria-label="Site footer" className="relative mt-12">
       <div className="card overflow-hidden px-6 py-8 sm:px-8">
         <div className="spotlight-orb -left-12 top-0 h-32 w-32 bg-amber-300/15" />
         <div className="spotlight-orb bottom-0 right-0 h-36 w-36 bg-sky-300/15" />

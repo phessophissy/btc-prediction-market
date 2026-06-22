@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { X, AlertCircle, Loader2 } from "lucide-react";
 import { useStacksAuth } from "@/contexts/StacksAuthContext";
 import { openContractCall } from "@stacks/connect";
@@ -34,11 +34,37 @@ interface BetModalProps {
 }
 
 export function BetModal({ market, outcome, onClose }: BetModalProps) {
+  const [isClosing, setIsClosing] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const handleBackdropClick = useCallback((e: React.MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+      handleClose();
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') handleClose();
+    };
+    document.addEventListener('keydown', handleEsc);
+    return () => document.removeEventListener('keydown', handleEsc);
+  }, []);
+  const handleClose = () => {
+    setIsClosing(true);
+    setTimeout(() => onClose(), 200);
+  };
   const { stxAddress } = useStacksAuth();
   const [amount, setAmount] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const parsedAmount = Number.parseFloat(amount || "0");
+  const validationMessage = parsedAmount > 0 && parsedAmount < minimumBet
+    ? `Minimum bet is ${minimumBet} STX`
+    : parsedAmount > 1000
+      ? 'Maximum bet is 1,000 STX'
+      : null;
   const minimumBet = MIN_BET_AMOUNT / 1_000_000;
 
   const getOutcomePool = () => {
@@ -86,13 +112,8 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleConfirmedSubmit = async () => {
     if (!stxAddress || !amount) return;
-    if (parsedAmount < minimumBet) {
-      setError(`Minimum bet is ${minimumBet} STX.`);
-      return;
-    }
 
     setError(null);
     setIsSubmitting(true);
@@ -131,6 +152,16 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
     }
   };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!stxAddress || !amount) return;
+    if (parsedAmount < minimumBet) {
+      setError(`Minimum bet is ${minimumBet} STX.`);
+      return;
+    }
+    setShowConfirmation(true);
+  };
+
   const outcomeColors: Record<string, string> = {
     A: "border-sky-300/30 bg-sky-300/10 text-sky-100",
     B: "border-amber-300/30 bg-amber-300/10 text-amber-100",
@@ -139,10 +170,14 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 p-4 backdrop-blur-md">
-      <div className="card relative w-full max-w-md">
+    <div
+      className={`fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md ${isClosing ? 'animate-fade-out' : 'animate-fade-in'}`}
+      style={{ backgroundColor: "rgba(9, 15, 29, 0.7)" }}
+      onClick={handleBackdropClick}
+    >
+      <div ref={modalRef} className={`card relative w-full max-w-md ${isClosing ? 'animate-scale-out' : 'animate-scale-in'}`}>
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className="absolute right-4 top-4 rounded-full border border-white/10 bg-white/6 p-2 text-slate-300 transition hover:bg-white/10 hover:text-white"
           aria-label="Close bet modal"
         >
@@ -195,9 +230,33 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
                 STX
               </span>
             </div>
+            <div className="mt-3">
+              <input
+                type="range"
+                min={minimumBet}
+                max={10}
+                step={0.01}
+                value={parsedAmount || minimumBet}
+                onChange={(e) => {
+                  setAmount(e.target.value);
+                  setError(null);
+                }}
+                className="bet-slider w-full"
+                aria-label="Bet amount slider"
+              />
+              <div className="mt-1 flex justify-between text-xs text-slate-400">
+                <span>{minimumBet} STX</span>
+                <span>10 STX</span>
+              </div>
+            </div>
             <p className="mt-2 text-xs text-slate-400">
               Minimum bet: {minimumBet} STX. Total pool: {formatMicroStx(market.totalPool)} STX.
             </p>
+            {validationMessage && (
+              <p className="mt-1 text-xs text-amber-300" role="alert">
+                {validationMessage}
+              </p>
+            )}
           </div>
 
           <div className="mb-6 flex flex-wrap gap-2">
@@ -250,7 +309,7 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
 
           <button
             type="submit"
-            disabled={!amount || parsedAmount < minimumBet || isSubmitting}
+            disabled={!amount || parsedAmount < minimumBet || parsedAmount > 1000 || !!validationMessage || isSubmitting}
             className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? (
@@ -263,6 +322,19 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
             )}
           </button>
         </form>
+        {showConfirmation && (
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-[1.75rem] bg-slate-950/95 p-6 backdrop-blur-sm animate-fade-in">
+            <h3 className="mb-2 text-2xl text-white">Confirm your bet</h3>
+            <p className="mb-1 text-sm text-slate-300">Amount: <strong className="text-white">{amount} STX</strong></p>
+            <p className="mb-6 text-sm text-slate-300">Outcome: <strong className="text-white">{outcomeLabel}</strong></p>
+            <div className="flex gap-3 w-full">
+              <button type="button" onClick={() => setShowConfirmation(false)} className="btn-secondary flex-1">Go back</button>
+              <button type="button" onClick={handleConfirmedSubmit} disabled={isSubmitting} className="btn-primary flex-1">
+                {isSubmitting ? 'Submitting...' : 'Confirm bet'}
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
