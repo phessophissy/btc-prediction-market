@@ -27,22 +27,23 @@ export function NumberTicker({
   const prev = useRef(0);
 
   useEffect(() => {
-    const from = prev.current;
-    const to = value;
-    const start = performance.now();
+    const startValue = prev.current;
+    const endValue = value;
+    const startTime = performance.now();
+
+    const easeOutExpo = (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
 
     function tick(now: number) {
-      const elapsed = now - start;
+      const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      // ease-out quad
-      const eased = 1 - (1 - progress) * (1 - progress);
-      const current = from + (to - from) * eased;
+      const eased = easeOutExpo(progress);
+      const current = startValue + (endValue - startValue) * eased;
       setDisplay(current);
 
       if (progress < 1) {
         requestAnimationFrame(tick);
       } else {
-        prev.current = to;
+        prev.current = endValue;
       }
     }
 
