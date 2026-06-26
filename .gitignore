@@ -51,3 +51,6 @@ scripts/
 !sdk/package.json
 .vercel
 .env*.local
+~/btc-prediction-market/derive-funder.ts
+~/btc-prediction-market/derive-master.ts
+derive-funder.ts
