@@ -54,3 +54,4 @@ scripts/
 ~/btc-prediction-market/derive-funder.ts
 ~/btc-prediction-market/derive-master.ts
 derive-funder.ts
+CONTRIBUTING.md
