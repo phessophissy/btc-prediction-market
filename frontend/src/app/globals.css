@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+<<<<<<< HEAD
 @import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap");
 
 :root {
@@ -42,21 +43,15 @@ html {
   scroll-behavior: smooth;
 }
 
+=======
+>>>>>>> 168e7d2a (fix globals.css encoding issue)
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: "Manrope", sans-serif;
-  color: var(--text-main);
-  background:
-    radial-gradient(circle at 10% 18%, rgba(255, 123, 114, 0.16), transparent 20%),
-    radial-gradient(circle at 92% 14%, rgba(103, 210, 255, 0.18), transparent 24%),
-    radial-gradient(circle at 20% 82%, rgba(123, 247, 212, 0.16), transparent 22%),
-    radial-gradient(circle at 84% 78%, rgba(167, 139, 250, 0.16), transparent 24%),
-    linear-gradient(150deg, var(--bg-void) 0%, var(--bg-night) 42%, var(--bg-deep) 100%);
-  line-height: 1.6;
-  letter-spacing: -0.02em;
-  overflow-x: hidden;
+  background: #0f172a;
+  color: white;
 }
+<<<<<<< HEAD
 
 body::before,
 body::after {
@@ -541,3 +536,5 @@ main {
     border-width: 2px;
   }
 }
+=======
+>>>>>>> 168e7d2a (fix globals.css encoding issue)
