@@ -273,4 +273,4 @@ MIT License
 <!-- [chore/dependency-audit-update] commit 9/10: revise docs layer – 1776638611658712417 -->
 \n\nDocumentation improvement: PR 30 commit 1 — clarified wording and examples. (2026-06-13T20:52:03Z)
 
-- [pr/docs-improvements-07] Improve documentation and add usage notes (commit 2, 2026-06-26 11:57:31Z)
+- [pr/docs-improvements-09] Improve documentation and add usage notes (commit 2, 2026-06-26 12:02:01Z)
