@@ -17,4 +17,3 @@ describe("sdk defaults", () => {
   });
 });
 
-// [chore/dependency-audit-update] commit 8/10: augment test layer – 1776638611629575199

@@ -68,7 +68,6 @@ export function estimateBlockTime(blocksRemaining: number): number {
   return Date.now() + blocksRemaining * MS_PER_BLOCK;
 }
 
-// [chore/dependency-audit-update] commit 4/10: extend lib layer – 1776638611516490283
 
 import type { OddsFormat } from './constants';
 

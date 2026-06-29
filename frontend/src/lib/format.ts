@@ -20,7 +20,6 @@ export function formatBlocksToEta(blocks: number): string {
   return `${Math.floor(minutes / 1440)}d ${Math.floor((minutes % 1440) / 60)}h`;
 }
 
-// [chore/dependency-audit-update] commit 4/10: extend lib layer – 1776638611511642964
 
 /**
  * Format a microstx amount as a compact STX string, e.g. '1.25M STX', '300K STX'.

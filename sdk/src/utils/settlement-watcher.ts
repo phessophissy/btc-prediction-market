@@ -124,7 +124,6 @@ export function createSettlementWatcher(config?: Partial<SettlementWatcherConfig
   return new SettlementWatcherHandler({ ...DEFAULT_CONFIG, ...config });
 }
 
-// [chore/dependency-audit-update] commit 7/10: strengthen sdk-utils layer – 1776638611602741926
 
 import { SettlementConfig } from '../types';
 

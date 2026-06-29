@@ -270,5 +270,4 @@ When contributing, please consider:
 
 MIT License
 
-<!-- [chore/dependency-audit-update] commit 9/10: revise docs layer – 1776638611658712417 -->
 

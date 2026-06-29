@@ -48,4 +48,3 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   return [storedValue, setValue, removeValue] as const;
 }
 
-// [chore/dependency-audit-update] commit 3/10: update hooks layer – 1776638611480870580

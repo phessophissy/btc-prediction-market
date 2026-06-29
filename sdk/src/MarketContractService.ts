@@ -436,4 +436,3 @@ export class MarketContractService {
 
 export default MarketContractService;
 
-// [chore/dependency-audit-update] commit 6/10: optimize sdk layer – 1776638611569677973

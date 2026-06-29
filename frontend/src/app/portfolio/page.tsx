@@ -434,4 +434,3 @@ export default function PortfolioPage() {
   );
 }
 
-// [chore/dependency-audit-update] commit 5/10: refine pages layer – 1776638611546297646
