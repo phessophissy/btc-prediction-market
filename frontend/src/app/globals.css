@@ -660,10 +660,47 @@ main {
   animation: aurora-shimmer 1.6s ease-in-out infinite;
 }
 
+/* ── Aurora "cool theme" flourishes (opt-in, no markup changes) ── */
+
+/* Gradient headline text in the hero + section titles */
+[data-theme="aurora"] .hero-panel h1,
+[data-theme="aurora"] .section-title {
+  background: linear-gradient(120deg, var(--accent-gold), var(--accent-violet) 45%, var(--accent-sky));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Eyebrow accent tint */
+[data-theme="aurora"] .eyebrow {
+  color: var(--accent-violet);
+}
+
+/* Hero panel: animated aurora border glow */
+[data-theme="aurora"] .hero-panel {
+  position: relative;
+  border-color: rgba(182, 155, 255, 0.28);
+  animation: aurora-glow 8s ease-in-out infinite;
+}
+
+[data-theme="aurora"] .hero-panel::before {
+  background: linear-gradient(120deg, rgba(255, 217, 138, 0.18), rgba(182, 155, 255, 0.18), rgba(122, 215, 255, 0.18));
+  opacity: 0.9;
+  animation: drift 24s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-glow {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(182, 155, 255, 0.10), 0 30px 90px rgba(10, 4, 30, 0.5); }
+  50% { box-shadow: 0 0 0 1px rgba(182, 155, 255, 0.22), 0 30px 90px rgba(10, 4, 30, 0.55); }
+}
+
 /* Respect reduced motion: disable the flourishes */
 @media (prefers-reduced-motion: reduce) {
   [data-theme="aurora"] body::after,
-  [data-theme="aurora"] .skeleton-shimmer {
+  [data-theme="aurora"] .skeleton-shimmer,
+  [data-theme="aurora"] .hero-panel,
+  [data-theme="aurora"] .hero-panel::before {
     animation: none;
   }
   [data-theme="aurora"] .card:hover,
