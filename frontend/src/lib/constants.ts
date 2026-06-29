@@ -51,6 +51,9 @@ export const CONTRACT_CAPABILITIES = {
 } as const;
 
 
+// Odds display format used by formatters and SDK utils.
+export type OddsFormat = "decimal" | "fractional" | "american";
+
 export const KEYBOARD_SHORTCUTS: Record<string, string> = {
   SEARCH: '/',
   CLOSE_MODAL: 'Escape',

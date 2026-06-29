@@ -174,7 +174,7 @@ export function MarketCard({ market }: MarketCardProps) {
 
   return (
     <>
-      <div ref={cardRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className={`card card-tilt ${market.settled ? "opacity-85" : ""}`}>
+      <div className={`card ${market.settled ? "opacity-85" : ""}`}>
         <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div className="space-y-3">
             <div className="flex flex-wrap items-center gap-2">
