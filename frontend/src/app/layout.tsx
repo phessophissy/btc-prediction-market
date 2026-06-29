@@ -21,6 +21,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Apply the saved theme before first paint to avoid a flash. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem('btc-pm-theme');if(t==='aurora'){document.documentElement.dataset.theme='aurora';}}catch(e){}`,
+          }}
+        />
+      </head>
       <body className="antialiased" suppressHydrationWarning>
         <a href="#main-content" className="skip-to-content">Skip to main content</a>
         <ExtensionErrorSuppressor />
