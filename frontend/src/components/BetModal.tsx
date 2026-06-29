@@ -340,4 +340,3 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
   );
 }
 
-// [chore/dependency-audit-update] commit 2/10: improve ui layer – 1776638611442958333

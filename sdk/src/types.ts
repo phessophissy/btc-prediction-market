@@ -32,7 +32,6 @@ export interface UserPosition {
   claimed: boolean;
 }
 
-// [chore/dependency-audit-update] commit 6/10: optimize sdk layer – 1776638611571524501
 
 export interface LeaderboardEntry {
   address: string;

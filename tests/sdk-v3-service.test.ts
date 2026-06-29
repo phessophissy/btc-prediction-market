@@ -118,4 +118,3 @@ describe("sdk V3 decoders", () => {
   });
 });
 
-// [chore/dependency-audit-update] commit 8/10: augment test layer – 1776638611631447453

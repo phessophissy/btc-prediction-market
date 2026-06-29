@@ -11,4 +11,3 @@ export default defineConfig({
   },
 });
 
-// [chore/dependency-audit-update] commit 10/10: polish config layer – 1776638611690322457

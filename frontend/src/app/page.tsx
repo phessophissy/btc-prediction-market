@@ -167,4 +167,3 @@ export default function Home() {
   );
 }
 
-// [chore/dependency-audit-update] commit 5/10: refine pages layer – 1776638611539847027

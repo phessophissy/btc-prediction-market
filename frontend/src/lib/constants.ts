@@ -50,7 +50,6 @@ export const CONTRACT_CAPABILITIES = {
   onChainUserStats: false,
 } as const;
 
-// [chore/dependency-audit-update] commit 4/10: extend lib layer – 1776638611513182728
 
 export const KEYBOARD_SHORTCUTS: Record<string, string> = {
   SEARCH: '/',

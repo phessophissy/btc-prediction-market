@@ -85,4 +85,3 @@ export function useStacksAuth() {
   return context;
 }
 
-// [chore/dependency-audit-update] commit 3/10: update hooks layer – 1776638611483184563

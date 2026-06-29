@@ -111,7 +111,6 @@ export function getSettleabilitySummary(
   };
 }
 
-// [chore/dependency-audit-update] commit 7/10: strengthen sdk-utils layer – 1776638611601079378
 
 /**
  * Returns true if the market closes within the next `blocks` Bitcoin blocks.

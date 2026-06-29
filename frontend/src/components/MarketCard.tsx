@@ -393,4 +393,3 @@ export function MarketCard({ market }: MarketCardProps) {
   );
 }
 
-// [chore/dependency-audit-update] commit 2/10: improve ui layer – 1776638611439953839

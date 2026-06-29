@@ -17,4 +17,3 @@ export function useDebounce<T>(value: T, delay = 300): T {
   return debounced;
 }
 
-// [chore/dependency-audit-update] commit 3/10: update hooks layer – 1776638611484899927
