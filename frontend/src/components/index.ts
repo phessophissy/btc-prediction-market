@@ -31,6 +31,7 @@ export { Accordion } from "./Accordion";
 export { SearchInput } from "./SearchInput";
 export { MarketActivity } from "./MarketActivity";
 export { FavoriteButton } from "./FavoriteButton";
+export { ThemeToggle } from "./ThemeToggle";
 
 // Hooks
 export { useClipboard } from "../hooks/useClipboard";
@@ -42,3 +43,6 @@ export { useOnClickOutside } from "../hooks/useOnClickOutside";
 export { usePrevious } from "../hooks/usePrevious";
 export { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 export { useBtcPrice } from "../hooks/useBtcPrice";
+export { useTheme } from "../hooks/useTheme";
+export { THEMES, THEME_STORAGE_KEY } from "../contexts/ThemeContext";
+export type { Theme } from "../contexts/ThemeContext";

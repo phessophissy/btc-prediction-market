@@ -8,6 +8,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { LiveNowPill } from "./LiveNowPill";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Header() {
   const { isConnected, stxAddress, connect, disconnect } = useStacksAuth();
@@ -84,6 +85,7 @@ export function Header() {
               Design refresh live
             </div>
           </div>
+          <ThemeToggle />
           {isConnected ? (
             <div className="flex items-center gap-3 rounded-full border border-sky-300/15 bg-white/6 p-1.5 pl-4 shadow-lg shadow-slate-950/10">
               <span className="text-sm text-slate-300">
@@ -133,6 +135,9 @@ export function Header() {
               </Link>
             ))}
             <div className="mt-3 border-t border-white/10 pt-3">
+              <div className="mb-3">
+                <ThemeToggle />
+              </div>
               {isConnected ? (
                 <div className="flex flex-col gap-2">
                   <span className="text-sm text-slate-300">
@@ -154,4 +159,3 @@ export function Header() {
     </header>
   );
 }
-
