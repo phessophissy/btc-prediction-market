@@ -60,12 +60,12 @@ export function BetModal({ market, outcome, onClose }: BetModalProps) {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const parsedAmount = Number.parseFloat(amount || "0");
+  const minimumBet = MIN_BET_AMOUNT / 1_000_000;
   const validationMessage = parsedAmount > 0 && parsedAmount < minimumBet
     ? `Minimum bet is ${minimumBet} STX`
     : parsedAmount > 1000
       ? 'Maximum bet is 1,000 STX'
       : null;
-  const minimumBet = MIN_BET_AMOUNT / 1_000_000;
 
   const getOutcomePool = () => {
     switch (outcome) {
