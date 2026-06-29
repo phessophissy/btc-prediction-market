@@ -1,57 +1,88 @@
+# ───────────────────────────────────────────────
 # Dependencies
+# ───────────────────────────────────────────────
 node_modules/
 
+# ───────────────────────────────────────────────
 # Build outputs
+# ───────────────────────────────────────────────
 dist/
 .cache/
 .next/
 frontend/.next/
+.vercel/
 
-# Environment files - NEVER commit these
+# ───────────────────────────────────────────────
+# Environment files — NEVER commit
+# ───────────────────────────────────────────────
 .env
 .env.local
 .env.*.local
+.env*.local
 
-# Clarinet - never expose wallet keys/mnemonics
-settings/Mainnet.toml
-settings/Devnet.toml
-settings/Testnet.toml
-
-# IDE
-.vscode/
-.idea/
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Logs
-*.log
-npm-debug.log*
-
-# Test coverage
-coverage/
-*.sh
-
-# Mainnet wallet secrets
+# ───────────────────────────────────────────────
+# Secrets / keys / wallets — NEVER commit
+# ───────────────────────────────────────────────
+# Key-derivation & funding scripts (read wallet mnemonics / private keys)
+derive-master.ts
+derive-funder.ts
+# Wallet dumps (contain mnemonics / private keys)
+wallets.json
+wallets-*.json
+*.wallet.json
 scripts/mainnet-wallets.json
 scripts/test-wallets.json
 scripts/fund-wallets.ts
-wallets.json
-wallets-*.json
+# Clarinet network configs (may embed deployer keys)
+settings/Mainnet.toml
+settings/Devnet.toml
+settings/Testnet.toml
+# Generic secret/key material
+*.pem
+*.key
+*.keystore
+*.p12
+*.pfx
+mnemonic*.txt
+secret*.txt
 
-# Scripts and tests logic
+# ───────────────────────────────────────────────
+# Scripts & local tooling (not part of the shipped app)
+# ───────────────────────────────────────────────
+*.sh
 scripts/
 !tests/
+
+# ───────────────────────────────────────────────
+# Logs
+# ───────────────────────────────────────────────
+*.log
+npm-debug.log*
+
+# ───────────────────────────────────────────────
+# Test coverage
+# ───────────────────────────────────────────────
+coverage/
+
+# ───────────────────────────────────────────────
+# IDE / OS
+# ───────────────────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ───────────────────────────────────────────────
+# Misc JSON at repo root (allowlist real package/config files)
+# ───────────────────────────────────────────────
 *.json
 !package.json
+!package-lock.json
 !tsconfig.json
 !Clarinet.toml
 !frontend/package.json
+!frontend/package-lock.json
+!frontend/tsconfig.json
 !sdk/package.json
-.vercel
-.env*.local
-~/btc-prediction-market/derive-funder.ts
-~/btc-prediction-market/derive-master.ts
-derive-funder.ts
-CONTRIBUTING.md
+!sdk/tsconfig.json
+
