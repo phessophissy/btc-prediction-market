@@ -31,6 +31,7 @@ export { Accordion } from "./Accordion";
 export { SearchInput } from "./SearchInput";
 export { MarketActivity } from "./MarketActivity";
 export { FavoriteButton } from "./FavoriteButton";
+export { ThemeToggle } from "./ThemeToggle";
 
 // Hooks
 export { useClipboard } from "../hooks/useClipboard";
