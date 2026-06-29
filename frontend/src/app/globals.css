@@ -532,3 +532,145 @@ main {
     border-width: 2px;
   }
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   Aurora theme — opt-in sleek variant
+   Activated via <html data-theme="aurora"> (see ThemeProvider). Only
+   overrides variables and adds interaction flourishes; the base design
+   system and the default "studio" look are left untouched.
+   ════════════════════════════════════════════════════════════════════ */
+
+[data-theme="aurora"] {
+  color-scheme: dark;
+  --bg-void: #05030f;
+  --bg-night: #0b0820;
+  --bg-deep: #110a2e;
+  --surface: rgba(20, 14, 48, 0.72);
+  --surface-strong: rgba(24, 16, 60, 0.86);
+  --surface-elevated: rgba(30, 20, 76, 0.9);
+  --surface-soft: rgba(255, 255, 255, 0.07);
+  --surface-frost: rgba(255, 255, 255, 0.04);
+  --border: rgba(167, 139, 250, 0.22);
+  --border-strong: rgba(255, 255, 255, 0.18);
+  --text-main: #f6f3ff;
+  --text-muted: #c9bdf2;
+  --text-soft: #a99fd4;
+  --text-subtle: #8479b0;
+  --accent-sun: #ffc46b;
+  --accent-gold: #ffd98a;
+  --accent-coral: #ff8fa3;
+  --accent-sky: #7ad7ff;
+  --accent-mint: #7bf7d4;
+  --accent-lime: #c6ff7a;
+  --accent-violet: #b69bff;
+  --accent-rose: #ff7ec0;
+  --shadow-soft: 0 30px 90px rgba(10, 4, 30, 0.5);
+  --shadow-glow: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 28px 80px rgba(8, 3, 26, 0.55);
+  --shadow-intense: 0 48px 120px rgba(5, 2, 18, 0.62);
+}
+
+/* Animated aurora wash behind the page (Aurora theme only) */
+[data-theme="aurora"] body::after {
+  background:
+    radial-gradient(circle at 16% 20%, rgba(167, 139, 250, 0.30), transparent 20%),
+    radial-gradient(circle at 74% 22%, rgba(255, 126, 192, 0.24), transparent 20%),
+    radial-gradient(circle at 64% 76%, rgba(122, 215, 255, 0.22), transparent 26%),
+    radial-gradient(circle at 28% 74%, rgba(123, 247, 212, 0.20), transparent 22%);
+  filter: blur(48px);
+  opacity: 1;
+  animation: drift 22s ease-in-out infinite alternate;
+}
+
+[data-theme="aurora"] ::selection {
+  background: rgba(182, 155, 255, 0.38);
+  color: var(--text-main);
+}
+
+[data-theme="aurora"] *::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(182, 155, 255, 0.7), rgba(122, 215, 255, 0.7));
+  background-clip: padding-box;
+}
+
+[data-theme="aurora"] :focus-visible {
+  outline-color: var(--accent-violet);
+}
+
+/* ── Sleek micro-interactions (Aurora only) ── */
+
+/* Card hover lift + soft glow */
+[data-theme="aurora"] .card,
+[data-theme="aurora"] .panel-soft,
+[data-theme="aurora"] .panel-highlight {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+[data-theme="aurora"] .card:hover,
+[data-theme="aurora"] .panel-soft:hover,
+[data-theme="aurora"] .panel-highlight:hover {
+  transform: translateY(-3px);
+  border-color: rgba(182, 155, 255, 0.4);
+  box-shadow: 0 0 0 1px rgba(182, 155, 255, 0.16),
+              0 28px 70px rgba(10, 4, 30, 0.55);
+}
+
+/* Primary button sheen sweep on hover */
+[data-theme="aurora"] .btn-primary {
+  background-size: 200% 100%;
+  background-position: 0% 0%;
+  transition: background-position 0.5s ease, box-shadow 0.25s ease, transform 0.15s ease;
+}
+
+[data-theme="aurora"] .btn-primary:hover {
+  background-position: 100% 0%;
+  box-shadow: 0 12px 30px rgba(182, 155, 255, 0.28);
+  transform: translateY(-1px);
+}
+
+[data-theme="aurora"] .btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Secondary button subtle border glow */
+[data-theme="aurora"] .btn-secondary {
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+}
+
+[data-theme="aurora"] .btn-secondary:hover {
+  border-color: rgba(122, 215, 255, 0.45);
+  transform: translateY(-1px);
+}
+
+/* Shimmer flourish for loading skeletons (the .skeleton-shimmer class is
+   used by Skeleton.tsx but unstyled by default, so this only enhances
+   the Aurora experience without altering the default look). */
+@keyframes aurora-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+[data-theme="aurora"] .skeleton-shimmer {
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(182, 155, 255, 0.16) 50%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  background-size: 200% 100%;
+  animation: aurora-shimmer 1.6s ease-in-out infinite;
+}
+
+/* Respect reduced motion: disable the flourishes */
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="aurora"] body::after,
+  [data-theme="aurora"] .skeleton-shimmer {
+    animation: none;
+  }
+  [data-theme="aurora"] .card:hover,
+  [data-theme="aurora"] .panel-soft:hover,
+  [data-theme="aurora"] .panel-highlight:hover,
+  [data-theme="aurora"] .btn-primary:hover,
+  [data-theme="aurora"] .btn-secondary:hover {
+    transform: none;
+  }
+}
